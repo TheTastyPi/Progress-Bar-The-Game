@@ -1,3 +1,5 @@
+var lastFrame = 0;
+var lastSave = 0;
 var game = newGame();
 
 function nextFrame(timeStamp) {
