@@ -13,7 +13,7 @@ function nextFrame(timeStamp) {
 			game.timewallPoint++;
 		}
 		document.getElementById("progressBar").value = game.progress;
-		document.getElementById("progressBarLabel").innerHTML = (game.progress / document.getElementById("progressBar").max).toFixed(6) + "%";
+		document.getElementById("progressBarLabel").innerHTML = (game.progress / document.getElementById("progressBar").max).toFixed(6)*100 + "%";
 	}
 	if (sinceLastSave >= game.autoSaveSpeed) {
 		if (game.doAutoSave) {
