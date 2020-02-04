@@ -8,11 +8,12 @@ function nextFrame(timeStamp) {
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
 		game.progress += sinceLastFrame;
-		if (game.progress >= 1.8e7) {
+		if (game.progress >= document.getElementById("progressBar").max) {
 			game.progress = 0;
 			game.timewallPoint++;
 		}
 		document.getElementById("progressBar").value = game.progress;
+		document.getElementById("progressBarLabel").innerHTML = (game.progress / document.getElementById("progressBar").max).toFixed(10) + "%";
 	}
 	if (sinceLastSave >= game.autoSaveSpeed) {
 		if (game.doAutoSave) {
