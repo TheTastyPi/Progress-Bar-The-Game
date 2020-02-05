@@ -28,7 +28,6 @@ button {
 	display: flex;
 	flex-wrap: wrap;
 	align-content: stretch;
-	flex: 1;
 	height: 20%;
 	width: 0px;
 	position: fixed;
@@ -38,6 +37,9 @@ button {
 	right: 0;
 	background-color: rgba(0,0,0,0.5);
 	transition: 0.5s;
+}
+.saveMenu > * {
+	flex-grow: 1;	
 }
 @keyframes progressBarInit {
 	from {width: 0%; opacity: 0;}
