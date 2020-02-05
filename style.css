@@ -1,6 +1,41 @@
 * {
 	font-family: "Lucida Console", Monaco, monospace;
 }
+.centered {
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%, -50%);
+}
+.progressBar {
+	animation-name: progressBarInit;
+	animation-duration: 1s;
+	width: 90%;
+	height: 100px;
+}
+.label {
+	background: rgba(0,0,0,0.1);
+	color: gray;
+	font-size: 50px;
+}
+.triangle-left {
+	width: 0;
+	height: 0;
+	border-top: 25px solid transparent;
+	border-right: 50px solid rgba(0,0,0,0.5);
+	border-bottom: 25px solid transparent;
+}
+.saveMenu {
+	height: 20%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.5);
+	overflow-x: hidden;
+	transition: 0.5s;
+}
 @keyframes progressBarInit {
 	from {width: 0%; opacity: 0;}
 	to {width: 90%; opacity: 1;}
