@@ -20,7 +20,7 @@ function nextFrame(timeStamp) {
 		document.getElementById("redeemButton").classList[game.lifetimeProgress >= game.progressPerPoint ? "remove" : "add"]("hidden");
 		document.getElementById("redeemButton").classList[game.progress >= game.progressPerPoint ? "remove" : "add"]("disabled");
 		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall points.";
+		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) {
@@ -142,6 +142,10 @@ function merge(base, source) {
 			}
 		}
 	}
+}
+
+function pluralCheck(n) {
+	return n == 1 ? "s" : "";
 }
 
 function newGame() {
