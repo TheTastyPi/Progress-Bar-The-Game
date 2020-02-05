@@ -24,22 +24,26 @@ function nextFrame(timeStamp) {
 	window.requestAnimationFrame(nextFrame);
 }
 
-function save(?auto) {
+function save(auto = true) {
 	localStorage.setItem('twsave', JSON.stringify(game));
-	document.getElementById("saveButton").style.backgroundColor = "green";
-	setTimeout(function(){
-		document.getElementById("saveButton").style.backgroundColor = "";
-	}, 250);
+	if (!auto) {
+		document.getElementById("saveButton").style.backgroundColor = "green";
+		setTimeout(function(){
+			document.getElementById("saveButton").style.backgroundColor = "";
+		}, 250);
+	}
 }
 
-function load() {
+function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
 		let pastGame = JSON.parse(localStorage.getItem('twsave'));
 		merge(game, pastGame);
-		document.getElementById("loadButton").style.backgroundColor = "green";
-		setTimeout(function(){
-			document.getElementById("loadButton").style.backgroundColor = "";
-		}, 250);
+		if (!auto) {
+			document.getElementById("loadButton").style.backgroundColor = "green";
+			setTimeout(function(){
+				document.getElementById("loadButton").style.backgroundColor = "";
+			}, 250);
+		}
 	}
 }
 
