@@ -2,23 +2,24 @@ var lastFrame = 0;
 var lastSave = 0;
 var game = newGame();
 
+const upgrade = {
+	basePrice: [1, 1, 2, 3],
+	priceGrowth: [5, 5, 7, 6],
+	limit: [Infinity,Infinity,Infinity,9]
+};
+
 function nextFrame(timeStamp) {
 	let sinceLastFrame = timeStamp - lastFrame;
 	let sinceLastSave = timeStamp - lastSave;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		if (game.progress < document.getElementById("progressBar").max) {
-			game.progress += sinceLastFrame;
-			game.lifetimeProgress += sinceLastFrame;
-		} else {
-			game.progress += Math.ceil(sinceLastFrame/10);
-			game.lifetimeProgress += Math.ceil(sinceLastFrame/10);
-		}
+		game.progress += sinceLastFrame * getBarSpeed();
+		game.lifetimeProgress += sinceLastFrame * getBarSpeed();
 		document.getElementById("progressBar").value = game.progress;
-		document.getElementById("progressBarLabel").innerHTML = (game.progress / game.progressPerPoint * 100).toFixed(4) + "%";
-		document.getElementById("progressBar").max = game.progressPerPoint;
-		document.getElementById("redeemButton").classList[game.lifetimeProgress >= game.progressPerPoint ? "remove" : "add"]("hidden");
-		document.getElementById("redeemButton").classList[game.progress >= game.progressPerPoint ? "remove" : "add"]("disabled");
+		document.getElementById("progressBarLabel").innerHTML = (game.progress / getBarLength() * 100).toFixed(4) + "%";
+		document.getElementById("progressBar").max = getBarLength();
+		document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
+		document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
 		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
 	}
@@ -155,19 +156,41 @@ function newGame() {
 		autoSaveInterval: 1000,
 		lifetimeProgress: 0,
 		progress: 0,
-		progressPerPoint: 3.6e6,
 		lifetimePoints: 0,
-		timewallPoint: 0
+		timewallPoint: 0,
+		upgradeAmount: [0,0,0,0],
 	};
 }
 
 function redeemPoints() {
-	if (game.progress >= game.progressPerPoint) {
-		let points = Math.floor(game.progress / game.progressPerPoint);
-		game.timewallPoint += points;
-		game.lifetimePoints += points;
-		game.progress -= points * game.progressPerPoint;
+	if (game.progress >= getBarLength()) {
+		game.timewallPoint += getPointGain();
+		game.lifetimePoints += getPointGain();
+		game.progress -= getPointGain() * getBarLength();
 	}
+}
+
+function getUpgPrice(n) {
+	return game.upgradeAmount[n] < upgrade.limit[n] ? upgrade.basePrice[n] * upgrade.priceGrowth[n] ^ game.upgradeAmount[n] : Infinity;
+}
+
+function buyUpgrade(n) {
+	if (game.timewallPoint >= getUpgPrice(n) && game.upgradeAmount[n] < upgrade.limit[n]) {
+		game.timewallPoint -= getUpgPrice(n);
+		game.upgradeAmount[n]++;
+	}
+}
+
+function getBarLength() {
+	return Math.floor(3.6e6 / 2 ^ game.upgradeAmount[0]);
+}
+
+function getBarSpeed() {
+	return Math.floor(2 ^ game.upgradeAmount[1] / (game.progress < getBarLength() ? 1 : 10 - game.upgradeAmount[3])));
+}
+
+function getPointGain() {
+	return Math.floor(game.progress / getBarLength() * 2 ^ game.upgradeAmount[2]);
 }
 
 load();
