@@ -57,6 +57,14 @@ function newGame() {
 	};
 }
 
+function openSaveMenu() {
+	document.getElementById("saveMenu").width = 200;
+}
+
+function closeSaveMenu() {
+	document.getElementById("saveMenu").width = 0;
+}
+
 load();
 
 window.requestAnimationFrame(nextFrame);
