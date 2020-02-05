@@ -3,6 +3,7 @@
 }
 button {
 	color: #DDDDDD;
+	border-style: none;
 }
 .centered {
 	position: absolute;
