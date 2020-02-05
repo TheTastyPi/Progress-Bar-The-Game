@@ -11,10 +11,15 @@
 		<button id="openSaveMenu" onclick="toggleSaveMenu()" style="border-radius:50px 0px 0px 50px; width:100px; height:20%; background-color:rgba(0,0,0,0.5); position:absolute; right:0; bottom:0; transition:0.5s;">Saving<br>Options</button>
 		<div id="saveMenu" class="saveMenu">
 			<div class="centered">
-				<button onclick="save()">Save</button> <br>
-				<button onclick="load()">Load</button>
+				<button id="saveButton" onclick="save()">Save</button>
+				<button id="loadButton" onclick="load()">Load</button>
+				<button id="autoSaveToggleButton" onclick="toggleAutoSave()">Auto Save<br>ON</button><br>
+				<button id="exportButton" onclick="exportSave()">Export</button>
+				<button id="importButton" onclick="importSave()">Import</button>
+				<button id="autoSaveIntervalButton" onclick="changeAutoSaveInterval()">Auto Save<br>Interval<br>1s</button>
 			</div>
 		</div>
+		<textarea style="opacity: .01; height:0; position:absolute; z-index: -1;" id="exportArea">export text</textarea>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
 </html>
