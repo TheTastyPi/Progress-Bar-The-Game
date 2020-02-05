@@ -134,7 +134,7 @@ function toggleSaveMenu() {
 }
 
 function toggleUpgMenu() {
-	if (document.getElementById("upgMenu").style.width == "0px" || document.getElementById("upgMenu").style.width == "" ) {
+	if (document.getElementById("upgMenu").style.height == "0px" || document.getElementById("upgMenu").style.width == "" ) {
 		document.getElementById("upgMenu").style.height = "280px";
 		document.getElementById("openUpgMenu").style.top = "280px";
 	} else {
