@@ -28,6 +28,9 @@ button {
 }
 .saveMenu {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
 	height: 20%;
 	width: 0px;
 	position: fixed;
