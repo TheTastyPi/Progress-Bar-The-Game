@@ -20,6 +20,7 @@ function nextFrame(timeStamp) {
 		document.getElementById("redeemButton").classList[game.lifetimeProgress >= game.progressPerPoint ? "remove" : "add"]("hidden");
 		document.getElementById("redeemButton").classList[game.progress >= game.progressPerPoint ? "remove" : "add"]("disabled");
 		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall points.";
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) {
@@ -162,7 +163,6 @@ function redeemPoints() {
 		game.timewallPoint += points;
 		game.lifetimePoints += points;
 		game.progress -= points * game.progressPerPoint;
-		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall points.";
 	}
 }
 
