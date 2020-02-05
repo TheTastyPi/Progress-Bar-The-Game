@@ -58,7 +58,7 @@ function newGame() {
 }
 
 function toggleSaveMenu() {
-	if (document.getElementById("saveMenu").style.width == 0) {
+	if (document.getElementById("saveMenu").style.width == "0px") {
 		document.getElementById("saveMenu").style.width = "200px";
 		document.getElementById("openSaveMenu").style.right = "200px";
 	} else {
