@@ -84,6 +84,10 @@ function wipeSave() {
 	if (confirm("Are you sure you want to wipe your save?")) {
 		game = newGame(); 
 		save();
+		document.getElementById("exportButton").style.backgroundColor = "red";
+		setTimeout(function(){
+			document.getElementById("exportButton").style.backgroundColor = "";
+		}, 250);
 	}
 }
 
