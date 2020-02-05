@@ -171,7 +171,7 @@ function redeemPoints() {
 }
 
 function getUpgPrice(n) {
-	return game.upgradeAmount[n] < upgrade.limit[n] ? upgrade.basePrice[n] * upgrade.priceGrowth[n] ^ game.upgradeAmount[n] : Infinity;
+	return game.upgradeAmount[n] < upgrade.limit[n] ? upgrade.basePrice[n] * Math.pow(upgrade.priceGrowth[n], game.upgradeAmount[n]) : Infinity;
 }
 
 function buyUpgrade(n) {
@@ -182,15 +182,15 @@ function buyUpgrade(n) {
 }
 
 function getBarLength() {
-	return Math.floor(3.6e6 / 2 ^ game.upgradeAmount[0]);
+	return Math.floor(3.6e6 / Math.pow(2, game.upgradeAmount[0]));
 }
 
 function getBarSpeed() {
-	return Math.floor(2 ^ game.upgradeAmount[1] / (game.progress < getBarLength() ? 1 : 10 - game.upgradeAmount[3]));
+	return Math.floor(Math.pow(2, game.upgradeAmount[1]) / (game.progress < getBarLength() ? 1 : 10 - game.upgradeAmount[3]));
 }
 
 function getPointGain() {
-	return Math.floor(game.progress / getBarLength() * 2 ^ game.upgradeAmount[2]);
+	return Math.floor(game.progress / getBarLength() * Math.pow(2, game.upgradeAmount[2]));
 }
 
 load();
