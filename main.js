@@ -145,7 +145,7 @@ function merge(base, source) {
 }
 
 function pluralCheck(n) {
-	return n == 1 ? "s" : "";
+	return n == 1 ? "" : "s";
 }
 
 function newGame() {
