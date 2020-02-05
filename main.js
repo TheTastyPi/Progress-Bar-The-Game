@@ -108,10 +108,10 @@ function changeAutoSaveInterval() {
 			let newIntervalMs = newInterval * 1000
 			game.autoSaveSpeed = newIntervalMs;
 			document.getElementById("autoSaveIntervalButton").innerHTML = "Auto Save<br>Interval<br>"+newInterval+"s";
+			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "green";
+		} else {
+			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "red";
 		}
-		document.getElementById("autoSaveIntervalButton").style.backgroundColor = "green";
-	} else {
-		document.getElementById("autoSaveIntervalButton").style.backgroundColor = "red";
 	}
 	setTimeout(function(){
 		document.getElementById("autoSaveIntervalButton").style.backgroundColor = "";
