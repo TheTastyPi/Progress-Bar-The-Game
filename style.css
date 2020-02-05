@@ -27,6 +27,12 @@ button {
 	right: 50%;
 	transform: translate(50%, calc(-50% + 200px));
 }
+.centeredButSlightlyHigher {
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%, calc(-50% - 200px));
+}
 .progressBar {
 	animation-name: progressBarInit;
 	animation-duration: 1s;
