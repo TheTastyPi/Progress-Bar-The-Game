@@ -39,7 +39,7 @@ button {
 	transition: 0.5s;
 }
 .saveMenu > * {
-	flex-grow: 1;	
+	flex: 1 0 70px;	
 }
 @keyframes progressBarInit {
 	from {width: 0%; opacity: 0;}
