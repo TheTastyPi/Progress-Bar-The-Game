@@ -26,12 +26,70 @@ function nextFrame(timeStamp) {
 
 function save() {
 	localStorage.setItem('twsave', JSON.stringify(game));
+	document.getElementById("saveButton").style.backgroundColor = "green";
+	setTimeout(function(){
+		document.getElementById("saveButton").style.backgroundColor = "";
+	}, 1000);
 }
 
 function load() {
 	if (localStorage.getItem('twsave')) {
 		let pastGame = JSON.parse(localStorage.getItem('twsave'));
 		merge(game, pastGame);
+		document.getElementById("loadButton").style.backgroundColor = "green";
+		setTimeout(function(){
+			document.getElementById("loadButton").style.backgroundColor = "";
+		}, 1000);
+	}
+}
+
+function exportSave() {
+	document.getElementById("exportArea").classList.remove('hidden');
+	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(game));
+	document.getElementById("exportArea").select();
+	document.execCommand("copy");
+	document.getElementById("exportArea").classList.add('hidden');
+	document.getElementById("exportButton").style.backgroundColor = "green";
+	setTimeout(function(){
+		document.getElementById("exportButton").style.backgroundColor = "";
+	}, 1000);
+}
+
+function importSave() {
+	let save = prompt("Please enter export text.\nWarning: Your current save will be over-written.");
+	if (save != null) {
+		let err = false;
+		try {
+			localStorage.setItem('twsave', atob(save));
+			load();
+		}
+		catch(yeet) {
+			err = true;
+			document.getElementById("exportButton").style.backgroundColor = "red";
+		}
+		if (!err) {
+			document.getElementById("exportButton").style.backgroundColor = "green";
+		}
+		setTimeout(function(){
+			document.getElementById("exportButton").style.backgroundColor = "";
+		}, 1000);
+	}
+}
+
+function toggleAutoSave() {
+	game.doAutoSave = !game.doAutoSave;
+	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+}
+
+function changeAutoSaveInterval() {
+	let newInterval = prompt("Please enter new auto-save speed in seconds.\n(Number from 0.2 to 300, inclusive)");
+	if (newInterval != null) {
+		newInterval = Number(newInterval);
+		if (!isNaN(newInterval) && newInterval >= 0.2 && newInterval <= 300) {
+			let newIntervalMs = newInterval * 1000
+			game.autoSaveSpeed = newIntervalMs;
+			document.getElementById("autoSaveIntervalButton").innerHTML = "Auto Save<br>Interval<br>"+newInterval+"s";
+		}
 	}
 }
 
@@ -51,7 +109,7 @@ function newGame() {
 	return {
 		updateSpeed: 50,
 		doAutoSave: true,
-		autoSaveSpeed: 1000,
+		autoSaveInterval: 1000,
 		progress: 0,
 		timewallPoint: 0
 	};
@@ -59,8 +117,8 @@ function newGame() {
 
 function toggleSaveMenu() {
 	if (document.getElementById("saveMenu").style.width == "0px" || document.getElementById("saveMenu").style.width == "" ) {
-		document.getElementById("saveMenu").style.width = "200px";
-		document.getElementById("openSaveMenu").style.right = "200px";
+		document.getElementById("saveMenu").style.width = "250px";
+		document.getElementById("openSaveMenu").style.right = "250px";
 	} else {
 		document.getElementById("saveMenu").style.width = "0px";
 		document.getElementById("openSaveMenu").style.right = "0px";
