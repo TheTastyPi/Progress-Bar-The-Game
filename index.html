@@ -8,10 +8,11 @@
 	<body>
 		<progress id="progressBar" class="progressBar centered" max="1.8e7" value="0"></progress>
 		<span id="progressBarLabel" class="label centered">0%</span>
-		<button style="width:100px; height:100px; color:rgba(0,0,0,0.5); position:absolute; right:0; bottom:0;">Saving</button>
+		<button onclick="openSaveMenu()" style="width:100px; height:100px; color:rgba(0,0,0,0.5); position:absolute; right:0; bottom:0;">Saving</button>
 		<div id="saveMenu" class="saveMenu">
-			<button>Save</button>
-			<button>Load</button>
+			<button onclick="closeSaveMenu()">x</button> <br>
+			<button onclick="save()">Save</button> <br>
+			<button onclick="load()">Load</button>
 		</div>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
