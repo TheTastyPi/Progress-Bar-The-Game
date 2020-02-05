@@ -21,7 +21,7 @@ function nextFrame(timeStamp) {
 		document.getElementById("redeemButton").classList[game.progress >= game.progressPerPoint ? "remove" : "add"]("disabled");
 		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 	}
-	if (sinceLastSave >= game.autoSaveSpeed) {
+	if (sinceLastSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) {
 			save();
 		}
@@ -109,7 +109,7 @@ function changeAutoSaveInterval() {
 		newInterval = Number(newInterval);
 		if (!isNaN(newInterval) && newInterval >= 0.2 && newInterval <= 300) {
 			let newIntervalMs = newInterval * 1000
-			game.autoSaveSpeed = newIntervalMs;
+			game.autoSaveInterval = newIntervalMs;
 			document.getElementById("autoSaveIntervalButton").innerHTML = "Auto Save<br>Interval<br>"+newInterval+"s";
 			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "green";
 		} else {
