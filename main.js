@@ -15,7 +15,7 @@ function nextFrame(timeStamp) {
 		document.getElementById("progressBar").value = game.progress;
 		document.getElementById("progressBarLabel").innerHTML = (game.progress / document.getElementById("progressBar").max * 100).toFixed(4) + "%";
 	}
-	if (sinceLastSave >= game.autoSaveSpeed) {
+	if (sinceLastSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) {
 			save();
 		}
@@ -106,7 +106,7 @@ function changeAutoSaveInterval() {
 		newInterval = Number(newInterval);
 		if (!isNaN(newInterval) && newInterval >= 0.2 && newInterval <= 300) {
 			let newIntervalMs = newInterval * 1000
-			game.autoSaveSpeed = newIntervalMs;
+			game.autoSaveInterval = newIntervalMs;
 			document.getElementById("autoSaveIntervalButton").innerHTML = "Auto Save<br>Interval<br>"+newInterval+"s";
 			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "green";
 		} else {
