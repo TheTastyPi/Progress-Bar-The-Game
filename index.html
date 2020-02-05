@@ -6,8 +6,19 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<progress id="progressBar" style="width:90%; height:100px; position:absolute; top:50%; right:50%; transform:translate(50%, -50%)" max="1.8e7" value="0"></progress>
-		<span id="progressBarLabel" style="color: gray; font-size:50px; position:absolute; top:50%; right:50%; transform:translate(50%, -50%)"">0%</span>
+		<progress id="progressBar" class="progressBar centered" max="1.8e7" value="0"></progress>
+		<span id="progressBarLabel" class="label centered">0%</span>
+		<button id="openSaveMenu" onclick="toggleSaveMenu()" style="border-radius:50px 0px 0px 50px; width:100px; height:20%; background-color:rgba(0,0,0,0.5); position:absolute; right:0; bottom:0; transition:0.5s;">Saving<br>Options</button>
+		<div id="saveMenu" class="saveMenu">
+			<button id="saveButton" onclick="save(false)">Save</button>
+			<button id="loadButton" onclick="load(false)">Load</button>
+			<button id="autoSaveToggleButton" onclick="toggleAutoSave()">Auto Save<br>ON</button>
+			<button id="exportButton" onclick="exportSave()">Export</button>
+			<button id="importButton" onclick="importSave()">Import</button>
+			<button id="autoSaveIntervalButton" onclick="changeAutoSaveInterval()">Auto Save<br>Interval<br>1s</button>
+			<button id="wipeButton" onclick="wipe()">Wipe</button>
+		</div>
+		<textarea style="opacity: .01; height:0; position:absolute; z-index: -1;" id="exportArea">export text</textarea>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
 </html>
