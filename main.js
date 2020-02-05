@@ -151,6 +151,7 @@ function pluralCheck(n) {
 
 function newGame() {
 	return {
+		speed: 1,
 		updateSpeed: 50,
 		doAutoSave: true,
 		autoSaveInterval: 1000,
@@ -186,7 +187,7 @@ function getBarLength() {
 }
 
 function getBarSpeed() {
-	return Math.pow(2, game.upgradeAmount[1]) / (game.progress < getBarLength() ? 1 : 10 - game.upgradeAmount[3]);
+	return Math.pow(2, game.upgradeAmount[1]) / (game.progress < getBarLength() ? 1 : 10 - game.upgradeAmount[3]) * game.speed;
 }
 
 function getPointGain() {
