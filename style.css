@@ -25,18 +25,6 @@ button {
 	color: gray;
 	font-size: 50px;
 }
-.saveMenuOpen {
-	animation-name: savingMenuInit;
-	animation-duration: 1s;
-	border-radius: 50px 0px 0px 50px;
-	width: 100px;
-	height: 20%;
-	background-color: rgba(0,0,0,0.5);
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	transition: 0.5s;
-}
 .saveMenu {
 	display: flex;
 	flex-wrap: wrap;
@@ -57,8 +45,4 @@ button {
 @keyframes progressBarInit {
 	from {width: 0%; opacity: 0;}
 	to {width: 90%; opacity: 1;}
-}
-@keyframes savingMenuInit {
-	from {width: 0%; opacity: 0;}
-	to {width: 100px; opacity: 1;}
 }
