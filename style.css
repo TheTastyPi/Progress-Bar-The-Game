@@ -102,6 +102,7 @@ button {
 	left: 0;
 	background-color: rgba(0,0,0,0.5);
 	transition: 0.5s;
+	color: #DDDDDD;
 }
 .upgMenu > * {
 	flex: 1 0 75px;	
