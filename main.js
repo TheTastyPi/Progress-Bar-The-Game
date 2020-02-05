@@ -7,10 +7,10 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = timeStamp - lastSave;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		game.progress += sinceLastFrame;
-		if (game.progress >= document.getElementById("progressBar").max) {
-			game.progress = 0;
-			game.timewallPoint++;
+		if (game.progress < document.getElementById("progressBar").max) {
+			game.progress += sinceLastFrame;
+		} else {
+			game.progress += Math.ceil(sinceLastFrame/10);
 		}
 		document.getElementById("progressBar").value = game.progress;
 		document.getElementById("progressBarLabel").innerHTML = (game.progress / document.getElementById("progressBar").max * 100).toFixed(4) + "%";
@@ -118,6 +118,16 @@ function changeAutoSaveInterval() {
 	}, 250);
 }
 
+function toggleSaveMenu() {
+	if (document.getElementById("saveMenu").style.width == "0px" || document.getElementById("saveMenu").style.width == "" ) {
+		document.getElementById("saveMenu").style.width = "280px";
+		document.getElementById("openSaveMenu").style.right = "280px";
+	} else {
+		document.getElementById("saveMenu").style.width = "0px";
+		document.getElementById("openSaveMenu").style.right = "0px";
+	}
+}
+
 function merge(base, source) {
 	for (let i in base) {
 		if (source[i] != undefined) {
@@ -136,18 +146,15 @@ function newGame() {
 		doAutoSave: true,
 		autoSaveInterval: 1000,
 		progress: 0,
+		progressPerPoint: 3.6e6,
 		timewallPoint: 0
 	};
 }
 
-function toggleSaveMenu() {
-	if (document.getElementById("saveMenu").style.width == "0px" || document.getElementById("saveMenu").style.width == "" ) {
-		document.getElementById("saveMenu").style.width = "280px";
-		document.getElementById("openSaveMenu").style.right = "280px";
-	} else {
-		document.getElementById("saveMenu").style.width = "0px";
-		document.getElementById("openSaveMenu").style.right = "0px";
-	}
+function redeemPoints() {
+	let points = Math.floor(game.progress / game.progressPerPoint);
+	game.timewallPoint += points;
+	game.progress -= points * game.progressPerPoint;
 }
 
 load();
