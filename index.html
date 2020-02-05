@@ -8,10 +8,12 @@
 	<body>
 		<progress id="progressBar" class="progressBar centered" max="1.8e7" value="0"></progress>
 		<span id="progressBarLabel" class="label centered">0%</span>
-		<button id="openSaveMenu" onclick="toggleSaveMenu()" style="border-radius:50px 0px 0px 50px; width:100px; height:20%; background-color:rgba(0,0,0,0.5); position:absolute; right:0; bottom:0; transition:0.5s;">Saving</button>
+		<button id="openSaveMenu" onclick="toggleSaveMenu()" style="border-radius:50px 0px 0px 50px; width:100px; height:20%; background-color:rgba(0,0,0,0.5); position:absolute; right:0; bottom:0; transition:0.5s;">Saving<br>Options</button>
 		<div id="saveMenu" class="saveMenu">
-			<button onclick="save()">Save</button> <br>
-			<button onclick="load()">Load</button>
+			<div class="centered">
+				<button onclick="save()">Save</button> <br>
+				<button onclick="load()">Load</button>
+			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
