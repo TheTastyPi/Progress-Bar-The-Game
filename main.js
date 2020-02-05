@@ -9,9 +9,13 @@ function nextFrame(timeStamp) {
 		lastFrame = timeStamp;
 		if (game.progress < document.getElementById("progressBar").max) {
 			game.progress += sinceLastFrame;
+			game.lifetimeProgress += sinceLastFrame;
 		} else {
 			game.progress += Math.ceil(sinceLastFrame/10);
+			game.lifetimeProgress += Math.ceil(sinceLastFrame/10);
 		}
+		document.getElementById("redeemButton").classList[game.lifetimeProgress >= game.progressPerPoint ? "remove" : "add"]("hidden");
+		document.getElementById("redeemButton").classList[game.progress >= game.progressPerPoint ? "remove" : "add"]("disabled");
 		document.getElementById("progressBar").value = game.progress;
 		document.getElementById("progressBarLabel").innerHTML = (game.progress / document.getElementById("progressBar").max * 100).toFixed(4) + "%";
 	}
@@ -66,14 +70,11 @@ function importSave() {
 		try {
 			localStorage.setItem('twsave', atob(save));
 			load();
-		}
-		catch(yeet) {
+		} catch(yeet) {
 			err = true;
 			document.getElementById("importButton").style.backgroundColor = "red";
 		}
-		if (!err) {
-			document.getElementById("importButton").style.backgroundColor = "green";
-		}
+		if (!err) document.getElementById("importButton").style.backgroundColor = "green";
 		setTimeout(function(){
 			document.getElementById("importButton").style.backgroundColor = "";
 		}, 250);
@@ -145,6 +146,7 @@ function newGame() {
 		updateSpeed: 50,
 		doAutoSave: true,
 		autoSaveInterval: 1000,
+		lifetimeProgress: 0,
 		progress: 0,
 		progressPerPoint: 3.6e6,
 		timewallPoint: 0
@@ -152,9 +154,11 @@ function newGame() {
 }
 
 function redeemPoints() {
-	let points = Math.floor(game.progress / game.progressPerPoint);
-	game.timewallPoint += points;
-	game.progress -= points * game.progressPerPoint;
+	if (game.progress >= game.progressPerPoint) {
+		let points = Math.floor(game.progress / game.progressPerPoint);
+		game.timewallPoint += points;
+		game.progress -= points * game.progressPerPoint;
+	}
 }
 
 load();
