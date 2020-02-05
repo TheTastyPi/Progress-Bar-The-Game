@@ -58,11 +58,11 @@ function newGame() {
 }
 
 function openSaveMenu() {
-	document.getElementById("saveMenu").width = 200;
+	document.getElementById("saveMenu").style.width = 200;
 }
 
 function closeSaveMenu() {
-	document.getElementById("saveMenu").width = 0;
+	document.getElementById("saveMenu").style.width = 0;
 }
 
 load();
