@@ -32,7 +32,7 @@ button {
 	height: 20%;
 	width: 0px;
 	position: fixed;
-	overflow-x: hidden;
+	overflow: hidden;
 	z-index: 1;
 	bottom: 0;
 	right: 0;
