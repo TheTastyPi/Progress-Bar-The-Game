@@ -65,7 +65,7 @@ button {
 	display: flex;
 	flex-wrap: wrap;
 	align-content: stretch;
-	height: 20%;
+	height: 120px;
 	width: 0px;
 	position: fixed;
 	overflow: hidden;
