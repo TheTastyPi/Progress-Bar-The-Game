@@ -186,7 +186,7 @@ function getBarLength() {
 }
 
 function getBarSpeed() {
-	return Math.floor(2 ^ game.upgradeAmount[1] / (game.progress < getBarLength() ? 1 : 10 - game.upgradeAmount[3])));
+	return Math.floor(2 ^ game.upgradeAmount[1] / (game.progress < getBarLength() ? 1 : 10 - game.upgradeAmount[3]));
 }
 
 function getPointGain() {
