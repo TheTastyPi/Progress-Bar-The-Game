@@ -6,8 +6,6 @@ button {
 	background-color: #222222;
 	border-style: none;
 	border-radius: 15px;
-	height: 80px;
-	width: 80px;
 }
 .centered {
 	position: absolute;
@@ -30,7 +28,6 @@ button {
 	display: flex;
 	flex-wrap: wrap;
 	align-content: stretch;
-	flex: 1;
 	height: 20%;
 	width: 0px;
 	position: fixed;
