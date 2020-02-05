@@ -107,6 +107,9 @@ button {
 .upgMenu > * {
 	flex: 1 0 75px;	
 }
+#upg0 {
+	background-image:url('upgrade0.png');
+}
 @keyframes progressBarInit {
 	from {width: 0%; opacity: 0;}
 	to {width: 90%; opacity: 1;}
