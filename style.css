@@ -40,8 +40,8 @@ button {
 	height: 100px;
 }
 .label {
-	background-color: rgba(0,0,0,0.2);
-	color: gray;
+	background-color: rgba(0,0,0,0.5);
+	color: lightgray;
 	font-size: 50px;
 }
 .saveMenuOpen {
