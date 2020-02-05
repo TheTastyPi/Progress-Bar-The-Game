@@ -135,8 +135,8 @@ function toggleSaveMenu() {
 
 function toggleUpgMenu() {
 	if (document.getElementById("upgMenu").style.height == "0px" || document.getElementById("upgMenu").style.height == "" ) {
-		document.getElementById("upgMenu").style.height = "280px";
-		document.getElementById("openUpgMenu").style.top = "280px";
+		document.getElementById("upgMenu").style.height = "240px";
+		document.getElementById("openUpgMenu").style.top = "240px";
 	} else {
 		document.getElementById("upgMenu").style.height = "0px";
 		document.getElementById("openUpgMenu").style.top = "0px";
