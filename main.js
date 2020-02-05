@@ -117,8 +117,8 @@ function newGame() {
 
 function toggleSaveMenu() {
 	if (document.getElementById("saveMenu").style.width == "0px" || document.getElementById("saveMenu").style.width == "" ) {
-		document.getElementById("saveMenu").style.width = "250px";
-		document.getElementById("openSaveMenu").style.right = "250px";
+		document.getElementById("saveMenu").style.width = "280px";
+		document.getElementById("openSaveMenu").style.right = "280px";
 	} else {
 		document.getElementById("saveMenu").style.width = "0px";
 		document.getElementById("openSaveMenu").style.right = "0px";
