@@ -17,7 +17,8 @@ function nextFrame(timeStamp) {
 		document.getElementById("redeemButton").classList[game.lifetimeProgress >= game.progressPerPoint ? "remove" : "add"]("hidden");
 		document.getElementById("redeemButton").classList[game.progress >= game.progressPerPoint ? "remove" : "add"]("disabled");
 		document.getElementById("progressBar").value = game.progress;
-		document.getElementById("progressBarLabel").innerHTML = (game.progress / document.getElementById("progressBar").max * 100).toFixed(4) + "%";
+		document.getElementById("progressBarLabel").innerHTML = (game.progress / game.progressPerPoint * 100).toFixed(4) + "%";
+		document.getElementById("progressBar").max = game.progressPerPoint;
 	}
 	if (sinceLastSave >= game.autoSaveSpeed) {
 		if (game.doAutoSave) {
