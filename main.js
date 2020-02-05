@@ -94,6 +94,10 @@ function wipe() {
 function toggleAutoSave() {
 	game.doAutoSave = !game.doAutoSave;
 	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+	document.getElementById("autoSaveToggleButton").style.backgroundColor = game.doAutoSave ? "green" : "red";
+	setTimeout(function(){
+		document.getElementById("autoSaveToggleButton").style.backgroundColor = "";
+	}, 250);
 }
 
 function changeAutoSaveInterval() {
@@ -105,7 +109,13 @@ function changeAutoSaveInterval() {
 			game.autoSaveSpeed = newIntervalMs;
 			document.getElementById("autoSaveIntervalButton").innerHTML = "Auto Save<br>Interval<br>"+newInterval+"s";
 		}
+		document.getElementById("autoSaveIntervalButton").style.backgroundColor = "green";
+	} else {
+		document.getElementById("autoSaveIntervalButton").style.backgroundColor = "red";
 	}
+	setTimeout(function(){
+		document.getElementById("autoSaveIntervalButton").style.backgroundColor = "";
+	}, 250);
 }
 
 function merge(base, source) {
