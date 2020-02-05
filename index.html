@@ -6,8 +6,13 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<progress id="progressBar" style="animation-name:progressBarInit; animation-duration:1s; width:90%; height:100px; position:absolute; top:50%; right:50%; transform:translate(50%, -50%)" max="1.8e7" value="0"></progress>
-		<span id="progressBarLabel" style="background:rgba(0,0,0,0.1); color: gray; font-size:50px; position:absolute; top:50%; right:50%; transform:translate(50%, -50%)"">0%</span>
+		<progress id="progressBar" class="progressBar centered" max="1.8e7" value="0"></progress>
+		<span id="progressBarLabel" class="label centered">0%</span>
+		<div id="savingOptions" class="saveMenu">
+			<div id="openSaving" onclick="openSaving()" class="triangle-left" style="margin-right:100%; top:50%; transform:translate(0%, -50%);"></div>
+			<button>Save</button>
+			<button>Load</button>
+		</div>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
 </html>
