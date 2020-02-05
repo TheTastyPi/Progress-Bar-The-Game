@@ -14,11 +14,12 @@ function nextFrame(timeStamp) {
 			game.progress += Math.ceil(sinceLastFrame/10);
 			game.lifetimeProgress += Math.ceil(sinceLastFrame/10);
 		}
-		document.getElementById("redeemButton").classList[game.lifetimeProgress >= game.progressPerPoint ? "remove" : "add"]("hidden");
-		document.getElementById("redeemButton").classList[game.progress >= game.progressPerPoint ? "remove" : "add"]("disabled");
 		document.getElementById("progressBar").value = game.progress;
 		document.getElementById("progressBarLabel").innerHTML = (game.progress / game.progressPerPoint * 100).toFixed(4) + "%";
 		document.getElementById("progressBar").max = game.progressPerPoint;
+		document.getElementById("redeemButton").classList[game.lifetimeProgress >= game.progressPerPoint ? "remove" : "add"]("hidden");
+		document.getElementById("redeemButton").classList[game.progress >= game.progressPerPoint ? "remove" : "add"]("disabled");
+		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 	}
 	if (sinceLastSave >= game.autoSaveSpeed) {
 		if (game.doAutoSave) {
@@ -150,6 +151,7 @@ function newGame() {
 		lifetimeProgress: 0,
 		progress: 0,
 		progressPerPoint: 3.6e6,
+		lifetimePoints: 0,
 		timewallPoint: 0
 	};
 }
@@ -158,7 +160,9 @@ function redeemPoints() {
 	if (game.progress >= game.progressPerPoint) {
 		let points = Math.floor(game.progress / game.progressPerPoint);
 		game.timewallPoint += points;
+		game.lifetimePoints += points;
 		game.progress -= points * game.progressPerPoint;
+		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall points.";
 	}
 }
 
