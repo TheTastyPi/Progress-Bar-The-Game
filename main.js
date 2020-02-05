@@ -24,12 +24,12 @@ function nextFrame(timeStamp) {
 	window.requestAnimationFrame(nextFrame);
 }
 
-function save() {
+function save(?auto) {
 	localStorage.setItem('twsave', JSON.stringify(game));
 	document.getElementById("saveButton").style.backgroundColor = "green";
 	setTimeout(function(){
 		document.getElementById("saveButton").style.backgroundColor = "";
-	}, 1000);
+	}, 250);
 }
 
 function load() {
@@ -39,7 +39,7 @@ function load() {
 		document.getElementById("loadButton").style.backgroundColor = "green";
 		setTimeout(function(){
 			document.getElementById("loadButton").style.backgroundColor = "";
-		}, 1000);
+		}, 250);
 	}
 }
 
@@ -52,7 +52,7 @@ function exportSave() {
 	document.getElementById("exportButton").style.backgroundColor = "green";
 	setTimeout(function(){
 		document.getElementById("exportButton").style.backgroundColor = "";
-	}, 1000);
+	}, 250);
 }
 
 function importSave() {
@@ -65,14 +65,21 @@ function importSave() {
 		}
 		catch(yeet) {
 			err = true;
-			document.getElementById("exportButton").style.backgroundColor = "red";
+			document.getElementById("importButton").style.backgroundColor = "red";
 		}
 		if (!err) {
-			document.getElementById("exportButton").style.backgroundColor = "green";
+			document.getElementById("importButton").style.backgroundColor = "green";
 		}
 		setTimeout(function(){
-			document.getElementById("exportButton").style.backgroundColor = "";
-		}, 1000);
+			document.getElementById("importButton").style.backgroundColor = "";
+		}, 250);
+	}
+}
+
+function wipeSave() {
+	if (confirm("Are you sure you want to wipe your save?")) {
+		game = newGame(); 
+		save();
 	}
 }
 
