@@ -6,7 +6,7 @@ button {
 	background-color: #222222;
 	border-style: none;
 	border-radius: 15px;
-	transition: 0.1s;
+	transition: 0.2s;
 }
 .centered {
 	position: absolute;
