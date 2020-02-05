@@ -80,7 +80,7 @@ function importSave() {
 	}
 }
 
-function wipeSave() {
+function wipe() {
 	if (confirm("Are you sure you want to wipe your save?")) {
 		game = newGame(); 
 		save();
