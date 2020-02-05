@@ -2,6 +2,6 @@
 	font-family: "Lucida Console", Monaco, monospace;
 }
 @keyframes progressBarInit {
-	from {width: 0%;}
-	to {width: 90%;}
+	from {width: 0%; opacity: 0;}
+	to {width: 90%; opacity: 1;}
 }
