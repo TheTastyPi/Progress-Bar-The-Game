@@ -242,7 +242,7 @@ function updateUpg() {
 				newDesc += "/" + (10 - game.upgradeAmount[3]);
 		}
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		document.getElementById("upg"+i).style.backgroundColor = "rgba("+game.timewallPoint>getUpgPrice(i)?255:200+",255,255,"+isEven(i)?0.2:0.5+")";
+		document.getElementById("upg"+i).style.backgroundColor = "rgba("+(game.timewallPoint>getUpgPrice(i)?255:200)+",255,255,"+(isEven(i)?0.2:0.5)+")";
 	}
 	document.getElementById("progressBar").max = getBarLength();
 }
