@@ -27,7 +27,8 @@ function nextFrame(timeStamp) {
 }
 
 function save(auto = true) {
-	localStorage.setItem('twsave', JSON.stringify(deinfinify(game)));
+	deinfinify(game);
+	localStorage.setItem('twsave', JSON.stringify(game));
 	if (!auto) {
 		document.getElementById("saveButton").style.backgroundColor = "green";
 		setTimeout(function(){
@@ -38,7 +39,8 @@ function save(auto = true) {
 
 function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
-		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
+		let pastGame = JSON.parse(localStorage.getItem('twsave'));
+		infinify(pastGame);
 		merge(game, pastGame);
 		if (!auto) {
 			document.getElementById("loadButton").style.backgroundColor = "green";
@@ -51,7 +53,8 @@ function load(auto = true) {
 
 function exportSave() {
 	document.getElementById("exportArea").classList.remove('hidden');
-	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(deinfinify(game)));
+	deinfinify(game);
+	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(game));
 	document.getElementById("exportArea").select();
 	document.execCommand("copy");
 	document.getElementById("exportArea").classList.add('hidden');
