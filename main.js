@@ -123,7 +123,7 @@ function infinify(object) {
 			o[i] = Infinity;
 		}
 		if (typeof(o[i]) == "object") {
-			o[i] = deinfinify(o[i]);
+			o[i] = infinify(o[i]);
 		}
 	}
 	return o;
