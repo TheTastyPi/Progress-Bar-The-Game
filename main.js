@@ -107,7 +107,7 @@ function deinfinify(obj) {
 	let o = obj;
 	for (let i in o) {
 		if (typeof(o[i] == "object")) deinfinify(o[i]);
-		else if (o[i] == Infinity) o[i] = "Infinity";
+		else if (o[i] === Infinity) o[i] = "Infinity";
 	}
 	return o;
 }
@@ -116,7 +116,7 @@ function infinify(obj) {
 	let o = obj;
 	for (let i in o) {
 		if (typeof(o[i] == "object")) infinify(o[i]);
-		else if (o[i] == "Infinity") o[i] = Infinity;
+		else if (o[i] === "Infinity") o[i] = Infinity;
 	}
 	return o;
 }
