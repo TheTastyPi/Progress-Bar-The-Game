@@ -217,7 +217,7 @@ function getUpgPrice(n) {
 }
 
 function buyUpgrade(n) {
-	if (game.timewallPoint >= getUpgPrice(n) && game.upgradeAmount[n] < upgrade.limit[n]) {
+	if (game.timewallPoint >= getUpgPrice(n) && game.upgradeAmount[n] < upgrade.limit[n] && getUpgPrice(n) != Infinity) {
 		game.timewallPoint -= getUpgPrice(n);
 		game.upgradeAmount[n]++;
 		updateUpg();
