@@ -13,6 +13,8 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = timeStamp - lastSave;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
+		game.lifetimeProgress += sinceLastFrame * getBarSpeed();
+		game.progress += sinceLastFrame * getBarSpeed();
 		updateProgress();
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
@@ -211,8 +213,6 @@ function updateAll() {
 }
 
 function updateProgress() {
-	game.lifetimeProgress += sinceLastFrame * getBarSpeed();
-	game.progress += sinceLastFrame * getBarSpeed();
 	document.getElementById("progressBar").value = game.progress;
 	document.getElementById("progressBarLabel").innerHTML = (game.progress / getBarLength() * 100).toFixed(4) + "%";
 	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
