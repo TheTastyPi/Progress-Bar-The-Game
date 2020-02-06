@@ -144,7 +144,7 @@ function merge(base, source) {
 			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
 				merge(base[i], source[i]);
 			} else {
-				base[i] = source[i];
+				base[i] = source[i] == null ? Infinity : source[i];
 			}
 		}
 	}
