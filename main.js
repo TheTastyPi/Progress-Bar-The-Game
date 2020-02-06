@@ -129,18 +129,6 @@ function infinify(object) {
 	return o;
 }
 
-function infinify(obj) {
-	let o = obj;
-	for (let i in o) {
-		if (typeof(o[i] == "object")) {
-			infinify(o[i]);
-		} else if (o[i] === "Infinity") {
-			o[i] = Infinity;
-		}
-	}
-	return o;
-}
-
 function toggleAutoSave() {
 	game.doAutoSave = !game.doAutoSave;
 	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
