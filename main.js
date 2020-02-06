@@ -27,7 +27,7 @@ function nextFrame(timeStamp) {
 }
 
 function save(auto = true) {
-	localStorage.setItem('twsave', JSON.stringify(game));
+	localStorage.setItem('twsave', JSON.stringify(uninfinify(game)));
 	if (!auto) {
 		document.getElementById("saveButton").style.backgroundColor = "green";
 		setTimeout(function(){
@@ -38,7 +38,7 @@ function save(auto = true) {
 
 function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
-		let pastGame = JSON.parse(localStorage.getItem('twsave'));
+		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
 		merge(game, pastGame);
 		if (!auto) {
 			document.getElementById("loadButton").style.backgroundColor = "green";
@@ -51,7 +51,7 @@ function load(auto = true) {
 
 function exportSave() {
 	document.getElementById("exportArea").classList.remove('hidden');
-	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(game));
+	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(uninfinify(game)));
 	document.getElementById("exportArea").select();
 	document.execCommand("copy");
 	document.getElementById("exportArea").classList.add('hidden');
@@ -88,6 +88,32 @@ function wipe() {
 		setTimeout(function(){
 			document.getElementById("wipeButton").style.backgroundColor = "";
 		}, 250);
+	}
+}
+
+function merge(base, source) {
+	for (let i in base) {
+		if (source[i] != undefined) {
+			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
+				merge(base[i], source[i]);
+			} else {
+				base[i] = source[i];
+			}
+		}
+	}
+}
+
+function deinfinify(obj) {
+	for (let i in obj) {
+		if (typeof(obj[i] == "object")) deinfinify(obj[i]);
+		else if (obj[i] == Infinity) obj[i] = "Infinity";
+	}
+}
+
+function infinify(obj) {
+	for (let i in obj) {
+		if (typeof(obj[i] == "object")) infinify(obj[i]);
+		else if (obj[i] == "Infinity") obj[i] = Infinity;
 	}
 }
 
@@ -135,18 +161,6 @@ function toggleUpgMenu() {
 	} else {
 		document.getElementById("upgMenu").style.height = "0px";
 		document.getElementById("openUpgMenu").style.top = "0px";
-	}
-}
-
-function merge(base, source) {
-	for (let i in base) {
-		if (source[i] != undefined) {
-			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
-				merge(base[i], source[i]);
-			} else {
-				base[i] = source[i] == null ? Infinity : source[i];
-			}
-		}
 	}
 }
 
