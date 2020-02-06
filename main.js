@@ -35,7 +35,7 @@ function nextFrame(timeStamp) {
 				case 3:
 					newDesc += "/" + (10 - game.upgradeAmount[3]);
 			}
-			document.getElementById("upgDesc"+i).innerHTML
+			document.getElementById("upgDesc"+i).innerHTML = newDesc;
 		}
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
