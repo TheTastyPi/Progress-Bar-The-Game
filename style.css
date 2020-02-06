@@ -107,7 +107,8 @@ button {
 	color: #DDDDDD;
 }
 .upgMenu > * {
-	flex: 1 0 75px;	
+	flex: 1 0 75px;
+	transition: 1s;
 }
 @keyframes progressBarInit {
 	from {width: 0; opacity: 0;}
