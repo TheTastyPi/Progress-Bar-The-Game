@@ -22,6 +22,7 @@ function nextFrame(timeStamp) {
 		document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
 		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
+		document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 		for (let i = 0; i < 4; i++) {
 			let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
 			switch(i) {
