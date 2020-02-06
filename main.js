@@ -278,7 +278,8 @@ function isEven(n) {
 }
 
 function format(n) {
-	if (n < 1e3) return n.toFixed(4);
+	if (n == "Infinity") return Infinity;
+	else if (n < 1e3) return n.toFixed(4);
 	return n.toPrecision(5).replace("+","");
 }
 
