@@ -241,8 +241,13 @@ function updateUpg() {
 				newDesc += "/" + (10 - game.upgradeAmount[3]);
 		}
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
+		document.getElementById("upg"+i).style.backgroundColor = "rgba("+game.timewallPoint>getUpgPrice(i)?0:100+",0,0,"+isEven(i)?0.2:0.5+")";
 	}
 	document.getElementById("progressBar").max = getBarLength();
+}
+
+function isEven(n) {
+	return Math.floor(n/2) == n/2;
 }
 
 load();
