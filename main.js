@@ -216,7 +216,7 @@ function updateAll() {
 
 function updateProgress() {
 	document.getElementById("progressBar").value = game.progress;
-	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100).toFixed(4)) + "%";
+	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100)) + "%";
 	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
 	document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
 }
@@ -252,8 +252,8 @@ function isEven(n) {
 }
 
 function format(n) {
-	if (n < 1e3) return n;
-	return n.toPrecision(4).replace("+","");
+	if (n < 1e3) return n.toFixed(4);
+	return n.toPrecision(5).replace("+","");
 }
 
 load();
