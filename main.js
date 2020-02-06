@@ -106,8 +106,11 @@ function merge(base, source) {
 function deinfinify(obj) {
 	let o = obj;
 	for (let i in o) {
-		if (typeof(o[i] == "object")) deinfinify(o[i]);
-		else if (o[i] === Infinity) o[i] = "Infinity";
+		if (typeof(o[i] == "object")) {
+			deinfinify(o[i]);
+		} else if (o[i] === Infinity) {
+			o[i] = "Infinity";
+		}
 	}
 	return o;
 }
@@ -115,8 +118,11 @@ function deinfinify(obj) {
 function infinify(obj) {
 	let o = obj;
 	for (let i in o) {
-		if (typeof(o[i] == "object")) infinify(o[i]);
-		else if (o[i] === "Infinity") o[i] = Infinity;
+		if (typeof(o[i] == "object")) {
+			infinify(o[i]);
+		} else if (o[i] === "Infinity") {
+			o[i] = Infinity;
+		}
 	}
 	return o;
 }
