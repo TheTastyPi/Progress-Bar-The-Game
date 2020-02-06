@@ -174,6 +174,7 @@ function redeemPoints() {
 		game.lifetimePoints += getPointGain();
 		game.progress = mod(game.progress, getBarLength());
 		updatePoints();
+		updateUpg();
 	}
 }
 
