@@ -190,6 +190,7 @@ function buyUpgrade(n) {
 		game.timewallPoint -= getUpgPrice(n);
 		game.upgradeAmount[n]++;
 		updateUpg();
+		updatePoints();
 	}
 }
 
