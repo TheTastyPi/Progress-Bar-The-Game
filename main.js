@@ -13,8 +13,8 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = timeStamp - lastSave;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		game.progress += sinceLastFrame * getBarSpeed();
 		game.lifetimeProgress += sinceLastFrame * getBarSpeed();
+		game.progress += sinceLastFrame * getBarSpeed();
 		document.getElementById("progressBar").value = game.progress;
 		document.getElementById("progressBarLabel").innerHTML = (game.progress / getBarLength() * 100).toFixed(4) + "%";
 		document.getElementById("progressBar").max = getBarLength();
