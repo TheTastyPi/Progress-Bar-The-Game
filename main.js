@@ -192,8 +192,12 @@ function redeemPoints() {
 	if (game.progress >= getBarLength()) {
 		game.timewallPoint += getPointGain();
 		game.lifetimePoints += getPointGain();
-		game.progress -= getPointGain() * getBarLength();
+		game.progress = mod(game.progress, getBarLength());
 	}
+}
+
+function mod(a, b) {
+	return a - Math.floor(a / b) * b;
 }
 
 function getUpgPrice(n) {
