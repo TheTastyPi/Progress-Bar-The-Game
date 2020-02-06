@@ -260,6 +260,7 @@ function updatePoints() {
 function updateUpg() {
 	for (let i = 0; i < 4; i++) {
 		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+format(getUpgPrice(i))+" Timewall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
+		if (getUpgPrice(i) != Infinity) setTimeout(function(){document.getElementById("upg"+i).style.maxWidth = 0;},1000);
 		switch(i) {
 			case 0:
 				newDesc += "/" + format(Math.pow(2, game.upgradeAmount[0]));
