@@ -103,13 +103,27 @@ function merge(base, source) {
 	}
 }
 
-function deinfinify(obj) {
-	let o = obj;
-	for (i in o) {
-		if (typeof(o[i] == "object")) {
-			deinfinify(o[i]);
-		} else if (o[i] === Infinity) {
+function deinfinify(object) {
+	let o = object;
+	for (let i in o) {
+		if (o[i] === Infinity) {
 			o[i] = "Infinity";
+		}
+		if (typeof(o[i]) == "object") {
+			o[i] = deinfinify(o[i]);
+		}
+	}
+	return o;
+}
+
+function infinify(object) {
+	let o = object;
+	for (let i in o) {
+		if (o[i] === "Infinity") {
+			o[i] = Infinity;
+		}
+		if (typeof(o[i]) == "object") {
+			o[i] = deinfinify(o[i]);
 		}
 	}
 	return o;
