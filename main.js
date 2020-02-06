@@ -86,31 +86,35 @@ function wipe() {
 	if (confirm("Are you sure you want to wipe your save?")) {
 		game = newGame(); 
 		save();
-		document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
-		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
-		for (let i = 0; i < 4; i++) {
-			let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
-			switch(i) {
-				case 0:
-					newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
-					break;
-				case 1:
-				case 2:
-					newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
-					break;
-				case 3:
-					newDesc += "/" + (10 - game.upgradeAmount[3]);
-			}
-			document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		}
-		document.getElementById("progressBar").max = getBarLength();
-		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-		document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+		updateAll();
 		document.getElementById("wipeButton").style.backgroundColor = "red";
 		setTimeout(function(){
 			document.getElementById("wipeButton").style.backgroundColor = "";
 		}, 250);
 	}
+}
+
+function updateAll() {
+	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+	document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
+	for (let i = 0; i < 4; i++) {
+		let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
+		switch(i) {
+			case 0:
+				newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
+				break;
+			case 1:
+			case 2:
+				newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
+				break;
+			case 3:
+				newDesc += "/" + (10 - game.upgradeAmount[3]);
+		}
+		document.getElementById("upgDesc"+i).innerHTML = newDesc;
+	}
+	document.getElementById("progressBar").max = getBarLength();
+	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+	document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 }
 
 function toggleAutoSave() {
@@ -245,5 +249,7 @@ function getPointGain() {
 }
 
 load();
+
+updateAll();
 
 window.requestAnimationFrame(nextFrame);
