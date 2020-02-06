@@ -13,12 +13,7 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = timeStamp - lastSave;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		game.lifetimeProgress += sinceLastFrame * getBarSpeed();
-		game.progress += sinceLastFrame * getBarSpeed();
-		document.getElementById("progressBar").value = game.progress;
-		document.getElementById("progressBarLabel").innerHTML = (game.progress / getBarLength() * 100).toFixed(4) + "%";
-		document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
-		document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
+		updateProgress();
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) {
@@ -92,29 +87,6 @@ function wipe() {
 			document.getElementById("wipeButton").style.backgroundColor = "";
 		}, 250);
 	}
-}
-
-function updateAll() {
-	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
-	document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
-	for (let i = 0; i < 4; i++) {
-		let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
-		switch(i) {
-			case 0:
-				newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
-				break;
-			case 1:
-			case 2:
-				newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
-				break;
-			case 3:
-				newDesc += "/" + (10 - game.upgradeAmount[3]);
-		}
-		document.getElementById("upgDesc"+i).innerHTML = newDesc;
-	}
-	document.getElementById("progressBar").max = getBarLength();
-	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-	document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 }
 
 function toggleAutoSave() {
@@ -199,9 +171,7 @@ function redeemPoints() {
 		game.timewallPoint += getPointGain();
 		game.lifetimePoints += getPointGain();
 		game.progress = mod(game.progress, getBarLength());
-		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
-		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-		document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+		updatePoints();
 	}
 }
 
@@ -217,22 +187,7 @@ function buyUpgrade(n) {
 	if (game.timewallPoint >= getUpgPrice(n) && game.upgradeAmount[n] < upgrade.limit[n]) {
 		game.timewallPoint -= getUpgPrice(n);
 		game.upgradeAmount[n]++;
-		for (let i = 0; i < 4; i++) {
-			let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
-			switch(i) {
-				case 0:
-					newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
-					document.getElementById("progressBar").max = getBarLength();
-					break;
-				case 1:
-				case 2:
-					newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
-					break;
-				case 3:
-					newDesc += "/" + (10 - game.upgradeAmount[3]);
-			}
-			document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		}
+		updateUpg();
 	}
 }
 
@@ -246,6 +201,47 @@ function getBarSpeed() {
 
 function getPointGain() {
 	return Math.floor(game.progress / getBarLength() * Math.pow(2, game.upgradeAmount[2]));
+}
+
+function updateAll() {
+	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+	updateProgress();
+	updatePoints();
+	updateUpg();
+}
+
+function updateProgress() {
+	game.lifetimeProgress += sinceLastFrame * getBarSpeed();
+	game.progress += sinceLastFrame * getBarSpeed();
+	document.getElementById("progressBar").value = game.progress;
+	document.getElementById("progressBarLabel").innerHTML = (game.progress / getBarLength() * 100).toFixed(4) + "%";
+	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
+	document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
+}
+
+function updatePoints() {
+	document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
+	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+	document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+}
+
+function updateUpg() {
+	for (let i = 0; i < 4; i++) {
+		let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
+		switch(i) {
+			case 0:
+				newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
+				break;
+			case 1:
+			case 2:
+				newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
+				break;
+			case 3:
+				newDesc += "/" + (10 - game.upgradeAmount[3]);
+		}
+		document.getElementById("upgDesc"+i).innerHTML = newDesc;
+	}
+	document.getElementById("progressBar").max = getBarLength();
 }
 
 load();
