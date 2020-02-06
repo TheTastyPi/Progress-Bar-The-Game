@@ -252,7 +252,7 @@ function isEven(n) {
 }
 
 function format(n) {
-	if (num < 1e3) return n;
+	if (n < 1e3) return n;
 	return n.toPrecision(4).replace("+","");
 }
 
