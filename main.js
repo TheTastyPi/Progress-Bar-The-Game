@@ -92,7 +92,7 @@ function wipe() {
 }
 
 function merge(base, source) {
-	for (let i in base) {
+	for (i in base) {
 		if (source[i] != undefined) {
 			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
 				merge(base[i], source[i]);
@@ -105,7 +105,7 @@ function merge(base, source) {
 
 function deinfinify(obj) {
 	let o = obj;
-	for (let i in o) {
+	for (i in o) {
 		if (typeof(o[i] == "object")) {
 			deinfinify(o[i]);
 		} else if (o[i] === Infinity) {
