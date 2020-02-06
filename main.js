@@ -104,7 +104,7 @@ function merge(base, source) {
 }
 
 function deinfinify(object) {
-	let o = object;
+	let o = {...object};
 	for (let i in o) {
 		if (o[i] === Infinity) {
 			o[i] = "Infinity";
@@ -117,7 +117,7 @@ function deinfinify(object) {
 }
 
 function infinify(object) {
-	let o = object;
+	let o = {...object};
 	for (let i in o) {
 		if (o[i] === "Infinity") {
 			o[i] = Infinity;
