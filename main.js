@@ -27,7 +27,7 @@ function nextFrame(timeStamp) {
 }
 
 function save(auto = true) {
-	localStorage.setItem('twsave', JSON.stringify(uninfinify(game)));
+	localStorage.setItem('twsave', JSON.stringify(deinfinify(game)));
 	if (!auto) {
 		document.getElementById("saveButton").style.backgroundColor = "green";
 		setTimeout(function(){
@@ -51,7 +51,7 @@ function load(auto = true) {
 
 function exportSave() {
 	document.getElementById("exportArea").classList.remove('hidden');
-	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(uninfinify(game)));
+	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(deinfinify(game)));
 	document.getElementById("exportArea").select();
 	document.execCommand("copy");
 	document.getElementById("exportArea").classList.add('hidden');
