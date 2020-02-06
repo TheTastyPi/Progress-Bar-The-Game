@@ -216,30 +216,30 @@ function updateAll() {
 
 function updateProgress() {
 	document.getElementById("progressBar").value = game.progress;
-	document.getElementById("progressBarLabel").innerHTML = (game.progress / getBarLength() * 100).toFixed(4) + "%";
+	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100).toFixed(4)) + "%";
 	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
 	document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
 }
 
 function updatePoints() {
-	document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
+	document.getElementById("timewallPoint").innerHTML = "You have "+format(game.timewallPoint)+" timewall point"+pluralCheck(game.timewallPoint)+".";
 	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 	document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 }
 
 function updateUpg() {
 	for (let i = 0; i < 4; i++) {
-		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
+		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+format(getUpgPrice(i))+" Timewall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
 		switch(i) {
 			case 0:
-				newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
+				newDesc += "/" + format(Math.pow(2, game.upgradeAmount[0]));
 				break;
 			case 1:
 			case 2:
-				newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
+				newDesc += format(Math.pow(2, game.upgradeAmount[i])) + "x";
 				break;
 			case 3:
-				newDesc += "/" + (10 - game.upgradeAmount[3]);
+				newDesc += "/" + format((10 - game.upgradeAmount[3]));
 		}
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
 		document.getElementById("upg"+i).style.backgroundColor = "rgba(255,"+(game.timewallPoint>getUpgPrice(i)?"255,255":"200,200")+","+(isEven(i)?0.2:0.5)+")";
@@ -249,6 +249,11 @@ function updateUpg() {
 
 function isEven(n) {
 	return Math.floor(n/2) == n/2;
+}
+
+function format(n) {
+	if (num < 1e3) return n;
+	return n.toPrecision(4).replace("+","");
 }
 
 load();
