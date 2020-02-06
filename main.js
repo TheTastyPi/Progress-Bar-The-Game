@@ -17,27 +17,8 @@ function nextFrame(timeStamp) {
 		game.progress += sinceLastFrame * getBarSpeed();
 		document.getElementById("progressBar").value = game.progress;
 		document.getElementById("progressBarLabel").innerHTML = (game.progress / getBarLength() * 100).toFixed(4) + "%";
-		document.getElementById("progressBar").max = getBarLength();
 		document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
 		document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
-		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
-		document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-		for (let i = 0; i < 4; i++) {
-			let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
-			switch(i) {
-				case 0:
-					newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
-					break;
-				case 1:
-				case 2:
-					newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
-					break;
-				case 3:
-					newDesc += "/" + (10 - game.upgradeAmount[3]);
-			}
-			document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		}
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) {
@@ -105,6 +86,26 @@ function wipe() {
 	if (confirm("Are you sure you want to wipe your save?")) {
 		game = newGame(); 
 		save();
+		document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
+		for (let i = 0; i < 4; i++) {
+			let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
+			switch(i) {
+				case 0:
+					newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
+					break;
+				case 1:
+				case 2:
+					newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
+					break;
+				case 3:
+					newDesc += "/" + (10 - game.upgradeAmount[3]);
+			}
+			document.getElementById("upgDesc"+i).innerHTML = newDesc;
+		}
+		document.getElementById("progressBar").max = getBarLength();
+		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+		document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 		document.getElementById("wipeButton").style.backgroundColor = "red";
 		setTimeout(function(){
 			document.getElementById("wipeButton").style.backgroundColor = "";
@@ -194,6 +195,9 @@ function redeemPoints() {
 		game.timewallPoint += getPointGain();
 		game.lifetimePoints += getPointGain();
 		game.progress = mod(game.progress, getBarLength());
+		document.getElementById("timewallPoint").innerHTML = "You have "+game.timewallPoint+" timewall point"+pluralCheck(game.timewallPoint)+".";
+		document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+		document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 	}
 }
 
@@ -209,6 +213,22 @@ function buyUpgrade(n) {
 	if (game.timewallPoint >= getUpgPrice(n) && game.upgradeAmount[n] < upgrade.limit[n]) {
 		game.timewallPoint -= getUpgPrice(n);
 		game.upgradeAmount[n]++;
+		for (let i = 0; i < 4; i++) {
+			let newDesc = "Cost: "+getUpgPrice(i)+" Timewall Point"+pluralCheck(getUpgPrice(i))+"<br>Currently: ";
+			switch(i) {
+				case 0:
+					newDesc += "/" + Math.pow(2, game.upgradeAmount[0]);
+					document.getElementById("progressBar").max = getBarLength();
+					break;
+				case 1:
+				case 2:
+					newDesc += Math.pow(2, game.upgradeAmount[i]) + "x";
+					break;
+				case 3:
+					newDesc += "/" + (10 - game.upgradeAmount[3]);
+			}
+			document.getElementById("upgDesc"+i).innerHTML = newDesc;
+		}
 	}
 }
 
