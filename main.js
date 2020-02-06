@@ -27,8 +27,7 @@ function nextFrame(timeStamp) {
 }
 
 function save(auto = true) {
-	deinfinify(game);
-	localStorage.setItem('twsave', JSON.stringify(game));
+	localStorage.setItem('twsave', JSON.stringify(deinfinify(game)));
 	if (!auto) {
 		document.getElementById("saveButton").style.backgroundColor = "green";
 		setTimeout(function(){
@@ -39,8 +38,7 @@ function save(auto = true) {
 
 function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
-		let pastGame = JSON.parse(localStorage.getItem('twsave'));
-		infinify(pastGame);
+		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
 		merge(game, pastGame);
 		if (!auto) {
 			document.getElementById("loadButton").style.backgroundColor = "green";
@@ -53,8 +51,7 @@ function load(auto = true) {
 
 function exportSave() {
 	document.getElementById("exportArea").classList.remove('hidden');
-	deinfinify(game);
-	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(game));
+	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(deinfinify(game)));
 	document.getElementById("exportArea").select();
 	document.execCommand("copy");
 	document.getElementById("exportArea").classList.add('hidden');
@@ -107,17 +104,21 @@ function merge(base, source) {
 }
 
 function deinfinify(obj) {
-	for (let i in obj) {
-		if (typeof(obj[i] == "object")) deinfinify(obj[i]);
-		else if (obj[i] == Infinity) obj[i] = "Infinity";
+	let o = obj;
+	for (let i in o) {
+		if (typeof(o[i] == "object")) deinfinify(o[i]);
+		else if (o[i] == Infinity) o[i] = "Infinity";
 	}
+	return o;
 }
 
 function infinify(obj) {
-	for (let i in obj) {
-		if (typeof(obj[i] == "object")) infinify(obj[i]);
-		else if (obj[i] == "Infinity") obj[i] = Infinity;
+	let o = obj;
+	for (let i in o) {
+		if (typeof(o[i] == "object")) infinify(o[i]);
+		else if (o[i] == "Infinity") o[i] = Infinity;
 	}
+	return o;
 }
 
 function toggleAutoSave() {
