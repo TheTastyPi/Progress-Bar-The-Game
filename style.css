@@ -8,11 +8,35 @@ button {
 	border-radius: 15px;
 	transition: 0.2s;
 }
+.disabled {
+	color: #550000;
+	background-color: #666666;
+}
+.hidden {
+	display: none;
+}
+.horisonalCentered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 .centered {
 	position: absolute;
 	top: 50%;
 	right: 50%;
 	transform: translate(50%, -50%);
+}
+.centeredButSlightlyLower {
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%, calc(-50% + 200px));
+}
+.centeredButSlightlyHigher {
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(50%, calc(-50% - 150px));
 }
 .progressBar {
 	animation-name: progressBarInit;
@@ -21,15 +45,29 @@ button {
 	height: 100px;
 }
 .label {
-	background-color: rgba(0,0,0,0.1);
+	animation-name: barLabelInit;
+	animation-duration: 1s;
+	background-color: rgba(255,255,255,0.2);
 	color: gray;
 	font-size: 50px;
+}
+.saveMenuOpen {
+	animation-name: savingMenuInit;
+	animation-duration: 1s;
+	border-radius: 50px 0px 0px 50px;
+	width: 100px;
+	height: 120px;
+	background-color: rgba(0,0,0,0.5);
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	transition: 0.5s;
 }
 .saveMenu {
 	display: flex;
 	flex-wrap: wrap;
 	align-content: stretch;
-	height: 20%;
+	height: 120px;
 	width: 0px;
 	position: fixed;
 	overflow: hidden;
@@ -42,7 +80,57 @@ button {
 .saveMenu > * {
 	flex: 1 0 75px;	
 }
+.upgMenuOpen {
+	animation-name: upgMenuInit;
+	animation-duration: 1s;
+	border-radius: 0px 0px 50px 50px;
+	width: 120px;
+	height: 100px;
+	background-color: rgba(0,0,0,0.5);
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: 0.5s;
+}
+.upgMenu {
+	display: flex;
+	flex-wrap: wrap;
+	height: 0px;
+	width: 100%;
+	position: fixed;
+	overflow: hidden;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.5);
+	transition: 0.5s;
+	color: #DDDDDD;
+}
+.upgMenu > * {
+	flex: 1 0 75px;
+	transition: 0.5s;
+}
 @keyframes progressBarInit {
-	from {width: 0%; opacity: 0;}
+	from {width: 0; opacity: 0;}
 	to {width: 90%; opacity: 1;}
+}
+@keyframes barLabelInit {
+	from {opacity: 0; font-size: 0;}
+	to {opacity: 1; font-size: 50px;}
+}
+@keyframes savingMenuInit {
+	from {width: 0; opacity: 0;}
+	to {width: 100px; opacity: 1;}
+}
+@keyframes upgMenuInit {
+	from {height: 0; opacity: 0;}
+	to {height: 100px; opacity: 1;}
+}
+@keyframes redeemButtonInit {
+	from {height: 0; width: 0; opacity: 0; font-size: 0;}
+	to {height: 200px; width: 300px; opacity: 1; font-size: 40px;}
+}
+@keyframes pointDisplayInit {
+	from {opacity: 0; font-size: 0;}
+	to {opacity: 1; font-size: 40px;}
 }
