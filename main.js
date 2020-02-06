@@ -84,6 +84,10 @@ function wipe() {
 		game = newGame(); 
 		save();
 		updateAll();
+		document.getElementById("saveMenu").style.width = "0px";
+		document.getElementById("openSaveMenu").style.right = "0px";
+		document.getElementById("upgMenu").style.height = "0px";
+		document.getElementById("openUpgMenu").style.top = "0px";
 		document.getElementById("wipeButton").style.backgroundColor = "red";
 		setTimeout(function(){
 			document.getElementById("wipeButton").style.backgroundColor = "";
