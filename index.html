@@ -47,8 +47,8 @@
 		</div>
 		<progress id="progressBar" class="progressBar centered" max="1.8e7" value="0"></progress>
 		<span id="progressBarLabel" class="label centered">0%</span>
-		<button id="redeemButton" onclick="redeemPoints()" class="hidden centeredButSlightlyLower" style="height:200px; width:300px; font-size:40px;">Redeem Points</button>
-		<span id="timewallPoint" class="hidden centeredButSlightlyHigher" style="width:100%; text-align:center; font-size:40px;">You have 0 timewall points.</span>
+		<button id="redeemButton" onclick="redeemPoints()" class="hidden centeredButSlightlyLower" style="animation-name:redeemButtonInit; height:200px; width:300px; font-size:40px;">Redeem Points</button>
+		<span id="timewallPoint" class="hidden centeredButSlightlyHigher" style="animation-name:pointDisplayInit; width:100%; text-align:center; font-size:40px;">You have 0 timewall points.</span>
 		<button id="openSaveMenu" onclick="toggleSaveMenu()" class="saveMenuOpen">Saving<br>Options</button>
 		<div id="saveMenu" class="saveMenu">
 			<button id="saveButton" onclick="save(false)">Save</button>
