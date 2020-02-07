@@ -110,6 +110,14 @@ button {
 	flex: 1 0 75px;
 	transition: 0.5s;
 }
+.maxall {
+	position:absolute;
+	width:80px;
+	height:50px;
+	left:0;
+	top:0;
+	border-radius:0 0 20px;
+}
 @keyframes progressBarInit {
 	from {width: 0; opacity: 0;}
 	to {width: 90%; opacity: 1;}
