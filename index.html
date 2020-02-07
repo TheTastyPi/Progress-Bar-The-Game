@@ -51,7 +51,7 @@
 		<button id="redeemButton" onclick="redeemPoints()" class="hidden centeredButSlightlyLower" style="animation-name:redeemButtonInit; animation-duration:1s; height:200px; width:300px; font-size:40px;">Redeem Points</button>
 		<span id="timewallPoint" class="hidden centeredButSlightlyHigher" style="animation-name:pointDisplayInit; animation-duration:1s; width:100%; text-align:center; font-size:40px;">You have 0 timewall points.</span>
 		<button id="saveMenuOpen" onclick="toggleSideMenu('save')" class="sideMenuOpen">Saving</button>
-		<div id="saveMenu" class="sideMenu" style="height:120px; max-width:280px">
+		<div id="saveMenu" class="sideMenu" style="bottom:0; height:120px; max-width:280px">
 			<button id="saveButton" onclick="save(false)">Save</button>
 			<button id="loadButton" onclick="load(false)">Load</button>
 			<button id="autoSaveToggleButton" onclick="toggleAutoSave()">Auto Save<br>ON</button>
@@ -60,8 +60,8 @@
 			<button id="autoSaveIntervalButton" onclick="changeAutoSaveInterval()">Auto Save<br>Interval<br>1s</button>
 			<button id="wipeButton" onclick="wipe()">Wipe</button>
 		</div>
-		<button id="themeMenuOpen" onclick="toggleSideMenu('theme')" class="sideMenuOpen">Saving</button>
-		<div id="themeMenu" class="sideMenu">
+		<button id="themeMenuOpen" onclick="toggleSideMenu('theme')" class="sideMenuOpen" style="bottom:120px;">Themes</button>
+		<div id="themeMenu" class="sideMenu" style="bottom:120px; height:120px; max-width:280px">
 			<button id="lightTheme" onclick="toTheme('light')">Light</button>
 			<button id="darkTheme" onclick="toTheme('dark')">Dark</button>
 		</div>
