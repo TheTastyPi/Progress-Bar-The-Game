@@ -13,8 +13,8 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = timeStamp - lastSave;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		game.lifetimeProgress += sinceLastFrame * getBarSpeed();
-		game.progress += sinceLastFrame * getBarSpeed();
+		game.lifetimeProgress += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 10));
+		game.progress += Math.powsinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 10));
 		updateProgress();
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
@@ -227,7 +227,7 @@ function getBarLength() {
 }
 
 function getBarSpeed() {
-	return Math.pow(2, game.upgradeAmount[1] / (game.progress < getBarLength() ? 1 : 10 - game.upgradeAmount[3])) * game.speed;
+	return Math.pow(2, game.upgradeAmount[1]) * game.speed;
 }
 
 function getPointGain() {
