@@ -4,7 +4,7 @@ var game = newGame();
 
 const upgrade = {
 	basePrice: [1, 1, 2, 3],
-	priceGrowth: [6.66, 6.66, 12, 17.3],
+	priceGrowth: [6.66, 6.66, 13, 17.3],
 	limit: [Infinity,Infinity,Infinity,9]
 };
 
@@ -222,7 +222,7 @@ function buyUpgrade(n) {
 }
 
 function getBarLength() {
-	return 3.6e6 / Math.pow(2, game.upgradeAmount[0]);
+	return 6e5 / Math.pow(2, game.upgradeAmount[0]);
 }
 
 function getBarSpeed() {
