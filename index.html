@@ -6,8 +6,8 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<button id="openUpgMenu" onclick="toggleUpgMenu()" class="hidden upgMenuOpen">Upgrades</button>
-		<div id="upgMenu" class="upgMenu">
+		<button id="openUpgMenu" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen">Upgrades</button>
+		<div id="upgMenu" class="topMenu" style="max-height:200px">
 			<div id="upg0" style="text-align:center;">
 				<button id="maxAllButton0" onclick="maxAll(0)" class="maxall">Max All</button>
 				<button id="upgButton0" onclick="buyUpgrade(0)" class="horizonalCentered upgButton" style="background-image:url('upgrade0.png');"></button><br>
@@ -50,8 +50,8 @@
 		<span id="progressBarLabel" class="label centered">0%</span>
 		<button id="redeemButton" onclick="redeemPoints()" class="hidden centeredButSlightlyLower" style="animation-name:redeemButtonInit; animation-duration:1s; height:200px; width:300px; font-size:40px;">Redeem Points</button>
 		<span id="timewallPoint" class="hidden centeredButSlightlyHigher" style="animation-name:pointDisplayInit; animation-duration:1s; width:100%; text-align:center; font-size:40px;">You have 0 timewall points.</span>
-		<button id="openSaveMenu" onclick="toggleSaveMenu()" class="saveMenuOpen">Saving<br>Options</button>
-		<div id="saveMenu" class="saveMenu">
+		<button id="openSaveMenu" onclick="toggleSideMenu('save')" class="sideMenuOpen">Saving</button>
+		<div id="saveMenu" class="sideMenu" style="height:120px; max-width:280px">
 			<button id="saveButton" onclick="save(false)">Save</button>
 			<button id="loadButton" onclick="load(false)">Load</button>
 			<button id="autoSaveToggleButton" onclick="toggleAutoSave()">Auto Save<br>ON</button>
@@ -59,6 +59,11 @@
 			<button id="importButton" onclick="importSave()">Import</button>
 			<button id="autoSaveIntervalButton" onclick="changeAutoSaveInterval()">Auto Save<br>Interval<br>1s</button>
 			<button id="wipeButton" onclick="wipe()">Wipe</button>
+		</div>
+		<button id="openThemeMenu" onclick="toggleSideMenu('theme')" class="sideMenuOpen">Saving</button>
+		<div id="themeMenu" class="sideMenu">
+			<button id="lightTheme" onclick="toTheme('light')">Light</button>
+			<button id="darkTheme" onclick="toTheme('dark')">Dark</button>
 		</div>
 		<textarea style="opacity: .01; height:0; position:absolute; z-index: -1;" id="exportArea">export text</textarea>
 	</body>
