@@ -13,8 +13,8 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = timeStamp - lastSave;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		game.lifetimeProgress += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 3));
-		game.progress += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 3));
+		game.lifetimeProgress += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 3 - 0.2 * game.upgradeAmount[3]));
+		game.progress += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 3 - 0.2 * game.upgradeAmount[3]));
 		updateProgress();
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
@@ -268,7 +268,7 @@ function updateUpg() {
 				newDesc += format(Math.pow(2, game.upgradeAmount[i])) + "x";
 				break;
 			case 3:
-				newDesc += format((10 - game.upgradeAmount[3])) + "&#8730;";
+				newDesc += format((3 - 0.2 * game.upgradeAmount[3])) + "&#8730;";
 		}
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
 		document.getElementById("upg"+i).style.backgroundColor = "rgba(255,"+(game.timewallPoint>=getUpgPrice(i)?"255,255":"200,200")+","+(isEven(i)?0.2:0.5)+")";
