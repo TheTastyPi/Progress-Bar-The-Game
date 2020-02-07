@@ -8,9 +8,17 @@ button {
 	border-radius: 15px;
 	transition: 0.2s;
 }
+button.dark {
+	color: #222222;
+	background-color: #DDDDDD
+}
 .disabled {
 	color: #550000;
 	background-color: #666666;
+}
+.disabled.dark {
+	color: #DD0000;
+	background-color: #888888;
 }
 .disabledUpg {
 	filter: grayscale() drop-shadow(0px 0px 4px red);
@@ -54,67 +62,84 @@ button {
 	color: gray;
 	font-size: 50px;
 }
-.saveMenuOpen {
-	animation-name: savingMenuInit;
+.sideMenuOpen {
+	animation-name: sideMenuInit;
 	animation-duration: 1s;
 	border-radius: 50px 0px 0px 50px;
 	width: 100px;
 	height: 120px;
 	background-color: rgba(0,0,0,0.5);
-	position: absolute;
+	position: fixed;
+	z-index: 1;
 	right: 0;
 	bottom: 0;
 	transition: 0.5s;
 }
-.saveMenu {
+.sideMenuOpen.dark {
+	background-color: rgba(255,255,255,0.5);
+}
+.sideMenu {
 	display: flex;
 	flex-wrap: wrap;
 	align-content: stretch;
-	height: 120px;
-	width: 0px;
+	height: 100%;
+	width: 0;
 	position: fixed;
 	overflow: hidden;
 	z-index: 1;
-	bottom: 0;
 	right: 0;
 	background-color: rgba(0,0,0,0.5);
 	transition: 0.5s;
 }
-.saveMenu > * {
+.sideMenu.dark {
+	background-color: rgba(255,255,255,0.5);
+}
+.sideMenu > * {
 	flex: 1 0 75px;	
 }
-.upgMenuOpen {
-	animation-name: upgMenuInit;
+.topMenuOpen {
+	animation-name: topMenuInit;
 	animation-duration: 1s;
 	border-radius: 0px 0px 50px 50px;
 	width: 120px;
 	height: 100px;
 	background-color: rgba(0,0,0,0.5);
-	position: absolute;
+	position: fixed;
+	z-index: 1;
 	top: 0;
-	left: 0;
 	transition: 0.5s;
 }
-.upgMenu {
+.topMenuOpen.dark {
+	background-color: rgba(255,255,255,0.5);
+}
+.topMenu {
 	display: flex;
 	flex-wrap: wrap;
-	height: 0px;
+	height: 0;
 	width: 100%;
 	position: fixed;
 	overflow: hidden;
 	z-index: 1;
 	top: 0;
-	left: 0;
 	background-color: rgba(0,0,0,0.5);
 	transition: 0.5s;
 	color: #DDDDDD;
 }
-.upgMenu > * {
+.topMenu.dark {
+	background-color: rgba(255,255,255,0.5);
+}
+.topMenu > * {
 	flex: 1 0 75px;
 	transition: 0.5s;
 }
 .oddUpgrades {
-	background-color:rgba(0,0,0,0.2);
+	background-color: rgba(0,0,0,0.2);
+}
+.oddUpgrades.dark {
+	background-color: rgba(255,255,255,0.2);
+}
+.maxedUpgrade {
+	flex: 0 0 0;
 }
 .maxall {
 	position: absolute;
@@ -138,14 +163,6 @@ button {
 	from {opacity: 0; font-size: 0;}
 	to {opacity: 1; font-size: 50px;}
 }
-@keyframes savingMenuInit {
-	from {width: 0; opacity: 0;}
-	to {width: 100px; opacity: 1;}
-}
-@keyframes upgMenuInit {
-	from {height: 0; opacity: 0;}
-	to {height: 100px; opacity: 1;}
-}
 @keyframes redeemButtonInit {
 	from {height: 0; width: 0; opacity: 0; font-size: 0;}
 	to {height: 200px; width: 300px; opacity: 1; font-size: 40px;}
@@ -153,4 +170,12 @@ button {
 @keyframes pointDisplayInit {
 	from {opacity: 0; font-size: 0;}
 	to {opacity: 1; font-size: 40px;}
+}
+@keyframes sideMenuInit {
+	from {width: 0; opacity: 0;}
+	to {width: 100px; opacity: 1;}
+}
+@keyframes topMenuInit {
+	from {height: 0; opacity: 0;}
+	to {height: 100px; opacity: 1;}
 }
