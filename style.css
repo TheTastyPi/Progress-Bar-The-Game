@@ -4,6 +4,7 @@
 body {
 	color: #222222;
 	background-color: #DDDDDD;
+	transition: 0.5s;
 }
 body.dark {
 	color: #DDDDDD;
@@ -69,6 +70,7 @@ button.dark {
 	background-color: rgba(255,255,255,0.2);
 	color: gray;
 	font-size: 50px;
+	transition: 0.5s;
 }
 .label.dark {
 	animation-name: barLabelInit;
