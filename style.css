@@ -118,6 +118,12 @@ button {
 	top: 0;
 	border-radius: 0 0 20px;
 }
+.upgButton {
+	margin-top: 10px;
+	width: 200px;
+	height: 80px;
+	background-size: contain;
+}
 @keyframes progressBarInit {
 	from {width: 0; opacity: 0;}
 	to {width: 90%; opacity: 1;}
