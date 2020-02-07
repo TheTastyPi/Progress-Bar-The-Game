@@ -185,7 +185,7 @@ function toggleTopMenu(name) {
 
 function toTheme(theme) {
 	let themeList = ["light", "dark"];
-	Document.querySelectorAll("*").forEach(function(node) {
+	document.querySelectorAll("*").forEach(function(node) {
 		for (let i in themeList) {
 			node.classList.remove(i);
 		}
