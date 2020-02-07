@@ -6,11 +6,11 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<button id="openUpgMenu" onclick="toggleUpgMenu()" class="hidden upgMenuOpen">Upgrades</button>
-		<div id="upgMenu" class="upgMenu">
+		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
+		<div id="upgMenu" class="topMenu" style="max-height:200px; left:0;">
 			<div id="upg0" style="text-align:center;">
-				<button id="maxAllButton0" onclick="maxAll(0)" style="position:absolute; width:80px; height:50px; left:0; top:0; border-radius:0 0 20px;">Max All</button>
-				<button id="upgButton0" onclick="buyUpgrade(0)" class="horisonalCentered" style="margin-top:10px; width:200px; height:80px; background-image:url('upgrade0.png'); background-size:contain;"></button><br>
+				<button id="maxAllButton0" onclick="maxAll(0)" class="maxall">Max All</button>
+				<button id="upgButton0" onclick="buyUpgrade(0)" class="horizonalCentered upgButton" style="background-image:url('upgrade0.png');"></button><br>
 				Bar Length Upgrade<br>
 				Divides bar length by 2.<br>
 				<span id="upgDesc0">
@@ -18,8 +18,8 @@
 					Currently: /1
 				</span>
 			</div>
-			<div id="upg1" style="text-align:center; background-color:rgba(255,255,255,0.2); color:gray;">
-				<button id="upgButton1" onclick="buyUpgrade(1)" class="horisonalCentered" style="margin-top:10px; width:200px; height:80px; background-image:url('upgrade1.png'); background-size:contain;"></button><br>
+			<div id="upg1" class="oddUpgrades" style="text-align:center;">
+				<button id="upgButton1" onclick="buyUpgrade(1)" class="horizonalCentered upgButton" style="background-image:url('upgrade1.png');"></button><br>
 				Bar Speed Upgrade<br>
 				Multiplies bar speed by 2.<br>
 				<span id="upgDesc1">
@@ -28,7 +28,7 @@
 				</span>
 			</div>
 			<div id="upg2" style="text-align:center;">
-				<button id="upgButton2" onclick="buyUpgrade(2)" class="horisonalCentered" style="margin-top:10px; width:200px; height:80px; background-image:url('upgrade2.png'); background-size:contain;"></button><br>
+				<button id="upgButton2" onclick="buyUpgrade(2)" class="horizonalCentered upgButton" style="background-image:url('upgrade2.png');"></button><br>
 				Point Gain Upgrade<br>
 				Multiplies point gain by 2.<br>
 				<span id="upgDesc2">
@@ -36,8 +36,8 @@
 					Currently: 1x
 				</span>
 			</div>
-			<div id="upg3" style="text-align:center; background-color:rgba(255,255,255,0.2); color:gray; transition:0.5s; overflow:hidden;">
-				<button id="upgButton3" onclick="buyUpgrade(3)" class="horisonalCentered" style="margin-top:10px; width:200px; height:80px; background-image:url('upgrade3.png'); background-size:contain;"></button><br>
+			<div id="upg3" class="oddUpgrades" style="text-align:center;">
+				<button id="upgButton3" onclick="buyUpgrade(3)" class="horizonalCentered upgButton" style="background-image:url('upgrade3.png');"></button><br>
 				Overflow Speed Upgrade<br>
 				Subtracts overflow penalty by 0.2<br>
 				<span id="upgDesc3">
@@ -50,8 +50,8 @@
 		<span id="progressBarLabel" class="label centered">0%</span>
 		<button id="redeemButton" onclick="redeemPoints()" class="hidden centeredButSlightlyLower" style="animation-name:redeemButtonInit; animation-duration:1s; height:200px; width:300px; font-size:40px;">Redeem Points</button>
 		<span id="timewallPoint" class="hidden centeredButSlightlyHigher" style="animation-name:pointDisplayInit; animation-duration:1s; width:100%; text-align:center; font-size:40px;">You have 0 timewall points.</span>
-		<button id="openSaveMenu" onclick="toggleSaveMenu()" class="saveMenuOpen">Saving<br>Options</button>
-		<div id="saveMenu" class="saveMenu">
+		<button id="saveMenuOpen" onclick="toggleSideMenu('save')" class="sideMenuOpen">Saving</button>
+		<div id="saveMenu" class="sideMenu" style="bottom:0; height:120px; max-width:280px">
 			<button id="saveButton" onclick="save(false)">Save</button>
 			<button id="loadButton" onclick="load(false)">Load</button>
 			<button id="autoSaveToggleButton" onclick="toggleAutoSave()">Auto Save<br>ON</button>
@@ -59,6 +59,11 @@
 			<button id="importButton" onclick="importSave()">Import</button>
 			<button id="autoSaveIntervalButton" onclick="changeAutoSaveInterval()">Auto Save<br>Interval<br>1s</button>
 			<button id="wipeButton" onclick="wipe()">Wipe</button>
+		</div>
+		<button id="themeMenuOpen" onclick="toggleSideMenu('theme')" class="sideMenuOpen" style="bottom:120px;">Themes</button>
+		<div id="themeMenu" class="sideMenu" style="bottom:120px; height:120px; max-width:100px">
+			<button id="lightTheme" onclick="toTheme('light')">Light</button>
+			<button id="darkTheme" onclick="toTheme('dark')">Dark</button>
 		</div>
 		<textarea style="opacity: .01; height:0; position:absolute; z-index: -1;" id="exportArea">export text</textarea>
 	</body>

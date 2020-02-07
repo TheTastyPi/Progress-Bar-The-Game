@@ -86,9 +86,9 @@ function wipe() {
 		save();
 		updateAll();
 		document.getElementById("saveMenu").style.width = "0px";
-		document.getElementById("openSaveMenu").style.right = "0px";
+		document.getElementById("saveMenuOpen").style.right = "0px";
 		document.getElementById("upgMenu").style.height = "0px";
-		document.getElementById("openUpgMenu").style.top = "0px";
+		document.getElementById("upgMenuOpen").style.top = "0px";
 		document.getElementById("wipeButton").style.backgroundColor = "red";
 		setTimeout(function(){
 			document.getElementById("wipeButton").style.backgroundColor = "";
@@ -161,24 +161,34 @@ function changeAutoSaveInterval() {
 	}, 250);
 }
 
-function toggleSaveMenu() {
-	if (document.getElementById("saveMenu").style.width == "0px" || document.getElementById("saveMenu").style.width == "" ) {
-		document.getElementById("saveMenu").style.width = "280px";
-		document.getElementById("openSaveMenu").style.right = "280px";
+function toggleSideMenu(name) {
+	if (document.getElementById(name+"Menu").style.width == "0px" ||
+	    document.getElementById(name+"Menu").style.width == "" ) {
+		document.getElementById(name+"Menu").style.width = document.getElementById(name+"Menu").style.maxWidth;
+		document.getElementById(name+"MenuOpen").style.right = document.getElementById(name+"Menu").style.maxWidth;
 	} else {
-		document.getElementById("saveMenu").style.width = "0px";
-		document.getElementById("openSaveMenu").style.right = "0px";
+		document.getElementById(name+"Menu").style.width = "0px";
+		document.getElementById(name+"MenuOpen").style.right = "0px";
 	}
 }
 
-function toggleUpgMenu() {
-	if (document.getElementById("upgMenu").style.height == "0px" || document.getElementById("upgMenu").style.height == "" ) {
-		document.getElementById("upgMenu").style.height = "200px";
-		document.getElementById("openUpgMenu").style.top = "200px";
+function toggleTopMenu(name) {
+	if (document.getElementById(name+"Menu").style.height == "0px" ||
+	    document.getElementById(name+"Menu").style.height == "" ) {
+		document.getElementById(name+"Menu").style.height = document.getElementById(name+"Menu").style.maxHeight;
+		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.maxHeight;
 	} else {
-		document.getElementById("upgMenu").style.height = "0px";
-		document.getElementById("openUpgMenu").style.top = "0px";
+		document.getElementById(name+"Menu").style.height = "0px";
+		document.getElementById(name+"MenuOpen").style.top = "0px";
 	}
+}
+
+function toTheme(newTheme) {
+	document.querySelectorAll("*").forEach(function(node) {
+		node.classList.remove(game.currentTheme);
+		node.classList.add(newTheme);
+	});
+	game.currentTheme = newTheme;
 }
 
 function pluralCheck(n) {
@@ -191,6 +201,7 @@ function newGame() {
 		updateSpeed: 50,
 		doAutoSave: true,
 		autoSaveInterval: 1000,
+		currentTheme: "light",
 		lifetimeProgress: 0,
 		progress: 0,
 		lifetimePoints: 0,
@@ -236,6 +247,9 @@ function getPointGain() {
 
 function updateAll() {
 	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+	document.querySelectorAll("*").forEach(function(node) {
+		node.classList.add(game.currentTheme);
+	});
 	updateProgress();
 	updatePoints();
 	updateUpg();
@@ -252,13 +266,21 @@ function updateProgress() {
 function updatePoints() {
 	document.getElementById("timewallPoint").innerHTML = "You have "+format(game.timewallPoint)+" timewall point"+pluralCheck(game.timewallPoint)+".";
 	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-	document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+	document.getElementById("upgMenuOpen").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 }
 
 function updateUpg() {
 	for (let i = 0; i < 4; i++) {
 		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+format(getUpgPrice(i))+" Timewall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
-		if (getUpgPrice(i) == Infinity) setTimeout(function(){document.getElementById("upg"+i).style.maxWidth = 0;},1000);
+		if (getUpgPrice(i) == Infinity) {
+			setTimeout(function(){
+				document.getElementById("upg"+i).classList.add("maxedUpg");
+				setTimeout(function(){document.getElementById("upg"+i).classList.add("hidden");},500);
+			},1000);
+		} else {
+			document.getElementById("upg"+i).classList.remove("maxedUpg");
+			document.getElementById("upg"+i).classList.remove("hidden");
+		}
 		switch(i) {
 			case 0:
 				newDesc += "/" + format(Math.pow(2, game.upgradeAmount[0]));
@@ -271,7 +293,7 @@ function updateUpg() {
 				newDesc += format(3 - 0.2 * game.upgradeAmount[3], 1) + "&#8730;";
 		}
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		document.getElementById("upg"+i).style.backgroundColor = "rgba(255,"+(game.timewallPoint>=getUpgPrice(i)?"255,255":"200,200")+","+(isEven(i)?0.2:0.5)+")";
+		document.getElementById("upgButton"+i).classList[game.timewallPoint >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
 	}
 	document.getElementById("progressBar").max = getBarLength();
 }
