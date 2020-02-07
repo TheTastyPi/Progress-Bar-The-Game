@@ -86,9 +86,9 @@ function wipe() {
 		save();
 		updateAll();
 		document.getElementById("saveMenu").style.width = "0px";
-		document.getElementById("openSaveMenu").style.right = "0px";
+		document.getElementById("saveMenuOpen").style.right = "0px";
 		document.getElementById("upgMenu").style.height = "0px";
-		document.getElementById("openUpgMenu").style.top = "0px";
+		document.getElementById("upgMenuOpen").style.top = "0px";
 		document.getElementById("wipeButton").style.backgroundColor = "red";
 		setTimeout(function(){
 			document.getElementById("wipeButton").style.backgroundColor = "";
@@ -270,7 +270,7 @@ function updateProgress() {
 function updatePoints() {
 	document.getElementById("timewallPoint").innerHTML = "You have "+format(game.timewallPoint)+" timewall point"+pluralCheck(game.timewallPoint)+".";
 	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-	document.getElementById("openUpgMenu").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+	document.getElementById("upgMenuOpen").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 }
 
 function updateUpg() {
