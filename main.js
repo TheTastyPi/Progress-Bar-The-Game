@@ -222,7 +222,7 @@ function buyUpgrade(n) {
 }
 
 function getBarLength() {
-	return 3e5 / Math.pow(2, game.upgradeAmount[0]);
+	return 6e4 / Math.pow(2, game.upgradeAmount[0]);
 }
 
 function getBarSpeed() {
