@@ -183,14 +183,12 @@ function toggleTopMenu(name) {
 	}
 }
 
-function toTheme(theme) {
-	let themeList = ["light", "dark"];
+function toTheme(newTheme) {
 	document.querySelectorAll("*").forEach(function(node) {
-		for (let i in themeList) {
-			node.classList.remove(i);
-		}
-		node.classList.add(theme);
+		node.classList.remove(game.currentTheme);
+		node.classList.add(newTheme);
 	});
+	game.currentTheme = newTheme;
 }
 
 function pluralCheck(n) {
@@ -203,6 +201,7 @@ function newGame() {
 		updateSpeed: 50,
 		doAutoSave: true,
 		autoSaveInterval: 1000,
+		currentTheme: "light",
 		lifetimeProgress: 0,
 		progress: 0,
 		lifetimePoints: 0,
