@@ -164,7 +164,7 @@ function changeAutoSaveInterval() {
 function toggleSideMenu(name) {
 	let targetWidth = document.getElementById(name+"Menu").style.maxWidth;
 	let menuWidth = document.getElementById(name+"Menu").style.width;
-	let buttonWidth = document.getElementById("open"+name+"Menu").style.right;
+	let buttonWidth = document.getElementById(name+"MenuOpen").style.right;
 	if (menuWidth == "0px" ||
 	    menuWidth == "" ) {
 		menuWidth = targetWidth;
@@ -178,7 +178,7 @@ function toggleSideMenu(name) {
 function toggleTopMenu(name) {
 	let targetHeight = document.getElementById(name+"Menu").style.maxHeight;
 	let menuHeight = document.getElementById(name+"Menu").style.height;
-	let buttonHeight = document.getElementById("open"+name+"Menu").style.top;
+	let buttonHeight = document.getElementById(name+"MenuOpen").style.top;
 	if (menuHeight == "0px" ||
 	    menuHeight == "" ) {
 		menuHeight = targetHeight;
