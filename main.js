@@ -256,7 +256,7 @@ function updateAll() {
 }
 
 function updateProgress() {
-	if (game.progress != Infinite) document.getElementById("progressBar").value = game.progress;
+	if (game.progress != Infinity) document.getElementById("progressBar").value = game.progress;
 	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100), 4) + "%";
 	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
 	document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
