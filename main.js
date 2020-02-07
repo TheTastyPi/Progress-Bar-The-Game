@@ -247,6 +247,9 @@ function getPointGain() {
 
 function updateAll() {
 	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+	document.querySelectorAll("*").forEach(function(node) {
+		node.classList.add(game.currentTheme);
+	});
 	updateProgress();
 	updatePoints();
 	updateUpg();
