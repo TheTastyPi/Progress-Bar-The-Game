@@ -267,6 +267,7 @@ function updatePoints() {
 	document.getElementById("timewallPoint").innerHTML = "You have "+format(game.timewallPoint)+" timewall point"+pluralCheck(game.timewallPoint)+".";
 	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 	document.getElementById("upgMenuOpen").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+	if (isNaN(game.timewallPoint)) game.timewallPoint = 0;
 }
 
 function updateUpg() {
