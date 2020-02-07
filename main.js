@@ -209,7 +209,7 @@ function redeemPoints() {
 }
 
 function getUpgPrice(n) {
-	return game.upgradeAmount[n] < upgrade.limit[n] ? upgrade.basePrice[n] * Math.pow(upgrade.priceGrowth[n], game.upgradeAmount[n]) : Infinity;
+	return Math.floor(game.upgradeAmount[n] < upgrade.limit[n] ? upgrade.basePrice[n] * Math.pow(upgrade.priceGrowth[n], game.upgradeAmount[n]) : Infinity);
 }
 
 function buyUpgrade(n) {
@@ -242,7 +242,7 @@ function updateAll() {
 
 function updateProgress() {
 	document.getElementById("progressBar").value = game.progress;
-	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100)) + "%";
+	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100), 4) + "%";
 	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
 	document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
 }
@@ -269,7 +269,7 @@ function updateUpg() {
 				newDesc += "/" + format((10 - game.upgradeAmount[3]));
 		}
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		document.getElementById("upg"+i).style.backgroundColor = "rgba(255,"+(game.timewallPoint>getUpgPrice(i)?"255,255":"200,200")+","+(isEven(i)?0.2:0.5)+")";
+		document.getElementById("upg"+i).style.backgroundColor = "rgba(255,"+(game.timewallPoint>=getUpgPrice(i)?"255,255":"200,200")+","+(isEven(i)?0.2:0.5)+")";
 	}
 	document.getElementById("progressBar").max = getBarLength();
 }
@@ -278,9 +278,9 @@ function isEven(n) {
 	return Math.floor(n/2) == n/2;
 }
 
-function format(n) {
+function format(n, toFixed = 0) {
 	if (n == "Infinity") return Infinity;
-	else if (n < 1e3) return n.toFixed(4);
+	else if (n < 1e3) return n.toFixed(toFixed);
 	return n.toPrecision(5).replace("+","");
 }
 
