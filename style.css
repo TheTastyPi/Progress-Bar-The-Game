@@ -70,7 +70,7 @@ button.dark {
 	color: gray;
 	font-size: 50px;
 }
-.label {
+.label.dark {
 	animation-name: barLabelInit;
 	animation-duration: 1s;
 	background-color: rgba(0,0,0,0.2);
