@@ -4,7 +4,7 @@ var game = newGame();
 
 const upgrade = {
 	basePrice: [1, 1, 2, 3],
-	priceGrowth: [6.66, 6.66, 12, 17.3],
+	priceGrowth: [6, 6, 11, 17.3],
 	limit: [Infinity,Infinity,Infinity,9]
 };
 
