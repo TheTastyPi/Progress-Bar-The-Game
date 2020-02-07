@@ -274,6 +274,19 @@ function updateUpg() {
 	document.getElementById("progressBar").max = getBarLength();
 }
 
+function maxAll(p) {
+	for (let i = 0; i < 4; i++) {
+		let totalAmount = Math.min(Math.floor(Math.log(game.timewallPoint*(upgrade.priceIncrease[i]-1)/upgrade.basePrice[i]+1)/Math.log(upgrade.priceIncrease[i])),upgrade.limit[i]);
+		let totalPrice = upgrade.basePrice[i]*(1-Math.pow(upgrade.priceIncrease[i],totalAmount))/1-upgrade.priceIncrease[i],upgrade.limit[i];
+		if (totalAmount >= 1) {
+			game.timewallPoint -= totalPrice;
+			game.upgradeAmount[i] += totalAmount;
+			updateUpg();
+			updatePoints();
+		}
+	}
+}
+
 function isEven(n) {
 	return Math.floor(n/2) == n/2;
 }
