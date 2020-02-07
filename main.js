@@ -256,6 +256,7 @@ function updateAll() {
 }
 
 function updateProgress() {
+	if (isNaN(game.progress)) game.progress = 0;
 	if (game.progress != Infinity) document.getElementById("progressBar").value = game.progress;
 	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100), 4) + "%";
 	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
@@ -264,10 +265,10 @@ function updateProgress() {
 }
 
 function updatePoints() {
+	if (isNaN(game.timewallPoint)) game.timewallPoint = 0;
 	document.getElementById("timewallPoint").innerHTML = "You have "+format(game.timewallPoint)+" timewall point"+pluralCheck(game.timewallPoint)+".";
 	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 	document.getElementById("upgMenuOpen").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
-	if (isNaN(game.timewallPoint)) game.timewallPoint = 0;
 }
 
 function updateUpg() {
