@@ -161,24 +161,42 @@ function changeAutoSaveInterval() {
 	}, 250);
 }
 
-function toggleSaveMenu() {
-	if (document.getElementById("saveMenu").style.width == "0px" || document.getElementById("saveMenu").style.width == "" ) {
-		document.getElementById("saveMenu").style.width = "280px";
-		document.getElementById("openSaveMenu").style.right = "280px";
+function toggleSideMenu(name) {
+	let targetWidth = document.getElementById(name+"Menu").style.maxWidth;
+	let menuWidth = document.getElementById(name+"Menu").style.width;
+	let buttonWidth = document.getElementById("open"+name+"Menu").style.right;
+	if (menuWidth == "0px" ||
+	    menuWidth == "" ) {
+		menuWidth = targetWidth;
+		buttonWidth = targetWidth;
 	} else {
-		document.getElementById("saveMenu").style.width = "0px";
-		document.getElementById("openSaveMenu").style.right = "0px";
+		menuWidth = "0px";
+		buttonWidth = "0px";
 	}
 }
 
-function toggleUpgMenu() {
-	if (document.getElementById("upgMenu").style.height == "0px" || document.getElementById("upgMenu").style.height == "" ) {
-		document.getElementById("upgMenu").style.height = "200px";
-		document.getElementById("openUpgMenu").style.top = "200px";
+function toggleTopMenu(name) {
+	let targetHeight = document.getElementById(name+"Menu").style.maxHeight;
+	let menuHeight = document.getElementById(name+"Menu").style.height;
+	let buttonHeight = document.getElementById("open"+name+"Menu").style.top;
+	if (menuHeight == "0px" ||
+	    menuHeight == "" ) {
+		menuHeight = targetHeight;
+		buttonHeight = targetHeight;
 	} else {
-		document.getElementById("upgMenu").style.height = "0px";
-		document.getElementById("openUpgMenu").style.top = "0px";
+		menuHeight = "0px";
+		buttonHeight = "0px";
 	}
+}
+
+function toTheme(theme) {
+	let themeList = ["light", "dark"];
+	Document.querySelectorAll("*").forEach(function(node) {
+		for (let i in themeList) {
+			node.classList.remove(i);
+		}
+		node.classList.add(theme);
+	});
 }
 
 function pluralCheck(n) {
@@ -258,7 +276,15 @@ function updatePoints() {
 function updateUpg() {
 	for (let i = 0; i < 4; i++) {
 		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+format(getUpgPrice(i))+" Timewall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
-		if (getUpgPrice(i) == Infinity) setTimeout(function(){document.getElementById("upg"+i).style.flex = "0 0 0";},1000);
+		if (getUpgPrice(i) == Infinity) {
+			setTimeout(function(){
+				document.getElementById("upg"+i).classList.add("maxedUpg");
+				setTimeout(function(){document.getElementById("upg"+i).classList.add("hidden");},500);
+			},1000);
+		} else {
+			document.getElementById("upg"+i).classList.remove("maxedUpg");
+			document.getElementById("upg"+i).classList.remove("hidden");
+		}
 		switch(i) {
 			case 0:
 				newDesc += "/" + format(Math.pow(2, game.upgradeAmount[0]));
