@@ -72,13 +72,6 @@ button.dark {
 	font-size: 50px;
 	transition: 0.5s;
 }
-.label.dark {
-	animation-name: barLabelInit;
-	animation-duration: 1s;
-	background-color: rgba(0,0,0,0.2);
-	color: #DDDDDD;
-	font-size: 50px;
-}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
