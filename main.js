@@ -40,6 +40,7 @@ function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
 		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
 		merge(game, pastGame);
+		updateAll();
 		if (!auto) {
 			document.getElementById("loadButton").style.backgroundColor = "green";
 			setTimeout(function(){
@@ -276,8 +277,8 @@ function updateUpg() {
 
 function maxAll(p) {
 	for (let i = 0; i < 4; i++) {
-		let totalAmount = Math.min(Math.floor(Math.log(game.timewallPoint*(upgrade.priceGrowth[i]-1)/upgrade.basePrice[i]+1)/Math.log(upgrade.priceGrowth[i])),upgrade.limit[i]);
-		let totalPrice = upgrade.basePrice[i]*(1-Math.pow(upgrade.priceGrowth[i],totalAmount))/1-upgrade.priceGrowth[i];
+		let totalAmount = Math.min(Math.floor(Math.log(game.timewallPoint*(upgrade.priceGrowth[i]-1)/getUpgPrice(i)+1)/Math.log(upgrade.priceGrowth[i])),upgrade.limit[i]);
+		let totalPrice = getUpgPrice(i)*(1-Math.pow(upgrade.priceGrowth[i],totalAmount))/(1-upgrade.priceGrowth[i]);
 		if (totalAmount >= 1) {
 			game.timewallPoint -= totalPrice;
 			game.upgradeAmount[i] += totalAmount;
@@ -298,8 +299,6 @@ function format(n, toFixed = 0) {
 }
 
 load();
-
-updateAll();
 
 window.requestAnimationFrame(nextFrame);
 
