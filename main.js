@@ -162,30 +162,24 @@ function changeAutoSaveInterval() {
 }
 
 function toggleSideMenu(name) {
-	let targetWidth = document.getElementById(name+"Menu").style.maxWidth;
-	let menuWidth = document.getElementById(name+"Menu").style.width;
-	let buttonWidth = document.getElementById(name+"MenuOpen").style.right;
-	if (menuWidth == "0px" ||
-	    menuWidth == "" ) {
-		menuWidth = targetWidth;
-		buttonWidth = targetWidth;
+	if (document.getElementById(name+"Menu").style.width == "0px" ||
+	    document.getElementById(name+"Menu").style.width == "" ) {
+		document.getElementById(name+"Menu").style.width = document.getElementById(name+"Menu").style.maxWidth;
+		document.getElementById(name+"MenuOpen").style.right = document.getElementById(name+"Menu").style.maxWidth;
 	} else {
-		menuWidth = "0px";
-		buttonWidth = "0px";
+		document.getElementById(name+"Menu").style.width = "0px";
+		document.getElementById(name+"MenuOpen").style.right = "0px";
 	}
 }
 
 function toggleTopMenu(name) {
-	let targetHeight = document.getElementById(name+"Menu").style.maxHeight;
-	let menuHeight = document.getElementById(name+"Menu").style.height;
-	let buttonHeight = document.getElementById(name+"MenuOpen").style.top;
-	if (menuHeight == "0px" ||
-	    menuHeight == "" ) {
-		menuHeight = targetHeight;
-		buttonHeight = targetHeight;
+	if (document.getElementById(name+"Menu").style.height == "0px" ||
+	    document.getElementById(name+"Menu").style.height == "" ) {
+		document.getElementById(name+"Menu").style.height = document.getElementById(name+"Menu").style.maxHeight;
+		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.maxHeight;
 	} else {
-		menuHeight = "0px";
-		buttonHeight = "0px";
+		document.getElementById(name+"Menu").style.height = "0px";
+		document.getElementById(name+"MenuOpen").style.top = "0px";
 	}
 }
 
