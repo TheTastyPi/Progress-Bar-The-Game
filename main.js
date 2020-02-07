@@ -246,6 +246,7 @@ function updateProgress() {
 	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100), 4) + "%";
 	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
 	document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
+	document.getElementById("redeemButton").innerHTML = "Redeem<br>"+format(getPointGain())+"<br>point"+pluralCheck(getPointGain());
 }
 
 function updatePoints() {
