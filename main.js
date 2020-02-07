@@ -271,7 +271,7 @@ function updateUpg() {
 				newDesc += format(3 - 0.2 * game.upgradeAmount[3], 1) + "&#8730;";
 		}
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		document.getElementById("upg"+i).classList.[game.timewallPoint >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
+		document.getElementById("upg"+i).classList[game.timewallPoint >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
 	}
 	document.getElementById("progressBar").max = getBarLength();
 }
