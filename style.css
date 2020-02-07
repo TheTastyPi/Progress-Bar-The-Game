@@ -152,7 +152,7 @@ button.dark {
 	flex: 0 0 0;
 }
 .maxall {
-	position: relative;
+	position: absolute;
 	max-width: 80px;
 	max-height: 50px;
 	left: 0;
