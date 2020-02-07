@@ -257,7 +257,7 @@ function updateAll() {
 
 function updateProgress() {
 	if (isNaN(game.progress)) game.progress = Infinity;
-	if (game.progress != Infinity) document.getElementById("progressBar").value = game.progress;
+	document.getElementById("progressBar").value = game.progress != Infinity ? game.progress : 1.79e308;
 	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100), 4) + "%";
 	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
 	document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
@@ -297,7 +297,7 @@ function updateUpg() {
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
 		document.getElementById("upgButton"+i).classList[game.timewallPoint >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
 	}
-	document.getElementById("progressBar").max = getBarLength();
+	document.getElementById("progressBar").max = getBarLength() != Infinity ? getBarLength() : 1.79e308;
 }
 
 function maxAll(p) {
