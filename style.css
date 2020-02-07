@@ -12,6 +12,9 @@ button {
 	color: #550000;
 	background-color: #666666;
 }
+.disabledUpg {
+	filter: grayscale() drop-shadow(0px 0px 4px red);
+}
 .hidden {
 	display: none;
 }
