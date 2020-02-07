@@ -14,7 +14,7 @@ function nextFrame(timeStamp) {
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
 		game.lifetimeProgress += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 10));
-		game.progress += Math.powsinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 10));
+		game.progress += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress < getBarLength() ? 1 : 10));
 		updateProgress();
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
