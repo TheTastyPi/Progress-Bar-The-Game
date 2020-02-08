@@ -70,6 +70,7 @@ button.dark {
 	white-space: nowrap;
 	overflow: hidden;
 	transition: 0.5s;
+	display: inline-block;
 }
 .progressBar {
 	animation-name: progressBarInit;
