@@ -191,6 +191,17 @@ function toTheme(newTheme) {
 	game.currentTheme = newTheme;
 }
 
+function switchScreen(dir) {
+	let screenLimit = [0, 1];
+	if (dir == "forward" && game.currentScreen != screenLimit[1]) {
+		game.currentScreen++;
+	}
+	if (dir == "backward" && game.currentScreen != screenLimit[0]) {
+		game.currentScreen--;
+	}
+	document.getElementById("screenHolder").transform = "translate(-"+game.currentScreen*100+"vw,0)";
+}
+
 function pluralCheck(n) {
 	return n == 1 ? "" : "s";
 }
@@ -202,6 +213,7 @@ function newGame() {
 		doAutoSave: true,
 		autoSaveInterval: 1000,
 		currentTheme: "light",
+		currentScreen: 0,
 		lifetimeProgress: 0,
 		progress: 0,
 		lifetimePoints: 0,
