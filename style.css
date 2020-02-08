@@ -66,8 +66,7 @@ button.dark {
 .screenHolder {
 	height: 100%;
 	white-space: nowrap;
-	overflow: hidden;
-	position: absolute;
+	overflow-x: hidden;
 }
 .progressBar {
 	animation-name: progressBarInit;
