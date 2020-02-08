@@ -2,7 +2,6 @@
 	font-family: "Lucida Console", Monaco, monospace;
 }
 body {
-	min-height: 100vh;
 	color: #222222;
 	background-color: #DDDDDD;
 	transition: 0.5s;
@@ -68,7 +67,7 @@ button.dark {
 }
 .screenHolder {
 	position: absolute;
-	height: 100%;
+	min-height: 100%;
 	overflow: hidden;
 	transition: 0.5s;
 	top: 0;
