@@ -5,6 +5,7 @@ body {
 	color: #222222;
 	background-color: #DDDDDD;
 	transition: 0.5s;
+	margin: 0;
 }
 body.dark {
 	color: #DDDDDD;
