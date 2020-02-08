@@ -75,6 +75,28 @@ button.dark {
 	top: 0;
 	left: 0;
 }
+.switchScreenLeft {
+	animation-name: sideMenuInit;
+	animation-duration: 1s;
+	border-radius: 0px 50px 50px 0px;
+	width: 30px;
+	height: 70px;
+	background-color: rgba(0,0,0,0.5);
+	position: fixed;
+	z-index: 1;
+	left: 0;
+}
+.switchScreenRight {
+	animation-name: sideMenuInit;
+	animation-duration: 1s;
+	border-radius: 50px 0px 0px 50px;
+	width: 30px;
+	height: 70px;
+	background-color: rgba(0,0,0,0.5);
+	position: fixed;
+	z-index: 1;
+	right: 0;
+}
 .progressBar {
 	animation-name: progressBarInit;
 	animation-duration: 1s;
@@ -99,7 +121,6 @@ button.dark {
 	position: fixed;
 	z-index: 1;
 	right: 0;
-	bottom: 0;
 	transition: 0.5s;
 }
 .sideMenuOpen.dark {
