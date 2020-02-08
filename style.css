@@ -66,7 +66,7 @@ button.dark {
 	display: inline-block;
 }
 .screenHolder {
-	height: 100%;
+	min-height: 100vh;
 	white-space: nowrap;
 	overflow: hidden;
 	transition: 0.5s;
