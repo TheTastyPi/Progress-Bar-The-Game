@@ -60,7 +60,7 @@ button.dark {
 }
 .screen {
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	display: inline-block;
 }
 .screenHolder {
