@@ -199,7 +199,7 @@ function switchScreen(dir) {
 	if (dir == "backward" && game.currentScreen != screenLimit[0]) {
 		game.currentScreen--;
 	}
-	document.getElementById("screenHolder").transform = "translate(-"+game.currentScreen*100+"vw,0)";
+	document.getElementById("screenHolder").style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
 }
 
 function pluralCheck(n) {
