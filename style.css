@@ -76,7 +76,7 @@ button.dark {
 	left: 0;
 }
 .switchScreenLeft {
-	animation-name: sideMenuInit;
+	animation-name: switchScreenInit;
 	animation-duration: 1s;
 	border-radius: 0px 50px 50px 0px;
 	width: 30px;
@@ -86,10 +86,10 @@ button.dark {
 	z-index: 1;
 	left: 0;
 	bottom: 50%;
-	transform: translate(0, -50%);
+	transform: translate(0, 50%);
 }
 .switchScreenRight {
-	animation-name: sideMenuInit;
+	animation-name: switchScreenInit;
 	animation-duration: 1s;
 	border-radius: 50px 0px 0px 50px;
 	width: 30px;
@@ -99,7 +99,7 @@ button.dark {
 	z-index: 1;
 	right: 0;
 	bottom: 50%;
-	transform: translate(0, -50%);
+	transform: translate(0, 50%);
 }
 .progressBar {
 	animation-name: progressBarInit;
@@ -230,4 +230,8 @@ button.dark {
 @keyframes topMenuInit {
 	from {height: 0; opacity: 0;}
 	to {height: 100px; opacity: 1;}
+}
+@keyframes switchScreenInit {
+	from {width: 0; opacity: 0;}
+	to {width: 30px; opacity: 1;}
 }
