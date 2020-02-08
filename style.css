@@ -2,8 +2,6 @@
 	font-family: "Lucida Console", Monaco, monospace;
 }
 body {
-	min-height: 100vh;
-	margin: 0;
 	color: #222222;
 	background-color: #DDDDDD;
 	transition: 0.5s;
@@ -61,16 +59,16 @@ button.dark {
 	transform: translate(50%, calc(-50% - 150px));
 }
 .screen {
+	position: absolute;
+	display: inline-block;
 	width: 100vw;
 	height: 100%;
-	display: inline-block;
 }
 .screenHolder {
-	min-height: 100%;
-	white-space: nowrap;
+	position: absolute;
+	height: 100%;
 	overflow: hidden;
 	transition: 0.5s;
-	display: inline-block;
 }
 .progressBar {
 	animation-name: progressBarInit;
