@@ -58,6 +58,13 @@ button.dark {
 	right: 50%;
 	transform: translate(50%, calc(-50% - 150px));
 }
+.screen {
+	width: 100vw;
+	height: 100vh;
+}
+.screenHolder {
+	height: 100vh;
+}
 .progressBar {
 	animation-name: progressBarInit;
 	animation-duration: 1s;
