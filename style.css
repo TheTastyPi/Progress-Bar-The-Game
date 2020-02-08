@@ -63,12 +63,15 @@ button.dark {
 	display: inline-block;
 	width: 100vw;
 	height: 100%;
+	top: 0;
 }
 .screenHolder {
 	position: absolute;
 	height: 100%;
 	overflow: hidden;
 	transition: 0.5s;
+	top: 0;
+	left: 0;
 }
 .progressBar {
 	animation-name: progressBarInit;
