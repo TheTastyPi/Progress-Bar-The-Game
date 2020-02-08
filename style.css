@@ -67,6 +67,7 @@ button.dark {
 	height: 100%;
 	white-space: nowrap;
 	overflow: hidden;
+	position: absolute;
 }
 .progressBar {
 	animation-name: progressBarInit;
