@@ -1,14 +1,14 @@
 * {
 	font-family: "Lucida Console", Monaco, monospace;
 }
-html {
+html, body {
 	height: 100%;
+	margin: 0;
 }
 body {
 	color: #222222;
 	background-color: #DDDDDD;
 	transition: 0.5s;
-	height: 100%;
 }
 body.dark {
 	color: #DDDDDD;
@@ -71,6 +71,7 @@ button.dark {
 	height: 100%;
 	white-space: nowrap;
 	overflow: hidden;
+	transition: 0.5s;
 }
 .progressBar {
 	animation-name: progressBarInit;
