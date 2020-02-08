@@ -70,6 +70,7 @@ button.dark {
 	white-space: nowrap;
 	overflow: hidden;
 	height: 100vh;
+	min-width: 100vw;
 	transition: 0.5s;
 	top: 0;
 	left: 0;
