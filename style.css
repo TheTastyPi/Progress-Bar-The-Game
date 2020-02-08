@@ -4,6 +4,7 @@
 html, body {
 	height: 100vh;
 	margin: 0;
+	display: inline-block;
 }
 body {
 	color: #222222;
