@@ -26,8 +26,7 @@ button.dark {
 	background-color: #666666;
 }
 .disabled.dark {
-	color: #DD0000;
-	background-color: #888888;
+	background-color: #999999;
 }
 .disabledUpg {
 	filter: grayscale() drop-shadow(0px 0px 4px red);
