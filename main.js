@@ -234,6 +234,8 @@ function getPointGain() {
 function updateAll() {
 	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
 	document.querySelectorAll("*").forEach(function(node) {node.classList.add(game.currentTheme);});
+	document.getElementById("switchScreenRight").classList[game.currentScreen == screenLimit[1] ? "add" : "remove"]("disabled");
+	document.getElementById("switchScreenLeft").classList[game.currentScreen == screenLimit[0] ? "add" : "remove"]("disabled");
 	updateProgress();
 	updatePoints();
 	updateUpg();
