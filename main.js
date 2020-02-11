@@ -193,13 +193,11 @@ function toTheme(newTheme) {
 
 function switchScreen(dir) {
 	let screenLimit = [0, 1];
-	if (dir == "forward" && game.currentScreen != screenLimit[1]) {
-		game.currentScreen++;
-	}
-	if (dir == "backward" && game.currentScreen != screenLimit[0]) {
-		game.currentScreen--;
-	}
+	if (dir == "forward" && game.currentScreen != screenLimit[1]) game.currentScreen++;
+	if (dir == "backward" && game.currentScreen != screenLimit[0]) game.currentScreen--;
 	document.getElementById("screenHolder").style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
+	document.GetElementById("switchScreenRight").classList[game.currentScreen == screenLimit[1] ? "add" : "remove"]("disabled");
+	document.GetElementById("switchScreenLeft").classList[game.currentScreen == screenLimit[0] ? "add" : "remove"]("disabled");
 }
 
 function pluralCheck(n) {
