@@ -18,9 +18,7 @@ function nextFrame(timeStamp) {
 		updateProgress();
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
-		if (game.doAutoSave) {
-			save();
-		}
+		if (game.doAutoSave) save();
 		lastSave = timeStamp;
 	}
 	window.requestAnimationFrame(nextFrame);
@@ -30,9 +28,7 @@ function save(auto = true) {
 	localStorage.setItem('twsave', JSON.stringify(deinfinify(game)));
 	if (!auto) {
 		document.getElementById("saveButton").style.backgroundColor = "green";
-		setTimeout(function(){
-			document.getElementById("saveButton").style.backgroundColor = "";
-		}, 250);
+		setTimeout(function(){document.getElementById("saveButton").style.backgroundColor = "";}, 250);
 	}
 }
 
@@ -43,9 +39,7 @@ function load(auto = true) {
 		updateAll();
 		if (!auto) {
 			document.getElementById("loadButton").style.backgroundColor = "green";
-			setTimeout(function(){
-				document.getElementById("loadButton").style.backgroundColor = "";
-			}, 250);
+			setTimeout(function(){document.getElementById("loadButton").style.backgroundColor = "";}, 250);
 		}
 	}
 }
@@ -57,9 +51,7 @@ function exportSave() {
 	document.execCommand("copy");
 	document.getElementById("exportArea").classList.add('hidden');
 	document.getElementById("exportButton").style.backgroundColor = "green";
-	setTimeout(function(){
-		document.getElementById("exportButton").style.backgroundColor = "";
-	}, 250);
+	setTimeout(function(){document.getElementById("exportButton").style.backgroundColor = "";}, 250);
 }
 
 function importSave() {
@@ -74,9 +66,7 @@ function importSave() {
 			document.getElementById("importButton").style.backgroundColor = "red";
 		}
 		if (!err) document.getElementById("importButton").style.backgroundColor = "green";
-		setTimeout(function(){
-			document.getElementById("importButton").style.backgroundColor = "";
-		}, 250);
+		setTimeout(function(){document.getElementById("importButton").style.backgroundColor = "";}, 250);
 	}
 }
 
@@ -90,9 +80,7 @@ function wipe() {
 		document.getElementById("upgMenu").style.height = "0px";
 		document.getElementById("upgMenuOpen").style.top = "0px";
 		document.getElementById("wipeButton").style.backgroundColor = "red";
-		setTimeout(function(){
-			document.getElementById("wipeButton").style.backgroundColor = "";
-		}, 250);
+		setTimeout(function(){document.getElementById("wipeButton").style.backgroundColor = "";}, 250);
 	}
 }
 
@@ -111,12 +99,8 @@ function merge(base, source) {
 function deinfinify(object) {
 	let o = {...object};
 	for (let i in o) {
-		if (o[i] === Infinity) {
-			o[i] = "Infinity";
-		}
-		if (typeof(o[i]) == "object") {
-			o[i] = deinfinify(o[i]);
-		}
+		if (o[i] === Infinity) o[i] = "Infinity";
+		if (typeof(o[i]) == "object") o[i] = deinfinify(o[i]);}
 	}
 	return o;
 }
@@ -124,12 +108,8 @@ function deinfinify(object) {
 function infinify(object) {
 	let o = {...object};
 	for (let i in o) {
-		if (o[i] === "Infinity") {
-			o[i] = Infinity;
-		}
-		if (typeof(o[i]) == "object") {
-			o[i] = infinify(o[i]);
-		}
+		if (o[i] === "Infinity") o[i] = Infinity;
+		if (typeof(o[i]) == "object") o[i] = infinify(o[i]);
 	}
 	return o;
 }
@@ -138,9 +118,7 @@ function toggleAutoSave() {
 	game.doAutoSave = !game.doAutoSave;
 	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
 	document.getElementById("autoSaveToggleButton").style.backgroundColor = game.doAutoSave ? "green" : "red";
-	setTimeout(function(){
-		document.getElementById("autoSaveToggleButton").style.backgroundColor = "";
-	}, 250);
+	setTimeout(function(){document.getElementById("autoSaveToggleButton").style.backgroundColor = "";}, 250);
 }
 
 function changeAutoSaveInterval() {
@@ -156,9 +134,7 @@ function changeAutoSaveInterval() {
 			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "red";
 		}
 	}
-	setTimeout(function(){
-		document.getElementById("autoSaveIntervalButton").style.backgroundColor = "";
-	}, 250);
+	setTimeout(function(){document.getElementById("autoSaveIntervalButton").style.backgroundColor = "";}, 250);
 }
 
 function toggleSideMenu(name) {
@@ -257,9 +233,7 @@ function getPointGain() {
 
 function updateAll() {
 	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
-	document.querySelectorAll("*").forEach(function(node) {
-		node.classList.add(game.currentTheme);
-	});
+	document.querySelectorAll("*").forEach(function(node) {node.classList.add(game.currentTheme);});
 	updateProgress();
 	updatePoints();
 	updateUpg();
