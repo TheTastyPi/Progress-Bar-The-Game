@@ -26,6 +26,7 @@ button.dark {
 	background-color: #666666;
 }
 .disabled.dark {
+	color: #770000;
 	background-color: #999999;
 }
 .disabledUpg {
