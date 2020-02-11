@@ -7,6 +7,7 @@ const upgrade = {
 	priceGrowth: [6, 6, 11, 17.3],
 	limit: [Infinity,Infinity,Infinity,10]
 };
+const screenLimit = [0, 1];
 
 function nextFrame(timeStamp) {
 	let sinceLastFrame = timeStamp - lastFrame;
@@ -168,7 +169,6 @@ function toTheme(newTheme) {
 }
 
 function switchScreen(dir) {
-	let screenLimit = [0, 1];
 	if (dir == "forward" && game.currentScreen != screenLimit[1]) game.currentScreen++;
 	if (dir == "backward" && game.currentScreen != screenLimit[0]) game.currentScreen--;
 	document.getElementById("screenHolder").style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
