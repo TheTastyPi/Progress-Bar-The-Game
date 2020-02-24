@@ -74,6 +74,13 @@ button.dark {
 	top: 0;
 	left: 0;
 }
+visualContainer {
+	position: absolute;
+	width: 100vw;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
 .switchScreenLeft {
 	animation-name: switchScreenInit;
 	animation-duration: 1s;
