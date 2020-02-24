@@ -63,6 +63,7 @@ button.dark {
 	display: inline-block;
 	width: 100vw;
 	height: 100%;
+	transition: 0.5s;
 	top: 0;
 }
 .screenHolder {
@@ -71,7 +72,6 @@ button.dark {
 	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
-	transition: 0.5s;
 	top: 0;
 	left: 0;
 }
