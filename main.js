@@ -7,7 +7,6 @@ const upgrade = {
 	priceGrowth: [6, 6, 11, 17.3],
 	limit: [Infinity,Infinity,Infinity,10]
 };
-const screenLimit = [0, 1];
 
 function nextFrame(timeStamp) {
 	let sinceLastFrame = timeStamp - lastFrame;
@@ -169,11 +168,13 @@ function toTheme(newTheme) {
 }
 
 function switchScreen(dir) {
-	if (dir == "forward" && game.currentScreen != screenLimit[1]) game.currentScreen++;
-	if (dir == "backward" && game.currentScreen != screenLimit[0]) game.currentScreen--;
-	document.getElementById("screenHolder").style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
-	document.getElementById("switchScreenRight").classList[game.currentScreen == screenLimit[1] ? "add" : "remove"]("disabled");
-	document.getElementById("switchScreenLeft").classList[game.currentScreen == screenLimit[0] ? "add" : "remove"]("disabled");
+	if (dir == "forward" && game.currentScreen != game.screenLimit) game.currentScreen++;
+	if (dir == "backward" && game.currentScreen != 0) game.currentScreen--;
+	for (let i = 0; i =< document.getElementsByClassName("screen").length; i++) {
+		document.getElementById("screen"+i).style.transform = "translate("+(i-game.currentScreen)*100+"vw,0)";
+	}
+	document.getElementById("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
+	document.getElementById("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
 }
 
 function pluralCheck(n) {
@@ -188,6 +189,7 @@ function newGame() {
 		autoSaveInterval: 1000,
 		currentTheme: "light",
 		currentScreen: 0,
+		screenLimit: 1,
 		lifetimeProgress: 0,
 		progress: 0,
 		lifetimePoints: 0,
