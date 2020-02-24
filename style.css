@@ -76,6 +76,7 @@ button.dark {
 }
 visualContainer {
 	position: absolute;
+	overflow: hidden;
 	width: 100vw;
 	height: 100%;
 	top: 0;
