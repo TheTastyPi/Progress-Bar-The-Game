@@ -4,7 +4,7 @@
 body {
 	color: #222222;
 	background-color: #DDDDDD;
-	transition-length: 0.5s;
+	transition-duration: 0.5s;
 }
 body.dark {
 	color: #DDDDDD;
@@ -15,7 +15,7 @@ button {
 	background-color: #222222;
 	border-style: none;
 	border-radius: 15px;
-	transition-length: 0.5s;
+	transition-duration: 0.5s;
 }
 button.dark {
 	color: #222222;
@@ -64,7 +64,7 @@ button.dark {
 	width: 100vw;
 	height: 100%;
 	top: 0;
-	transition-length: 0.5s;
+	transition-duration: 0.5s;
 }
 .screenHolder {
 	position: absolute;
