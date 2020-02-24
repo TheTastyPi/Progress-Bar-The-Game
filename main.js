@@ -171,7 +171,7 @@ function switchScreen(dir) {
 	if (dir == "forward" && game.currentScreen != game.screenLimit) game.currentScreen++;
 	if (dir == "backward" && game.currentScreen != 0) game.currentScreen--;
 	for (let i = 0; i < document.getElementsByClassName("screen").length; i++) {
-		document.getElementById("screen"+i).style.transform = "translate("+(i-game.currentScreen)*100+"vw,0)";
+		document.getElementById("screen"+i).style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
 	}
 	document.getElementById("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
 	document.getElementById("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
