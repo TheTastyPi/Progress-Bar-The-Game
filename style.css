@@ -68,7 +68,6 @@ button.dark {
 .screenHolder {
 	position: absolute;
 	white-space: nowrap;
-	overflow: hidden;
 	height: 100vh;
 	min-width: 100vw;
 	transition: 0.5s;
