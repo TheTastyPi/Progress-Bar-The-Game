@@ -68,18 +68,10 @@ button.dark {
 .screenHolder {
 	position: absolute;
 	white-space: nowrap;
-	overflow: visible;
+	overflow: hidden;
 	height: 100vh;
 	width: 100vw;
 	transition: 0.5s;
-	top: 0;
-	left: 0;
-}
-visualContainer {
-	position: absolute;
-	overflow: hidden;
-	width: 100vw;
-	height: 100%;
 	top: 0;
 	left: 0;
 }
