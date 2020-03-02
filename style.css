@@ -63,7 +63,7 @@ button.dark {
 	color: #DDDDDD;
 	background-color: #222222;
 }
-button.screenHolder {
+.screenHolder {
 	position: absolute;
 	white-space: nowrap;
 	overflow: hidden;
@@ -85,7 +85,7 @@ button.switchScreenLeft {
 	bottom: 50%;
 	transform: translate(0, 50%);
 }
-.switchScreenRight {
+button.switchScreenRight {
 	animation-name: switchScreenInit;
 	animation-duration: 1s;
 	border-radius: 50px 0px 0px 50px;
