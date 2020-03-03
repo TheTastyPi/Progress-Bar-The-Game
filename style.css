@@ -209,7 +209,6 @@ button.dark {
 .upgSect {
 	display: flex;
 	flex: 1 0 75px;
-	transition: 0.5s;
 }
 .upgSect > * {
 	flex: 1 0 75px;
