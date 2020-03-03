@@ -1,11 +1,14 @@
 * {
 	font-family: "Lucida Console", Monaco, monospace;
 }
+progress {
+	-webkit-appearance: none;
+}
 #progressBar0::-webkit-progress-value{
-    background: blue;
+	background: blue;
 }
 #progressBar1::-webkit-progress-value{
-    background: red;
+	background: red;
 }
 button {
 	color: #DDDDDD;
