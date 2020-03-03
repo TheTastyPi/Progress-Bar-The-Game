@@ -215,10 +215,6 @@ button.dark {
 }
 .oddUpgrades {
 	background-color: rgba(0,0,0,0.2);
-	transition-duration: 0.5s;
-}
-.oddUpgrades.dark {
-	background-color: rgba(255,255,255,0.2);
 }
 .maxedUpgrade {
 	flex: 0 0 0;
