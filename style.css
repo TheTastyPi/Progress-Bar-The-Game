@@ -3,6 +3,8 @@
 }
 progress {
 	-webkit-appearance: none;
+	border: 5px solid gray;
+	border-radius: 5px
 }
 progress::-webkit-progress-bar {
 	background: white;
