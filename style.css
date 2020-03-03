@@ -20,13 +20,13 @@ progress::-webkit-progress-value {
 	transition: 0.5s;
 }
 #progressBar0::-webkit-progress-value {
-	background: #5555AA;
+	background: #6666AA;
 }
 #progressBar0.dark::-webkit-progress-value {
 	background: #9999EE;
 }
 #progressBar1::-webkit-progress-value {
-	background: #AAAA55;
+	background: #AAAA66;
 }
 #progressBar1.dark::-webkit-progress-value {
 	background: #EEEE99;
