@@ -153,7 +153,7 @@ button.dark {
 	transition: 0.5s;
 }
 .sideMenuOpen.dark {
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(255,255,255,0.7);
 }
 .sideMenu {
 	display: flex;
@@ -169,7 +169,7 @@ button.dark {
 	transition: 0.5s;
 }
 .sideMenu.dark {
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(255,255,255,0.7);
 }
 .sideMenu > * {
 	flex: 1 0 75px;	
@@ -187,7 +187,7 @@ button.dark {
 	transition: 0.5s;
 }
 .topMenuOpen.dark {
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(255,255,255,0.7);
 }
 .topMenu {
 	display: flex;
