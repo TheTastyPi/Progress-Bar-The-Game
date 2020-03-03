@@ -141,7 +141,7 @@ button.dark {
 	transition: 0.5s;
 }
 .label.dark {
-	background-color: rgba(0,0,0,0.3);
+	background-color: rgba(0,0,0,0.2);
 	color: #DDDDDD;
 }
 .sideMenuOpen {
