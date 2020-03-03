@@ -8,6 +8,8 @@ const upgrade = {
 	limit: [Infinity,Infinity,Infinity,10]
 };
 
+document.getElementById("upgMenu").style.width = document.getElementByClassName("screen").length+"00%"
+
 function nextFrame(timeStamp) {
 	let sinceLastFrame = timeStamp - lastFrame;
 	let sinceLastSave = timeStamp - lastSave;
