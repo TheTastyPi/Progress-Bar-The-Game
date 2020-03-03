@@ -9,42 +9,46 @@
 		<div id="screenHolder" class="screenHolder">
 			<div id="screen0" class="screen">
 				<div id="upgMenu" class="topMenu" style="max-height:200px; left:0;">
-					<button id="maxAllButton0" onclick="maxAll(0)" class="maxall">Max All</button>
-					<div id="upg0" style="text-align:center;">
-						<button id="upgButton0" onclick="buyUpgrade(0)" class="horizonalCentered upgButton" style="background-image:url('upgrade0.png');"></button><br>
-						Bar Length Upgrade<br>
-						Divides bar length by 2.<br>
-						<span id="upgDesc0">
-							Cost: 1 Timewall Point<br>
-							Currently: /1
-						</span>
+					<div id="upgSect0">
+						<button id="maxAllButton0" onclick="maxAll(0)" class="maxall">Max All</button>
+						<div id="upg0" style="text-align:center;">
+							<button id="upgButton0" onclick="buyUpgrade(0)" class="horizonalCentered upgButton" style="background-image:url('upgrade0.png');"></button><br>
+							Bar Length Upgrade<br>
+							Divides bar length by 2.<br>
+							<span id="upgDesc0">
+								Cost: 1 Timewall Point<br>
+								Currently: /1
+							</span>
+						</div>
+						<div id="upg1" class="oddUpgrades" style="text-align:center;">
+							<button id="upgButton1" onclick="buyUpgrade(1)" class="horizonalCentered upgButton" style="background-image:url('upgrade1.png');"></button><br>
+							Bar Speed Upgrade<br>
+							Multiplies bar speed by 2.<br>
+							<span id="upgDesc1">
+								Cost: 1 Timewall Point<br>
+								Currently: 1x
+							</span>
+						</div>
+						<div id="upg2" style="text-align:center;">
+							<button id="upgButton2" onclick="buyUpgrade(2)" class="horizonalCentered upgButton" style="background-image:url('upgrade2.png');"></button><br>
+							Point Gain Upgrade<br>
+							Multiplies point gain by 2.<br>
+							<span id="upgDesc2">
+								Cost: 2 Timewall Points<br>
+								Currently: 1x
+							</span>
+						</div>
+						<div id="upg3" class="oddUpgrades" style="text-align:center;">
+							<button id="upgButton3" onclick="buyUpgrade(3)" class="horizonalCentered upgButton" style="background-image:url('upgrade3.png');"></button><br>
+							Overflow Speed Upgrade<br>
+							Subtracts overflow penalty by 0.2<br>
+							<span id="upgDesc3">
+								Cost: 3 Timewall Point<br>
+								Currently: /10
+							</span>
+						</div>
 					</div>
-					<div id="upg1" class="oddUpgrades" style="text-align:center;">
-						<button id="upgButton1" onclick="buyUpgrade(1)" class="horizonalCentered upgButton" style="background-image:url('upgrade1.png');"></button><br>
-						Bar Speed Upgrade<br>
-						Multiplies bar speed by 2.<br>
-						<span id="upgDesc1">
-							Cost: 1 Timewall Point<br>
-							Currently: 1x
-						</span>
-					</div>
-					<div id="upg2" style="text-align:center;">
-						<button id="upgButton2" onclick="buyUpgrade(2)" class="horizonalCentered upgButton" style="background-image:url('upgrade2.png');"></button><br>
-						Point Gain Upgrade<br>
-						Multiplies point gain by 2.<br>
-						<span id="upgDesc2">
-							Cost: 2 Timewall Points<br>
-							Currently: 1x
-						</span>
-					</div>
-					<div id="upg3" class="oddUpgrades" style="text-align:center;">
-						<button id="upgButton3" onclick="buyUpgrade(3)" class="horizonalCentered upgButton" style="background-image:url('upgrade3.png');"></button><br>
-						Overflow Speed Upgrade<br>
-						Subtracts overflow penalty by 0.2<br>
-						<span id="upgDesc3">
-							Cost: 3 Timewall Point<br>
-							Currently: /10
-						</span>
+					<div id="upgSect1">
 					</div>
 				</div>
 				<progress id="progressBar" class="progressBar centered" max="6e4" value="0"></progress>
