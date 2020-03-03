@@ -9,10 +9,10 @@ progress::-webkit-progress-bar {
 	background: white;
 }
 #progressBar0::-webkit-progress-value {
-	background: #0000AA;
+	background: #5555AA;
 }
 #progressBar1::-webkit-progress-value {
-	background: #AAAA00;
+	background: #555500;
 }
 
 button {
