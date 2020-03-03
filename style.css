@@ -4,12 +4,16 @@
 progress {
 	-webkit-appearance: none;
 }
-#progressBar0::-webkit-progress-value{
+progress::-webkit-progress-bar {
+	background: white;
+}
+#progressBar0::-webkit-progress-value {
 	background: blue;
 }
-#progressBar1::-webkit-progress-value{
-	background: red;
+#progressBar1::-webkit-progress-value {
+	background: yellow;
 }
+
 button {
 	color: #DDDDDD;
 	background-color: #222222;
