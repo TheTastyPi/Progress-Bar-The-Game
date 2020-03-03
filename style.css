@@ -5,14 +5,26 @@ progress {
 	-webkit-appearance: none;
 	border: 5px solid #222222;
 }
+progress.dark {
+	border: 5px solid #DDDDDD;
+}
 progress::-webkit-progress-bar {
 	background: white;
+}
+progress.dark::-webkit-progress-bar {
+	background: black;
 }
 #progressBar0::-webkit-progress-value {
 	background: #5555AA;
 }
+#progressBar0::-webkit-progress-value {
+	background: #9999EE;
+}
 #progressBar1::-webkit-progress-value {
 	background: #AAAA55;
+}
+#progressBar1::-webkit-progress-value {
+	background: #EEEE99;
 }
 button {
 	color: #DDDDDD;
