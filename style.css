@@ -140,6 +140,10 @@ button.dark {
 	font-size: 50px;
 	transition: 0.5s;
 }
+.label.dark {
+	background-color: rgba(0,0,0,0.3);
+	color: #DDDDDD;
+}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
