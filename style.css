@@ -5,6 +5,7 @@ progress {
 	-webkit-appearance: none;
 	border: 5px solid #222222;
 	transition: 0.5s;
+	border-radius: 15px;
 }
 progress.dark {
 	border: 5px solid #DDDDDD;
