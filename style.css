@@ -13,6 +13,7 @@ progress::-webkit-progress-bar {
 }
 progress.dark::-webkit-progress-bar {
 	background: black;
+	border: 5px solid #DDDDDD;
 }
 progress::-webkit-progress-value {
 	transition: 0.5s;
