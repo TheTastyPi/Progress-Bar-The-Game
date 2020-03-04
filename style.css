@@ -21,7 +21,7 @@ progress.dark::-webkit-progress-bar {
 }
 progress::-webkit-progress-value {
 	transition: 0.5s;
-	border-radius: 40px;
+	border-radius: 35px;
 }
 #progressBar0 {color: #6666AA;}
 #progressBar0.dark {color: #9999EE;}
