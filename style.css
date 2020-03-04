@@ -12,6 +12,7 @@ progress.dark {
 	background: black;
 }
 progress::-webkit-progress-bar {
+	border-radius: 35px;
 	background: white;
 	transition: 0.5s;
 }
