@@ -14,12 +14,9 @@ progress.dark {
 progress::-webkit-progress-bar {
 	background: white;
 	transition: 0.5s;
-	border: 5px solid #222222;
-	border-radius: 40px;
 }
 progress.dark::-webkit-progress-bar {
 	background: black;
-	border: 5px solid #DDDDDD;
 }
 progress::-webkit-progress-value {
 	transition: 0.5s;
