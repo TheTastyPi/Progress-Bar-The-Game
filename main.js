@@ -292,8 +292,8 @@ function updateUpg() {
 	document.getElementById("progressBar0").max = getBarLength() != Infinity ? getBarLength() : 1.79e308;
 }
 
-function maxAll(p) {
-	for (let i = 0; i < 4; i++) {
+function maxAll {
+	for (let i = game.currentScreen*4; i < (game.currentScreen+1)*4; i++) {
 		let totalAmount = Math.min(Math.floor(Math.log(game.timewallPoint*(upgrade.priceGrowth[i]-1)/getUpgPrice(i)+1)/Math.log(upgrade.priceGrowth[i])),upgrade.limit[i]);
 		let totalPrice = getUpgPrice(i)*(1-Math.pow(upgrade.priceGrowth[i],totalAmount))/(1-upgrade.priceGrowth[i]);
 		if (totalAmount >= 1) {
