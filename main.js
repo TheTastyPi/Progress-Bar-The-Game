@@ -250,16 +250,16 @@ function updateAll() {
 function updateProgress() {
 	if (isNaN(game.progress)) game.progress = Infinity;
 	document.getElementById("progressBar0").value = game.progress != Infinity ? game.progress : 1.79e308;
-	document.getElementById("progressBarLabel").innerHTML = format((game.progress / getBarLength() * 100), 4) + "%";
-	document.getElementById("redeemButton").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
-	document.getElementById("redeemButton").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
-	document.getElementById("redeemButton").innerHTML = "Redeem<br>"+format(getPointGain())+"<br>point"+pluralCheck(getPointGain());
+	document.getElementById("progressBarLabel0").innerHTML = format((game.progress / getBarLength() * 100), 4) + "%";
+	document.getElementById("redeemButton0").classList[game.lifetimeProgress >= getBarLength() ? "remove" : "add"]("hidden");
+	document.getElementById("redeemButton0").classList[game.progress >= getBarLength() ? "remove" : "add"]("disabled");
+	document.getElementById("redeemButton0").innerHTML = "Redeem<br>"+format(getPointGain())+"<br>point"+pluralCheck(getPointGain());
 }
 
 function updatePoints() {
 	if (isNaN(game.timewallPoint)) game.timewallPoint = 0;
-	document.getElementById("timewallPoint").innerHTML = "You have "+format(game.timewallPoint)+" timewall point"+pluralCheck(game.timewallPoint)+".";
-	document.getElementById("timewallPoint").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
+	document.getElementById("timewallPoint0").innerHTML = "You have "+format(game.timewallPoint)+" timewall point"+pluralCheck(game.timewallPoint)+".";
+	document.getElementById("timewallPoint0").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 	document.getElementById("upgMenuOpen").classList[game.lifetimePoints >= 1 ? "remove" : "add"]("hidden");
 }
 
