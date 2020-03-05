@@ -37,7 +37,7 @@ function save(auto = true) {
 function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
 		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
-		if (pastGame.point == undefined) pastGame.point = [pastGame.timewallPoint];
+		if (pastGame.points == undefined) pastGame.points = [pastGame.timewallPoint];
 		if (typeof(pastGame.lifeTimePoints) == "number") pastGame.lifeTimePoints = [pastGame.lifeTimePoints];
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
 		if (typeof(pastGame.lifeTimeProgress) == "number") pastGame.lifeTimeProgress = [pastGame.lifeTimeProgress];
@@ -213,7 +213,7 @@ function newGame() {
 
 function redeemPoints(n) {
 	if (game.progress[n] >= getBarLength(n)) {
-		game.point[n] += getPointGain(n);
+		game.points[n] += getPointGain(n);
 		game.lifetimePoints[n] += getPointGain(n);
 		game.progress[n] = game.progress[n] % getBarLength(n);
 		updatePoints();
@@ -226,8 +226,8 @@ function getUpgPrice(n) {
 }
 
 function buyUpgrade(n) {
-	if (game.point[Math.floor(n/4)] >= getUpgPrice(n) && game.upgrade.normal[n] < upgrade.limit[n] && getUpgPrice(n) != Infinity) {
-		game.point[Math.floor(n/4)] -= getUpgPrice(n);
+	if (game.points[Math.floor(n/4)] >= getUpgPrice(n) && game.upgrade.normal[n] < upgrade.limit[n] && getUpgPrice(n) != Infinity) {
+		game.points[Math.floor(n/4)] -= getUpgPrice(n);
 		game.upgrade.normal[n]++;
 		updateUpg();
 		updatePoints();
@@ -266,8 +266,8 @@ function updateProgress() {
 }
 
 function updatePoints() {
-	if (isNaN(game.point[0])) game.point[0] = 0;
-	document.getElementById("timewallPoint0").innerHTML = "You have "+format(game.point[0])+" timewall point"+pluralCheck(game.point[0])+".";
+	if (isNaN(game.points[0])) game.points[0] = 0;
+	document.getElementById("timewallPoint0").innerHTML = "You have "+format(game.points[0])+" timewall point"+pluralCheck(game.points[0])+".";
 	document.getElementById("timewallPoint0").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 	document.getElementById("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 }
@@ -296,17 +296,17 @@ function updateUpg() {
 				newDesc += format(3 - 0.2 * game.upgrade.normal[3], 1) + "&#8730;";
 		}
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		document.getElementById("upgButton"+i).classList[game.point[0] >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
+		document.getElementById("upgButton"+i).classList[game.points[0] >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
 	}
 	document.getElementById("progressBar0").max = getBarLength() != Infinity ? getBarLength() : 1.79e308;
 }
 
 function maxAll() {
 	for (let i = game.currentScreen*4; i < (game.currentScreen+1)*4; i++) {
-		let totalAmount = Math.min(Math.floor(Math.log(game.point[0]*(upgrade.priceGrowth[i]-1)/getUpgPrice(i)+1)/Math.log(upgrade.priceGrowth[i])),upgrade.limit[i]);
+		let totalAmount = Math.min(Math.floor(Math.log(game.points[0]*(upgrade.priceGrowth[i]-1)/getUpgPrice(i)+1)/Math.log(upgrade.priceGrowth[i])),upgrade.limit[i]);
 		let totalPrice = getUpgPrice(i)*(1-Math.pow(upgrade.priceGrowth[i],totalAmount))/(1-upgrade.priceGrowth[i]);
 		if (totalAmount >= 1) {
-			game.point[0] -= totalPrice;
+			game.points[0] -= totalPrice;
 			game.upgrade.normal[i] += totalAmount;
 			updateUpg();
 			updatePoints();
