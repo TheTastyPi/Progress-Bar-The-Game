@@ -41,7 +41,7 @@ function load(auto = true) {
 		if (typeof(pastGame.lifeTimePoints) == "number") pastGame.lifeTimePoints = [pastGame.lifeTimePoints];
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
 		if (typeof(pastGame.lifeTimeProgress) == "number") pastGame.lifeTimeProgress = [pastGame.lifeTimeProgress];
-		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:[...pastGame.upgradeAmount]};
+		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
 		merge(game, pastGame);
 		updateAll();
 		if (!auto) {
