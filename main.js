@@ -38,9 +38,9 @@ function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
 		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
 		if (pastGame.points == undefined) pastGame.points = [pastGame.timewallPoint];
-		if (typeof(pastGame.lifeTimePoints) == "number") pastGame.lifeTimePoints = [pastGame.lifeTimePoints];
+		if (typeof(pastGame.lifetimePoints) == "number") pastGame.lifetimePoints = [pastGame.lifetimePoints];
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
-		if (typeof(pastGame.lifeTimeProgress) == "number") pastGame.lifeTimeProgress = [pastGame.lifeTimeProgress];
+		if (typeof(pastGame.lifetimeProgress) == "number") pastGame.lifetimeProgress = [pastGame.lifetimeProgress];
 		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
 		merge(game, pastGame);
 		updateAll();
