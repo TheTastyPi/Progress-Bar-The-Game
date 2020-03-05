@@ -263,6 +263,7 @@ function updateProgress() {
 	document.getElementById("redeemButton0").classList[game.lifetimeProgress[0] >= getBarLength() ? "remove" : "add"]("hidden");
 	document.getElementById("redeemButton0").classList[game.progress[0] >= getBarLength() ? "remove" : "add"]("disabled");
 	document.getElementById("redeemButton0").innerHTML = "Redeem<br>"+format(getPointGain())+"<br>point"+pluralCheck(getPointGain());
+	if (game.upgrade.normal[7] == 0) game.progress[1] = Math.log10(game.progress[0]);
 }
 
 function updatePoints() {
