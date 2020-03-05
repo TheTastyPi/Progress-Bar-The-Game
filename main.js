@@ -37,6 +37,11 @@ function save(auto = true) {
 function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
 		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
+		if (pastGame.point == undefined) pastGame.point = [pastGame.timewallPoint];
+		if (typeof(pastGame.lifeTimePoints) == "number") pastGame.lifeTimePoints = [pastGame.lifeTimePoints];
+		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
+		if (typeof(pastGame.lifeTimeProgress) == "number") pastGame.lifeTimeProgress = [pastGame.lifeTimeProgress];
+		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:[...pastGame.upgrade]};
 		merge(game, pastGame);
 		updateAll();
 		if (!auto) {
@@ -194,11 +199,16 @@ function newGame() {
 		currentTheme: "light",
 		currentScreen: 0,
 		screenLimit: 1,
-		lifetimeProgress: 0,
-		progress: 0,
-		lifetimePoints: 0,
-		timewallPoint: 0,
-		upgradeAmount: [0,0,0,0],
+		lifetimeProgress: [0,0],
+		progress: [0,0],
+		lifetimePoints: [0,0],
+		points: [0,0],
+		upgrade: {
+			normal: [0,0,0,0,0,0,0,0],
+			skill: [0,0,0,0,0,0,0,0],
+			auto: [0,0,0,0,0,0,0,0],
+		},
+		upgradeAmount: [0,0,0,0,0,0,0,0],
 	};
 }
 
