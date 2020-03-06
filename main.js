@@ -327,10 +327,7 @@ function updateUpg() {
 		   getUpgPrice(i*4+1) == Infinity &&
 		   getUpgPrice(i*4+2) == Infinity &&
 		   getUpgPrice(i*4+3) == Infinity) {
-			let div = document.createElement("div");
-			div.innerHTML = "Nothing here...";
-			div.classList.add("centered");
-			document.getElementById("upgSect"+i).appendChild(div);
+			document.getElementById("upgSect"+i).innerHTML = "Nothing here!"
 		}
 	}
 }
