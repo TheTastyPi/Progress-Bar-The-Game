@@ -241,6 +241,7 @@ function getBarLength(n) {
 			break;
 		case 1:
 			return Math.log10(1.79e308);
+	}
 }
 
 function getBarSpeed(n) {
@@ -250,6 +251,7 @@ function getBarSpeed(n) {
 			break;
 		case 1:
 			return Math.pow(2, game.upgrade.normal[1]) * game.speed / game.progress[1] * Math.log(10);
+	}
 }
 
 function getPointGain(n) {
@@ -259,6 +261,7 @@ function getPointGain(n) {
 			break;
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1));
+	}
 }
 
 function updateAll() {
