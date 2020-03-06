@@ -290,8 +290,8 @@ function updatePoints() {
 	for (let i = 0; i < 2; i++) {
 		if (isNaN(game.points[i])) game.points[i] = 0;
 		document.getElementById("timewallPoint"+i).innerHTML = "You have "+format(game.points[i])+" "+(i==0?"time":"log")+"wall point"+pluralCheck(game.points[i])+".";
+		document.getElementById("timewallPoint"+i).classList[game.lifetimePoints[i] >= 1 ? "remove" : "add"]("hidden");
 	}
-	document.getElementById("timewallPoint0").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 	document.getElementById("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 }
 
