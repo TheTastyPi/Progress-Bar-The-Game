@@ -296,7 +296,7 @@ function updatePoints() {
 }
 
 function updateUpg() {
-	for (let i = 0; i < 4; i++) {
+	for (let i = 0; i < 8; i++) {
 		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+format(getUpgPrice(i))+" Timewall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
 		if (getUpgPrice(i) == Infinity) {
 			setTimeout(function(){
@@ -323,6 +323,12 @@ function updateUpg() {
 	}
 	for (let i = 0; i < 2; i++) {
 		document.getElementById("progressBar"+i).max = getBarLength(i) != Infinity ? getBarLength(i) : 1.79e308;
+		if (getUpgPrice(i*4) != Infinity &&
+		   getUpgPrice(i*4+1) != Infinity &&
+		   getUpgPrice(i*4+2) != Infinity &&
+		   getUpgPrice(i*4+3) != Infinity) {
+			document.getElementById("upgSect"+i).innerHTML = "Nothing here...";
+		}
 	}
 }
 
