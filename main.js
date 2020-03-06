@@ -343,5 +343,3 @@ function format(n, toFixed = 0) {
 load();
 
 window.requestAnimationFrame(nextFrame);
-
-// hi
