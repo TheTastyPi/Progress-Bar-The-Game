@@ -323,10 +323,10 @@ function updateUpg() {
 	}
 	for (let i = 0; i < 2; i++) {
 		document.getElementById("progressBar"+i).max = getBarLength(i) != Infinity ? getBarLength(i) : 1.79e308;
-		if (getUpgPrice(i*4) != Infinity &&
-		   getUpgPrice(i*4+1) != Infinity &&
-		   getUpgPrice(i*4+2) != Infinity &&
-		   getUpgPrice(i*4+3) != Infinity) {
+		if (getUpgPrice(i*4) == Infinity &&
+		   getUpgPrice(i*4+1) == Infinity &&
+		   getUpgPrice(i*4+2) == Infinity &&
+		   getUpgPrice(i*4+3) == Infinity) {
 			let div = document.createElement("div");
 			div.innerHTML = "Nothing here...";
 			div.classList.add("centered");
