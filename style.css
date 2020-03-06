@@ -222,7 +222,7 @@ button.dark {
 	background-color: rgba(0,0,0,0.2);
 }
 .maxedUpg {
-	flex: 0 0 0;
+	max-width: 0;
 }
 .maxall {
 	position: absolute;
