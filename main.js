@@ -3,9 +3,9 @@ var lastSave = 0;
 var game = newGame();
 
 const upgrade = {
-	basePrice: [1, 1, 2, 3],
-	priceGrowth: [6, 6, 11, 17.3],
-	limit: [Infinity,Infinity,Infinity,10]
+	basePrice: [1, 1, 2, 3, 1, 2, 3, 4],
+	priceGrowth: [6, 6, 11, 17.3, 6, 6, 6, 7],
+	limit: [Infinity,Infinity,Infinity,10,5,1,1,1]
 };
 
 document.getElementById("upgMenu").style.width = document.getElementsByClassName("screen").length+"00%"
