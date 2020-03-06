@@ -15,8 +15,8 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = timeStamp - lastSave;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		game.lifetimeProgress[0] += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress[0] < getBarLength() ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
-		game.progress[0] += Math.pow(sinceLastFrame * getBarSpeed(), 1 / (game.progress[0] < getBarLength() ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
+		game.lifetimeProgress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
+		game.progress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
 		updateProgress();
 	}
 	if (sinceLastSave >= game.autoSaveInterval) {
@@ -234,16 +234,31 @@ function buyUpgrade(n) {
 	}
 }
 
-function getBarLength() {
-	return 6e4 / Math.pow(2, game.upgrade.normal[0]);
+function getBarLength(n) {
+	switch (n) {
+		case 0:
+			return 6e4 / Math.pow(2, game.upgrade.normal[0]);
+			break;
+		case 1:
+			return Math.log10(1.79e308);
 }
 
-function getBarSpeed() {
-	return Math.pow(2, game.upgrade.normal[1]) * game.speed;
+function getBarSpeed(n) {
+	switch (n) {
+		case 0:
+			return Math.pow(2, game.upgrade.normal[1]) * game.speed;
+			break;
+		case 1:
+			return Math.pow(2, game.upgrade.normal[1]) * game.speed / game.progress[1] * Math.log(10);
 }
 
-function getPointGain() {
-	return Math.floor(game.progress[0] / getBarLength() * Math.pow(2, game.upgrade.normal[2]));
+function getPointGain(n) {
+	switch (n) {
+		case 0:
+			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]));
+			break;
+		case 1:
+			return Math.floor(game.progress[1] / getBarLength(1));
 }
 
 function updateAll() {
@@ -259,10 +274,10 @@ function updateAll() {
 function updateProgress() {
 	if (isNaN(game.progress[0])) game.progress[0] = Infinity;
 	document.getElementById("progressBar0").value = game.progress[0] != Infinity ? game.progress[0] : 1.79e308;
-	document.getElementById("progressBarLabel0").innerHTML = format((game.progress[0] / getBarLength() * 100), 4) + "%";
-	document.getElementById("redeemButton0").classList[game.lifetimeProgress[0] >= getBarLength() ? "remove" : "add"]("hidden");
-	document.getElementById("redeemButton0").classList[game.progress[0] >= getBarLength() ? "remove" : "add"]("disabled");
-	document.getElementById("redeemButton0").innerHTML = "Redeem<br>"+format(getPointGain())+"<br>point"+pluralCheck(getPointGain());
+	document.getElementById("progressBarLabel0").innerHTML = format((game.progress[0] / getBarLength(0) * 100), 4) + "%";
+	document.getElementById("redeemButton0").classList[game.lifetimeProgress[0] >= getBarLength(0) ? "remove" : "add"]("hidden");
+	document.getElementById("redeemButton0").classList[game.progress[0] >= getBarLength(0) ? "remove" : "add"]("disabled");
+	document.getElementById("redeemButton0").innerHTML = "Redeem<br>"+format(getPointGain(0))+"<br>point"+pluralCheck(getPointGain(0));
 	if (game.upgrade.normal[7] == 0) game.progress[1] = Math.log10(game.progress[0]);
 }
 
@@ -299,7 +314,7 @@ function updateUpg() {
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
 		document.getElementById("upgButton"+i).classList[game.points[0] >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
 	}
-	document.getElementById("progressBar0").max = getBarLength() != Infinity ? getBarLength() : 1.79e308;
+	document.getElementById("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
 }
 
 function maxAll() {
