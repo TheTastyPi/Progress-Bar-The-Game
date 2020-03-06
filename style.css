@@ -203,7 +203,7 @@ button.dark {
 	z-index: 1;
 	top: 0;
 	background-color: rgba(0,0,0,0.5);
-	transition: 0.5s;
+	transition: height 0.5s;
 	color: #DDDDDD;
 }
 .topMenu.dark {
@@ -216,7 +216,7 @@ button.dark {
 }
 .upgSect > * {
 	flex: 1 0 75px;
-	transition: 0s;
+	transition: width 0s;
 }
 .oddUpgrades {
 	background-color: rgba(0,0,0,0.2);
