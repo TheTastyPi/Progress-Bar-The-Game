@@ -216,7 +216,7 @@ button.dark {
 }
 .upgSect > * {
 	flex: 1 0 75px;
-	transition: width 0.5s;
+	transition: max-width 0.5s;
 }
 .oddUpgrades {
 	background-color: rgba(0,0,0,0.2);
