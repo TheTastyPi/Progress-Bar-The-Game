@@ -321,7 +321,9 @@ function updateUpg() {
 		document.getElementById("upgDesc"+i).innerHTML = newDesc;
 		document.getElementById("upgButton"+i).classList[game.points[0] >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
 	}
-	document.getElementById("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
+	for (let i = 0; i < 2; i++) {
+		document.getElementById("progressBar"+i).max = getBarLength(i) != Infinity ? getBarLength(i) : 1.79e308;
+	}
 }
 
 function maxAll() {
