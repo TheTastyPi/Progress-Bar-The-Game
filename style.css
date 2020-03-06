@@ -217,6 +217,7 @@ button.dark {
 .upgSect > * {
 	flex: 1 0 75px;
 	transition: flex 0.5s;
+	overflow-x: hidden;
 }
 .oddUpgrades {
 	background-color: rgba(0,0,0,0.2);
