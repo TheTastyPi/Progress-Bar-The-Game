@@ -216,13 +216,13 @@ button.dark {
 }
 .upgSect > * {
 	flex: 1 0 75px;
-	transition: flex-basis 0.5s;
+	transition: flex-grow 0.5s;
 }
 .oddUpgrades {
 	background-color: rgba(0,0,0,0.2);
 }
 .maxedUpg {
-	flex-basis: 0px;
+	flex-grow: 0;
 }
 .maxall {
 	position: absolute;
