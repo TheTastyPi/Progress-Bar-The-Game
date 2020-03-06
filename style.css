@@ -213,8 +213,6 @@ button.dark {
 .upgSect {
 	display: flex;
 	flex: 1 0 75px;
-	justify-content: center;
-	align-content: center;
 }
 .upgSect > * {
 	flex: 1 0 75px;
