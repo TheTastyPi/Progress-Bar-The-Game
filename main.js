@@ -275,18 +275,22 @@ function updateAll() {
 }
 
 function updateProgress() {
-	if (isNaN(game.progress[0])) game.progress[0] = Infinity;
-	document.getElementById("progressBar0").value = game.progress[0] != Infinity ? game.progress[0] : 1.79e308;
-	document.getElementById("progressBarLabel0").innerHTML = format((game.progress[0] / getBarLength(0) * 100), 4) + "%";
-	document.getElementById("redeemButton0").classList[game.lifetimeProgress[0] >= getBarLength(0) ? "remove" : "add"]("hidden");
-	document.getElementById("redeemButton0").classList[game.progress[0] >= getBarLength(0) ? "remove" : "add"]("disabled");
-	document.getElementById("redeemButton0").innerHTML = "Redeem<br>"+format(getPointGain(0))+"<br>point"+pluralCheck(getPointGain(0));
+	for (let i = 0; i < 2; i++) {
+		if (isNaN(game.progress[i])) game.progress[i] = Infinity;
+		document.getElementById("progressBar"+i).value = game.progress[i] != Infinity ? game.progress[i] : 1.79e308;
+		document.getElementById("progressBarLabel"+i).innerHTML = format((game.progress[i] / getBarLength(i) * 100), 4) + "%";
+		document.getElementById("redeemButton"+i).classList[game.lifetimeProgress[i] >= getBarLength(i) ? "remove" : "add"]("hidden");
+		document.getElementById("redeemButton"+i).classList[game.progress[i] >= getBarLength(i) ? "remove" : "add"]("disabled");
+		document.getElementById("redeemButton"+i).innerHTML = "Redeem<br>"+format(getPointGain(i))+"<br>point"+pluralCheck(getPointGain(i));
+	}
 	if (game.upgrade.normal[7] == 0) game.progress[1] = Math.log10(game.progress[0]);
 }
 
 function updatePoints() {
-	if (isNaN(game.points[0])) game.points[0] = 0;
-	document.getElementById("timewallPoint0").innerHTML = "You have "+format(game.points[0])+" timewall point"+pluralCheck(game.points[0])+".";
+	for (let i = 0; i < 2; i++) {
+		if (isNaN(game.points[i])) game.points[i] = 0;
+		document.getElementById("timewallPoint"+i).innerHTML = "You have "+format(game.points[i])+" "+i==0?"time":"log"+"wall point"+pluralCheck(game.points[i])+".";
+	}
 	document.getElementById("timewallPoint0").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 	document.getElementById("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 }
