@@ -311,7 +311,7 @@ function updatePoints() {
 
 function updateUpg() {
 	for (let i = 0; i < 8; i++) {
-		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+format(getUpgPrice(i))+" Timewall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
+		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+format(getUpgPrice(i))+" "+(Math.floor(i/4)==0?"Time":"Log")+"wall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
 		if (getUpgPrice(i) == Infinity) {
 			setTimeout(function(){
 				document.getElementById("upg"+i).classList.add("maxedUpg");
