@@ -9,10 +9,11 @@ const upgrade = {
 };
 
 {
-	let upgCleared = document.createElement("div");
-	upgCleared.appendChild(document.createTextNode("Nothing here..."));
-	upgCleared.classList.add("hidden");
+	
 	for (let i = 0; i < 2; i++) {
+		let upgCleared = document.createElement("div");
+		upgCleared.appendChild(document.createTextNode("Nothing here..."));
+		upgCleared.classList.add("hidden");
 		upgCleared.id = "upgCleared"+i;
 		document.getElementById("upgSect"+i).appendChild(upgCleared);
 	}
