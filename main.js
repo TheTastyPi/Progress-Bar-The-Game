@@ -261,7 +261,7 @@ function getBarSpeed(n) {
 			return Math.pow(2, game.upgrade.normal[1]) * game.speed;
 			break;
 		case 1:
-			return Math.pow(2, game.upgrade.normal[1]) * game.speed / game.progress[1] * Math.log(10);
+			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10)) * game.speed;
 	}
 }
 
