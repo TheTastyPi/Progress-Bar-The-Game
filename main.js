@@ -12,7 +12,10 @@ const upgrade = {
 	
 	for (let i = 0; i < 2; i++) {
 		let upgCleared = document.createElement("div");
-		upgCleared.appendChild(document.createTextNode("Nothing here..."));
+		let whyTho = document.createElement("span");
+		whyTho.appendChild(document.createTextNode("Nothing here..."));
+		upgCleared.appendChild(whyTho);
+		whyTho.style.verticalAlign = "middle";
 		upgCleared.classList.add("upgCleared");
 		upgCleared.classList.add("hidden");
 		upgCleared.id = "upgCleared"+i;
