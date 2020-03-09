@@ -230,6 +230,7 @@ button.dark {
 }
 .upgCleared {
 	align-self: center;
+	text-align: center;
 }
 .maxall {
 	position: absolute;
