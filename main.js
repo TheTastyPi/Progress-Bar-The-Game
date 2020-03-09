@@ -8,6 +8,15 @@ const upgrade = {
 	limit: [Infinity,Infinity,Infinity,10,5,1,1,1]
 };
 
+{
+	let upgCleared = document.createElement("div");
+	upgCleared.appendChild(document.createTextNode("Nothing here..."));
+	upgCleared.classList.add("hidden");
+	for (let i = 0; i < 1; i++) {
+		document.getElementById("upgSect"+i).appendChild(upgCleared);
+	}
+}
+
 document.getElementById("upgMenu").style.width = document.getElementsByClassName("screen").length+"00%"
 
 function nextFrame(timeStamp) {
