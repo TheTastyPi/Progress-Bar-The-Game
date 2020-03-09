@@ -226,9 +226,8 @@ button.dark {
 	flex: 0 0 0px;
 }
 .upgCleared {
-	top: 50%;
-	right: 50%;
-	transform: translate(50%, -50%);
+	text-align: center;
+	vertical-align: middle;
 }
 .maxall {
 	position: absolute;
