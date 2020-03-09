@@ -294,7 +294,10 @@ function updateProgress() {
 		document.getElementById("redeemButton"+i).classList[game.progress[i] >= getBarLength(i) ? "remove" : "add"]("disabled");
 		document.getElementById("redeemButton"+i).innerHTML = "Redeem<br>"+format(getPointGain(i))+"<br>point"+pluralCheck(getPointGain(i));
 	}
-	if (game.upgrade.normal[7] == 0) game.progress[1] = Math.log10((Math.log10(game.progress[0]) == Infinity ? 1.79e308 : game.progress[0]));
+	if (game.upgrade.normal[7] == 0) {
+		game.progress[1] = Math.log10((game.progress[0] == Infinity ? 1.79e308 : game.progress[0]));
+		if (game.progress[0] == Infinity) game.lifetimeProgress[1] = Math.log10(1.79e308);
+	}
 }
 
 function updatePoints() {
