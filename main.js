@@ -13,6 +13,7 @@ const upgrade = {
 	upgCleared.appendChild(document.createTextNode("Nothing here..."));
 	upgCleared.classList.add("hidden");
 	for (let i = 0; i < 1; i++) {
+		upgCleared.id = "upgCleared"+i;
 		document.getElementById("upgSect"+i).appendChild(upgCleared);
 	}
 }
