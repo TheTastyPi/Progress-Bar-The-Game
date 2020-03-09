@@ -227,7 +227,7 @@ button.dark {
 }
 .upgCleared {
 	text-align: center;
-	padding: 70px 0;
+	line-height: 100%;
 }
 .maxall {
 	position: absolute;
