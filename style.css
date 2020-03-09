@@ -225,6 +225,11 @@ button.dark {
 .maxedUpg {
 	flex: 0 0 0px;
 }
+.upgCleared {
+	top: 50%;
+	right: 50%;
+	transform: translate(50%, -50%);
+}
 .maxall {
 	position: absolute;
 	width: 80px;
