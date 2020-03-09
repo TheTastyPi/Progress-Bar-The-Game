@@ -327,7 +327,9 @@ function updateUpg() {
 		   getUpgPrice(i*4+1) == Infinity &&
 		   getUpgPrice(i*4+2) == Infinity &&
 		   getUpgPrice(i*4+3) == Infinity) {
-			document.getElementById("upgSect"+i).innerHTML = "Nothing here!"
+			document.getElementById("upgCleared"+i).classList.remove("hidden");
+		} else {
+			document.getElementById("upgCleared"+i).classList.add("hidden");
 		}
 	}
 }
