@@ -11,7 +11,7 @@ const upgrade = {
 {
 	for (let i = 0; i < 2; i++) {
 		let upgCleared = document.createElement("span");
-		span.appendChild(document.createTextNode("Nothing here..."));
+		upgCleared.appendChild(document.createTextNode("Nothing here..."));
 		document.getElementById("upgSect"+i).appendChild(upgCleared);
 		upgCleared.classList.add("upgCleared");
 		upgCleared.classList.add("hidden");
