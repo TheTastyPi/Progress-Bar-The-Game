@@ -231,6 +231,8 @@ button.dark {
 .upgCleared {
 	align-self: center;
 	text-align: center;
+	font-size: 40px;
+	max-width: 0;
 }
 .maxall {
 	position: absolute;
