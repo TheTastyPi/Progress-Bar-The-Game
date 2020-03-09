@@ -9,14 +9,12 @@ const upgrade = {
 };
 
 {
-	
 	for (let i = 0; i < 2; i++) {
-		let upgCleared = document.createElement("div");
-		upgCleared.appendChild(document.createTextNode("Nothing here..."));
-		upgCleared.classList.add("upgCleared");
-		upgCleared.classList.add("hidden");
-		upgCleared.id = "upgCleared"+i;
-		document.getElementById("upgSect"+i).appendChild(upgCleared);
+		let text = document.createTextNode("Nothing here...");
+		document.getElementById("upgSect"+i).appendChild(text);
+		text.classList.add("upgCleared");
+		text.classList.add("hidden");
+		text.id = "upgCleared"+i;
 	}
 }
 
