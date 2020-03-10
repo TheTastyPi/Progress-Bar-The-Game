@@ -346,7 +346,6 @@ function updateUpg() {
 				document.getElementById("upg"+i).classList.remove("hidden");
 			}
 			switch(type) {
-				default:
 				case "normal":
 					switch(i) {
 						case 0:
