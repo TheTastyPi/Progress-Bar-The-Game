@@ -100,85 +100,165 @@
 			</div>
 			<button id="maxAllButton" onclick="maxAll()" class="maxall">Max All</button>
 		</div>
-		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
-		<div id="upgMenuSkill" class="topMenu" style="max-height:200px; left:120px;">
-			<div id="upgSectSkill0" class="upgSect">
-				<div id="upgSkill0" style="text-align:center;">
-					<button id="upgButtonSkill0" onclick="buyUpgrade(0,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill0.png');"></button><br>
+		<button id="skillUpgMenuOpen" onclick="toggleTopMenu('skillUpg')" class="hidden topMenuOpen" style="left:120px;">Upgrades</button>
+		<div id="skillUpgMenu" class="topMenu" style="max-height:200px; left:0;">
+			<div id="skillUpgSect0" class="upgSect">
+				<div id="skillUpg0" style="text-align:center;">
+					<button id="skillUpgButton0" onclick="buyUpgrade(0,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill0.png');"></button><br>
 					Bar Length Upgrade<br>
 					Divides bar length by 2.<br>
-					<span id="upgDescSkill0">
+					<span id="skillUpgDesc0">
 						Cost: 1 Timewall Point<br>
 						Currently: /1
 					</span>
 				</div>
-				<div id="upgSkill1" class="oddUpgrades" style="text-align:center;">
-					<button id="upgButtonSkill1" onclick="buyUpgrade(1,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill1.png');"></button><br>
+				<div id="skillUpg1" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton1" onclick="buyUpgrade(1,'skill')" class="horizonalCentered upgButton" style="background-image:url('skillUpgrade1.png');"></button><br>
 					Bar Speed Upgrade<br>
 					Multiplies bar speed by 2.<br>
-					<span id="upgDescSkill1">
+					<span id="skillUpgDesc1">
 						Cost: 1 Timewall Point<br>
 						Currently: 1x
 					</span>
 				</div>
-				<div id="upgSkill2" style="text-align:center;">
-					<button id="upgButtonSkill2" onclick="buyUpgrade(2,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill2.png');"></button><br>
+				<div id="skillUpg2" style="text-align:center;">
+					<button id="skillUpgButton2" onclick="buyUpgrade(2,'skill')" class="horizonalCentered upgButton" style="background-image:url('skillUpgrade2.png');"></button><br>
 					Point Gain Upgrade<br>
 					Multiplies point gain by 2.<br>
-					<span id="upgDescSkill2">
+					<span id="skillUpgDesc2">
 						Cost: 2 Timewall Points<br>
 						Currently: 1x
 					</span>
 				</div>
-				<div id="upgSkill3" class="oddUpgrades" style="text-align:center;">
-					<button id="upgButtonSkill3" onclick="buyUpgrade(3,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill3.png');"></button><br>
+				<div id="skillUpg3" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton3" onclick="buyUpgrade(3,'skill')" class="horizonalCentered upgButton" style="background-image:url('skillUpgrade3.png');"></button><br>
 					Overflow Speed Upgrade<br>
 					Subtracts overflow penalty by 0.2.<br>
-					<span id="upgDescSkill3">
+					<span id="skillUpgDesc3">
 						Cost: 3 Timewall Point<br>
 						Currently: /10
 					</span>
 				</div>
 			</div>
-			<div id="upgSectSkill1" class="upgSect">
-				<div id="upgSkill4" style="text-align:center;">
-					<button id="upgButtonSkill4" onclick="buyUpgrade(4,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill4.png');"></button><br>
+			<div id="skillUpgSect1" class="upgSect">
+				<div id="skillUpg4" style="text-align:center;">
+					<button id="skillUpgButton4" onclick="buyUpgrade(4,'skill')" class="horizonalCentered upgButton" style="background-image:url('skillUpgrade4.png');"></button><br>
 					Skill Unlock<br>
 					Unlocks a new skill.<br>
-					<span id="upgDescSkill4">
+					<span id="skillUpgDesc4">
 						Cost: 1 Logwall Point<br>
 						Currently: 0 Skill
 					</span>
 				</div>
-				<div id="upgSkill5" class="oddUpgrades" style="text-align:center;">
-					<button id="upgButtonSkill5" onclick="buyUpgrade(5,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill5.png');"></button><br>
+				<div id="skillUpg5" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton5" onclick="buyUpgrade(5,'skill')" class="horizonalCentered upgButton" style="background-image:url('skillUpgrade5.png');"></button><br>
 					Skill Power Upgrades<br>
 					Unlocks the skill upgrade tab.<br>
-					<span id="upgDescSkill5">
+					<span id="skillUpgDesc5">
 						Cost: 2 Logwall Point<br>
 						Currently: Locked
 					</span>
 				</div>
-				<div id="upgSkill6" style="text-align:center;">
-					<button id="upgButtonSkill6" onclick="buyUpgrade(6,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill6.png');"></button><br>
+				<div id="skillUpg6" style="text-align:center;">
+					<button id="skillUpgButton6" onclick="buyUpgrade(6,'skill')" class="horizonalCentered upgButton" style="background-image:url('skillUpgrade6.png');"></button><br>
 					Automation Unlock<br>
 					Unlocks the automation tab.<br>
-					<span id="upgDescSkill6">
+					<span id="skillUpgDesc6">
 						Cost: 2 Logwall Points<br>
 						Currently: Locked
 					</span>
 				</div>
-				<div id="upgSkill7" class="oddUpgrades" style="text-align:center;">
-					<button id="upgButtonSkill7" onclick="buyUpgrade(7,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill7.png');"></button><br>
+				<div id="skillUpg7" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton7" onclick="buyUpgrade(7,'skill')" class="horizonalCentered upgButton" style="background-image:url('skillUpgrade7.png');"></button><br>
 					Independence Upgrade<br>
 					Disconnect bar 2 from bar 1.<br>
-					<span id="upgDescSkill7">
+					<span id="skillUpgDesc7">
 						Cost: 3 Logwall Point<br>
 						Currently: Dependent
 					</span>
 				</div>
 			</div>
-			<button id="maxAllButtonSkill" onclick="maxAll('skill')" class="maxall">Max All</button>
+			<button id="skillMaxAllButton" onclick="maxAll('skill')" class="maxall">Max All</button>
+		</div>
+		<button id="autoUpgMenuOpen" onclick="toggleTopMenu('autoUpg')" class="hidden topMenuOpen" style="left:240px;">Upgrades</button>
+		<div id="autoUpgMenu" class="topMenu" style="max-height:200px; left:0;">
+			<div id="autoUpgSect0" class="upgSect">
+				<div id="autoUpg0" style="text-align:center;">
+					<button id="autoUpgButton0" onclick="buyUpgrade(0,'skill')" class="horizonalCentered upgButton" style="background-image:url('autoUpgrade0.png');"></button><br>
+					Bar Length Upgrade<br>
+					Divides bar length by 2.<br>
+					<span id="autoUpgDesc0">
+						Cost: 1 Timewall Point<br>
+						Currently: /1
+					</span>
+				</div>
+				<div id="autoUpg1" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton1" onclick="buyUpgrade(1,'skill')" class="horizonalCentered upgButton" style="background-image:url('autoUpgrade1.png');"></button><br>
+					Bar Speed Upgrade<br>
+					Multiplies bar speed by 2.<br>
+					<span id="autoUpgDesc1">
+						Cost: 1 Timewall Point<br>
+						Currently: 1x
+					</span>
+				</div>
+				<div id="autoUpg2" style="text-align:center;">
+					<button id="autoUpgButton2" onclick="buyUpgrade(2,'skill')" class="horizonalCentered upgButton" style="background-image:url('autoUpgrade2.png');"></button><br>
+					Point Gain Upgrade<br>
+					Multiplies point gain by 2.<br>
+					<span id="autoUpgDesc2">
+						Cost: 2 Timewall Points<br>
+						Currently: 1x
+					</span>
+				</div>
+				<div id="autoUpg3" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton3" onclick="buyUpgrade(3,'skill')" class="horizonalCentered upgButton" style="background-image:url('autoUpgrade3.png');"></button><br>
+					Overflow Speed Upgrade<br>
+					Subtracts overflow penalty by 0.2.<br>
+					<span id="autoUpgDesc3">
+						Cost: 3 Timewall Point<br>
+						Currently: /10
+					</span>
+				</div>
+			</div>
+			<div id="autoUpgSect1" class="upgSect">
+				<div id="autoUpg4" style="text-align:center;">
+					<button id="autoUpgButton4" onclick="buyUpgrade(4,'skill')" class="horizonalCentered upgButton" style="background-image:url('autoUpgrade4.png');"></button><br>
+					Skill Unlock<br>
+					Unlocks a new skill.<br>
+					<span id="autoUpgDesc4">
+						Cost: 1 Logwall Point<br>
+						Currently: 0 Skill
+					</span>
+				</div>
+				<div id="autoUpg5" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton5" onclick="buyUpgrade(5,'skill')" class="horizonalCentered upgButton" style="background-image:url('autoUpgrade5.png');"></button><br>
+					Skill Power Upgrades<br>
+					Unlocks the skill upgrade tab.<br>
+					<span id="autoUpgDesc5">
+						Cost: 2 Logwall Point<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="autoUpg6" style="text-align:center;">
+					<button id="autoUpgButton6" onclick="buyUpgrade(6,'skill')" class="horizonalCentered upgButton" style="background-image:url('autoUpgrade6.png');"></button><br>
+					Automation Unlock<br>
+					Unlocks the automation tab.<br>
+					<span id="autoUpgDesc6">
+						Cost: 2 Logwall Points<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="autoUpg7" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton7" onclick="buyUpgrade(7,'skill')" class="horizonalCentered upgButton" style="background-image:url('autoUpgrade7.png');"></button><br>
+					Independence Upgrade<br>
+					Disconnect bar 2 from bar 1.<br>
+					<span id="autoUpgDesc7">
+						Cost: 3 Logwall Point<br>
+						Currently: Dependent
+					</span>
+				</div>
+			</div>
+			<button id="autoMaxAllButton" onclick="maxAll('auto')" class="maxall">Max All</button>
 		</div>
 		<button id="saveMenuOpen" onclick="toggleSideMenu('save')" class="sideMenuOpen" style="bottom:0;">Saving</button>
 		<div id="saveMenu" class="sideMenu" style="bottom:0; height:120px; max-width:280px">
