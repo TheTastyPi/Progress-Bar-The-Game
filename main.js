@@ -333,7 +333,7 @@ function updatePoints() {
 }
 
 function updateUpg() {
-	for (let type in Object.keys(upgrade)) {
+	for (let type in upgrade) {
 		for (let i = 0; i < 8; i++) {
 			let newDesc = (getUpgPrice(i, type) != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(Math.floor(i/4)==0?"Time":"Log")+"wall Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
 			if (getUpgPrice(i) == Infinity) {
