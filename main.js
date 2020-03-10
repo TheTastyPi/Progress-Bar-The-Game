@@ -260,7 +260,7 @@ function getUpgPrice(n, type) {
 }
 
 function buyUpgrade(n, type = "normal") {
-	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n) && game.upgrade[type][n] < upgrade[type]limit[n] && getUpgPrice(n) != Infinity) {
+	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n) && game.upgrade[type][n] < upgrade[type].limit[n] && getUpgPrice(n) != Infinity) {
 		game.points[upgrade[type].type[n]] -= getUpgPrice(n);
 		game.upgrade[type][n]++;
 		updateUpg();
