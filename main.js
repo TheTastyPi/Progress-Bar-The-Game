@@ -336,15 +336,6 @@ function updateUpg() {
 	for (let type of Object.keys(upgrade)) {
 		for (let i = 0; i < 8; i++) {
 			let newDesc = (getUpgPrice(i, type) != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(Math.floor(i/4)==0?"Time":"Log")+"wall Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
-			if (getUpgPrice(i) == Infinity) {
-				setTimeout(function(){
-					document.getElementById("upg"+i).classList.add("maxedUpg");
-					setTimeout(function(){document.getElementById("upg"+i).classList.add("hidden");},500);
-				},1000);
-			} else {
-				document.getElementById("upg"+i).classList.remove("maxedUpg");
-				document.getElementById("upg"+i).classList.remove("hidden");
-			}
 			switch(type) {
 				case "normal":
 					switch(i) {
@@ -371,7 +362,16 @@ function updateUpg() {
 					break;
 				case "auto":
 			}
-			document.getElementById("upgDesc"+i).innerHTML = newDesc;
+			document.getElementById("upgDesc"+(type=="normal"?"":type)+i).innerHTML = newDesc;
+			if (getUpgPrice(i) == Infinity) {
+				setTimeout(function(){
+					document.getElementById("upg"+i).classList.add("maxedUpg");
+					setTimeout(function(){document.getElementById("upg"+i).classList.add("hidden");},500);
+				},1000);
+			} else {
+				document.getElementById("upg"+i).classList.remove("maxedUpg");
+				document.getElementById("upg"+i).classList.remove("hidden");
+			}
 			document.getElementById("upgButton"+i).classList[game.points[0] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
 		}
 	}
