@@ -321,6 +321,8 @@ function updateProgress() {
 		document.getElementById("redeemButton"+i).classList[game.progress[i] >= getBarLength(i) ? "remove" : "add"]("disabled");
 		document.getElementById("redeemButton"+i).innerHTML = "Redeem<br>"+format(getPointGain(i))+"<br>point"+pluralCheck(getPointGain(i));
 	}
+	document.getElementById("switchScreenButtonLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
+	document.getElementById("switchScreenButtonRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	if (game.upgrade.normal[7] == 0) {
 		game.progress[1] = Math.log10((game.progress[0] == Infinity ? 1.79e308 : game.progress[0]));
 		if (game.progress[0] == Infinity) game.lifetimeProgress[1] = Math.log10(1.79e308);
@@ -334,6 +336,8 @@ function updatePoints() {
 		document.getElementById("timewallPoint"+i).classList[game.lifetimePoints[i] >= 1 ? "remove" : "add"]("hidden");
 	}
 	document.getElementById("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+	document.getElementById("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
+	document.getElementById("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
 }
 
 function updateUpg() {
