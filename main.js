@@ -366,7 +366,7 @@ function updateUpg() {
 					break;
 				case "auto":
 			}
-			document.getElementById("upgDesc"+(type=="normal"?"":type)+i).innerHTML = newDesc;
+			document.getElementById((type=="normal"?"u":type+"U")+"pgDesc"+i).innerHTML = newDesc;
 			if (getUpgPrice(i) == Infinity) {
 				setTimeout(function(){
 					document.getElementById("upg"+i).classList.add("maxedUpg");
