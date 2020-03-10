@@ -100,6 +100,86 @@
 			</div>
 			<button id="maxAllButton" onclick="maxAll()" class="maxall">Max All</button>
 		</div>
+		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
+		<div id="upgMenuSkill" class="topMenu" style="max-height:200px; left:120px;">
+			<div id="upgSectSkill0" class="upgSect">
+				<div id="upgSkill0" style="text-align:center;">
+					<button id="upgButtonSkill0" onclick="buyUpgrade(0,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill0.png');"></button><br>
+					Bar Length Upgrade<br>
+					Divides bar length by 2.<br>
+					<span id="upgDescSkill0">
+						Cost: 1 Timewall Point<br>
+						Currently: /1
+					</span>
+				</div>
+				<div id="upgSkill1" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButtonSkill1" onclick="buyUpgrade(1,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill1.png');"></button><br>
+					Bar Speed Upgrade<br>
+					Multiplies bar speed by 2.<br>
+					<span id="upgDescSkill1">
+						Cost: 1 Timewall Point<br>
+						Currently: 1x
+					</span>
+				</div>
+				<div id="upgSkill2" style="text-align:center;">
+					<button id="upgButtonSkill2" onclick="buyUpgrade(2,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill2.png');"></button><br>
+					Point Gain Upgrade<br>
+					Multiplies point gain by 2.<br>
+					<span id="upgDescSkill2">
+						Cost: 2 Timewall Points<br>
+						Currently: 1x
+					</span>
+				</div>
+				<div id="upgSkill3" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButtonSkill3" onclick="buyUpgrade(3,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill3.png');"></button><br>
+					Overflow Speed Upgrade<br>
+					Subtracts overflow penalty by 0.2.<br>
+					<span id="upgDescSkill3">
+						Cost: 3 Timewall Point<br>
+						Currently: /10
+					</span>
+				</div>
+			</div>
+			<div id="upgSectSkill1" class="upgSect">
+				<div id="upgSkill4" style="text-align:center;">
+					<button id="upgButtonSkill4" onclick="buyUpgrade(4,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill4.png');"></button><br>
+					Skill Unlock<br>
+					Unlocks a new skill.<br>
+					<span id="upgDescSkill4">
+						Cost: 1 Logwall Point<br>
+						Currently: 0 Skill
+					</span>
+				</div>
+				<div id="upgSkill5" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButtonSkill5" onclick="buyUpgrade(5,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill5.png');"></button><br>
+					Skill Power Upgrades<br>
+					Unlocks the skill upgrade tab.<br>
+					<span id="upgDescSkill5">
+						Cost: 2 Logwall Point<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="upgSkill6" style="text-align:center;">
+					<button id="upgButtonSkill6" onclick="buyUpgrade(6,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill6.png');"></button><br>
+					Automation Unlock<br>
+					Unlocks the automation tab.<br>
+					<span id="upgDescSkill6">
+						Cost: 2 Logwall Points<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="upgSkill7" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButtonSkill7" onclick="buyUpgrade(7,'skill')" class="horizonalCentered upgButton" style="background-image:url('upgradeSkill7.png');"></button><br>
+					Independence Upgrade<br>
+					Disconnect bar 2 from bar 1.<br>
+					<span id="upgDescSkill7">
+						Cost: 3 Logwall Point<br>
+						Currently: Dependent
+					</span>
+				</div>
+			</div>
+			<button id="maxAllButtonSkill" onclick="maxAll('skill')" class="maxall">Max All</button>
+		</div>
 		<button id="saveMenuOpen" onclick="toggleSideMenu('save')" class="sideMenuOpen" style="bottom:0;">Saving</button>
 		<div id="saveMenu" class="sideMenu" style="bottom:0; height:120px; max-width:280px">
 			<button id="saveButton" onclick="save(false)">Save</button>
