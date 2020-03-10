@@ -232,7 +232,6 @@ button.dark {
 	align-self: center;
 	text-align: center;
 	font-size: 40px;
-	max-width: 0;
 	transition: flex 0.5s;
 }
 .maxall {
