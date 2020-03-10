@@ -3,9 +3,24 @@ var lastSave = 0;
 var game = newGame();
 
 const upgrade = {
-	basePrice: [1, 1, 2, 3, 1, 2, 3, 4],
-	priceGrowth: [6, 6, 11, 17.3, 6, 6, 6, 7],
-	limit: [Infinity,Infinity,Infinity,10,5,1,1,1]
+	normal: {
+		basePrice: [1, 1, 2, 3, 1, 2, 3, 4],
+		priceGrowth: [6, 6, 11, 17.3, 6, 6, 6, 7],
+		limit: [Infinity,Infinity,Infinity,10,8,1,1,1],
+		type: [0,0,0,0,1,1,1,1]
+	},
+	skill: {
+		basePrice: [1, 1, 2, 3, 1, 2, 3, 4],
+		priceGrowth: [6, 6, 11, 17.3, 6, 6, 6, 7],
+		limit: [Infinity,Infinity,Infinity,10,8,1,1,1],
+		type: [1,1,1,1,1,1,1,1]
+	},
+	auto: {
+		basePrice: [1, 1, 2, 3, 1, 2, 3, 4],
+		priceGrowth: [6, 6, 11, 17.3, 6, 6, 6, 7],
+		limit: [Infinity,Infinity,Infinity,10,8,1,1,1],
+		type: [1,1,1,1,1,1,1,1]
+	}
 };
 
 {
@@ -240,14 +255,14 @@ function redeemPoints(n) {
 	}
 }
 
-function getUpgPrice(n) {
-	return Math.floor(game.upgrade.normal[n] < upgrade.limit[n] ? upgrade.basePrice[n] * Math.pow(upgrade.priceGrowth[n], game.upgrade.normal[n]) : Infinity);
+function getUpgPrice(n, type) {
+	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]) : Infinity);
 }
 
-function buyUpgrade(n) {
-	if (game.points[Math.floor(n/4)] >= getUpgPrice(n) && game.upgrade.normal[n] < upgrade.limit[n] && getUpgPrice(n) != Infinity) {
-		game.points[Math.floor(n/4)] -= getUpgPrice(n);
-		game.upgrade.normal[n]++;
+function buyUpgrade(n, type = "normal") {
+	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n) && game.upgrade[type][n] < upgrade[type]limit[n] && getUpgPrice(n) != Infinity) {
+		game.points[upgrade[type].type[n]] -= getUpgPrice(n);
+		game.upgrade[type][n]++;
 		updateUpg();
 		updatePoints();
 	}
@@ -318,30 +333,48 @@ function updatePoints() {
 }
 
 function updateUpg() {
-	for (let i = 0; i < 8; i++) {
-		let newDesc = (getUpgPrice(i) != Infinity ? "Cost: "+format(getUpgPrice(i))+" "+(Math.floor(i/4)==0?"Time":"Log")+"wall Point"+pluralCheck(getUpgPrice(i)) : "Maxed Out")+"<br>Currently: ";
-		if (getUpgPrice(i) == Infinity) {
-			setTimeout(function(){
-				document.getElementById("upg"+i).classList.add("maxedUpg");
-				setTimeout(function(){document.getElementById("upg"+i).classList.add("hidden");},500);
-			},1000);
-		} else {
-			document.getElementById("upg"+i).classList.remove("maxedUpg");
-			document.getElementById("upg"+i).classList.remove("hidden");
+	for (let type in upgrade.keys()) {
+		for (let i = 0; i < 8; i++) {
+			let newDesc = (getUpgPrice(i, type) != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(Math.floor(i/4)==0?"Time":"Log")+"wall Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
+			if (getUpgPrice(i) == Infinity) {
+				setTimeout(function(){
+					document.getElementById("upg"+i).classList.add("maxedUpg");
+					setTimeout(function(){document.getElementById("upg"+i).classList.add("hidden");},500);
+				},1000);
+			} else {
+				document.getElementById("upg"+i).classList.remove("maxedUpg");
+				document.getElementById("upg"+i).classList.remove("hidden");
+			}
+			switch(type) {
+				default:
+				case "normal":
+					switch(i) {
+						case 0:
+							newDesc += "/" + format(Math.pow(2, game.upgrade.normal[i]));
+							break;
+						case 1:
+						case 2:
+							newDesc += format(Math.pow(2, game.upgrade.normal[i])) + "x";
+							break;
+						case 3:
+							newDesc += format(3 - 0.2 * game.upgrade.normal[i], 1) + "&#8730;";
+							break;
+						case 4:
+							newDesc += format(game.upgrade.normal[i]) + " Skill" + pluralCheck(game.upgrade.normal[i]);
+							break;
+						case 5:
+						case 6:
+						case 7:
+							newDesc += game.upgrade.normal[i]?"Unlocked":"Locked";
+					}
+					break;
+				case "skill":
+					break;
+				case "auto":
+			}
+			document.getElementById("upgDesc"+i).innerHTML = newDesc;
+			document.getElementById("upgButton"+i).classList[game.points[0] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
 		}
-		switch(i) {
-			case 0:
-				newDesc += "/" + format(Math.pow(2, game.upgrade.normal[0]));
-				break;
-			case 1:
-			case 2:
-				newDesc += format(Math.pow(2, game.upgrade.normal[i])) + "x";
-				break;
-			case 3:
-				newDesc += format(3 - 0.2 * game.upgrade.normal[3], 1) + "&#8730;";
-		}
-		document.getElementById("upgDesc"+i).innerHTML = newDesc;
-		document.getElementById("upgButton"+i).classList[game.points[0] >= getUpgPrice(i) ? "remove" : "add"]("disabledUpg");
 	}
 	for (let i = 0; i < 2; i++) {
 		document.getElementById("progressBar"+i).max = getBarLength(i) != Infinity ? getBarLength(i) : 1.79e308;
@@ -358,13 +391,13 @@ function updateUpg() {
 	}
 }
 
-function maxAll() {
+function maxAll(type = "normal") {
 	for (let i = game.currentScreen*4; i < (game.currentScreen+1)*4; i++) {
-		let totalAmount = Math.min(Math.floor(Math.log(game.points[0]*(upgrade.priceGrowth[i]-1)/getUpgPrice(i)+1)/Math.log(upgrade.priceGrowth[i])),upgrade.limit[i]);
-		let totalPrice = getUpgPrice(i)*(1-Math.pow(upgrade.priceGrowth[i],totalAmount))/(1-upgrade.priceGrowth[i]);
+		let totalAmount = Math.min(Math.floor(Math.log(game.points[0]*(upgrade[type].priceGrowth[i]-1)/getUpgPrice(i)+1)/Math.log(upgrade[type].priceGrowth[i])),upgrade[type].limit[i]);
+		let totalPrice = getUpgPrice(i)*(1-Math.pow(upgrade[type].priceGrowth[i],totalAmount))/(1-upgrade[type].priceGrowth[i]);
 		if (totalAmount >= 1) {
 			game.points[0] -= totalPrice;
-			game.upgrade.normal[i] += totalAmount;
+			game.upgrade[type][i] += totalAmount;
 			updateUpg();
 			updatePoints();
 		}
