@@ -255,7 +255,7 @@ function redeemPoints(n) {
 	}
 }
 
-function getUpgPrice(n, type) {
+function getUpgPrice(n, type = "normal") {
 	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]) : Infinity);
 }
 
