@@ -184,9 +184,9 @@ function toggleSideMenu(name) {
 function toggleTopMenu(name) {
 	if (document.getElementById(name+"Menu").style.height == "0px" ||
 	    document.getElementById(name+"Menu").style.height == "" ) {
-		document.getElementsByClassName("topMenu").forEach(function(menu.id){
-			document.getElementById(menu).style.height = document.getElementById(menu).style.maxHeight;
-			document.getElementById(menu+"Open").style.top = document.getElementById(menu).style.maxHeight;
+		document.getElementsByClassName("topMenu").forEach(function(menu){
+			document.getElementById(menu.id).style.height = document.getElementById(menu.id).style.maxHeight;
+			document.getElementById(menu.id+"Open").style.top = document.getElementById(menu.id).style.maxHeight;
 		})
 		document.getElementById(name+"Menu").style.height = document.getElementById(name+"Menu").style.maxHeight;
 		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.maxHeight;
