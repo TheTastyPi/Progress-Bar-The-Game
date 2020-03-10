@@ -226,7 +226,15 @@ function redeemPoints(n) {
 	if (game.progress[n] >= getBarLength(n)) {
 		game.points[n] += getPointGain(n);
 		game.lifetimePoints[n] += getPointGain(n);
-		game.progress[n] = game.progress[n] % getBarLength(n);
+		if (n == 1 && game.upgrade.normal[7]) {
+			game.progress[n] = game.progress[n] % getBarLength(n);
+		} else {
+			game.progress[0] = 0;
+			game.points[0] = 0;
+			for (let i = 0; i < 4; i++) {
+				game.upgrade.normal[i] = 0;
+			}
+		}
 		updatePoints();
 		updateUpg();
 	}
