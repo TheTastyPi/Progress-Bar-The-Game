@@ -22,8 +22,8 @@ const upgrade = {
 document.getElementById("upgMenu").style.width = document.getElementsByClassName("screen").length+"00%"
 
 function nextFrame(timeStamp) {
-	let sinceLastFrame = timeStamp - lastFrame;
-	let sinceLastSave = timeStamp - lastSave;
+	let sinceLastFrame = (timeStamp - lastFrame) * game.speed;
+	let sinceLastSave = (timeStamp - lastSave) * game.speed;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
 		game.lifetimeProgress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
@@ -266,10 +266,10 @@ function getBarLength(n) {
 function getBarSpeed(n) {
 	switch (n) {
 		case 0:
-			return Math.pow(2, game.upgrade.normal[1]) * game.speed;
+			return Math.pow(2, game.upgrade.normal[1]);
 			break;
 		case 1:
-			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10)) * game.speed;
+			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10));
 	}
 }
 
