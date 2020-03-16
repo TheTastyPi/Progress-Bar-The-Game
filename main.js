@@ -403,8 +403,8 @@ function updateUpg() {
 			document.getElementById("upgCleared"+i).style.flex = "0";
 		}
 	}
-	document.getElementById("skillMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
-	document.getElementById("autoMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
+	document.getElementById("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
+	document.getElementById("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
 }
 
 function updateSkills() {
