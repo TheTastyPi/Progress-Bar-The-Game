@@ -179,10 +179,10 @@ function toggleSideMenu(name) {
 	if (document.getElementById(name+"Menu").style.width == "0px" ||
 	    document.getElementById(name+"Menu").style.width == "" ) {
 		document.getElementById(name+"Menu").style.width = document.getElementById(name+"Menu").style.maxWidth;
-		document.getElementById(name+"MenuOpen").style[document.getElementById.classList.includes("left")?"left":"right"] = document.getElementById(name+"Menu").style.maxWidth;
+		document.getElementById(name+"MenuOpen").style[document.getElementById(name+"MenuOpen").classList.includes("left")?"left":"right"] = document.getElementById(name+"Menu").style.maxWidth;
 	} else {
 		document.getElementById(name+"Menu").style.width = "0px";
-		document.getElementById(name+"MenuOpen").style[document.getElementById.classList.includes("left")?"left":"right"] = "0px";
+		document.getElementById(name+"MenuOpen").style[document.getElementById(name+"MenuOpen").classList.includes("left")?"left":"right"] = "0px";
 	}
 }
 
