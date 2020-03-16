@@ -4,8 +4,8 @@ var game = newGame();
 
 const upgrade = {
 	normal: {
-		basePrice: [1, 1, 2, 3, 1, 2, 3, 4],
-		priceGrowth: [6, 6, 11, 17.3, 6, 6, 6, 7],
+		basePrice: [1, 1, 2, 3, 1, 2, 3, 10],
+		priceGrowth: [6, 6, 11, 17.3, 6, 1, 1, 1],
 		limit: [Infinity,Infinity,Infinity,10,8,1,1,1],
 		type: [0,0,0,0,1,1,1,1]
 	},
@@ -21,6 +21,11 @@ const upgrade = {
 		limit: [Infinity,Infinity,Infinity,10,8,1,1,1],
 		type: [1,1,1,1,1,1,1,1]
 	}
+};
+
+const skill = {
+	baseCost: [2],
+	sinDuration: 0,
 };
 
 {
@@ -238,6 +243,7 @@ function newGame() {
 			skill: [0,0,0,0,0,0,0,0],
 			auto: [0,0,0,0,0,0,0,0],
 		},
+		skillPoints: 0
 	};
 }
 
@@ -285,7 +291,7 @@ function getBarLength(n) {
 function getBarSpeed(n) {
 	switch (n) {
 		case 0:
-			return Math.pow(2, game.upgrade.normal[1]);
+			return Math.pow(2, game.upgrade.normal[1]) * (Math.sin(skill.sinDuration)*9+1));
 			break;
 		case 1:
 			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10));
@@ -295,7 +301,7 @@ function getBarSpeed(n) {
 function getPointGain(n) {
 	switch (n) {
 		case 0:
-			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]));
+			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]);
 			break;
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1));
@@ -310,6 +316,7 @@ function updateAll() {
 	updateProgress();
 	updatePoints();
 	updateUpg();
+	updateSkills()
 }
 
 function updateProgress() {
@@ -324,8 +331,8 @@ function updateProgress() {
 	document.getElementById("switchScreenLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	document.getElementById("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	if (game.upgrade.normal[7] == 0) {
-		game.progress[1] = Math.log10((game.progress[0] == Infinity ? 1.79e308 : game.progress[0]));
-		if (game.progress[0] == Infinity) game.lifetimeProgress[1] = Math.log10(1.79e308);
+		game.progress[1] = Math.log10(game.progress[0] == Infinity ? 1.79e308 : game.progress[0]);
+		if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress;
 	}
 }
 
@@ -363,7 +370,7 @@ function updateUpg() {
 						case 5:
 						case 6:
 						case 7:
-							newDesc += game.upgrade.normal[i]?"Unlocked":"Locked";
+							newDesc += (game.upgrade.normal[i]?"Unlocked":"Locked");
 					}
 					break;
 				case "skill":
@@ -396,6 +403,12 @@ function updateUpg() {
 			document.getElementById("upgCleared"+i).style.flex = "0";
 		}
 	}
+	document.getElementById("skillMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
+	document.getElementById("autoMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
+}
+
+function updateSkills() {
+	skill.sinDuration = (skill.sinDuration > 0 ? skill.sinDuration-1 : 0);
 }
 
 function maxAll(type = "normal") {
@@ -409,6 +422,20 @@ function maxAll(type = "normal") {
 			updatePoints();
 		}
 	}
+}
+
+function useSkill(n) {
+	if (game.skillPoints >= getSkillCost(n)) {
+		game.skillPoints -= getSkillCost(n);
+		switch(n) {
+			case 0:
+				
+		}
+	}
+}
+
+function getSkillCost(n) {
+	return skill.baseCost;
 }
 
 function isEven(n) {
