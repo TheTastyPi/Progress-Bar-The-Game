@@ -159,6 +159,11 @@ button.dark {
 .sideMenuOpen.dark {
 	background-color: rgba(255,255,255,0.7);
 }
+.sideMenuOpen.left {
+	border-radius: 0px 50px 50px 0px;
+	right: auto;
+	left: 0
+}
 .sideMenu {
 	display: flex;
 	flex-wrap: wrap;
@@ -174,6 +179,11 @@ button.dark {
 }
 .sideMenu.dark {
 	background-color: rgba(255,255,255,0.7);
+}
+.sideMenu.left {
+	left: 0;
+	right: auto;
+	
 }
 .sideMenu > * {
 	flex: 1 0 75px;	
