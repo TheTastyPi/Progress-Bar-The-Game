@@ -301,7 +301,7 @@ function getBarSpeed(n) {
 function getPointGain(n) {
 	switch (n) {
 		case 0:
-			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]);
+			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]));
 			break;
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1));
