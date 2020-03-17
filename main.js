@@ -387,7 +387,7 @@ function updateUpg() {
 				document.getElementById("upg"+i).classList.remove("maxedUpg");
 				document.getElementById("upg"+i).classList.remove("hidden");
 			}
-			document.getElementById((type == "normal"?"":type)+"upgButton"+i).classList[game.points[0] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
+			document.getElementById((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[0] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
 		}
 	}
 	for (let i = 0; i < 2; i++) {
