@@ -26,7 +26,8 @@ const upgrade = {
 const skill = {
 	cooldown: [10, 10, 20, 20],
 	timer: [0, 0, 0, 0],
-	isActive: [false, false, false, false]
+	isActive: [false, false, false, false],
+	sinDuration: 0
 };
 
 {
