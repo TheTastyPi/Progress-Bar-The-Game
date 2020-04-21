@@ -453,7 +453,50 @@ function format(n, toFixed = 0) {
 }
 
 function formatTime(ms) {
-	
+	let s = ms/1000;
+	let ds = (s % 60).toFixed(2);
+	let m = Math.floor(s/60);
+	let dm = m % 60;
+	let h = Math.floor(m/60);
+	let dh = h % 24;
+	let d = Math.floor(h/24);
+	let dd = d % 30.43685;
+	let mo = Math.floor(d/30.43685);
+	let dmo = mo % 12;
+	let dy = Math.floor(mo/365.2422);
+	let time = "";
+	let seg = 0;
+	if (s < 60) {
+		time = ds + " second" + pluralCheck(ds);
+		seg++;
+	} else {
+		time = "and " + ds + " second" + pluralCheck(ds);
+		seg++;
+	}
+	if (dm >= 1) {
+		time = dm + " minute" + pluralCheck(dm) + ", " + time;
+		seg++;
+	}
+	if (dh >= 1) {
+		time = dh + " hour" + pluralCheck(dh) + ", " + time;
+		seg++;
+	}
+	if (dd >= 1) {
+		time = dh + " day" + pluralCheck(dd) + ", " + time;
+		seg++;
+	}
+	if (dmo >= 1) {
+		time = dh + " month" + pluralCheck(dmo) + ", " + time;
+		seg++;
+	}
+	if (dy >= 1) {
+		time = dh + " year" + pluralCheck(dy) + ", " + time;
+		seg++;
+	}
+	if (seg == 2) {
+		time = time.replace(",", "");
+	}
+	return time;
 }
 
 load();
