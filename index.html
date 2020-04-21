@@ -262,7 +262,7 @@
 		</div>
 		<button id="skillMenuOpen" onclick="toggleSideMenu('skill')" class="sideMenuOpen left" style="bottom:0; height:180px;">Skills</button>
 		<div id="skillMenu" class="sideMenu left" style="bottom:0px; height:180px; max-width:360px;">
-			<div style="min-width:360px; text-align:center; font-size:20px; min-height:40px; position:relative"><div id="skillPoints" class="centered" style="width:360px">You have 0 skill points.</div></div>
+			<canvas id="skillCooldown"></canvas>
 			<button id="skill0" onclick="useSkill(0)">sine</button>
 			<button id="skill1" onclick="useSkill(1)">exp</button>
 			<button id="skill2" onclick="useSkill(2)">accel</button>
