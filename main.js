@@ -425,7 +425,7 @@ function updateSkills() {
 	let percent = (1 - Math.sin(skill.sinDuration / 250)) / 2;
 	line.style.top = percent * 100 + "%";
 	percent = (1 - Math.pow(Math.sin(skill.sinDuration / 250),0.2)) / 2
-	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*1-percent) + ",0)";
+	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
 }
 
 function maxAll(type = "normal") {
