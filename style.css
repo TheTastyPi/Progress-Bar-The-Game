@@ -69,18 +69,6 @@ button.dark {
 	right: 50%;
 	transform: translate(50%, -50%);
 }
-.centeredButSlightlyLower {
-	position: absolute;
-	top: 50%;
-	right: 50%;
-	transform: translate(50%, calc(-50% + 200px));
-}
-.centeredButSlightlyHigher {
-	position: absolute;
-	top: 50%;
-	right: 50%;
-	transform: translate(50%, calc(-50% - 150px));
-}
 .screen {
 	color: #222222;
 	background-color: #DDDDDD;
@@ -143,6 +131,43 @@ button.dark {
 .label.dark {
 	background-color: rgba(0,0,0,0.2);
 	color: #DDDDDD;
+}
+.redeemButton {
+	animation-name: redeemButtonInit;
+	animation-duration: 1s;
+	height: 200px;
+	width: 300px;
+	font-size: 40px;
+	transform: translate(50%, calc(-50% + 200px));
+}
+.pointDisplay {
+	animation-name: pointDisplayInit;
+	animation-duration: 1s;
+	width: 100%;
+	text-align: center;
+	font-size: 40px;
+	transform: translate(50%, calc(-50% - 150px));
+}
+.sinGraph {
+	transform: translate(calc(50% - 150px), calc(-50% + 200px));
+	width: 100px;
+	height: 200px;
+	background-color: #DDDDDD;
+	border: #222222
+}
+.sinGraph.dark {
+	background-color: #222222;
+	border: #DDDDDD;
+}
+.sinGraphLine {
+	position: absolute;
+	width: 100%;
+	height: 4px;
+	top: 50%;
+	background-color: #222222;
+}
+.sinGraphLine.dark {
+	background-color: #DDDDDD;
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
