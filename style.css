@@ -160,9 +160,10 @@ button.dark {
 	border: 4px solid #DDDDDD;
 }
 .sinGraphLine {
+	transform: translate(0, -50%);
 	position: absolute;
 	width: 100%;
-	height: 4px;
+	height: 3px;
 	top: 50%;
 	background-color: #222222;
 }
