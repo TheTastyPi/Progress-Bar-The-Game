@@ -442,7 +442,7 @@ function maxAll(type = "normal") {
 }
 
 function useSkill(n) {
-	if (skill.timer[n] == 0) {
+	if (skill.timer[n] <= 0) {
 		skill.timer[n] = skill.cooldown[n];
 		skill.isActive[n] = true;
 	}
