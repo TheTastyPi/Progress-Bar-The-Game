@@ -24,10 +24,7 @@ const upgrade = {
 };
 
 const skill = {
-	cooldown: [10, 10, 20, 20],
-	timer: [0, 0, 0, 0],
-	isActive: [false, false, false, false],
-	sinDuration: 0
+	cooldown: [10*60, 10*60, 20*60, 20*60]
 };
 
 {
@@ -51,13 +48,13 @@ function nextFrame(timeStamp) {
 		game.lifetimeProgress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
 		game.progress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
 		for (let i = 0; i < 4; i++) {
-			if (skill.timer[i] > 0) skill.timer[i] -= sinceLastFrame;
+			if (game.skill.timer[i] > 0) game.skill.timer[i] -= sinceLastFrame;
 		}
-		if (skill.isActive[0]) {
-			skill.sinDuration += sinceLastFrame;
-			if (skill.sinDuration >= 60000) {
-				skill.sinDuration = 0;
-				skill.isActive[0] = false;
+		if (game.skill.isActive[0]) {
+			game.skill.sinDuration += sinceLastFrame;
+			if (game.skill.sinDuration >= 60000) {
+				game.skill.sinDuration = 0;
+				game.skill.isActive[0] = false;
 			}
 			updateSkills();
 		}
@@ -255,7 +252,12 @@ function newGame() {
 		upgrade: {
 			normal: [0,0,0,0,0,0,0,0],
 			skill: [0,0,0,0,0,0,0,0],
-			auto: [0,0,0,0,0,0,0,0],
+			auto: [0,0,0,0,0,0,0,0]
+		},
+		skill: {
+			timer: [0, 0, 0, 0],
+			isActive: [false, false, false, false],
+			sinDuration: 0
 		}
 	};
 }
@@ -314,7 +316,7 @@ function getBarSpeed(n) {
 function getPointGain(n) {
 	switch (n) {
 		case 0:
-			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]) * (Math.sin(skill.sinDuration / 250)*9+1));
+			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]) * (Math.sin(game.skill.sinDuration / 250)*9+1));
 			break;
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1));
@@ -422,9 +424,9 @@ function updateUpg() {
 
 function updateSkills() {
 	let line = document.getElementById("sinGraphLine");
-	let percent = (1 - Math.sin(skill.sinDuration / 250)) / 2;
+	let percent = (1 - Math.sin(game.skill.sinDuration / 250)) / 2;
 	line.style.top = percent * 100 + "%";
-	percent = (1 - Math.cbrt(Math.cbrt(Math.sin(skill.sinDuration / 250)))) / 2
+	percent = (1 - Math.cbrt(Math.cbrt(Math.sin(game.skill.sinDuration / 250)))) / 2
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
 }
 
@@ -442,9 +444,9 @@ function maxAll(type = "normal") {
 }
 
 function useSkill(n) {
-	if (skill.timer[n] <= 0) {
-		skill.timer[n] = skill.cooldown[n];
-		skill.isActive[n] = true;
+	if (game.skill.timer[n] <= 0) {
+		game.skill.timer[n] = skill.cooldown[n];
+		game.skill.isActive[n] = true;
 	}
 }
 
