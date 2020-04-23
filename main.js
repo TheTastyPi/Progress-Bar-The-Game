@@ -423,6 +423,9 @@ function updateUpg() {
 }
 
 function updateSkills() {
+	for (let i = 0; i < 4; i++) {
+		document.getElementById("skill"+i).classList.[game.skill.timer[i]<=0?"remove":"add"]("disabledUpg");
+	}
 	let line = document.getElementById("sinGraphLine");
 	let percent = (1 - Math.sin(game.skill.sinDuration / 250)) / 2;
 	line.style.top = percent * 100 + "%";
