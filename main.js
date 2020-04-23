@@ -463,7 +463,7 @@ function format(n, toFixed = 0) {
 	return n.toPrecision(5).replace("+","");
 }
 
-function formatTime(ms) {
+function formatTime(ms, word=true) {
 	let s = ms/1000;
 	let ds = (s % 60).toFixed(2);
 	let m = Math.floor(s/60);
@@ -476,38 +476,34 @@ function formatTime(ms) {
 	let dmo = mo % 12;
 	let dy = Math.floor(mo/365.2422);
 	let time = "";
-	let seg = 0;
-	if (s < 60) {
-		time = ds + " second" + pluralCheck(ds);
-		seg++;
+	if (word) {
+		if (s < 60) {
+			time = ds + " second" + pluralCheck(ds);
+		} else {
+			time = "and " + ds.toFixed(0) + " second" + pluralCheck(ds);
+		}
+		if (dm >= 1) time = dm + " minute" + pluralCheck(dm) + ", " + time;
+		if (dh >= 1) time = dh + " hour" + pluralCheck(dh) + ", " + time;
+		if (dd >= 1) time = dh + " day" + pluralCheck(dd) + ", " + time;
+		if (dmo >= 1) time = dh + " month" + pluralCheck(dmo) + ", " + time;
+		if (dy >= 1) time = dh + " year" + pluralCheck(dy) + ", " + time;
+		if (m < 60) {
+			time = time.replace(",", "");
+		}
+		return time;
 	} else {
-		time = "and " + ds + " second" + pluralCheck(ds);
-		seg++;
+		if (s < 60) {
+			time = ds;
+		} else {
+			time = ds.toFixed(0);
+		}
+		if (dm >= 1) time = dm + ":" + time;
+		if (dh >= 1) time = dh + ":" + time;
+		if (dd >= 1) time = dh + ":" + time;
+		if (dmo >= 1) time = dh + ":" + time;
+		if (dy >= 1) time = dh + ":" + time;
+		return time;
 	}
-	if (dm >= 1) {
-		time = dm + " minute" + pluralCheck(dm) + ", " + time;
-		seg++;
-	}
-	if (dh >= 1) {
-		time = dh + " hour" + pluralCheck(dh) + ", " + time;
-		seg++;
-	}
-	if (dd >= 1) {
-		time = dh + " day" + pluralCheck(dd) + ", " + time;
-		seg++;
-	}
-	if (dmo >= 1) {
-		time = dh + " month" + pluralCheck(dmo) + ", " + time;
-		seg++;
-	}
-	if (dy >= 1) {
-		time = dh + " year" + pluralCheck(dy) + ", " + time;
-		seg++;
-	}
-	if (seg == 2) {
-		time = time.replace(",", "");
-	}
-	return time;
 }
 
 load();
