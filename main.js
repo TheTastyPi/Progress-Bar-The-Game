@@ -424,7 +424,8 @@ function updateSkills() {
 	let line = document.getElementById("sinGraphLine");
 	let percent = (1 - Math.sin(skill.sinDuration / 250)) / 2;
 	line.style.top = percent * 100 + "%";
-	line.style.backgroundColor = "rgb(" + (255*Math.pow(percent,0.2)) + "," + (255*Math.pow(1-percent,0.2)) + ",0)";
+	percent = (1 - Math.pow(Math.sin(skill.sinDuration / 250),0.2)) / 2
+	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*1-percent) + ",0)";
 }
 
 function maxAll(type = "normal") {
