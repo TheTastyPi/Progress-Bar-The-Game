@@ -149,15 +149,15 @@ button.dark {
 	transform: translate(50%, calc(-50% - 150px));
 }
 .sinGraph {
-	transform: translate(calc(50% - 150px), calc(-50% + 200px));
+	transform: translate(calc(50% - 250px), calc(-50% + 200px));
 	width: 100px;
 	height: 200px;
 	background-color: #DDDDDD;
-	border: #222222
+	border: 4px solid #222222
 }
 .sinGraph.dark {
 	background-color: #222222;
-	border: #DDDDDD;
+	border: 4px solid #DDDDDD;
 }
 .sinGraphLine {
 	position: absolute;
