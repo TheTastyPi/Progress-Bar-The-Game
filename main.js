@@ -420,7 +420,10 @@ function updateUpg() {
 }
 
 function updateSkills() {
-	
+	let line = document.getElementById("sinGraphLine");
+	let percent = (1 - Math.sin(skill.sinDuration)) / 2;
+	line.style.top = percent * 100 + "%";
+	line.style.backgroundColor = "rgb(" + 255*percent + "," + 255-255*percent + "0)";
 }
 
 function maxAll(type = "normal") {
