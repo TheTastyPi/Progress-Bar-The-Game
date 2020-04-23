@@ -59,6 +59,7 @@ function nextFrame(timeStamp) {
 				skill.sinDuration = 0;
 				skill.isActive[0] = false;
 			}
+			updateSkill();
 		}
 		updateProgress();
 	}
