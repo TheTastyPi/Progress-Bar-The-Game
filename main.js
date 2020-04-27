@@ -413,8 +413,10 @@ function updateUpg() {
 		   getUpgPrice(i*4+1) == Infinity &&
 		   getUpgPrice(i*4+2) == Infinity &&
 		   getUpgPrice(i*4+3) == Infinity) {
-			document.getElementById("upgCleared"+i).classList.remove("hidden");
-			document.getElementById("upgCleared"+i).style.flex = "1";
+			setTimeout(function(){
+				document.getElementById("upgCleared"+i).classList.remove("hidden");
+				document.getElementById("upgCleared"+i).style.flex = "1";
+			},1000);
 		} else {
 			document.getElementById("upgCleared"+i).classList.add("hidden");
 			document.getElementById("upgCleared"+i).style.flex = "0";
