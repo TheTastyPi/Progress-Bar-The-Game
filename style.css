@@ -5,7 +5,6 @@ progress {
 	-webkit-appearance: none;
 	border: 5px solid #222222;
 	background: white;
-	transition: 0.5s;
 }
 progress.dark {
 	border: 5px solid #DDDDDD;
@@ -13,13 +12,9 @@ progress.dark {
 }
 progress::-webkit-progress-bar {
 	background: white;
-	transition: 0.1s;
 }
 progress.dark::-webkit-progress-bar {
 	background: black;
-}
-progress::-webkit-progress-value {
-	transition: 0.1s;
 }
 #progressBar0 {color: #6666AA;}
 #progressBar0.dark {color: #9999EE;}
