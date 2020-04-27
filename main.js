@@ -48,7 +48,10 @@ function nextFrame(timeStamp) {
 		game.lifetimeProgress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
 		game.progress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
 		for (let i = 0; i < 4; i++) {
-			if (game.skill.timer[i] > 0) game.skill.timer[i] -= sinceLastFrame;
+			if (game.skill.timer[i] > 0) {
+				game.skill.timer[i] -= sinceLastFrame;
+				updateSkills();
+			}
 		}
 		if (game.skill.isActive[0]) {
 			document.getElementById("sinGraph").style.opacity = 1;
@@ -57,7 +60,6 @@ function nextFrame(timeStamp) {
 				document.getElementById("sinGraph").style.opacity = 0;
 				game.skill.sinDuration = 0;
 				game.skill.isActive[0] = false;
-				updateSkills();
 			}
 			updateSkills();
 		}
