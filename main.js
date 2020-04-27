@@ -57,6 +57,7 @@ function nextFrame(timeStamp) {
 				document.getElementById("sinGraph").style.opacity = 0;
 				game.skill.sinDuration = 0;
 				game.skill.isActive[0] = false;
+				updateSkills();
 			}
 			updateSkills();
 		}
