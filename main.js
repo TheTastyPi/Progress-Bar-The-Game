@@ -416,7 +416,7 @@ function updateUpg() {
 			setTimeout(function(){
 				document.getElementById("upgCleared"+i).classList.remove("hidden");
 				document.getElementById("upgCleared"+i).style.flex = "1";
-			},1000);
+			},1500);
 		} else {
 			document.getElementById("upgCleared"+i).classList.add("hidden");
 			document.getElementById("upgCleared"+i).style.flex = "0";
