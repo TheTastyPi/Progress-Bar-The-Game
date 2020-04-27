@@ -263,6 +263,7 @@ button.dark {
 	flex: 0 0 0px;
 }
 .upgCleared {
+	flex: 0;
 	align-self: center;
 	text-align: center;
 	font-size: 40px;
