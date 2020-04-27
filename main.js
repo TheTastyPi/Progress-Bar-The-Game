@@ -51,8 +51,10 @@ function nextFrame(timeStamp) {
 			if (game.skill.timer[i] > 0) game.skill.timer[i] -= sinceLastFrame;
 		}
 		if (game.skill.isActive[0]) {
+			document.getElementById("sinGraph").style.opacity = 1;
 			game.skill.sinDuration += sinceLastFrame;
 			if (game.skill.sinDuration >= 60000) {
+				document.getElementById("sinGraph").style.opacity = 0;
 				game.skill.sinDuration = 0;
 				game.skill.isActive[0] = false;
 			}
