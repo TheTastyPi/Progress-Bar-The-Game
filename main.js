@@ -289,15 +289,6 @@ function getUpgPrice(n, type = "normal") {
 	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]) : Infinity);
 }
 
-function buyUpgrade(n, type = "normal") {
-	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n) && game.upgrade[type][n] < upgrade[type].limit[n] && getUpgPrice(n) != Infinity) {
-		game.points[upgrade[type].type[n]] -= getUpgPrice(n);
-		game.upgrade[type][n]++;
-		updateUpg();
-		updatePoints();
-	}
-}
-
 function getBarLength(n) {
 	switch (n) {
 		case 0:
@@ -431,13 +422,22 @@ function updateUpg() {
 
 function updateSkills() {
 	for (let i = 0; i < 4; i++) {
-		document.getElementById("skill"+i).classList[game.skill.timer[i]<=0?"remove":"add"]("disabledUpg");
+		document.getElementById("skill"+i).classList[game.skill.timer[i]<=0 && game.upgrade.normal[4] > i?"remove":"add"]("disabledUpg");
 	}
 	let line = document.getElementById("sinGraphLine");
 	let percent = (1 - Math.sin(game.skill.sinDuration / 250)) / 2;
 	line.style.top = percent * 100 + "%";
 	percent = (1 - Math.cbrt(Math.cbrt(Math.sin(game.skill.sinDuration / 250)))) / 2
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
+}
+
+function buyUpgrade(n, type = "normal") {
+	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n) && game.upgrade[type][n] < upgrade[type].limit[n] && getUpgPrice(n) != Infinity) {
+		game.points[upgrade[type].type[n]] -= getUpgPrice(n);
+		game.upgrade[type][n]++;
+		updateUpg();
+		updatePoints();
+	}
 }
 
 function maxAll(type = "normal") {
@@ -454,7 +454,7 @@ function maxAll(type = "normal") {
 }
 
 function useSkill(n) {
-	if (game.skill.timer[n] <= 0) {
+	if (game.skill.timer[n] <= 0 && game.upgrade.normal[4] > n) {
 		game.skill.timer[n] = skill.cooldown[n];
 		game.skill.isActive[n] = true;
 	}
@@ -494,16 +494,10 @@ function formatTime(ms, word=true) {
 		if (dd >= 1) time = dh + " day" + pluralCheck(dd) + ", " + time;
 		if (dmo >= 1) time = dh + " month" + pluralCheck(dmo) + ", " + time;
 		if (dy >= 1) time = dh + " year" + pluralCheck(dy) + ", " + time;
-		if (m < 60) {
-			time = time.replace(",", "");
-		}
+		if (m < 60) time = time.replace(",", "");
 		return time;
 	} else {
-		if (s < 60) {
-			time = ds;
-		} else {
-			time = ds.toFixed(0);
-		}
+		time = s < 60 ? ds : ds.toFixed(0);
 		if (dm >= 1) time = dm + ":" + time;
 		if (dh >= 1) time = dh + ":" + time;
 		if (dd >= 1) time = dh + ":" + time;
