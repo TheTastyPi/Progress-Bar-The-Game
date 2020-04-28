@@ -283,7 +283,7 @@ button.dark {
 	height: 80px;
 	background-size: contain;
 }
-.tooltiptext {
+.tooltipText {
   visibility: hidden;
   width: 120px;
   background-color: #555;
@@ -299,7 +299,7 @@ button.dark {
   opacity: 0;
   transition: opacity 0.3s;
 }
-.tooltiptext::after {
+.tooltipText::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -309,7 +309,7 @@ button.dark {
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltipText {
   visibility: visible;
   opacity: 1;
 }
