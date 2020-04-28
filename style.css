@@ -228,7 +228,6 @@ button.dark {
 .topMenu {
 	display: flex;
 	flex-wrap: wrap;
-	height: 0;
 	width: 100%;
 	position: fixed;
 	z-index: 1;
@@ -299,6 +298,10 @@ button.dark {
 	margin-left: -45px;
 	opacity: 0;
 	transition: opacity 0.5s;
+}
+.tooltipText.dark {
+	background-color: #222222;
+	color: #DDDDDD;
 }
 .tooltipText::after {
 	content: "";
