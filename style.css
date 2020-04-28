@@ -283,6 +283,10 @@ button.dark {
 	height: 80px;
 	background-size: contain;
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
 .tooltipText {
   visibility: hidden;
   width: 90px;
@@ -295,7 +299,7 @@ button.dark {
   z-index: 1;
   bottom: 125%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -45px;
   opacity: 0;
 }
 .tooltipText::after {
