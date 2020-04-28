@@ -285,9 +285,9 @@ button.dark {
 }
 .tooltipText {
   visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
+  width: 90px;
+  background-color: #DDDDDD;
+  color: #222222;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
@@ -297,7 +297,6 @@ button.dark {
   left: 50%;
   margin-left: -60px;
   opacity: 0;
-  transition: opacity 0.3s;
 }
 .tooltipText::after {
   content: "";
@@ -307,7 +306,7 @@ button.dark {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: #DDDDDD transparent transparent transparent;
 }
 .tooltip:hover .tooltipText {
   visibility: visible;
