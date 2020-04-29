@@ -205,7 +205,6 @@ button.dark {
 .sideMenu.left {
 	left: auto;
 	right: 100%;
-	
 }
 .sideMenu > * {
 	flex: 1 0 75px;	
