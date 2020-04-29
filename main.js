@@ -436,7 +436,6 @@ function updateSkills() {
 	let line = document.getElementById("sinGraphLine");
 	let percent = (1 - Math.sin(game.skill.sinDuration / 250)) / 2;
 	line.style.top = percent * 100 + "%";
-	percent = (1 - Math.cbrt(Math.cbrt(Math.sin(game.skill.sinDuration / 250)))) / 2
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
 }
 
