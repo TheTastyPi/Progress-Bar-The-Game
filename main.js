@@ -40,6 +40,11 @@ const skill = {
 
 document.getElementById("upgMenu").style.width = document.getElementsByClassName("screen").length+"00%"
 
+toggleSideMenu("theme");
+toggleSideMenu("theme");
+toggleTopMenu("upg");
+toggleTopMenu("upg");
+
 function nextFrame(timeStamp) {
 	let sinceLastFrame = (timeStamp - lastFrame) * game.speed;
 	let sinceLastSave = (timeStamp - lastSave) * game.speed;
