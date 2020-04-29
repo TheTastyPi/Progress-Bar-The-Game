@@ -267,15 +267,33 @@
 		<button id="skillMenuOpen" onclick="toggleSideMenu('skill')" class="sideMenuOpen left" style="bottom:0; height:180px;">Skills</button>
 		<div id="skillMenu" class="sideMenu left" style="bottom:0px; height:180px; width:180px;">
 			<button id="skill0" class="tooltip" onclick="useSkill(0)">
-				<span class="tooltipText" style="width:180px">
+				<span class="tooltipText">
 					"Sine"<br>
-					Gives a multiplier oscillating between x10 and x-8 for 1 minute.<br>
+					Gives a point gain multiplier oscillating between x10 and x-8 for 1 minute.<br>
 					Cooldown: 5 minutes
 				</span>
 			</button>
-			<button id="skill1" onclick="useSkill(1)">exp</button>
-			<button id="skill2" onclick="useSkill(2)">accel</button>
-			<button id="skill3" onclick="useSkill(3)">+-</button>
+			<button id="skill1" onclick="useSkill(1)">
+				<span class="tooltipText">
+					"Exp"<br>
+					Gives an exponentially increasing bar speed multiplier for 1 minute.<br>
+					Cooldown: 5 minutes
+				</span>
+			</button>
+			<button id="skill2" onclick="useSkill(2)">
+				<span class="tooltipText">
+					"Accel"<br>
+					Game speed starts to accelerate slowly for 1 minute.<br>
+					Cooldown: 5 minutes
+				</span>
+			</button>
+			<button id="skill3" onclick="useSkill(3)">
+				<span class="tooltipText">
+					"-1+1"<br>
+					Redeeming points boosts bar speed for 1 minute.<br>
+					Cooldown: 5 minutes
+				</span>
+			</button>
 		</div>
 		<button id="saveMenuOpen" onclick="toggleSideMenu('save')" class="sideMenuOpen" style="bottom:0;">Saving</button>
 		<div id="saveMenu" class="sideMenu" style="bottom:0; height:120px; width:280px">
