@@ -227,7 +227,7 @@ button.dark {
 .topMenu {
 	display: flex;
 	flex-wrap: wrap;
-	width: 100%;
+	width: 1000%;
 	position: fixed;
 	z-index: 1;
 	top: -200px;
