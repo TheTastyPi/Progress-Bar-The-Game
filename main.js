@@ -36,8 +36,11 @@ const skill = {
 		upgCleared.classList.add("hidden");
 		upgCleared.id = "upgCleared"+i;
 	}
-	for (let menu of document.getElementsByClassName("topMenu")) {
-		menu.style.width = document.getElementsByClassName("screen").length+"00%"
+	for (let topMenu of document.getElementsByClassName("topMenu")) {
+		topMenu.style.width = document.getElementsByClassName("screen").length+"00%";
+	}
+	for (let leftMenu of document.getElementsByClassName("left")) {
+		leftMenu.style.left = "-"+leftMenu.style.width;
 	}
 }
 
