@@ -48,7 +48,7 @@ button.dark {
 	background-color: #999999;
 }
 .disabledUpg {
-	filter: grayscale();
+	filter: grayscale(50%);
 	box-shadow: 0 0 10px red inset;
 }
 .hidden {
@@ -310,6 +310,9 @@ button.dark {
 	margin-left: -5px;
 	border-width: 5px;
 	border-style: solid;
+	border-color: #222222 transparent transparent transparent;
+}
+.tooltipText::after.dark {
 	border-color: #DDDDDD transparent transparent transparent;
 }
 .tooltip:hover .tooltipText {
