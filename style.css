@@ -163,7 +163,6 @@ button.dark {
 	height: 3px;
 	top: 50%;
 	background-color: #222222;
-	transition: background-color 0.5s
 }
 .sinGraphLine.dark {
 	background-color: #DDDDDD;
