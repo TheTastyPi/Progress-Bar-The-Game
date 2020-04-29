@@ -218,9 +218,11 @@ function toggleTopMenu(name) {
 		}
 		document.getElementById(name+"Menu").style.top = "0";
 		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
+		document.getElementById(name+"Menu").classList.add("isOpen");
 	} else {
 		document.getElementById(name+"Menu").style.top = "-"+document.getElementById(name+"Menu").style.height;
 		document.getElementById(name+"MenuOpen").style.top = "0";
+		document.getElementById(name+"Menu").classList.remove("isOpen");
 	}
 }
 
