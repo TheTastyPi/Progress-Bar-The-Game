@@ -283,7 +283,7 @@ button.dark {
 }
 .tooltipText {
 	visibility: hidden;
-	width: 90px;
+	width: 180px;
 	background-color: #222222;
 	color: #DDDDDD;
 	text-align: center;
