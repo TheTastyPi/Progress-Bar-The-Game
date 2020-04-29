@@ -48,7 +48,7 @@ button.dark {
 	background-color: #999999;
 }
 .disabledUpg {
-	filter: brightness(50%);
+	filter: brightness(75%);
 	box-shadow: 0 0 10px red inset;
 }
 .hidden {
