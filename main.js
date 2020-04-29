@@ -36,14 +36,10 @@ const skill = {
 		upgCleared.classList.add("hidden");
 		upgCleared.id = "upgCleared"+i;
 	}
+	for (let menu of document.getElementsByClassName("topMenu")) {
+		menu.style.width = document.getElementsByClassName("screen").length+"00%"
+	}
 }
-
-document.getElementById("upgMenu").style.width = document.getElementsByClassName("screen").length+"00%"
-
-toggleSideMenu("theme");
-toggleSideMenu("theme");
-toggleTopMenu("upg");
-toggleTopMenu("upg");
 
 function nextFrame(timeStamp) {
 	let sinceLastFrame = (timeStamp - lastFrame) * game.speed;
