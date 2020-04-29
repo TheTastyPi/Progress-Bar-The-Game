@@ -194,13 +194,11 @@ function changeAutoSaveInterval() {
 function toggleSideMenu(name) {
 	let isLeft = document.getElementById(name+"MenuOpen").classList.contains("left");
 	if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
-		document.getElementById(name+"Menu").style[isLeft?"right":"left"] = "auto";
-		document.getElementById(name+"Menu").style[isLeft?"left":"right"] = "0";
+		document.getElementById(name+"Menu").style.left = isLeft?"0":"calc(100% - "+document.getElementById(name+"Menu").style.width+")";
 		document.getElementById(name+"MenuOpen").style[isLeft?"left":"right"] = document.getElementById(name+"Menu").style.width;
 		document.getElementById(name+"Menu").classList.add("isOpen");
 	} else {
-		document.getElementById(name+"Menu").style[isLeft?"right":"left"] = "100%";
-		document.getElementById(name+"Menu").style[isLeft?"left":"right"] = "auto";
+		document.getElementById(name+"Menu").style.left = isLeft?"-"+document.getElementById(name+"Menu").style.width:"100%";
 		document.getElementById(name+"MenuOpen").style[isLeft?"left":"right"] = "0";
 		document.getElementById(name+"Menu").classList.remove("isOpen");
 	}
@@ -209,18 +207,15 @@ function toggleSideMenu(name) {
 function toggleTopMenu(name) {
 	if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
-			document.getElementById(name+"Menu").style.bottom = "100%";
-			document.getElementById(name+"Menu").style.top = "auto";
+			menu.style.top = "-"+document.getElementById(name+"Menu").style.height;
 		}
-		for (let menu of document.getElementsByClassName("topMenu")) {
-			document.getElementById(name+"MenuOpen").style.top = "0";
+		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
+			menuOpen.style.top = "0";
 		}
 		document.getElementById(name+"Menu").style.top = "0";
-		document.getElementById(name+"Menu").style.bottom = "auto";
 		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
 	} else {
-		document.getElementById(name+"Menu").style.top = "auto";
-		document.getElementById(name+"Menu").style.bottom = "100%";
+		document.getElementById(name+"Menu").style.top = "-"+document.getElementById(name+"Menu").style.height;
 		document.getElementById(name+"MenuOpen").style.top = "0";
 	}
 }
