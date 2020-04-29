@@ -150,7 +150,6 @@ button.dark {
 	height: 200px;
 	background-color: #DDDDDD;
 	border: 4px solid #222222;
-	transition: 0.5s;
 	opacity: 0;
 }
 .sinGraph.dark {
