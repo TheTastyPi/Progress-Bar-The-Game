@@ -312,7 +312,7 @@ button.dark {
 	border-style: solid;
 	border-color: #222222 transparent transparent transparent;
 }
-.tooltipText::after.dark {
+.tooltipText.dark::after {
 	border-color: #DDDDDD transparent transparent transparent;
 }
 .tooltip:hover .tooltipText {
