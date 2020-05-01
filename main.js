@@ -433,8 +433,10 @@ function updateSkills() {
 		document.getElementById("skill"+i).classList[game.skill.timer[i]<=0 && game.upgrade.normal[4] > i?"remove":"add"]("disabledUpg");
 		if (game.skill.durationTimer[i]>0) {
 			document.getElementById("skill"+i).innerHTML = formatTime(game.skill.durationTimer[i]);
+			document.getElementById("skill"+i).style.color = "green";
 		} else if (game.skill.timer[i]>0) {
 			document.getElementById("skill"+i).innerHTML = formatTime(game.skill.timer[i]);
+			document.getElementById("skill"+i).style.color = "red";
 		}
 	}
 	let line = document.getElementById("sinGraphLine");
