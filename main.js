@@ -511,7 +511,7 @@ function formatTime(ms, word=true) {
 		if (m < 60) time = time.replace(",", "");
 		return time;
 	} else {
-		time = s < 60 ? ds.tofixed(2) : ds.toFixed(0);
+		time = s < 60 ? ds.toFixed(2) : ds.toFixed(0);
 		if (dm >= 1) time = dm + ":" + time;
 		if (dh >= 1) time = dh + ":" + time;
 		if (dd >= 1) time = dh + ":" + time;
