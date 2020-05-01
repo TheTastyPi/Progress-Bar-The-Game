@@ -486,7 +486,7 @@ function format(n, toFixed = 0) {
 
 function formatTime(ms, word=true) {
 	let s = ms/1000;
-	let ds = (s % 60).toFixed(2);
+	let ds = s % 60;
 	let m = Math.floor(s/60);
 	let dm = m % 60;
 	let h = Math.floor(m/60);
@@ -499,7 +499,7 @@ function formatTime(ms, word=true) {
 	let time = "";
 	if (word) {
 		if (s < 60) {
-			time = ds + " second" + pluralCheck(ds);
+			time = ds.toFixed(2) + " second" + pluralCheck(ds);
 		} else {
 			time = "and " + ds.toFixed(0) + " second" + pluralCheck(ds);
 		}
@@ -511,7 +511,7 @@ function formatTime(ms, word=true) {
 		if (m < 60) time = time.replace(",", "");
 		return time;
 	} else {
-		time = s < 60 ? ds : ds.toFixed(0);
+		time = s < 60 ? ds.tofixed(2) : ds.toFixed(0);
 		if (dm >= 1) time = dm + ":" + time;
 		if (dh >= 1) time = dh + ":" + time;
 		if (dd >= 1) time = dh + ":" + time;
