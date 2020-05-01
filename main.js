@@ -24,7 +24,8 @@ const upgrade = {
 };
 
 const skill = {
-	cooldown: [10*60*1000, 10*60*1000, 20*60*1000, 20*60*1000]
+	cooldown: [10*60*1000, 10*60*1000, 20*60*1000, 20*60*1000],
+	duration: [60*1000, 60*1000, 60*1000, 60*1000]
 };
 
 {
@@ -52,18 +53,16 @@ function nextFrame(timeStamp) {
 		game.lifetimeProgress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
 		game.progress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
 		for (let i = 0; i < 4; i++) {
-			if (game.skill.timer[i] > 0) {
+			if (game.skill.timer[i] > 0 && game.skill.durationTimer <= 0) {
 				game.skill.timer[i] -= sinceLastFrame;
 				updateSkills();
 			}
 		}
-		if (game.skill.isActive[0]) {
+		if (game.skill.durationTimer[0]>0) {
 			document.getElementById("sinGraph").style.opacity = 1;
-			game.skill.sinDuration += sinceLastFrame;
-			if (game.skill.sinDuration >= 60000) {
+			game.skill.durationTimer[0] -= sinceLastFrame;
+			if (game.skill.durationTimer[0]<=0) {
 				document.getElementById("sinGraph").style.opacity = 0;
-				game.skill.sinDuration = 0;
-				game.skill.isActive[0] = false;
 			}
 			updateSkills();
 		}
@@ -271,7 +270,7 @@ function newGame() {
 		skill: {
 			timer: [0, 0, 0, 0],
 			isActive: [false, false, false, false],
-			sinDuration: 0
+			durationTimer: [0,0,0,0]
 		}
 	};
 }
@@ -321,7 +320,7 @@ function getBarSpeed(n) {
 function getPointGain(n) {
 	switch (n) {
 		case 0:
-			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]) * (Math.sin(game.skill.sinDuration / 250)*9+1));
+			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]) * (Math.sin(game.skill.durationTimer[0] / 250)*9+1));
 			break;
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1));
@@ -432,9 +431,14 @@ function updateUpg() {
 function updateSkills() {
 	for (let i = 0; i < 4; i++) {
 		document.getElementById("skill"+i).classList[game.skill.timer[i]<=0 && game.upgrade.normal[4] > i?"remove":"add"]("disabledUpg");
+		if (game.skill.durationTimer[i]>0) {
+			document.getElementById("skill"+i).innerHTML = formatTime(game.skill.durationTimer[i]);
+		} else if (game.skill.timer[i]>0) {
+			document.getElementById("skill"+i).innerHTML = formatTime(game.skill.timer[i]);
+		}
 	}
 	let line = document.getElementById("sinGraphLine");
-	let percent = (1 - Math.sin(game.skill.sinDuration / 250)) / 2;
+	let percent = (1 - Math.sin(game.skill.durationTimer[0] / 250)) / 2;
 	line.style.top = percent * 100 + "%";
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
 }
@@ -464,7 +468,7 @@ function maxAll(type = "normal") {
 function useSkill(n) {
 	if (game.skill.timer[n] <= 0 && game.upgrade.normal[4] > n) {
 		game.skill.timer[n] = skill.cooldown[n];
-		game.skill.isActive[n] = true;
+		game.skill.durationTimer[n] = skill.duration[n];
 	}
 }
 
