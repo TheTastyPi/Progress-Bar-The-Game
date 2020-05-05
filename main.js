@@ -512,9 +512,9 @@ function formatTime(ms, word=true) {
 		if (m < 60) time = time.replace(",", "");
 		return time;
 	} else {
-		time = s < 60 ? ds.toFixed(2) : ds.toFixed(0);
-		if (dm >= 1) time = dm + ":" + time;
-		if (dh >= 1) time = dh + ":" + time;
+		time = s < 60 ? ds.toFixed(2) : (ds<10?"0":"")+ds.toFixed(0);
+		if (dm >= 1) time = (dm<10?"0":"")+dm + ":" + time;
+		if (dh >= 1) time = (dh<10?"0":"")+dh + ":" + time;
 		if (dd >= 1) time = dh + ":" + time;
 		if (dmo >= 1) time = dh + ":" + time;
 		if (dy >= 1) time = dh + ":" + time;
