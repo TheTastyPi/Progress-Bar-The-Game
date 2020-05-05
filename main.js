@@ -61,6 +61,7 @@ function nextFrame(timeStamp) {
 		if (game.skill.durationTimer[0]>0) {
 			document.getElementById("sinGraph").style.opacity = 1;
 			game.skill.durationTimer[0] -= sinceLastFrame;
+			if (game.skill.durationTimer[0]<=0) game.skill.durationTimer[0] = 0;
 			if (game.skill.durationTimer[0]<=0) {
 				document.getElementById("sinGraph").style.opacity = 0;
 			}
