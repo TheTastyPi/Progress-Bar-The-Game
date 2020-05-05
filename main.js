@@ -406,7 +406,7 @@ function updateUpg() {
 				document.getElementById("upg"+i).classList.remove("maxedUpg");
 				document.getElementById("upg"+i).classList.remove("hidden");
 			}
-			document.getElementById((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[0] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
+			document.getElementById((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
 		}
 	}
 	document.getElementById("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
