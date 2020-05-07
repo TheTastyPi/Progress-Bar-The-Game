@@ -212,9 +212,13 @@ function toggleTopMenu(name) {
 	if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+document.getElementById(name+"Menu").style.height;
+			menu.remove("isOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
+			setTimeout(function(){
+				menuOpen.style.top = document.getElementById(name+"Menu").style.height;
+			},250);
 		}
 		document.getElementById(name+"Menu").style.top = "0";
 		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
