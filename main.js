@@ -390,7 +390,7 @@ function updatePoints() {
 function updateUpg() {
 	for (let type of Object.keys(upgrade)) {
 		for (let i = 0; i < 8; i++) {
-			let newDesc = (getUpgPrice(i, type) != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(Math.floor(i/4)==0?"Time":"Log")+"wall Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
+			let newDesc = (getUpgPrice(i, type) != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Time":"Log")+"wall Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
 			switch(type) {
 				case "normal":
 					switch(i) {
