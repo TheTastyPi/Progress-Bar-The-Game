@@ -151,6 +151,7 @@ button.dark {
 	background-color: #DDDDDD;
 	border: 4px solid #222222;
 	opacity: 0;
+	transition: opacity 0.5s;
 }
 .sinGraph.dark {
 	background-color: #222222;
