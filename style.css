@@ -51,9 +51,7 @@ button.dark {
 	filter: brightness(75%);
 	box-shadow: 0 0 10px red inset;
 }
-.hidden {
-	display: none;
-}
+.hidden {display: none;}
 .horizonalCentered {
 	display: block;
 	margin-left: auto;
@@ -276,6 +274,9 @@ button.dark {
 	width: 200px;
 	height: 80px;
 	background-size: contain;
+}
+.skillButton {
+	max-height: 90px;
 }
 .tooltip {
 	position: relative;
