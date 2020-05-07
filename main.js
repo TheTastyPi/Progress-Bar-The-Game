@@ -218,11 +218,13 @@ function toggleTopMenu(name) {
 			menuOpen.style.top = "0";
 			setTimeout(function(){
 				menuOpen.style.top = document.getElementById(name+"Menu").style.height;
-			},250);
+			},500);
 		}
-		document.getElementById(name+"Menu").style.top = "0";
-		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
-		document.getElementById(name+"Menu").classList.add("isOpen");
+		setTimeout(function(){
+			document.getElementById(name+"Menu").style.top = "0";
+			document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
+			document.getElementById(name+"Menu").classList.add("isOpen");
+		},500);
 	} else {
 		document.getElementById(name+"Menu").style.top = "-"+document.getElementById(name+"Menu").style.height;
 		document.getElementById(name+"MenuOpen").style.top = "0";
