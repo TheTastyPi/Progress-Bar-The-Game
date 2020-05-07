@@ -266,7 +266,7 @@
 		</div>
 		<button id="skillMenuOpen" onclick="toggleSideMenu('skill')" class="sideMenuOpen left" style="bottom:0; height:180px;">Skills</button>
 		<div id="skillMenu" class="sideMenu left" style="bottom:0px; height:180px; width:180px;">
-			<button id="skill0" class="tooltip" onclick="useSkill(0)">
+			<button id="skill0" class="tooltip skillButton" onclick="useSkill(0)">
 				<span id="skillTimer0"></span>
 				<span class="tooltipText">
 					"Sine"<br>
@@ -275,7 +275,7 @@
 				</span>
 			</button>
 			<button id="skill1" class="tooltip" onclick="useSkill(1)">
-				<span id="skillTimer1"></span>
+				<span id="skillTimer1 skillButton"></span>
 				<span class="tooltipText" style="margin-left:-135px;">
 					"Exp"<br>
 					Gives an exponentially increasing bar speed multiplier for 1 minute.<br>
@@ -283,7 +283,7 @@
 				</span>
 			</button>
 			<button id="skill2" class="tooltip" onclick="useSkill(2)">
-				<span id="skillTimer2"></span>
+				<span id="skillTimer2 skillButton"></span>
 				<span class="tooltipText">
 					"Accel"<br>
 					Game speed starts to accelerate slowly for 1 minute.<br>
@@ -291,7 +291,7 @@
 				</span>
 			</button>
 			<button id="skill3" class="tooltip" onclick="useSkill(3)">
-				<span id="skillTimer3"></span>
+				<span id="skillTimer3 skillButton"></span>
 				<span class="tooltipText" style="margin-left:-135px;">
 					"-1+1"<br>
 					Redeeming points boosts bar speed for 1 minute.<br>
