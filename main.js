@@ -212,7 +212,7 @@ function toggleTopMenu(name) {
 	if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+document.getElementById(name+"Menu").style.height;
-			menu.remove("isOpen");
+			menu.classList.remove("isOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
