@@ -59,14 +59,16 @@ function nextFrame(timeStamp) {
 				updateSkills();
 			}
 		}
-		if (game.skill.durationTimer[0]>0) {
-			document.getElementById("sinGraph").style.opacity = 1;
-			game.skill.durationTimer[0] -= sinceLastFrame;
-			if (game.skill.durationTimer[0]<=0) {
-				game.skill.durationTimer[0] = 0
-				document.getElementById("sinGraph").style.opacity = 0;
+		for (let i = 0; i < 4; i++) {
+			if (game.skill.durationTimer[i]>0) {
+				if (i==0) document.getElementById("sinGraph").style.opacity = 1;
+				game.skill.durationTimer[0] -= sinceLastFrame;
+				if (game.skill.durationTimer[0]<=0) {
+					game.skill.durationTimer[0] = 0
+					if (i==0) document.getElementById("sinGraph").style.opacity = 0;
+				}
+				updateSkills();
 			}
-			updateSkills();
 		}
 		updateProgress();
 	}
@@ -144,7 +146,7 @@ function wipe() {
 }
 
 function merge(base, source) {
-	for (i in base) {
+	for (let i in base) {
 		if (source[i] != undefined) {
 			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
 				merge(base[i], source[i]);
