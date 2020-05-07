@@ -261,7 +261,9 @@ function switchScreen(dir) {
 	for (let i = 0; i < document.getElementsByClassName("screen").length; i++) {
 		document.getElementById("screen"+i).style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
 	}
-	document.getElementById("upgMenu").style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
+	for (let menu of document.getElementsByClassName("topMenu")) {
+		menu.style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
+	}
 	document.getElementById("maxAllButton").style.transform = "translate("+game.currentScreen*100+"vw,0)";
 	document.getElementById("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
 	document.getElementById("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
