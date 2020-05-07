@@ -208,8 +208,15 @@ function toggleSideMenu(name) {
 	}
 }
 
+var topMenuOpen = false;
+
 function toggleTopMenu(name) {
-	if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
+	if (!topMenuOpen) {
+		document.getElementById(name+"Menu").style.top = "0";
+		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
+		document.getElementById(name+"Menu").classList.add("isOpen");
+		topMenuOpen = true;
+	} else if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+document.getElementById(name+"Menu").style.height;
 			menu.classList.remove("isOpen");
@@ -224,11 +231,14 @@ function toggleTopMenu(name) {
 			document.getElementById(name+"Menu").style.top = "0";
 			document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
 			document.getElementById(name+"Menu").classList.add("isOpen");
+			topMenuOpen = true;
 		},500);
 	} else {
 		document.getElementById(name+"Menu").style.top = "-"+document.getElementById(name+"Menu").style.height;
 		document.getElementById(name+"MenuOpen").style.top = "0";
 		document.getElementById(name+"Menu").classList.remove("isOpen");
+		topMenuOpen = false;
+		
 	}
 }
 
