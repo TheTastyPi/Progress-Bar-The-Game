@@ -213,7 +213,9 @@ var topMenuOpen = false;
 function toggleTopMenu(name) {
 	if (!topMenuOpen) {
 		document.getElementById(name+"Menu").style.top = "0";
-		document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
+		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
+			menuOpen.style.top = document.getElementById(name+"Menu").style.height;
+		}
 		document.getElementById(name+"Menu").classList.add("isOpen");
 		topMenuOpen = true;
 	} else if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
@@ -229,7 +231,6 @@ function toggleTopMenu(name) {
 		}
 		setTimeout(function(){
 			document.getElementById(name+"Menu").style.top = "0";
-			document.getElementById(name+"MenuOpen").style.top = document.getElementById(name+"Menu").style.height;
 			document.getElementById(name+"Menu").classList.add("isOpen");
 			topMenuOpen = true;
 		},500);
@@ -237,6 +238,9 @@ function toggleTopMenu(name) {
 		document.getElementById(name+"Menu").style.top = "-"+document.getElementById(name+"Menu").style.height;
 		document.getElementById(name+"MenuOpen").style.top = "0";
 		document.getElementById(name+"Menu").classList.remove("isOpen");
+		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
+			menuOpen.style.top = "0";
+		}
 		topMenuOpen = false;
 		
 	}
