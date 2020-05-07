@@ -463,6 +463,8 @@ function updateSkills() {
 		} else if (game.skill.timer[i]>0) {
 			document.getElementById("skillTimer"+i).innerHTML = formatTime(game.skill.timer[i], false);
 			document.getElementById("skillTimer"+i).style.color = "red";
+		} else {
+			document.getElementById("skillTimer"+i).innerHTML = ""
 		}
 	}
 	let line = document.getElementById("sinGraphLine");
