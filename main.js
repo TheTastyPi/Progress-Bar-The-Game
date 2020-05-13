@@ -1,6 +1,7 @@
 var lastFrame = 0;
 var lastSave = 0;
 var game = newGame();
+init();
 
 const upgrade = {
 	normal: {
@@ -28,7 +29,7 @@ const skill = {
 	duration: [60*1000, 60*1000, 60*1000, 60*1000]
 };
 
-{
+function init() {
 	for (let i = 0; i < 2; i++) {
 		let upgCleared = document.createElement("span");
 		upgCleared.appendChild(document.createTextNode("Nothing here..."));
@@ -294,7 +295,7 @@ function newGame() {
 			auto: [0,0,0,0,0,0,0,0]
 		},
 		skill: {
-			timer: [0, 0, 0, 0],
+			timer: [0,0,0,0],
 			isActive: [false, false, false, false],
 			durationTimer: [0,0,0,0]
 		}
@@ -336,7 +337,7 @@ function getBarLength(n) {
 function getBarSpeed(n) {
 	switch (n) {
 		case 0:
-			return Math.pow(2, game.upgrade.normal[1]);
+			return Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? (Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1));
 			break;
 		case 1:
 			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10));
