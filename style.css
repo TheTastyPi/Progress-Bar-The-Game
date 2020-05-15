@@ -166,6 +166,15 @@ button.dark {
 .sinGraphLine.dark {
 	background-color: #DDDDDD;
 }
+.expDisp {
+	transform: translate(calc(50% + 250px), calc(-50% + 200px));
+	background-color: #DDDDDD;
+	color: #222222;
+	border: 4px solid #222222;
+	opacity: 0;
+	transition: opacity 0.5s;
+	border-radius: 15px;
+}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
