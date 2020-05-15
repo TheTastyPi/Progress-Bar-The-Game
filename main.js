@@ -337,7 +337,7 @@ function getBarLength(n) {
 function getBarSpeed(n) {
 	switch (n) {
 		case 0:
-			return Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? (Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1));
+			return Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1);
 			break;
 		case 1:
 			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10));
