@@ -269,6 +269,7 @@ button.dark {
 	text-align: center;
 	font-size: 40px;
 	transition: flex 0.5s;
+	overflow: hidden;
 }
 .maxall {
 	position: absolute;
