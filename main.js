@@ -66,7 +66,7 @@ function nextFrame(timeStamp) {
 					document.getElementById("sinGraph").style.opacity = 1;
 					setTimeout(function(){
 						document.getElementById("sinGraph").classList.remove("hidden");
-					});
+					}, 500);
 				}
 				game.skill.durationTimer[0] -= sinceLastFrame;
 				if (game.skill.durationTimer[0]<=0) {
@@ -74,7 +74,7 @@ function nextFrame(timeStamp) {
 					if (i==0) document.getElementById("sinGraph").style.opacity = 0;
 					setTimeout(function(){
 						document.getElementById("sinGraph").classList.add("hidden");
-					});
+					}, 500);
 				}
 				updateSkills();
 			}
