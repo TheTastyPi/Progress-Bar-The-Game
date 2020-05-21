@@ -430,7 +430,7 @@ function updateUpg() {
 				case "skill":
 					switch(i) {
 						case 0:
-							newDesc += "^" + format(0.5 * game.upgrade.skill[i] + 1);
+							newDesc += "^" + format(0.5 * game.upgrade.skill[i] + 1, 1);
 							break;
 						case 1:
 						case 3:
