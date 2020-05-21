@@ -11,8 +11,8 @@ const upgrade = {
 		type: [0,0,0,0,1,1,1,1]
 	},
 	skill: {
-		basePrice: [1, 1, 2, 3, 1, 2, 3, 4],
-		priceGrowth: [6, 6, 11, 17.3, 6, 6, 6, 7],
+		basePrice: [1, 3, 2, 4, 3, 6, 4, 9],
+		priceGrowth: [2, 1, 2, 1, 2, 1, 2, 1],
 		limit: [Infinity,1,Infinity,1,Infinity,1,Infinity,1],
 		type: [1,1,1,1,1,1,1,1]
 	},
@@ -355,7 +355,7 @@ function getBarSpeed(n) {
 function getPointGain(n) {
 	switch (n) {
 		case 0:
-			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]) * (Math.sin(game.skill.durationTimer[0] / 250)*9+1));
+			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]) * Math.pow(Math.sin(game.skill.durationTimer[0] / 250) * 9 + 1, game.upgrade.skill[0] * 0.5 + 1));
 			break;
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1));
@@ -428,6 +428,16 @@ function updateUpg() {
 					}
 					break;
 				case "skill":
+					switch(i) {
+						case 0:
+							newDesc += "^" + format(0.5 * game.upgrade.skill[i] + 1);
+							break;
+						case 1:
+						case 3:
+						case 5:
+						case 7:
+							newDesc += (game.upgrade.skill[i]?"Unlocked":"Locked");
+					}
 					break;
 				case "auto":
 			}
