@@ -145,6 +145,22 @@ function wipe() {
 		game = newGame(); 
 		save();
 		updateAll();
+		for (let menu of document.getElementsByClassName("topMenu")) {
+			menu.style.top = "-"+menu.style.height;
+			menu.classList.remove("isOpen");
+		}
+		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
+			menuOpen.style.top = "0";
+		}
+		for (let menu of document.getElementsByClassName("sideMenu")) {
+			let isLeft = document.getElementById(menu+"Open").classList.contains("left");
+			menu.style.left = isLeft?"-"+menu.style.width:"100%";
+			menu.classList.remove("isOpen");
+		}
+		for (let menuOpen of document.getElementsByClassName("sideMenuOpen")) {
+			let isLeft = menuOpen.classList.contains("left");
+			menuOpen.style[isLeft?"left":"right"] = "0";
+		}
 		document.getElementById("saveMenu").style.width = "0px";
 		document.getElementById("saveMenuOpen").style.right = "0px";
 		document.getElementById("upgMenu").style.height = "0px";
@@ -232,7 +248,7 @@ function toggleTopMenu(name) {
 		topMenuOpen = true;
 	} else if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
-			menu.style.top = "-"+document.getElementById(name+"Menu").style.height;
+			menu.style.top = "-"+menu.style.height;
 			menu.classList.remove("isOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
