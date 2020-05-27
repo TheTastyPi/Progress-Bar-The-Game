@@ -51,8 +51,8 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = (timeStamp - lastSave) * game.speed;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		game.lifetimeProgress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
-		game.progress[0] += Math.pow(sinceLastFrame * getBarSpeed(0), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
+		game.lifetimeProgress[0] += sinceLastFrame * getBarSpeed(0);
+		game.progress[0] += sinceLastFrame * getBarSpeed(0);
 		for (let i = 0; i < 4; i++) {
 			if (game.skill.timer[i] > 0 && game.skill.durationTimer[i] <= 0) {
 				game.skill.timer[i] -= sinceLastFrame;
@@ -345,7 +345,7 @@ function getBarLength(n) {
 function getBarSpeed(n) {
 	switch (n) {
 		case 0:
-			return Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1);
+			return Math.pow(Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
 			break;
 		case 1:
 			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10));
