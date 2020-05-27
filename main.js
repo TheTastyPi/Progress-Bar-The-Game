@@ -192,7 +192,7 @@ function toggleAutoSave() {
 }
 
 function changeAutoSaveInterval() {
-	let newInterval = prompt("Please enter new auto-save speed in seconds.\n(Number from 0.2 to 300, inclusive)");
+	let newInterval = prompt("Please enter new auto-save interval in seconds.\n(Number from 0.2 to 300, inclusive)");
 	if (newInterval != null) {
 		newInterval = Number(newInterval);
 		if (!isNaN(newInterval) && newInterval >= 0.2 && newInterval <= 300) {
@@ -490,6 +490,7 @@ function updateSkills() {
 	let percent = (1 - Math.sin(game.skill.durationTimer[0] / 250)) / 2;
 	line.style.top = percent * 100 + "%";
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
+	document.getElementById("skillMenuOpen").classList[game.upgrade.normal[4] > 0 ? "remove" : "add"]("hidden");
 }
 
 function buyUpgrade(n, type = "normal") {
