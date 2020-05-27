@@ -161,10 +161,6 @@ function wipe() {
 			let isLeft = menuOpen.classList.contains("left");
 			menuOpen.style[isLeft?"left":"right"] = "0";
 		}
-		document.getElementById("saveMenu").style.width = "0px";
-		document.getElementById("saveMenuOpen").style.right = "0px";
-		document.getElementById("upgMenu").style.height = "0px";
-		document.getElementById("upgMenuOpen").style.top = "0px";
 		document.getElementById("wipeButton").style.backgroundColor = "red";
 		setTimeout(function(){document.getElementById("wipeButton").style.backgroundColor = "";}, 250);
 	}
