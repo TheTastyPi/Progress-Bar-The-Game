@@ -345,7 +345,7 @@ function getBarLength(n) {
 function getBarSpeed(n) {
 	switch (n) {
 		case 0:
-			return Math.pow(Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1), 1 / (game.progress[0] < getBarLength(0) ? 1 : 3 - 0.2 * game.upgrade.normal[3]));
+			return Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1) / (game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 1 / (game.upgrade.normal[3] / 2 + 1)) : 1);
 			break;
 		case 1:
 			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10));
@@ -416,7 +416,7 @@ function updateUpg() {
 							newDesc += format(Math.pow(2, game.upgrade.normal[i])) + "x";
 							break;
 						case 3:
-							newDesc += format(3 - 0.2 * game.upgrade.normal[i], 1) + "&#8730;";
+							newDesc += format(3 - 0.2 * game.upgrade.normal[i], 1);
 							break;
 						case 4:
 							newDesc += format(game.upgrade.normal[i]) + " Skill" + pluralCheck(game.upgrade.normal[i]);
