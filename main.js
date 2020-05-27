@@ -30,7 +30,6 @@ const skill = {
 };
 
 function init() {
-	updateAll();
 	for (let i = 0; i < 2; i++) {
 		let upgCleared = document.createElement("span");
 		upgCleared.appendChild(document.createTextNode("Nothing here..."));
@@ -572,3 +571,5 @@ function formatTime(ms, word=true) {
 load();
 
 window.requestAnimationFrame(nextFrame);
+
+updateAll();
