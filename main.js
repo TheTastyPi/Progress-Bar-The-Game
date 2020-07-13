@@ -87,7 +87,7 @@ function doFrame(sinceLastFrame) {
 }
 
 function nextFrame(timeStamp) {
-	game.date = Date.now;
+	game.date = Date.now();
 	let sinceLastFrame = (timeStamp - lastFrame) * game.speed;
 	let sinceLastSave = (timeStamp - lastSave) * game.speed;
 	if (sinceLastFrame >= game.updateSpeed) {
