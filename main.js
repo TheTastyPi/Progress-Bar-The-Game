@@ -597,6 +597,8 @@ function formatTime(ms, word=true) {
 	}
 }
 
+console.log(Date.now() - game.date);
+
 load();
 
 console.log(Date.now() - game.date);
