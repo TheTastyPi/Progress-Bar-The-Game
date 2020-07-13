@@ -84,7 +84,7 @@ function doFrame(sinceLastFrame) {
 }
 
 function nextFrame(timeStamp) {
-	game.date = new Date;
+	game.date = Date.now;
 	let sinceLastFrame = (timeStamp - lastFrame) * game.speed;
 	let sinceLastSave = (timeStamp - lastSave) * game.speed;
 	if (sinceLastFrame >= game.updateSpeed) {
@@ -313,7 +313,7 @@ function pluralCheck(n) {
 
 function newGame() {
 	return {
-		date: new Date,
+		date: Date.now(),
 		speed: 1,
 		updateSpeed: 50,
 		doAutoSave: true,
@@ -599,10 +599,8 @@ function formatTime(ms, word=true) {
 
 load();
 
-console.log(new Date - game.date);
+console.log(Date.now() - game.date);
 
-if (new Date - game.date > 1000) simulateTime(new Date - game.date);
+if (Date.now() - game.date > 1000) simulateTime(Date.now() - game.date);
 
 window.requestAnimationFrame(nextFrame);
-
-updateAll();
