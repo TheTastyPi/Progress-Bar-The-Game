@@ -124,6 +124,7 @@ function load(auto = true) {
 		if (typeof(pastGame.lifetimeProgress) == "number") pastGame.lifetimeProgress = [pastGame.lifetimeProgress];
 		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
 		let offlineTime = Date.now() - pastGame.date;
+		console.log(offlineTime);
 		merge(game, pastGame);
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		updateAll();
