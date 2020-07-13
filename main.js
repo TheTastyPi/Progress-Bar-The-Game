@@ -1,7 +1,6 @@
 var lastFrame = 0;
 var lastSave = 0;
 var game = newGame();
-init();
 
 const upgrade = {
 	normal: {
@@ -602,3 +601,5 @@ function formatTime(ms, word=true) {
 		return time;
 	}
 }
+
+init();
