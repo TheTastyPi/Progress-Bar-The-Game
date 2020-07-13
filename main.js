@@ -46,38 +46,52 @@ function init() {
 	}
 }
 
+function simulateTime(time) {
+	for (let i = 0; i < 1000; i++) {
+		doFrame(time/1000);
+	}
+}
+
+function doFrame(sinceLastFrame) {
+	game.lifetimeProgress[0] += sinceLastFrame * getBarSpeed(0);
+	game.progress[0] += sinceLastFrame * getBarSpeed(0);
+	for (let i = 0; i < 4; i++) {
+		if (game.skill.timer[i] > 0 && game.skill.durationTimer[i] <= 0) {
+			game.skill.timer[i] -= sinceLastFrame;
+			if (game.skill.timer[i]<=0) game.skill.timer[i] = 0;
+			updateSkills();
+		}
+	}
+	for (let i = 0; i < 4; i++) {
+		if (game.skill.durationTimer[i]>0) {
+			if (i==0) {
+				document.getElementById("sinGraph").style.opacity = 1;
+				setTimeout(function(){
+					document.getElementById("sinGraph").classList.remove("hidden");
+				}, 500);
+			}
+			game.skill.durationTimer[0] -= sinceLastFrame;
+			if (game.skill.durationTimer[0]<=0) {
+				game.skill.durationTimer[0] = 0
+				if (i==0) document.getElementById("sinGraph").style.opacity = 0;
+				setTimeout(function(){
+					document.getElementById("sinGraph").classList.add("hidden");
+				}, 500);
+			}
+			updateSkills();
+		}
+	}
+}
+
 function nextFrame(timeStamp) {
 	let sinceLastFrame = (timeStamp - lastFrame) * game.speed;
 	let sinceLastSave = (timeStamp - lastSave) * game.speed;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		game.lifetimeProgress[0] += sinceLastFrame * getBarSpeed(0);
-		game.progress[0] += sinceLastFrame * getBarSpeed(0);
-		for (let i = 0; i < 4; i++) {
-			if (game.skill.timer[i] > 0 && game.skill.durationTimer[i] <= 0) {
-				game.skill.timer[i] -= sinceLastFrame;
-				if (game.skill.timer[i]<=0) game.skill.timer[i] = 0;
-				updateSkills();
-			}
-		}
-		for (let i = 0; i < 4; i++) {
-			if (game.skill.durationTimer[i]>0) {
-				if (i==0) {
-					document.getElementById("sinGraph").style.opacity = 1;
-					setTimeout(function(){
-						document.getElementById("sinGraph").classList.remove("hidden");
-					}, 500);
-				}
-				game.skill.durationTimer[0] -= sinceLastFrame;
-				if (game.skill.durationTimer[0]<=0) {
-					game.skill.durationTimer[0] = 0
-					if (i==0) document.getElementById("sinGraph").style.opacity = 0;
-					setTimeout(function(){
-						document.getElementById("sinGraph").classList.add("hidden");
-					}, 500);
-				}
-				updateSkills();
-			}
+		if (sinceLastFrame >= 1000) {
+			simulateTime(sinceLastFrame);
+		} else {
+			doFrame(sinceLastFrame);
 		}
 		updateProgress();
 	}
