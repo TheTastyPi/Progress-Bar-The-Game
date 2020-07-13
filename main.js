@@ -120,7 +120,6 @@ function load(auto = true) {
 		if (typeof(pastGame.lifetimeProgress) == "number") pastGame.lifetimeProgress = [pastGame.lifetimeProgress];
 		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
 		merge(game, pastGame);
-		if (new Date - game.date > 1000) simulateTime(new Date - game.date);
 		updateAll();
 		if (!auto) {
 			document.getElementById("loadButton").style.backgroundColor = "green";
@@ -598,6 +597,8 @@ function formatTime(ms, word=true) {
 }
 
 load();
+
+if (new Date - game.date > 1000) simulateTime(new Date - game.date);
 
 window.requestAnimationFrame(nextFrame);
 
