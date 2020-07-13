@@ -44,6 +44,10 @@ function init() {
 	for (let leftMenu of document.getElementsByClassName("left")) {
 		leftMenu.style.left = "-"+leftMenu.style.width;
 	}
+
+	load();
+
+	window.requestAnimationFrame(nextFrame);
 }
 
 function simulateTime(time) {
@@ -120,7 +124,9 @@ function load(auto = true) {
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
 		if (typeof(pastGame.lifetimeProgress) == "number") pastGame.lifetimeProgress = [pastGame.lifetimeProgress];
 		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
+		let offlineTime = Date.now() - pastGame.date;
 		merge(game, pastGame);
+		if (offlineTime > 1000) simulateTime(offlineTime);
 		updateAll();
 		if (!auto) {
 			document.getElementById("loadButton").style.backgroundColor = "green";
@@ -596,13 +602,3 @@ function formatTime(ms, word=true) {
 		return time;
 	}
 }
-
-console.log(Date.now() - game.date);
-
-load();
-
-console.log(Date.now() - game.date);
-
-if (Date.now() - game.date > 1000) simulateTime(Date.now() - game.date);
-
-window.requestAnimationFrame(nextFrame);
