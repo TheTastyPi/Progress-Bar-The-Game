@@ -599,6 +599,8 @@ function formatTime(ms, word=true) {
 
 load();
 
+console.log(new Date - game.date);
+
 if (new Date - game.date > 1000) simulateTime(new Date - game.date);
 
 window.requestAnimationFrame(nextFrame);
