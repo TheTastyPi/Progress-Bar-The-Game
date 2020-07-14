@@ -58,7 +58,7 @@ function simulateTime(time) {
 function doFrame(sinceLastFrame) {
 	game.lifetimeProgress[0] += sinceLastFrame * getBarSpeed(0);
 	if (game.progress[0] < getBarLength(0) &&
-	   sinceLastFrame * getBarSpeed(0) >= getBarLength) {
+	   sinceLastFrame * getBarSpeed(0) >= getBarLength(0)) {
 		game.progress[0] = getBarLength(0);
 	} else {
 		game.progress[0] += sinceLastFrame * getBarSpeed(0);
