@@ -16,18 +16,18 @@ progress::-webkit-progress-bar {
 progress.dark::-webkit-progress-bar {
 	background: black;
 }
-#progressBar0 {color: #6666AA;}
-#progressBar0.dark {color: #9999EE;}
-#progressBar0::-webkit-progress-value {background: #6666AA;}
-#progressBar0.dark::-webkit-progress-value {background: #9999EE;}
-#progressBar0::-moz-progress-bar {background: #6666AA;}
-#progressBar0.dark::-moz-progress-bar {background: #9999EE;}
-#progressBar1 {color: #AAAA66;}
-#progressBar1.dark {color: #EEEE99;}
-#progressBar1::-webkit-progress-value {background: #AAAA66;}
-#progressBar1.dark::-webkit-progress-value {background: #EEEE99;}
-#progressBar1::-moz-progress-bar {background: #AAAA66;}
-#progressBar1.dark::-moz-progress-bar {background: #EEEE99;}
+#progressBar0 {color: #6666AA;transition:0.5s;}
+#progressBar0.dark {color: #9999EE;transition:0.5s;}
+#progressBar0::-webkit-progress-value {background: #6666AA;transition:0.5s;}
+#progressBar0.dark::-webkit-progress-value {background: #9999EE;transition:0.5s;}
+#progressBar0::-moz-progress-bar {background: #6666AA;transition:0.5s;}
+#progressBar0.dark::-moz-progress-bar {background: #9999EE;transition:0.5s;}
+#progressBar1 {color: #AAAA66;transition:0.5s;}
+#progressBar1.dark {color: #EEEE99;transition:0.5s;}
+#progressBar1::-webkit-progress-value {background: #AAAA66;transition:0.5s;}
+#progressBar1.dark::-webkit-progress-value {background: #EEEE99;transition:0.5s;}
+#progressBar1::-moz-progress-bar {background: #AAAA66;transition:0.5s;}
+#progressBar1.dark::-moz-progress-bar {background: #EEEE99;transition:0.5s;}
 button {
 	color: #DDDDDD;
 	background-color: #222222;
