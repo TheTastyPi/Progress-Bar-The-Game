@@ -81,12 +81,10 @@ function doFrame(sinceLastFrame) {
 			game.skill.durationTimer[0] -= sinceLastFrame;
 			if (game.skill.durationTimer[0]<=0) {
 				game.skill.durationTimer[0] = 0
-				if (i==0) {
-					document.getElementById("sinGraph").style.opacity = 0;
-					setTimeout(function(){
-						document.getElementById("sinGraph").classList.add("hidden");
-					}, 500);
-				}
+				if (i==0) document.getElementById("sinGraph").style.opacity = 0;
+				setTimeout(function(){
+					document.getElementById("sinGraph").classList.add("hidden");
+				}, 500);
 			}
 			updateSkills();
 		}
