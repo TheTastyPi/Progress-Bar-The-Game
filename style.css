@@ -34,6 +34,7 @@ button {
 	border-style: none;
 	border-radius: 15px;
 	transition: 0.5s;
+	background-size: contain;
 }
 button.dark {
 	color: #222222;
@@ -283,7 +284,6 @@ button.dark {
 	margin-top: 10px;
 	width: 200px;
 	height: 80px;
-	background-size: contain;
 }
 .skillButton {
 	max-height: 90px;
