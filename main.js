@@ -414,6 +414,7 @@ function updateAll() {
 function updateProgress() {
 	for (let i = 0; i < 2; i++) {
 		if (isNaN(game.progress[i])) game.progress[i] = Infinity;
+		if (isNaN(game.lifetimeProgress[i])) game.lifetimeProgress[i] = Infinity;
 		document.getElementById("progressBar"+i).value = game.progress[i] != Infinity ? game.progress[i] : 1.79e308;
 		document.getElementById("progressBarLabel"+i).innerHTML = format((game.progress[i] / getBarLength(i) * 100), 4) + "%";
 		document.getElementById("redeemButton"+i).classList[game.lifetimeProgress[i] >= getBarLength(i) ? "remove" : "add"]("hidden");
