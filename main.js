@@ -74,18 +74,16 @@ function doFrame(sinceLastFrame) {
 		if (game.skill.durationTimer[i]>0) {
 			if (i==0) {
 				document.getElementById("sinGraph").classList.remove("hidden");
-				setTimeout(function(){
-					document.getElementById("sinGraph").style.opacity = 1;
-				}, 500);
+				document.getElementById("sinGraph").style.opacity = 1;
+				if (game.skill.durationTimer[0]<=0) {
+					game.skill.durationTimer[0] = 0
+					document.getElementById("sinGraph").style.opacity = 0;
+					setTimeout(function(){
+						document.getElementById("sinGraph").classList.add("hidden");
+					}, 1000);
+				}
 			}
 			game.skill.durationTimer[0] -= sinceLastFrame;
-			if (game.skill.durationTimer[0]<=0) {
-				game.skill.durationTimer[0] = 0
-				if (i==0) document.getElementById("sinGraph").style.opacity = 0;
-				setTimeout(function(){
-					document.getElementById("sinGraph").classList.add("hidden");
-				}, 500);
-			}
 			updateSkills();
 		}
 	}
