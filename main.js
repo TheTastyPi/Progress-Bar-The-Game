@@ -550,6 +550,7 @@ function maxAll(type = "normal") {
 			game.upgrade[type][i] += totalAmount;
 			updateUpg();
 			updatePoints();
+			updateSkills();
 		}
 	}
 }
