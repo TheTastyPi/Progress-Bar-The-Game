@@ -188,7 +188,9 @@ button.dark {
 	background-color: white;
 	border: 4px solid #222222;
 	transform: translate(293px, 106px);
-	font-size: 15px;
+	font-size: 20px;
+	vertical-align: middle;
+	text-align: center;
 }
 .boostBarStatus.dark {
 	background-color: black;
