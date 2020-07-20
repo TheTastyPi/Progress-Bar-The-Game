@@ -72,6 +72,7 @@ function doFrame(sinceLastFrame) {
 	}
 	for (let i = 0; i < 4; i++) {
 		if (game.skill.durationTimer[i]>0) {
+			game.skill.durationTimer[0] -= sinceLastFrame;
 			if (i==0) {
 				document.getElementById("sinGraph").classList.remove("hidden");
 				document.getElementById("sinGraph").style.opacity = 1;
@@ -83,7 +84,6 @@ function doFrame(sinceLastFrame) {
 					}, 1000);
 				}
 			}
-			game.skill.durationTimer[0] -= sinceLastFrame;
 			updateSkills();
 		}
 	}
