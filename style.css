@@ -195,7 +195,12 @@ button.dark {
 	width: 100px;
 	height:50px;
 	background-color: white;
+	border: 4px solid #222222;
 	transform: translate(100px, 175px);
+}
+.boostBarStatus.dark {
+	background-color: black;
+	border: 4px solid #DDDDDD;
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
