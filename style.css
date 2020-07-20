@@ -168,13 +168,13 @@ button.dark {
 	background-color: #DDDDDD;
 }
 .boostBar {
-	width: 400px;
+	width: 450px;
 	height:100px;
 	background-color: white;
 	color: #0000FF;
 	border: 4px solid #222222;
 	transition:0.5s;
-	transform: translate(600px, 150px);
+	transform: translate(625px, 150px);
 }
 .boostBar.dark {
 	background-color: black;
@@ -187,7 +187,7 @@ button.dark {
 	height:50px;
 	background-color: white;
 	border: 4px solid #222222;
-	transform: translate(300px, 150px);
+	transform: translate(312.5px, 100px);
 }
 .boostBarStatus.dark {
 	background-color: black;
