@@ -17,17 +17,17 @@ progress.dark::-webkit-progress-bar {
 	background: black;
 }
 #progressBar0 {color: #6666AA;transition:0.5s;}
-#progressBar0.dark {color: #9999EE;transition:0.5s;}
+#progressBar0.dark {color: #9999EE;}
 #progressBar0::-webkit-progress-value {background: #6666AA;transition:0.5s;}
-#progressBar0.dark::-webkit-progress-value {background: #9999EE;transition:0.5s;}
+#progressBar0.dark::-webkit-progress-value {background: #9999EE;}
 #progressBar0::-moz-progress-bar {background: #6666AA;transition:0.5s;}
-#progressBar0.dark::-moz-progress-bar {background: #9999EE;transition:0.5s;}
+#progressBar0.dark::-moz-progress-bar {background: #9999EE;}
 #progressBar1 {color: #AAAA66;transition:0.5s;}
-#progressBar1.dark {color: #EEEE99;transition:0.5s;}
+#progressBar1.dark {color: #EEEE99;}
 #progressBar1::-webkit-progress-value {background: #AAAA66;transition:0.5s;}
-#progressBar1.dark::-webkit-progress-value {background: #EEEE99;transition:0.5s;}
+#progressBar1.dark::-webkit-progress-value {background: #EEEE99;}
 #progressBar1::-moz-progress-bar {background: #AAAA66;transition:0.5s;}
-#progressBar1.dark::-moz-progress-bar {background: #EEEE99;transition:0.5s;}
+#progressBar1.dark::-moz-progress-bar {background: #EEEE99;}
 button {
 	color: #DDDDDD;
 	background-color: #222222;
@@ -167,7 +167,7 @@ button.dark {
 .sinGraphLine.dark {
 	background-color: #DDDDDD;
 }
-.expDisp {
+.boostBar {
 	transform: translate(calc(50% + 250px), calc(-50% + 200px));
 	background-color: #DDDDDD;
 	color: #222222;
@@ -175,6 +175,27 @@ button.dark {
 	opacity: 0;
 	transition: opacity 0.5s;
 	border-radius: 15px;
+}
+.boostBar {
+	width: 400px;
+	height:100px;
+	background-color: white;
+	color: #0000FF;
+	border: 4px solid #222222;
+	transition:0.5s;
+	transform: translate(350px, 200px);
+}
+.boostBar.dark {
+	background-color: black;
+	border: 4px solid #DDDDDD;
+}
+.boostBar::-webkit-progress-value {transition:0.5s;}
+.boostBar::-moz-progress-bar {transition:0.5s;}
+.boostBarStatus {
+	width: 100px;
+	height:50px;
+	background-color: white;
+	transform: translate(100px, 175px);
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
