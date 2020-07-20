@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Timewall: The Game</title>
+		<title>Progress Bar: The Game</title>
 		<link rel="shortcut icon" type="image/png" href="pics/Timewall.png">
 		<link rel="stylesheet" href="style.css">
 	</head>
@@ -16,7 +16,8 @@
 					<div id="sinGraphLine" class="sinGraphLine"></div>
 					<div id="sinGraphLine2" class="sinGraphLine"></div>
 				</div>
-				<span id="expDisp" class="centered expDisp">x1</span>
+				<progress id="boostBar" class="boostBar centered" max="1e4" value="0"></progress>
+				<span id="boostBarStatus" class="centered boostBarStatus">Cold</span>
 			</div>
 			<div id="screen1" class="screen" style="left:100%;">
 				<progress id="progressBar1" class="progressBar centered" max="308.2528530309799" value="0"></progress>
