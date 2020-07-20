@@ -174,7 +174,7 @@ button.dark {
 	color: #0000FF;
 	border: 4px solid #222222;
 	transition:0.5s;
-	transform: translate(625px, 150px);
+	transform: translate(635px, 150px);
 }
 .boostBar.dark {
 	background-color: black;
@@ -184,10 +184,11 @@ button.dark {
 .boostBar::-moz-progress-bar {transition:0.5s;}
 .boostBarStatus {
 	width: 100px;
-	height:50px;
+	height:40px;
 	background-color: white;
 	border: 4px solid #222222;
-	transform: translate(312.5px, 100px);
+	transform: translate(293px, 106px);
+	font-size: 15px;
 }
 .boostBarStatus.dark {
 	background-color: black;
