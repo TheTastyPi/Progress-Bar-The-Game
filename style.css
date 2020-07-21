@@ -191,7 +191,7 @@ button.dark {
 	height:40px;
 	background-color: white;
 	border: 4px solid #222222;
-	transform: translate(293px, 106px);
+	transform: translate(285px, 105px);
 	font-size: 20px;
 	transition: 0.5s;
 }
