@@ -11,7 +11,7 @@
 				<progress id="progressBar0" class="progressBar centered" max="6e4" value="0"></progress>
 				<span id="progressBarLabel0" class="label centered">0%</span>
 				<button id="redeemButton0" onclick="redeemPoints(0)" class="hidden centered redeemButton">Redeem Points</button>
-				<span id="timewallPoint0" class="hidden centered pointDisplay">You have 0 timewall points.</span>
+				<span id="pointDisplay0" class="hidden centered pointDisplay">You have 0 progress points.</span>
 				<div id="sinGraph" class="hidden centered sinGraph">
 					<div id="sinGraphLine" class="sinGraphLine"></div>
 					<div id="sinGraphLine2" class="sinGraphLine"></div>
@@ -27,7 +27,7 @@
 				<progress id="progressBar1" class="progressBar centered" max="308.2528530309799" value="0"></progress>
 				<span id="progressBarLabel1" class="label centered">0%</span>
 				<button id="redeemButton1" onclick="redeemPoints(1)" class="hidden centered redeemButton">Redeem Points</button>
-				<span id="timewallPoint1" class="hidden centered pointDisplay">You have 0 logwall points.</span>
+				<span id="pointDisplay1" class="hidden centered pointDisplay">You have 0 logress points.</span>
 			</div>
 		</div>
 		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
@@ -38,7 +38,7 @@
 					Bar Length Upgrade<br>
 					Divides bar length by 2.<br>
 					<span id="upgDesc0">
-						Cost: 1 Timewall Point<br>
+						Cost: 1 Progress Point<br>
 						Currently: /1
 					</span>
 				</div>
@@ -47,7 +47,7 @@
 					Bar Speed Upgrade<br>
 					Multiplies bar speed by 2.<br>
 					<span id="upgDesc1">
-						Cost: 1 Timewall Point<br>
+						Cost: 1 Progress Point<br>
 						Currently: 1x
 					</span>
 				</div>
@@ -56,7 +56,7 @@
 					Point Gain Upgrade<br>
 					Multiplies point gain by 2.<br>
 					<span id="upgDesc2">
-						Cost: 2 Timewall Points<br>
+						Cost: 2 Progress Points<br>
 						Currently: 1x
 					</span>
 				</div>
@@ -65,7 +65,7 @@
 					Overflow Speed Upgrade<br>
 					Reduces overflow penalty.<br>
 					<span id="upgDesc3">
-						Cost: 3 Timewall Point<br>
+						Cost: 3 Progress Point<br>
 						Currently: hi
 					</span>
 				</div>
@@ -76,7 +76,7 @@
 					Skill Unlock<br>
 					Unlocks a new skill.<br>
 					<span id="upgDesc4">
-						Cost: 1 Logwall Point<br>
+						Cost: 1 Logress Point<br>
 						Currently: 0 Skill
 					</span>
 				</div>
@@ -85,7 +85,7 @@
 					Skill Power Upgrades<br>
 					Unlocks the skill upgrade tab.<br>
 					<span id="upgDesc5">
-						Cost: 2 Logwall Point<br>
+						Cost: 2 Logress Point<br>
 						Currently: Locked
 					</span>
 				</div>
@@ -94,7 +94,7 @@
 					Automation Unlock<br>
 					Unlocks the automation tab.<br>
 					<span id="upgDesc6">
-						Cost: 2 Logwall Points<br>
+						Cost: 2 Logress Points<br>
 						Currently: Locked
 					</span>
 				</div>
@@ -103,7 +103,7 @@
 					Independence Upgrade<br>
 					Disconnect bar 2 from bar 1.<br>
 					<span id="upgDesc7">
-						Cost: 3 Logwall Point<br>
+						Cost: 3 Logress Point<br>
 						Currently: Dependent
 					</span>
 				</div>
@@ -118,7 +118,7 @@
 					Sine Upgrade<br>
 					Improves "Sine".<br>
 					<span id="skillUpgDesc0">
-						Cost: 1 Timewall Point<br>
+						Cost: 1 Logress Point<br>
 						Currently: /1
 					</span>
 				</div>
@@ -127,7 +127,7 @@
 					Absolute Value<br>
 					Puts the multiplier from "Sine" through an absolute value function.<br>
 					<span id="skillUpgDesc1">
-						Cost: 1 Timewall Point<br>
+						Cost: 1 Logress Point<br>
 						Currently: 1x
 					</span>
 				</div>
@@ -136,7 +136,7 @@
 					Exp Upgrade<br>
 					Improves "Exp".<br>
 					<span id="skillUpgDesc2">
-						Cost: 2 Timewall Points<br>
+						Cost: 2 Logress Points<br>
 						Currently: 1x
 					</span>
 				</div>
@@ -145,7 +145,7 @@
 					Quick Start<br>
 					Starts the exponential growth 10 seconds in.<br>
 					<span id="skillUpgDesc3">
-						Cost: 3 Timewall Point<br>
+						Cost: 3 Logress Point<br>
 						Currently: /10
 					</span>
 				</div>
@@ -156,7 +156,7 @@
 					Accel Upgrade<br>
 					Improves "Accel".<br>
 					<span id="skillUpgDesc4">
-						Cost: 1 Logwall Point<br>
+						Cost: 1 Logress Point<br>
 						Currently: 0 Skill
 					</span>
 				</div>
@@ -165,7 +165,7 @@
 					Jerk<br>
 					Makes the effect of "Accel" also accelerates.<br>
 					<span id="skillUpgDesc5">
-						Cost: 2 Logwall Point<br>
+						Cost: 2 Logress Point<br>
 						Currently: Locked
 					</span>
 				</div>
@@ -174,7 +174,7 @@
 					-1+1 Upgrade<br>
 					Improves "-1+1".<br>
 					<span id="skillUpgDesc6">
-						Cost: 2 Logwall Points<br>
+						Cost: 2 Logress Points<br>
 						Currently: Locked
 					</span>
 				</div>
@@ -183,7 +183,7 @@
 					-1^2<br>
 					Makes "-1+1" boost bar speed quadratically.<br>
 					<span id="skillUpgDesc7">
-						Cost: 3 Logwall Point<br>
+						Cost: 3 Logress Point<br>
 						Currently: Dependent
 					</span>
 				</div>
@@ -198,7 +198,7 @@
 					Bar Length Upgrade<br>
 					Divides bar length by 2.<br>
 					<span id="autoUpgDesc0">
-						Cost: 1 Timewall Point<br>
+						Cost: 1 Logress Point<br>
 						Currently: /1
 					</span>
 				</div>
@@ -207,7 +207,7 @@
 					Bar Speed Upgrade<br>
 					Multiplies bar speed by 2.<br>
 					<span id="autoUpgDesc1">
-						Cost: 1 Timewall Point<br>
+						Cost: 1 Logress Point<br>
 						Currently: 1x
 					</span>
 				</div>
@@ -216,7 +216,7 @@
 					Point Gain Upgrade<br>
 					Multiplies point gain by 2.<br>
 					<span id="autoUpgDesc2">
-						Cost: 2 Timewall Points<br>
+						Cost: 2 Logress Points<br>
 						Currently: 1x
 					</span>
 				</div>
@@ -225,7 +225,7 @@
 					Overflow Speed Upgrade<br>
 					Subtracts overflow penalty by 0.2.<br>
 					<span id="autoUpgDesc3">
-						Cost: 3 Timewall Point<br>
+						Cost: 3 Logress Point<br>
 						Currently: /10
 					</span>
 				</div>
@@ -236,7 +236,7 @@
 					Skill Unlock<br>
 					Unlocks a new skill.<br>
 					<span id="autoUpgDesc4">
-						Cost: 1 Logwall Point<br>
+						Cost: 1 Logress Point<br>
 						Currently: 0 Skill
 					</span>
 				</div>
@@ -245,7 +245,7 @@
 					Skill Power Upgrades<br>
 					Unlocks the skill upgrade tab.<br>
 					<span id="autoUpgDesc5">
-						Cost: 2 Logwall Point<br>
+						Cost: 2 Logress Point<br>
 						Currently: Locked
 					</span>
 				</div>
@@ -254,7 +254,7 @@
 					Automation Unlock<br>
 					Unlocks the automation tab.<br>
 					<span id="autoUpgDesc6">
-						Cost: 2 Logwall Points<br>
+						Cost: 2 Logress Points<br>
 						Currently: Locked
 					</span>
 				</div>
@@ -263,7 +263,7 @@
 					Independence Upgrade<br>
 					Disconnect bar 2 from bar 1.<br>
 					<span id="autoUpgDesc7">
-						Cost: 3 Logwall Point<br>
+						Cost: 3 Logress Point<br>
 						Currently: Dependent
 					</span>
 				</div>
@@ -292,7 +292,7 @@
 				<span id="skillTimer2"></span>
 				<span class="tooltipText">
 					"Squr"<br>
-					Squares your current timewall point after 1 minute, but if you redeem points at any point, it'll stop and fail!<br>
+					Squares your current progress point after 1 minute, but if you redeem points at any point, it'll stop and fail!<br>
 					Cooldown: 10 minutes
 				</span>
 			</button>
@@ -300,7 +300,7 @@
 				<span id="skillTimer3"></span>
 				<span class="tooltipText" style="margin-left:-135px;">
 					"Inv"<br>
-					Makes discount coupons randomly appear on the screen! All upgrades that cost timewall points' price will be divided by the amount you click! Reset after 1 minutes. <br>
+					Makes discount coupons randomly appear on the screen! All upgrades that cost progress points' price will be divided by the amount you click! Reset after 1 minutes. <br>
 					Cooldown: 7.5 minutes
 				</span>
 			</button>
