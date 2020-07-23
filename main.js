@@ -66,23 +66,34 @@ function doFrame(sinceLastFrame) {
 	for (let i = 0; i < 4; i++) {
 		if (game.skill.timer[i] > 0 && game.skill.durationTimer[i] <= 0) {
 			game.skill.timer[i] -= sinceLastFrame;
-			if (game.skill.timer[i]<=0) game.skill.timer[i] = 0;
+			if (game.skill.timer[i] < 0) game.skill.timer[i] = 0;
 			updateSkills();
 		}
 	}
 	for (let i = 0; i < 4; i++) {
 		if (game.skill.durationTimer[i]>0) {
-			game.skill.durationTimer[0] -= sinceLastFrame;
-			if (i==0) {
-				document.getElementById("sinGraph").classList.remove("hidden");
-				document.getElementById("sinGraph").style.opacity = 1;
-				if (game.skill.durationTimer[0]<=0) {
-					game.skill.durationTimer[0] = 0
-					document.getElementById("sinGraph").style.opacity = 0;
-					setTimeout(function(){
-						document.getElementById("sinGraph").classList.add("hidden");
-					}, 1000);
-				}
+			game.skill.durationTimer[i] -= sinceLastFrame;
+			if (game.skill.durationTimer[i] < 0) game.skill.durationTimer[i] = 0;
+			switch (i) {
+				case 0:
+					document.getElementById("sinGraph").classList.remove("hidden");
+					document.getElementById("sinGraph").style.opacity = 1;
+					if (game.skill.durationTimer[0] < 0) {
+						document.getElementById("sinGraph").style.opacity = 0;
+						setTimeout(function(){
+							document.getElementById("sinGraph").classList.add("hidden");
+						}, 1000);
+					}
+					break;
+				case 1:
+					game.skill.boostProgress -= sinceLastFrame;
+					if (game.skill.boostProgress < 0) game.skill.boostProgress = 0;
+					if (game.skill.boostProgress == 0) game.skill.boostOverflow = false;
+					if (game.skill.durationTimer[1] < 0) {
+						game.skill.boostProgress = 0;
+						updateBoostBar();
+					}
+					break;
 			}
 			updateSkills();
 		}
@@ -341,7 +352,9 @@ function newGame() {
 		skill: {
 			timer: [0,0,0,0],
 			isActive: [false, false, false, false],
-			durationTimer: [0,0,0,0]
+			durationTimer: [0,0,0,0],
+			boostProgress: 0,
+			boostOverflow: false
 		}
 	};
 }
@@ -350,7 +363,7 @@ function redeemPoints(n) {
 	if (game.progress[n] >= getBarLength(n)) {
 		game.points[n] += getPointGain(n);
 		game.lifetimePoints[n] += getPointGain(n);
-		if (n == 1 && !game.upgrade.normal[7]) {
+		if (n == 1) {
 			game.progress[0] = 0;
 			game.points[0] = 0;
 			for (let i = 0; i < 4; i++) {
@@ -359,6 +372,8 @@ function redeemPoints(n) {
 		} else {
 			game.progress[n] = game.progress[n] % getBarLength(n);
 		}
+		if (game.skill.durationTimer[1] > 0 && !game.skill.boostOverflow) game.skill.boostProgress += 500;
+		if (game.skill.boostProgress > 10000) game.skill.boostOverflow = true;
 		updatePoints();
 		updateUpg();
 	}
@@ -381,7 +396,7 @@ function getBarLength(n) {
 function getBarSpeed(n) {
 	switch (n) {
 		case 0:
-			return Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1) / (game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 5 / (game.upgrade.normal[3] / 2 + 1)) : 1);
+			return Math.pow(2, game.upgrade.normal[1]) * (game.skill.durationTimer[1] != 0 ? Math.pow(1.1 ,skill.cooldown[1] - game.skill.durationTimer[1]) : 1) / (game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 5 / (game.upgrade.normal[3] / 2 + 1)) : 1) * getBoostBarMult();
 			break;
 		case 1:
 			return (Math.pow(2, game.upgrade.normal[1])==Infinity?1.79e308:Math.pow(2, game.upgrade.normal[1])) / (game.progress[1] * Math.log(10));
@@ -396,6 +411,13 @@ function getPointGain(n) {
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1));
 	}
+}
+
+function getBoostBarMult() {
+	let multLimit = 30 + 5 * game.upgrade.skill[2];
+	let base = Math.pow(multLimit,1/10000);
+	let mult = Math.pow(base,game.skill.boostProgress * (game.upgrade.skill[3] ? 1.1 : 1));
+	return Math.min(mult,multLimit);
 }
 
 function updateAll() {
@@ -421,10 +443,9 @@ function updateProgress() {
 	}
 	document.getElementById("switchScreenLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
 	document.getElementById("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
-	if (game.upgrade.normal[7] == 0) {
-		game.progress[1] = Math.log10(game.progress[0] == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
-		if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
-	}
+	game.progress[1] = Math.log10(game.progress[0] == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
+	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
+	if (game.skill.durationTimer[1] > 0) updateBoostBar();
 }
 
 function updatePoints() {
@@ -528,6 +549,37 @@ function updateSkills() {
 	line.style.top = percent * 100 + "%";
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
 	document.getElementById("skillMenuOpen").classList[game.upgrade.normal[4] > 0 ? "remove" : "add"]("hidden");
+}
+
+function updateBoostBar() {
+	let boostColor = "hsl(" + (240 - game.skill.boostProgress/125*3) + ",100%,50%);";
+	document.getElementById("boostLabel").innerHTML = "x" + format(getBoostBarMult());
+	document.getElementById("boostBarValue").width = game.skill.boostProgress / 100 + "%";
+	document.getElemenyById("boostBarValue").backgroundColor = boostColor;
+	let boostStatus;
+	let x = game.skill.boostProgress;
+	switch (x) {
+		case (x < 2000):
+			boostStatus = "Cold";
+			break;
+		case (x < 4000):
+			boostStatus = "Eh";
+			break;
+		case (x < 6000):
+			boostStatus = "Warm";
+			break;
+		case (x < 8000):
+			boostStatus = "Hot";
+			break;
+		case (x < 9000):
+			boostStatus = "Burning";
+			break;
+		case (x < 10000):
+			boostStatus = "Melting";
+	}
+	if (game.skill.boostOverflow) boostStatus = "OVERHEAT";
+	document.getElementById("boostBarStatus").innerText = boostStatus;
+	document.getElementById("boostBarStatus").backgroundColor = boostColor;
 }
 
 function buyUpgrade(n, type = "normal") {
