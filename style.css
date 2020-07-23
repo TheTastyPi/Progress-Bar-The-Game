@@ -181,7 +181,7 @@ button.dark {
 	width: 0;
 	height: 100%;
 	background-color: blue;
-	transition: 0.5s;
+	transition: 0.1s;
 }
 .boostBarStatus {
 	width: 100px;
