@@ -77,19 +77,19 @@ function doFrame(sinceLastFrame) {
 			switch (i) {
 				case 0:
 					document.getElementById("sinGraph").classList.remove("hidden");
-					document.getElementById("sinGraph").style.opacity = 1;
-					if (game.skill.durationTimer[0] < 0) {
-						document.getElementById("sinGraph").style.opacity = 0;
-						setTimeout(function(){
-							document.getElementById("sinGraph").classList.add("hidden");
-						}, 1000);
-					}
+					if (game.skill.durationTimer[0] <= 0) document.getElementById("sinGraph").classList.add("hidden");
 					break;
 				case 1:
+					document.getElementById("boostBar").classList.remove("hidden");
+					document.getElementById("boostBarStatus").classList.remove("hidden");
+					document.getElementById("boostLabel").classList.remove("hidden");
 					game.skill.boostProgress -= sinceLastFrame;
 					if (game.skill.boostProgress < 0) game.skill.boostProgress = 0;
 					if (game.skill.boostProgress == 0) game.skill.boostOverflow = false;
-					if (game.skill.durationTimer[1] < 0) {
+					if (game.skill.durationTimer[1] <= 0) {
+						document.getElementById("boostBar").classList.add("hidden");
+						document.getElementById("boostBarStatus").classList.add("hidden");
+						document.getElementById("boostLabel").classList.add("hidden");
 						game.skill.boostProgress = 0;
 						updateBoostBar();
 					}
