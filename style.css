@@ -149,8 +149,6 @@ button.dark {
 	height: 200px;
 	background-color: #DDDDDD;
 	border: 4px solid #222222;
-	opacity: 0;
-	transition: opacity 0.5s;
 }
 .sinGraph.dark {
 	background-color: #222222;
@@ -173,7 +171,6 @@ button.dark {
 	background-color: white;
 	color: #0000FF;
 	border: 4px solid #222222;
-	transition: 0.5s;
 	transform: translate(635px, 150px);
 }
 .boostBar.dark {
