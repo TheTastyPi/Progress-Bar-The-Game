@@ -199,6 +199,10 @@ button.dark {
 #boostLabel {
 	transform: translate(475px, 175px);
 }
+.boostBarStatusText {
+	font-size:20px;
+	animation-name: none;
+}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
