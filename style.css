@@ -190,14 +190,14 @@ button.dark {
 	border: 4px solid #222222;
 	transform: translate(285px, 105px);
 	font-size: 20px;
-	transition: 0.5s;
+	transition: 0.1s;
 }
 .boostBarStatus.dark {
 	background-color: black;
 	border: 4px solid #DDDDDD;
 }
 #boostLabel {
-	transform: translate(435px, 175px);
+	transform: translate(475px, 175px);
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
