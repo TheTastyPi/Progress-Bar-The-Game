@@ -555,8 +555,8 @@ function updateSkills() {
 }
 
 function updateBoostBar() {
-	let boostColor = "hsl(" + (240 - game.skill.boostProgress/125*3) + ",100%,50%);";
-	document.getElementById("boostLabel").innerHTML = "x" + format(getBoostBarMult());
+	let boostColor = "hsl(" + (240 - game.skill.boostProgress/125*3) + ",100%,50%)";
+	document.getElementById("boostLabel").innerHTML = "x" + format(getBoostBarMult(),2);
 	document.getElementById("boostBarValue").style.width = game.skill.boostProgress / 100 + "%";
 	document.getElementById("boostBarValue").style.backgroundColor = boostColor;
 	let boostStatus;
