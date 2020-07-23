@@ -200,7 +200,7 @@ button.dark {
 	border: 4px solid #DDDDDD;
 }
 #boostLabel {
-	transform: translate(300px, 155px);
+	transform: translate(435px, 175px);
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
