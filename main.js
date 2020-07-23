@@ -561,7 +561,7 @@ function updateBoostBar() {
 	document.getElementById("boostBarValue").backgroundColor = boostColor;
 	let boostStatus;
 	let x = game.skill.boostProgress;
-	switch (x) {
+	switch (true) {
 		case (x < 2000):
 			boostStatus = "Cold";
 			break;
