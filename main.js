@@ -557,8 +557,8 @@ function updateSkills() {
 function updateBoostBar() {
 	let boostColor = "hsl(" + (240 - game.skill.boostProgress/125*3) + ",100%,50%);";
 	document.getElementById("boostLabel").innerHTML = "x" + format(getBoostBarMult());
-	document.getElementById("boostBarValue").width = game.skill.boostProgress / 100 + "%";
-	document.getElementById("boostBarValue").backgroundColor = boostColor;
+	document.getElementById("boostBarValue").style.width = game.skill.boostProgress / 100 + "%";
+	document.getElementById("boostBarValue").style.backgroundColor = boostColor;
 	let boostStatus;
 	let x = game.skill.boostProgress;
 	switch (true) {
@@ -582,7 +582,7 @@ function updateBoostBar() {
 	}
 	if (game.skill.boostOverflow) boostStatus = "OVERHEAT";
 	document.getElementById("boostBarStatus").innerText = boostStatus;
-	document.getElementById("boostBarStatus").backgroundColor = boostColor;
+	document.getElementById("boostBarStatus").style.backgroundColor = boostColor;
 }
 
 function buyUpgrade(n, type = "normal") {
