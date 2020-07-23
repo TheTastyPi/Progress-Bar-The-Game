@@ -581,7 +581,7 @@ function updateBoostBar() {
 			boostStatus = "Melting";
 	}
 	if (game.skill.boostOverflow) boostStatus = "OVERHEAT";
-	document.getElementById("boostBarStatus").innerText = boostStatus;
+	document.getElementById("boostBarStatusText").innerText = boostStatus;
 	document.getElementById("boostBarStatus").style.backgroundColor = boostColor;
 }
 
