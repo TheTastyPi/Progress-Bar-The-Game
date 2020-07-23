@@ -588,6 +588,7 @@ function buyUpgrade(n, type = "normal") {
 		game.upgrade[type][n]++;
 		updateUpg();
 		updatePoints();
+		updateSkills();
 	}
 }
 
