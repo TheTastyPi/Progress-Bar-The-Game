@@ -4,20 +4,20 @@ var game = newGame();
 
 const upgrade = {
 	normal: {
-		basePrice: [1, 1, 2, 3, 1, 1, 3, 10],
-		priceGrowth: [5, 5, 10, 12, 2, 1, 1, 1],
+		basePrice: [1, 1, 2, 3, 1, 2, 3, Infinity],
+		priceGrowth: [5, 5, 10, 12, 1, 1, 1, 1],
 		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1],
 		type: [0,0,0,0,1,1,1,1]
 	},
 	skill: {
-		basePrice: [1, 3, 2, 4, 3, 6, 4, 9],
+		basePrice: [1, 5, 1, 5, 1, 5, 1, 5],
 		priceGrowth: [2, 1, 2, 1, 2, 1, 2, 1],
 		limit: [Infinity,1,Infinity,1,Infinity,1,Infinity,1],
 		type: [1,1,1,1,1,1,1,1]
 	},
 	auto: {
-		basePrice: [1, 1, 2, 3, 1, 2, 3, 4],
-		priceGrowth: [6, 6, 11, 17.3, 6, 6, 6, 7],
+		basePrice: [1, 1, 1, 1, 1, 1, 1, 1],
+		priceGrowth: [2, 2, 2, 2, 2, 2, 2, 2],
 		limit: [Infinity,Infinity,Infinity,10,8,1,1,1],
 		type: [1,1,1,1,1,1,1,1]
 	}
