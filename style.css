@@ -211,6 +211,7 @@ button.dark {
 	z-index: 2;
 	transition: none;
 	border-radius: 0px;
+	position: absolute;
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
