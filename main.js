@@ -106,6 +106,7 @@ function doFrame(sinceLastFrame) {
 						game.skill.couponNext = Math.random() * 3000 + 2000;
 						game.skill.couponTimer = game.upgrade.skill[5] ? 2000 : 1000;
 						let coupon = document.createElement("button");
+						document.body.appendChild(coupon);
 						coupon.id = "coupon";
 						coupon.classList.add("coupon");
 						coupon.style.transform = "rotate("+Math.random()*40-20+"deg) translate(calc("+Math.random()+"*(100vw-248px)),"+Math.random()+"*(100vh-77px)))";
