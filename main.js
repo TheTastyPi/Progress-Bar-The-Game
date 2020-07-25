@@ -44,6 +44,8 @@ function init() {
 		leftMenu.style.left = "-"+leftMenu.style.width;
 	}
 	
+	load();
+	
 	if (game.skill.couponTimer > 0) {
 		let coupon = document.createElement("button");
 		document.body.appendChild(coupon);
@@ -53,8 +55,6 @@ function init() {
 		coupon.onclick = couponClick;
 	}
 	
-	load();
-
 	window.requestAnimationFrame(nextFrame);
 }
 
