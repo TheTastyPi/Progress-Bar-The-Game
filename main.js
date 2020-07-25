@@ -32,7 +32,7 @@ function init() {
 	for (let i = 0; i < 2; i++) {
 		let upgCleared = document.createElement("span");
 		upgCleared.appendChild(document.createTextNode("Nothing here..."));
-		document.getElementById("upgSect"+i).appendChild(upgCleared);
+		id("upgSect"+i).appendChild(upgCleared);
 		upgCleared.classList.add("upgCleared");
 		upgCleared.classList.add("hidden");
 		upgCleared.id = "upgCleared"+i;
@@ -76,20 +76,20 @@ function doFrame(sinceLastFrame) {
 			if (game.skill.durationTimer[i] < 0) game.skill.durationTimer[i] = 0;
 			switch (i) {
 				case 0:
-					document.getElementById("sinGraph").classList.remove("hidden");
-					if (game.skill.durationTimer[0] <= 0) document.getElementById("sinGraph").classList.add("hidden");
+					id("sinGraph").classList.remove("hidden");
+					if (game.skill.durationTimer[0] <= 0) id("sinGraph").classList.add("hidden");
 					break;
 				case 1:
-					document.getElementById("boostBar").classList.remove("hidden");
-					document.getElementById("boostBarStatus").classList.remove("hidden");
-					document.getElementById("boostLabel").classList.remove("hidden");
+					id("boostBar").classList.remove("hidden");
+					id("boostBarStatus").classList.remove("hidden");
+					id("boostLabel").classList.remove("hidden");
 					game.skill.boostProgress -= sinceLastFrame;
 					if (game.skill.boostProgress < 0) game.skill.boostProgress = 0;
 					if (game.skill.boostProgress == 0) game.skill.boostOverflow = false;
 					if (game.skill.durationTimer[1] <= 0) {
-						document.getElementById("boostBar").classList.add("hidden");
-						document.getElementById("boostBarStatus").classList.add("hidden");
-						document.getElementById("boostLabel").classList.add("hidden");
+						id("boostBar").classList.add("hidden");
+						id("boostBarStatus").classList.add("hidden");
+						id("boostLabel").classList.add("hidden");
 						game.skill.boostProgress = 0;
 						updateBoostBar();
 					}
@@ -124,8 +124,8 @@ function nextFrame(timeStamp) {
 function save(auto = true) {
 	localStorage.setItem('twsave', JSON.stringify(deinfinify(game)));
 	if (!auto) {
-		document.getElementById("saveButton").style.backgroundColor = "green";
-		setTimeout(function(){document.getElementById("saveButton").style.backgroundColor = "";}, 250);
+		id("saveButton").style.backgroundColor = "green";
+		setTimeout(function(){id("saveButton").style.backgroundColor = "";}, 250);
 	}
 }
 
@@ -142,20 +142,20 @@ function load(auto = true) {
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		updateAll();
 		if (!auto) {
-			document.getElementById("loadButton").style.backgroundColor = "green";
-			setTimeout(function(){document.getElementById("loadButton").style.backgroundColor = "";}, 250);
+			id("loadButton").style.backgroundColor = "green";
+			setTimeout(function(){id("loadButton").style.backgroundColor = "";}, 250);
 		}
 	}
 }
 
 function exportSave() {
-	document.getElementById("exportArea").classList.remove('hidden');
-	document.getElementById("exportArea").innerHTML = btoa(JSON.stringify(deinfinify(game)));
-	document.getElementById("exportArea").select();
+	id("exportArea").classList.remove('hidden');
+	id("exportArea").innerHTML = btoa(JSON.stringify(deinfinify(game)));
+	id("exportArea").select();
 	document.execCommand("copy");
-	document.getElementById("exportArea").classList.add('hidden');
-	document.getElementById("exportButton").style.backgroundColor = "green";
-	setTimeout(function(){document.getElementById("exportButton").style.backgroundColor = "";}, 250);
+	id("exportArea").classList.add('hidden');
+	id("exportButton").style.backgroundColor = "green";
+	setTimeout(function(){id("exportButton").style.backgroundColor = "";}, 250);
 }
 
 function importSave() {
@@ -167,10 +167,10 @@ function importSave() {
 			load();
 		} catch(yeet) {
 			err = true;
-			document.getElementById("importButton").style.backgroundColor = "red";
+			id("importButton").style.backgroundColor = "red";
 		}
-		if (!err) document.getElementById("importButton").style.backgroundColor = "green";
-		setTimeout(function(){document.getElementById("importButton").style.backgroundColor = "";}, 250);
+		if (!err) id("importButton").style.backgroundColor = "green";
+		setTimeout(function(){id("importButton").style.backgroundColor = "";}, 250);
 	}
 }
 
@@ -187,7 +187,7 @@ function wipe() {
 			menuOpen.style.top = "0";
 		}
 		for (let menu of document.getElementsByClassName("sideMenu")) {
-			let isLeft = document.getElementById(menu+"Open").classList.contains("left");
+			let isLeft = id(menu+"Open").classList.contains("left");
 			menu.style.left = isLeft?"-"+menu.style.width:"100%";
 			menu.classList.remove("isOpen");
 		}
@@ -195,8 +195,8 @@ function wipe() {
 			let isLeft = menuOpen.classList.contains("left");
 			menuOpen.style[isLeft?"left":"right"] = "0";
 		}
-		document.getElementById("wipeButton").style.backgroundColor = "red";
-		setTimeout(function(){document.getElementById("wipeButton").style.backgroundColor = "";}, 250);
+		id("wipeButton").style.backgroundColor = "red";
+		setTimeout(function(){id("wipeButton").style.backgroundColor = "";}, 250);
 	}
 }
 
@@ -232,9 +232,9 @@ function infinify(object) {
 
 function toggleAutoSave() {
 	game.doAutoSave = !game.doAutoSave;
-	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
-	document.getElementById("autoSaveToggleButton").style.backgroundColor = game.doAutoSave ? "green" : "red";
-	setTimeout(function(){document.getElementById("autoSaveToggleButton").style.backgroundColor = "";}, 250);
+	id("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+	id("autoSaveToggleButton").style.backgroundColor = game.doAutoSave ? "green" : "red";
+	setTimeout(function(){id("autoSaveToggleButton").style.backgroundColor = "";}, 250);
 }
 
 function changeAutoSaveInterval() {
@@ -244,25 +244,25 @@ function changeAutoSaveInterval() {
 		if (!isNaN(newInterval) && newInterval >= 0.2 && newInterval <= 300) {
 			let newIntervalMs = newInterval * 1000
 			game.autoSaveInterval = newIntervalMs;
-			document.getElementById("autoSaveIntervalButton").innerHTML = `Auto Save<br>Interval<br>${newInterval}s`;
-			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "green";
+			id("autoSaveIntervalButton").innerHTML = "Auto Save<br>Interval<br>"+newInterval+"s";
+			id("autoSaveIntervalButton").style.backgroundColor = "green";
 		} else {
-			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "red";
+			id("autoSaveIntervalButton").style.backgroundColor = "red";
 		}
 	}
-	setTimeout(function(){document.getElementById("autoSaveIntervalButton").style.backgroundColor = "";}, 250);
+	setTimeout(function(){id("autoSaveIntervalButton").style.backgroundColor = "";}, 250);
 }
 
 function toggleSideMenu(name) {
-	let isLeft = document.getElementById(name+"MenuOpen").classList.contains("left");
-	if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
-		document.getElementById(name+"Menu").style.left = isLeft?"0":"calc(100% - "+document.getElementById(name+"Menu").style.width+")";
-		document.getElementById(name+"MenuOpen").style[isLeft?"left":"right"] = document.getElementById(name+"Menu").style.width;
-		document.getElementById(name+"Menu").classList.add("isOpen");
+	let isLeft = id(name+"MenuOpen").classList.contains("left");
+	if (!id(name+"Menu").classList.contains("isOpen")) {
+		id(name+"Menu").style.left = isLeft?"0":"calc(100% - "+id(name+"Menu").style.width+")";
+		id(name+"MenuOpen").style[isLeft?"left":"right"] = id(name+"Menu").style.width;
+		id(name+"Menu").classList.add("isOpen");
 	} else {
-		document.getElementById(name+"Menu").style.left = isLeft?"-"+document.getElementById(name+"Menu").style.width:"100%";
-		document.getElementById(name+"MenuOpen").style[isLeft?"left":"right"] = "0";
-		document.getElementById(name+"Menu").classList.remove("isOpen");
+		id(name+"Menu").style.left = isLeft?"-"+id(name+"Menu").style.width:"100%";
+		id(name+"MenuOpen").style[isLeft?"left":"right"] = "0";
+		id(name+"Menu").classList.remove("isOpen");
 	}
 }
 
@@ -270,13 +270,13 @@ var topMenuOpen = false;
 
 function toggleTopMenu(name) {
 	if (!topMenuOpen) {
-		document.getElementById(name+"Menu").style.top = "0";
+		id(name+"Menu").style.top = "0";
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
-			menuOpen.style.top = document.getElementById(name+"Menu").style.height;
+			menuOpen.style.top = id(name+"Menu").style.height;
 		}
-		document.getElementById(name+"Menu").classList.add("isOpen");
+		id(name+"Menu").classList.add("isOpen");
 		topMenuOpen = true;
-	} else if (!document.getElementById(name+"Menu").classList.contains("isOpen")) {
+	} else if (!id(name+"Menu").classList.contains("isOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+menu.style.height;
 			menu.classList.remove("isOpen");
@@ -284,18 +284,18 @@ function toggleTopMenu(name) {
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
 			setTimeout(function(){
-				menuOpen.style.top = document.getElementById(name+"Menu").style.height;
+				menuOpen.style.top = id(name+"Menu").style.height;
 			},500);
 		}
 		setTimeout(function(){
-			document.getElementById(name+"Menu").style.top = "0";
-			document.getElementById(name+"Menu").classList.add("isOpen");
+			id(name+"Menu").style.top = "0";
+			id(name+"Menu").classList.add("isOpen");
 			topMenuOpen = true;
 		},500);
 	} else {
-		document.getElementById(name+"Menu").style.top = "-"+document.getElementById(name+"Menu").style.height;
-		document.getElementById(name+"MenuOpen").style.top = "0";
-		document.getElementById(name+"Menu").classList.remove("isOpen");
+		id(name+"Menu").style.top = "-"+id(name+"Menu").style.height;
+		id(name+"MenuOpen").style.top = "0";
+		id(name+"Menu").classList.remove("isOpen");
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
 		}
@@ -316,14 +316,14 @@ function switchScreen(dir) {
 	if (dir == "forward" && game.currentScreen != game.screenLimit) game.currentScreen++;
 	if (dir == "backward" && game.currentScreen != 0) game.currentScreen--;
 	for (let i = 0; i < document.getElementsByClassName("screen").length; i++) {
-		document.getElementById("screen"+i).style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
+		id("screen"+i).style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
 	}
 	for (let menu of document.getElementsByClassName("topMenu")) {
 		menu.style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
 	}
-	document.getElementById("maxAllButton").style.transform = "translate("+game.currentScreen*100+"vw,0)";
-	document.getElementById("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
-	document.getElementById("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
+	id("maxAllButton").style.transform = "translate("+game.currentScreen*100+"vw,0)";
+	id("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
+	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
 }
 
 function pluralCheck(n) {
@@ -424,10 +424,10 @@ function getBoostBarMult() {
 }
 
 function updateAll() {
-	document.getElementById("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
+	id("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
 	document.querySelectorAll("*").forEach(function(node) {node.classList.add(game.currentTheme);});
-	document.getElementById("switchScreenRight").classList[game.currentScreen == game.screenLimit[1] ? "add" : "remove"]("disabled");
-	document.getElementById("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
+	id("switchScreenRight").classList[game.currentScreen == game.screenLimit[1] ? "add" : "remove"]("disabled");
+	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
 	updateProgress();
 	updatePoints();
 	updateUpg();
@@ -444,8 +444,8 @@ function updateProgress() {
 		id("redeemButton"+i).classList[game.progress[i] >= getBarLength(i) ? "remove" : "add"]("disabled");
 		id("redeemButton"+i).innerHTML = "Redeem<br>"+format(getPointGain(i))+"<br>point"+pluralCheck(getPointGain(i));
 	}
-	document.getElementById("switchScreenLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
-	document.getElementById("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
+	id("switchScreenLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
+	id("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
 	game.progress[1] = Math.log10(game.progress[0] == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
 	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
 	if (game.skill.durationTimer[1] > 0) updateBoostBar();
@@ -454,12 +454,12 @@ function updateProgress() {
 function updatePoints() {
 	for (let i = 0; i < 2; i++) {
 		if (isNaN(game.points[i])) game.points[i] = 0;
-		document.getElementById("pointDisplay"+i).innerHTML = "You have "+format(game.points[i])+" "+(i==0?"pr":"l")+"ogress point"+pluralCheck(game.points[i])+".";
-		document.getElementById("pointDisplay"+i).classList[game.lifetimePoints[i] >= 1 ? "remove" : "add"]("hidden");
+		id("pointDisplay"+i).innerHTML = "You have "+format(game.points[i])+" "+(i==0?"pr":"l")+"ogress point"+pluralCheck(game.points[i])+".";
+		id("pointDisplay"+i).classList[game.lifetimePoints[i] >= 1 ? "remove" : "add"]("hidden");
 	}
-	document.getElementById("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
-	document.getElementById("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
-	document.getElementById("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
+	id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
+	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
 }
 
 function updateUpg() {
@@ -502,63 +502,63 @@ function updateUpg() {
 					break;
 				case "auto":
 			}
-			document.getElementById((type=="normal"?"u":type+"U")+"pgDesc"+i).innerHTML = newDesc;
+			id((type=="normal"?"u":type+"U")+"pgDesc"+i).innerHTML = newDesc;
 			if (getUpgPrice(i) == Infinity) {
 				setTimeout(function(){
-					document.getElementById("upg"+i).classList.add("maxedUpg");
-					setTimeout(function(){document.getElementById("upg"+i).classList.add("hidden");},500);
+					id("upg"+i).classList.add("maxedUpg");
+					setTimeout(function(){id("upg"+i).classList.add("hidden");},500);
 				},1000);
 			} else {
-				document.getElementById("upg"+i).classList.remove("maxedUpg");
-				document.getElementById("upg"+i).classList.remove("hidden");
+				id("upg"+i).classList.remove("maxedUpg");
+				id("upg"+i).classList.remove("hidden");
 			}
-			document.getElementById((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
+			id((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
 		}
 	}
-	document.getElementById("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
+	id("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
 	for (let i = 0; i < 2; i++) {
 		if (getUpgPrice(i*4) == Infinity &&
 		   getUpgPrice(i*4+1) == Infinity &&
 		   getUpgPrice(i*4+2) == Infinity &&
 		   getUpgPrice(i*4+3) == Infinity) {
 			setTimeout(function(){
-				document.getElementById("upgCleared"+i).classList.remove("hidden");
-				document.getElementById("upgCleared"+i).style.flex = "1";
+				id("upgCleared"+i).classList.remove("hidden");
+				id("upgCleared"+i).style.flex = "1";
 			},1500);
 		} else {
-			document.getElementById("upgCleared"+i).classList.add("hidden");
-			document.getElementById("upgCleared"+i).style.flex = "0";
+			id("upgCleared"+i).classList.add("hidden");
+			id("upgCleared"+i).style.flex = "0";
 		}
 	}
-	document.getElementById("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
-	document.getElementById("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
+	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
+	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
 }
 
 function updateSkills() {
 	for (let i = 0; i < 4; i++) {
-		document.getElementById("skill"+i).classList[game.skill.timer[i]<=0 && game.upgrade.normal[4] > i?"remove":"add"]("disabledUpg");
+		id("skill"+i).classList[game.skill.timer[i]<=0 && game.upgrade.normal[4] > i?"remove":"add"]("disabledUpg");
 		if (game.skill.durationTimer[i]>0) {
-			document.getElementById("skillTimer"+i).innerHTML = formatTime(game.skill.durationTimer[i], false);
-			document.getElementById("skillTimer"+i).style.color = "green";
+			id("skillTimer"+i).innerHTML = formatTime(game.skill.durationTimer[i], false);
+			id("skillTimer"+i).style.color = "green";
 		} else if (game.skill.timer[i]>0) {
-			document.getElementById("skillTimer"+i).innerHTML = formatTime(game.skill.timer[i], false);
-			document.getElementById("skillTimer"+i).style.color = "red";
+			id("skillTimer"+i).innerHTML = formatTime(game.skill.timer[i], false);
+			id("skillTimer"+i).style.color = "red";
 		} else {
-			document.getElementById("skillTimer"+i).innerHTML = ""
+			id("skillTimer"+i).innerHTML = ""
 		}
 	}
-	let line = document.getElementById("sinGraphLine");
+	let line = id("sinGraphLine");
 	let percent = (1 - Math.sin(game.skill.durationTimer[0] / 250)) / 2;
 	line.style.top = percent * 100 + "%";
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
-	document.getElementById("skillMenuOpen").classList[game.upgrade.normal[4] > 0 ? "remove" : "add"]("hidden");
+	id("skillMenuOpen").classList[game.upgrade.normal[4] > 0 ? "remove" : "add"]("hidden");
 }
 
 function updateBoostBar() {
 	let boostColor = "hsl(" + (240 - game.skill.boostProgress/125*3) + ",100%,50%)";
-	document.getElementById("boostLabel").innerHTML = "x" + format(getBoostBarMult(),2);
-	document.getElementById("boostBarValue").style.width = Math.min(game.skill.boostProgress / 100,100) + "%";
-	document.getElementById("boostBarValue").style.backgroundColor = boostColor;
+	id("boostLabel").innerHTML = "x" + format(getBoostBarMult(),2);
+	id("boostBarValue").style.width = Math.min(game.skill.boostProgress / 100,100) + "%";
+	id("boostBarValue").style.backgroundColor = boostColor;
 	let boostStatus;
 	let x = game.skill.boostProgress;
 	switch (true) {
@@ -581,8 +581,8 @@ function updateBoostBar() {
 			boostStatus = "Melting";
 	}
 	if (game.skill.boostOverflow) boostStatus = "OVERHEAT";
-	document.getElementById("boostBarStatusText").innerText = boostStatus;
-	document.getElementById("boostBarStatus").style.backgroundColor = boostColor;
+	id("boostBarStatusText").innerText = boostStatus;
+	id("boostBarStatus").style.backgroundColor = boostColor;
 }
 
 function buyUpgrade(n, type = "normal") {
