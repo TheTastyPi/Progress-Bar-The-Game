@@ -210,7 +210,7 @@ button.dark {
 	background-image: url('pics/coupon.png');
 	z-index: 2;
 	transition: none;
-	border-radius: none;
+	border-radius: 0px;
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
