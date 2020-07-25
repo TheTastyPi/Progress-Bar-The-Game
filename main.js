@@ -244,7 +244,7 @@ function changeAutoSaveInterval() {
 		if (!isNaN(newInterval) && newInterval >= 0.2 && newInterval <= 300) {
 			let newIntervalMs = newInterval * 1000
 			game.autoSaveInterval = newIntervalMs;
-			document.getElementById("autoSaveIntervalButton").innerHTML = "Auto Save<br>Interval<br>${newInterval}s";
+			document.getElementById("autoSaveIntervalButton").innerHTML = `Auto Save<br>Interval<br>${newInterval}s`;
 			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "green";
 		} else {
 			document.getElementById("autoSaveIntervalButton").style.backgroundColor = "red";
