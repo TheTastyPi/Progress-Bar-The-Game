@@ -46,12 +46,6 @@ function init() {
 	
 	load();
 	
-	if (game.skill.durationTimer[2] > 0) {
-		game.skill.couponTimer = 0;
-		game.skill.couponCount = 0;
-		game.skill.couponNext = Math.random() * 3000 + 2000;
-	}
-	
 	window.requestAnimationFrame(nextFrame);
 }
 
@@ -170,6 +164,11 @@ function load(auto = true) {
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
 		if (typeof(pastGame.lifetimeProgress) == "number") pastGame.lifetimeProgress = [pastGame.lifetimeProgress];
 		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
+		if (pastGame.skill.durationTimer[2] > 0) {
+			pastGame.skill.couponTimer = 0;
+			pastGame.skill.couponCount = 0;
+			pastGame.skill.couponNext = Math.random() * 3000 + 2000;
+		}
 		let offlineTime = Date.now() - pastGame.date;
 		merge(game, pastGame);
 		if (offlineTime > 1000) simulateTime(offlineTime);
