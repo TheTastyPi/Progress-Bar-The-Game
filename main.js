@@ -133,7 +133,7 @@ function nextFrame(timeStamp) {
 	let sinceLastSave = (timeStamp - lastSave) * game.speed;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		if (sinceLastFrame >= 1000) {
+		if (sinceLastFrame >= 1000 * game.speed) {
 			simulateTime(sinceLastFrame);
 		} else {
 			doFrame(sinceLastFrame);
