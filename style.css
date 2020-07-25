@@ -209,6 +209,7 @@ button.dark {
 	height: 77px;
 	background-image: url('pics/coupon.png');
 	z-index: 2;
+	transition: none;
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
