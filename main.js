@@ -46,13 +46,10 @@ function init() {
 	
 	load();
 	
-	if (game.skill.couponTimer > 0) {
-		let coupon = document.createElement("button");
-		document.body.appendChild(coupon);
-		coupon.id = "coupon";
-		coupon.classList.add("coupon");
-		coupon.style.transform = "translate(calc("+Math.random()+"*(100vw - 257px)),calc("+Math.random()+"*(100vh - 85px)))";
-		coupon.onclick = couponClick;
+	if (game.skill.durationTimer[2] > 0) {
+		game.skill.couponTimer = 0;
+		game.skill.couponCount = 0;
+		game.skill.couponNext = Math.random() * 3000 + 2000;
 	}
 	
 	window.requestAnimationFrame(nextFrame);
