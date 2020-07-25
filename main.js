@@ -105,7 +105,7 @@ function doFrame(sinceLastFrame) {
 						coupon.id = "coupon";
 						coupon.classList.add("coupon");
 						coupon.style.transform = "translate(calc("+Math.random()+"*(100vw - 248px)),calc("+Math.random()+"*(100vh - 77px)))";
-						coupon.onclick = "couponClick()";
+						coupon.onclick = couponClick;
 					}
 					if (game.skill.couponTimer > 0) {
 						game.skill.couponTimer -= sinceLastFrame;
@@ -119,7 +119,7 @@ function doFrame(sinceLastFrame) {
 						game.skill.couponTimer = 0;
 						game.skill.couponCount = 0;
 						game.skill.couponNext = 0;
-						//document.body.removeChild(id("coupon"));
+						if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 					}
 					break;
 			}
