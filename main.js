@@ -102,14 +102,6 @@ function doFrame(sinceLastFrame) {
 						game.skill.couponCount = 0;
 						game.skill.couponNext = 0;
 					}
-					if (game.skill.couponTimer > 0) {
-						game.skill.couponTimer -= sinceLastFrame;
-						id("coupon").style.opacity = Math.max(game.skill.couponTimer / (game.upgrade.skill[5] ? 2000 : 1000), 0) + "";
-						if (game.skill.couponTimer <= 0) {
-							game.skill.couponTimer = 0;
-							document.removeChild(id("coupon"));
-						}
-					}
 					if (game.skill.couponNext<=0) {
 						game.skill.couponNext = Math.random() * 3000 + 2000;
 						game.skill.couponTimer = game.upgrade.skill[5] ? 2000 : 1000;
@@ -118,6 +110,14 @@ function doFrame(sinceLastFrame) {
 						coupon.classList.add("coupon");
 						coupon.style.transform = "rotate("+Math.random()*40-20+"deg) translate(calc("+Math.random()+"*(100vw-248px)),"+Math.random()+"*(100vh-77px)))";
 						coupon.onclick = "couponClick();";
+					}
+					if (game.skill.couponTimer > 0) {
+						game.skill.couponTimer -= sinceLastFrame;
+						id("coupon").style.opacity = Math.max(game.skill.couponTimer / (game.upgrade.skill[5] ? 2000 : 1000), 0) + "";
+						if (game.skill.couponTimer <= 0) {
+							game.skill.couponTimer = 0;
+							document.removeChild(id("coupon"));
+						}
 					}
 					break;
 			}
