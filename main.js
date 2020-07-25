@@ -78,6 +78,7 @@ function doFrame(sinceLastFrame) {
 				case 0:
 					id("sinGraph").classList.remove("hidden");
 					if (game.skill.durationTimer[0] <= 0) id("sinGraph").classList.add("hidden");
+					updateSineGraph();
 					break;
 				case 1:
 					id("boostBar").classList.remove("hidden");
@@ -91,7 +92,32 @@ function doFrame(sinceLastFrame) {
 						id("boostBarStatus").classList.add("hidden");
 						id("boostLabel").classList.add("hidden");
 						game.skill.boostProgress = 0;
-						updateBoostBar();
+					}
+					updateBoostBar();
+					break;
+				case 2:
+					game.skill.couponNext -= sinceLastFrame;
+					if (game.skill.durationTimer[2] <= 0) {
+						game.skill.couponTimer = 0;
+						game.skill.couponCount = 0;
+						game.skill.couponNext = 0;
+					}
+					if (game.skill.couponTimer > 0) {
+						game.skill.couponTimer -= sinceLastFrame;
+						id("coupon").style.opacity = Math.max(game.skill.couponTimer / (game.upgrade.skill[5] ? 2000 : 1000), 0) + "";
+						if (game.skill.couponTimer <= 0) {
+							game.skill.couponTimer = 0;
+							document.removeChild(id("coupon"));
+						}
+					}
+					if (game.skill.couponNext<=0) {
+						game.skill.couponNext = Math.random() * 3000 + 2000;
+						game.skill.couponTimer = game.upgrade.skill[5] ? 2000 : 1000;
+						let coupon = document.createElement("button");
+						coupon.id = "coupon";
+						coupon.classList.add("coupon");
+						coupon.style.transform = "rotate("+Math.random()*40-20+"deg) translate(calc("+Math.random()+"*(100vw-248px)),"+Math.random()+"*(100vh-77px)))";
+						coupon.onclick = "couponClick();";
 					}
 					break;
 			}
@@ -354,7 +380,11 @@ function newGame() {
 			isActive: [false, false, false, false],
 			durationTimer: [0,0,0,0],
 			boostProgress: 0,
-			boostOverflow: false
+			boostOverflow: false,
+			couponTimer: 0,
+			couponNext: 0,
+			couponCount: 0,
+			waitTimer: 0
 		}
 	};
 }
@@ -448,7 +478,6 @@ function updateProgress() {
 	id("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
 	game.progress[1] = Math.log10(game.progress[0] == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
 	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
-	if (game.skill.durationTimer[1] > 0) updateBoostBar();
 }
 
 function updatePoints() {
@@ -547,6 +576,9 @@ function updateSkills() {
 			id("skillTimer"+i).innerHTML = ""
 		}
 	}
+}
+
+function updateSineGraph() {
 	let line = id("sinGraphLine");
 	let percent = (1 - Math.sin(game.skill.durationTimer[0] / 250)) / 2;
 	line.style.top = percent * 100 + "%";
@@ -614,6 +646,11 @@ function useSkill(n) {
 		game.skill.timer[n] = skill.cooldown[n];
 		game.skill.durationTimer[n] = skill.duration[n];
 	}
+}
+
+function couponClick() {
+	game.skill.couponCount++;
+	game.skill.couponTimer = 0;
 }
 
 function isEven(n) {
