@@ -104,7 +104,7 @@ function doFrame(sinceLastFrame) {
 						document.body.appendChild(coupon);
 						coupon.id = "coupon";
 						coupon.classList.add("coupon");
-						coupon.style.transform = "rotate("+(Math.random()*40-20)+"deg) translate(calc("+Math.random()+"*(100vw-248px)),calc("+Math.random()+"*(100vh-77px)))";
+						coupon.style.transform = "translate(calc("+Math.random()+"*(100vw - 248px)),calc("+Math.random()+"*(100vh - 77px)))";
 						coupon.onclick = "couponClick()";
 					}
 					if (game.skill.couponTimer > 0) {
