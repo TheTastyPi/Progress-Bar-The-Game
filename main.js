@@ -104,21 +104,20 @@ function doFrame(sinceLastFrame) {
 						document.body.appendChild(coupon);
 						coupon.id = "coupon";
 						coupon.classList.add("coupon");
-						coupon.style.transform = "translate(calc("+Math.random()+"*(100vw - 248px)),calc("+Math.random()+"*(100vh - 77px)))";
+						coupon.style.transform = "translate(calc("+Math.random()+"*(100vw - 257px)),calc("+Math.random()+"*(100vh - 85px)))";
 						coupon.onclick = couponClick;
 					}
 					if (game.skill.couponTimer > 0) {
 						game.skill.couponTimer -= sinceLastFrame;
 						id("coupon").style.opacity = Math.max(game.skill.couponTimer / (game.upgrade.skill[5] ? 2000 : 1000), 0) + "";
-						if (game.skill.couponTimer <= 0) {
-							game.skill.couponTimer = 0;
-							document.body.removeChild(id("coupon"));
-						}
+					} else {
+						game.skill.couponTimer = 0;
+						document.body.removeChild(id("coupon"));
 					}
 					if (game.skill.durationTimer[2] <= 0) {
 						game.skill.couponTimer = 0;
 						game.skill.couponCount = 0;
-						game.skill.couponNext = 0;
+						game.skill.couponNext = Math.random() * 3000 + 2000;
 						if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 					}
 					break;
