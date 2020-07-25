@@ -1,7 +1,5 @@
-# Timewalls-The-Game
-Timewalls: The Game
-
-The name will become more unfitting as more updates come out.
+# Progress Bar: The Game
+A game where you fill progress bars.
 
 # Change Log
 ## v0.3: Logarithmic Progress - TBD
