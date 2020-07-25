@@ -101,6 +101,7 @@ function doFrame(sinceLastFrame) {
 						game.skill.couponTimer = 0;
 						game.skill.couponCount = 0;
 						game.skill.couponNext = 0;
+						document.body.removeChild(id("coupon"));
 					}
 					if (game.skill.couponNext<=0) {
 						game.skill.couponNext = Math.random() * 3000 + 2000;
@@ -109,8 +110,8 @@ function doFrame(sinceLastFrame) {
 						document.body.appendChild(coupon);
 						coupon.id = "coupon";
 						coupon.classList.add("coupon");
-						coupon.style.transform = "rotate("+(Math.random()*40-20)+"deg) translate(calc("+Math.random()+"*(100vw-248px)),"+Math.random()+"*(100vh-77px)))";
-						coupon.onclick = "couponClick();";
+						coupon.style.transform = "rotate("+(Math.random()*40-20)+"deg) translate(calc("+Math.random()+"*(100vw-248px)),calc("+Math.random()+"*(100vh-77px)))";
+						coupon.onclick = "couponClick()";
 					}
 					if (game.skill.couponTimer > 0) {
 						game.skill.couponTimer -= sinceLastFrame;
