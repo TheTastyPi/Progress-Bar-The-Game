@@ -438,11 +438,11 @@ function updateProgress() {
 	for (let i = 0; i < 2; i++) {
 		if (isNaN(game.progress[i])) game.progress[i] = Infinity;
 		if (isNaN(game.lifetimeProgress[i])) game.lifetimeProgress[i] = Infinity;
-		document.getElementById("progressBar"+i).value = game.progress[i] != Infinity ? game.progress[i] : 1.79e308;
-		document.getElementById("progressBarLabel"+i).innerHTML = format((game.progress[i] / getBarLength(i) * 100), 4) + "%";
-		document.getElementById("redeemButton"+i).classList[game.lifetimeProgress[i] >= getBarLength(i) ? "remove" : "add"]("hidden");
-		document.getElementById("redeemButton"+i).classList[game.progress[i] >= getBarLength(i) ? "remove" : "add"]("disabled");
-		document.getElementById("redeemButton"+i).innerHTML = "Redeem<br>"+format(getPointGain(i))+"<br>point"+pluralCheck(getPointGain(i));
+		id("progressBar"+i).value = game.progress[i] != Infinity ? game.progress[i] : 1.79e308;
+		id("progressBarLabel"+i).innerHTML = format((game.progress[i] / getBarLength(i) * 100), 4) + "%";
+		id("redeemButton"+i).classList[game.lifetimeProgress[i] >= getBarLength(i) ? "remove" : "add"]("hidden");
+		id("redeemButton"+i).classList[game.progress[i] >= getBarLength(i) ? "remove" : "add"]("disabled");
+		id("redeemButton"+i).innerHTML = "Redeem<br>"+format(getPointGain(i))+"<br>point"+pluralCheck(getPointGain(i));
 	}
 	document.getElementById("switchScreenLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
 	document.getElementById("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/33 ? "remove" : "add"]("hidden");
@@ -661,6 +661,10 @@ function formatTime(ms, word=true) {
 		if (dy >= 1) time = dh + ":" + time;
 		return time;
 	}
+}
+
+function id(id) {
+	return document.getElementById(id);
 }
 
 init();
