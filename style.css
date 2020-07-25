@@ -204,6 +204,11 @@ button.dark {
 	font-size:20px;
 	animation-name: none;
 }
+.coupon {
+	width: 248px;
+	height: 77px;
+	background-image: url('pics/coupon.png');
+}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
