@@ -222,7 +222,10 @@ button.dark {
 	font-size: 400px;
 	z-index: 2;
 }
-.couponCount.dark {background-color: rgba(0,0,0,0.5);}
+.couponCount.dark {
+	background-color: rgba(0,0,0,0.5);
+	color: white;
+}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
