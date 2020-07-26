@@ -104,7 +104,7 @@ function doFrame(sinceLastFrame) {
 						document.body.appendChild(coupon);
 						coupon.id = "coupon";
 						coupon.classList.add("coupon");
-						coupon.style.transform = "translate(calc("+Math.random()+"*(100vw - 257px)),calc("+Math.random()+"*(100vh - 85px)))";
+						coupon.style.transform = "translate(calc("+Math.random()+"*(100vw - 100%)),calc("+Math.random()+"*(100vh - 100%)))";
 						coupon.onclick = couponClick;
 					}
 					if (game.skill.couponTimer > 0) {
@@ -663,6 +663,7 @@ function couponClick() {
 	id("couponCount").style.opacity = 1;
 	id("couponCount").style.transition = "opacity 0.5s";
 	id("couponCount").style.opacity = 0;
+	updateUpg();
 }
 
 function isEven(n) {
