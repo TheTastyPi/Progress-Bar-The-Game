@@ -213,6 +213,15 @@ button.dark {
 	border-radius: 0px;
 	position: absolute;
 }
+.couponCount {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(255,255,255,0.5);
+	font-size: 400px;
+	transition: opacity 0.5;
+	opacity: 0;
+}
+.couponCount.dark {background-color: rgba(0,0,0,0.5);}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
