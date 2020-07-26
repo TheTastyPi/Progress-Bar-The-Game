@@ -666,7 +666,7 @@ function isEven(n) {
 function format(n, toFixed = 0) {
 	if (n == "Infinity") return Infinity;
 	else if (n < 1e3) return n.toFixed(toFixed);
-	return n.toPrecision(5).replace("+","");
+	return n.toExponential(2).replace("+","");
 }
 
 function formatTime(ms, word=true) {
