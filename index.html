@@ -293,7 +293,7 @@
 				<span id="skillTimer2"></span>
 				<span class="tooltipText">
 					"Inv"<br>
-					Makes discount coupons randomly appear on the screen! All upgrades that cost progress points' price will be divided by the amount you click, but if you miss one, then it'll all reset! <br>
+					Makes discount coupons randomly appear on the screen! All upgrades that cost progress points' price will be divided based on the amount you click, but if you miss one, then it'll all reset! <br>
 					Cooldown: 10 minutes
 				</span>
 			</button>
@@ -323,6 +323,7 @@
 		</div>
 		<button id="switchScreenLeft" onclick="switchScreen('backward')" class="hidden switchScreenLeft">&lt;</button>
 		<button id="switchScreenRight" onclick="switchScreen('forward')" class="hidden switchScreenRight">&gt;</button>
+		<span id="couponCount" class="couponCount">0</span>
 		<textarea style="opacity: .01; height:0; position:absolute; z-index: -1;" id="exportArea">export text</textarea>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
