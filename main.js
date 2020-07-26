@@ -110,9 +110,9 @@ function doFrame(sinceLastFrame) {
 					if (game.skill.couponTimer > 0) {
 						game.skill.couponTimer -= sinceLastFrame;
 						id("coupon").style.opacity = Math.max(game.skill.couponTimer / (game.upgrade.skill[5] ? 2000 : 1000), 0) + "";
+						if (game.skill.couponTimer <= 0) game.skill.couponCount = 0;
 					} else {
 						game.skill.couponTimer = 0;
-						game.skill.couponCount = 0;
 						if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 					}
 					if (game.skill.durationTimer[2] <= 0) {
