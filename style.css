@@ -221,6 +221,8 @@ button.dark {
 	transition: opacity 0.5s;
 	opacity: 0;
 	z-index: 2;
+	animation-name: couponCountInit;
+	antimation-duration: 0.5s;
 }
 .couponCount.dark {background-color: rgba(0,0,0,0.5);}
 .sideMenuOpen {
@@ -404,4 +406,8 @@ button.dark {
 @keyframes switchScreenInit {
 	from {width: 0; opacity: 0;}
 	to {width: 30px; opacity: 1;}
+}
+@keyframes couponCountInit {
+	from {opacity: 1;}
+	to {opacity: 0;}
 }
