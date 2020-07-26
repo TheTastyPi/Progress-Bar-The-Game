@@ -24,8 +24,8 @@ const upgrade = {
 };
 
 const skill = {
-	cooldown: [10*60*1000, 10*60*1000, 20*60*1000, 20*60*1000],
-	duration: [60*1000, 60*1000, 60*1000, 60*1000]
+	cooldown: [5*60*1000, 5*60*1000, 10*60*1000, 7.5*60*1000],
+	duration: [60*1000, 60*1000, 60*1000, 30*1000]
 };
 
 function init() {
@@ -98,7 +98,7 @@ function doFrame(sinceLastFrame) {
 				case 2:
 					game.skill.couponNext -= sinceLastFrame;
 					if (game.skill.couponNext<=0) {
-						game.skill.couponNext = Math.random() * 3000 + 2000;
+						game.skill.couponNext = Math.random() * 2000 + 3000;
 						game.skill.couponTimer = game.upgrade.skill[5] ? 2000 : 1000;
 						let coupon = document.createElement("button");
 						document.body.appendChild(coupon);
@@ -110,7 +110,10 @@ function doFrame(sinceLastFrame) {
 					if (game.skill.couponTimer > 0) {
 						game.skill.couponTimer -= sinceLastFrame;
 						id("coupon").style.opacity = Math.max(game.skill.couponTimer / (game.upgrade.skill[5] ? 2000 : 1000), 0) + "";
-						if (game.skill.couponTimer <= 0) game.skill.couponCount = 0;
+						if (game.skill.couponTimer <= 0) {
+							game.skill.couponCount = 0;
+							updaeUpg();
+						}
 					} else {
 						game.skill.couponTimer = 0;
 						if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
@@ -120,6 +123,7 @@ function doFrame(sinceLastFrame) {
 						game.skill.couponCount = 0;
 						game.skill.couponNext = Math.random() * 3000 + 2000;
 						if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
+						updateUpg();
 					}
 					break;
 			}
