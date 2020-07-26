@@ -655,9 +655,7 @@ function useSkill(n) {
 	}
 }
 
-var couponTimeout;
 function couponClick() {
-	clearTimeout(couponTimeout);
 	game.skill.couponCount++;
 	game.skill.couponTimer = 0;
 	id("couponCountText").innerHTML = game.skill.couponCount;
@@ -666,7 +664,7 @@ function couponClick() {
 	setTimeout(function(){
 		id("couponCount").style.opacity = 0;
 	},1)
-	couponTimeout = setTimeout(function(){
+	setTimeout(function(){
 		id("couponCount").classList.add("hidden");
 		id("couponCount").style.transition = "opacity 0s";
 		id("couponCount").style.opacity = 1;
