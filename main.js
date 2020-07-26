@@ -112,6 +112,7 @@ function doFrame(sinceLastFrame) {
 						id("coupon").style.opacity = Math.max(game.skill.couponTimer / (game.upgrade.skill[5] ? 2000 : 1000), 0) + "";
 					} else {
 						game.skill.couponTimer = 0;
+						game.skill.couponCount = 0;
 						if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 					}
 					if (game.skill.durationTimer[2] <= 0) {
@@ -416,7 +417,7 @@ function redeemPoints(n) {
 }
 
 function getUpgPrice(n, type = "normal") {
-	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]) : Infinity);
+	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]) / ((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1) : Infinity);
 }
 
 function getBarLength(n) {
@@ -657,6 +658,11 @@ function useSkill(n) {
 function couponClick() {
 	game.skill.couponCount++;
 	game.skill.couponTimer = 0;
+	id("couponCount").innerHTML = game.skill.couponCount;
+	id("couponCount").style.transition = 0;
+	id("couponCount").style.opacity = 1;
+	id("couponCount").style.transition = "opacity 0.5s";
+	id("couponCount").style.opacity = 0;
 }
 
 function isEven(n) {
