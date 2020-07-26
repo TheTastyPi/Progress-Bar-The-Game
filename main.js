@@ -458,7 +458,7 @@ function getPointGain(n) {
 }
 
 function getBoostBarMult() {
-	let multLimit = 30 + 5 * game.upgrade.skill[2];
+	let multLimit = Math.pow(36, 0.5 * game.upgrade.skill[2] + 1);
 	let base = Math.pow(multLimit,1/10000);
 	let mult = Math.pow(base,game.skill.boostProgress * (game.upgrade.skill[3] ? 1.1 : 1));
 	return Math.min(mult,multLimit);
@@ -531,7 +531,13 @@ function updateUpg() {
 				case "skill":
 					switch(i) {
 						case 0:
+						case 2:
 							newDesc += "^" + format(0.5 * game.upgrade.skill[i] + 1, 1);
+							break;
+						case 4:
+							newDesc += "x" + format(game.upgrade.skill[i] + 1, 0);
+							break
+						case 6:
 							break;
 						case 1:
 						case 3:
@@ -572,6 +578,8 @@ function updateUpg() {
 	}
 	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
 	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
+	id("skillDesc0").innerHTML = "x${Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) + 1} and x-${Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) - 1}";
+	id("skillDesc1").innerHTML = Math.pow(36, 0.5 * game.upgrade.skill[2] + 1);
 }
 
 function updateSkills() {
