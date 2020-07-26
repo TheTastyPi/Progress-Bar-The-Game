@@ -578,7 +578,7 @@ function updateUpg() {
 	}
 	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
 	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
-	id("skillDesc0").innerHTML = "x${Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) + 1} and x-${Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) - 1}";
+	id("skillDesc0").innerHTML = `x${Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) + 1} and x-${Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) - 1}`;
 	id("skillDesc1").innerHTML = Math.pow(36, 0.5 * game.upgrade.skill[2] + 1);
 }
 
