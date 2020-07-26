@@ -655,15 +655,15 @@ function useSkill(n) {
 	}
 }
 
-var couponTimeout = 0;
 function couponClick() {
-	clearTimeout(couponTimeout);
 	game.skill.couponCount++;
 	game.skill.couponTimer = 0;
 	id("couponCountText").innerHTML = game.skill.couponCount;
 	id("couponCount").classList.remove("hidden");
-	id("couponCount").style.opacity = 0;
-	couponTimeout = setTimeout(function(){
+	setTimeout(function(){
+		id("couponCount").style.opacity = 0;
+	},1)
+	setTimeout(function(){
 		id("couponCount").classList.add("hidden");
 		id("couponCount").style.opacity = 1;
 	},500);
