@@ -660,10 +660,12 @@ function couponClick() {
 	clearTimeout(couponTimeout);
 	game.skill.couponCount++;
 	game.skill.couponTimer = 0;
-	id("couponCount").innerHTML = game.skill.couponCount;
+	id("couponCountText").innerHTML = game.skill.couponCount;
 	id("couponCount").classList.remove("hidden");
+	id("couponCount").style.opacity = 0;
 	couponTimeout = setTimeout(function(){
 		id("couponCount").classList.add("hidden");
+		id("couponCount").style.opacity = 1;
 	},500);
 	updateUpg();
 }
