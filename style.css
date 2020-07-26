@@ -219,7 +219,6 @@ button.dark {
 	background-color: rgba(255,255,255,0.5);
 	font-size: 400px;
 	transition: opacity 0.5s;
-	opacity: 0;
 	z-index: 2;
 	animation-name: couponCountInit;
 	antimation-duration: 0.5s;
