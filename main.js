@@ -461,7 +461,7 @@ function getPointGain(n) {
 			let point = game.progress[0] / getBarLength(0);
 			point *= Math.pow(2, game.upgrade.normal[2]);
 			point *= Math.pow(Math.sin(game.skill.durationTimer[0] / 250) * Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)
-			return Math.floor( *  *);
+			return Math.floor(point);
 			break;
 		}
 		case 1:
