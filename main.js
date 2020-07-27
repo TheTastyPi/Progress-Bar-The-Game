@@ -126,6 +126,9 @@ function doFrame(sinceLastFrame) {
 						updateUpg();
 					}
 					break;
+				case 3:
+					if (game.skill.waitTimer > 0) game.skill.durationTimer[3] += sinceLastFrame;
+					game.skill.waitTimer -= sinceLastFrame;
 			}
 			updateSkills();
 		}
@@ -415,6 +418,10 @@ function redeemPoints(n) {
 		}
 		if (game.skill.durationTimer[1] > 0 && !game.skill.boostOverflow) game.skill.boostProgress += 500;
 		if (game.skill.boostProgress > 10000) game.skill.boostOverflow = true;
+		if (game.skill.waitTimer > 0) {
+			game.skill.waitTimer = 0;
+			game.skill.durationTimer[3] = 0;
+		}
 		updatePoints();
 		updateUpg();
 	}
@@ -588,6 +595,10 @@ function updateSkills() {
 		if (game.skill.durationTimer[i]>0) {
 			id("skillTimer"+i).innerHTML = formatTime(game.skill.durationTimer[i], false);
 			id("skillTimer"+i).style.color = "green";
+			if (i == 3 && game.skill.waitTimer > 0) {
+				id("skillTimer"+i).innerHTML = formatTime(game.skill.waitTimer, false);
+				id("skillTimer"+i).style.color = "blue";
+			}
 		} else if (game.skill.timer[i]>0) {
 			id("skillTimer"+i).innerHTML = formatTime(game.skill.timer[i], false);
 			id("skillTimer"+i).style.color = "red";
@@ -664,6 +675,7 @@ function useSkill(n) {
 	if (game.skill.timer[n] <= 0 && game.upgrade.normal[4] > n) {
 		game.skill.timer[n] = skill.cooldown[n];
 		game.skill.durationTimer[n] = skill.duration[n];
+		if (n == 3) game.skill.waitTimer = 120*1000;
 	}
 }
 
