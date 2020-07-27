@@ -129,6 +129,7 @@ function doFrame(sinceLastFrame) {
 				case 3:
 					if (game.skill.waitTimer > 0) game.skill.durationTimer[3] += sinceLastFrame;
 					game.skill.waitTimer -= sinceLastFrame;
+					if (game.skill.waitTimer < 0) game.skill.waitTimer = 0;
 			}
 			updateSkills();
 		}
@@ -428,7 +429,7 @@ function redeemPoints(n) {
 }
 
 function getUpgPrice(n, type = "normal") {
-	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]) / ((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1) : Infinity);
+	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]) / Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1) : Infinity);
 }
 
 function getBarLength(n) {
@@ -456,16 +457,20 @@ function getBarSpeed(n) {
 
 function getPointGain(n) {
 	switch (n) {
-		case 0:
-			return Math.floor(game.progress[0] / getBarLength(0) * Math.pow(2, game.upgrade.normal[2]) * (Math.sin(game.skill.durationTimer[0] / 250) * Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) + 1));
+		case 0: {
+			let point = game.progress[0] / getBarLength(0);
+			point *= Math.pow(2, game.upgrade.normal[2]);
+			point *= Math.pow(Math.sin(game.skill.durationTimer[0] / 250) * Math.pow(9, game.upgrade.skill[0] * 0.5 + 1) + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)
+			return Math.floor( *  *);
 			break;
+		}
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1));
 	}
 }
 
 function getBoostBarMult() {
-	let multLimit = Math.pow(36, 0.5 * game.upgrade.skill[2] + 1);
+	let multLimit = Math.pow(36, 0.5 * game.upgrade.skill[2] + 1 * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1));
 	let base = Math.pow(multLimit,1/10000);
 	let mult = Math.pow(base,game.skill.boostProgress * (game.upgrade.skill[3] ? 1.1 : 1));
 	return Math.min(mult,multLimit);
