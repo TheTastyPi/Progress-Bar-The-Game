@@ -597,7 +597,7 @@ function updateUpg() {
 	}
 	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
 	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
-	updateSkill();
+	updateSkills();
 }
 
 function updateSkills() {
