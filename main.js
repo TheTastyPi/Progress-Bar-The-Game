@@ -472,8 +472,9 @@ function getPointGain(n) {
 function getSineMult() {
 	let mult = Math.sin(game.skill.durationTimer[0] / 250);
 	mult *= Math.pow(9, game.upgrade.skill[0] * 0.5 + 1);
-	mult = Math.pow(mult, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
-	return mult + 1;
+	mult = Math.pow(mult, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1) + 1;
+	if (game.upgrade.skill[1]) mult = Math.abs(mult);
+	return mult;
 }
 
 function getBoostBarMult() {
@@ -624,7 +625,9 @@ function updateSkills() {
 
 function updateSineGraph() {
 	let line = id("sinGraphLine");
-	let percent = (1 - Math.sin(game.skill.durationTimer[0] / 250)) / 2;
+	let sineMult = Math.sin(game.skill.durationTimer[0] / 250);
+	if (game.upgrade.skill[1]) sineMult = Math.abs(sineMult);
+	let percent = (1 - sineMult) / 2;
 	line.style.top = percent * 100 + "%";
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
 	id("skillMenuOpen").classList[game.upgrade.normal[4] > 0 ? "remove" : "add"]("hidden");
