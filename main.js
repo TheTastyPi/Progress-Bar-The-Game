@@ -149,7 +149,7 @@ function doFrame(sinceLastFrame) {
 				case 1:
 				case 2:
 				case 3:
-					if (game.point[0] >= getUpgPrice(i)) {
+					if (game.points[0] >= getUpgPrice(i)) {
 						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]));
 						game.auto.nextRun[i] = Math.max(auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i]), 50);
 					}
