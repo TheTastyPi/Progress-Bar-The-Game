@@ -272,6 +272,59 @@
 			</div>
 			<button id="autoMaxAllButton" onclick="maxAll('auto')" class="maxall">Max All</button>
 		</div>
+		<button id="autoMenuOpen" onclick="toggleTopMenu('auto')" class="hidden topMenuOpen" style="right:0;">Automation</button>
+		<div id="autoMenu" class="topMenu" style="height:200px; left:0;">
+			<div id="autoSect0" class="upgSect">
+				<div id="auto0">
+					<div id="autoBar0" class="autoBar">
+						<div id="autoBarValue0" class="autoBarValue"></div>
+						<span id="autoBarLabel0" class="label centered"></span>
+					</div>
+					<button id="autoToggle0" class="autoToggle" onclick="toggleAuto(0)">On</button>
+				</div>
+				<div id="auto1">
+					<div id="autoBar1" class="autoBar">
+						<div id="autoBarValue1" class="autoBarValue"></div>
+						<span id="autoBarLabel1" class="label centered"></span>
+					</div>
+					<button id="autoToggle1" class="autoToggle" onclick="toggleAuto(1)">On</button>
+				</div>
+				<div id="auto2">
+					<div id="autoBar2" class="autoBar">
+						<div id="autoBarValue2" class="autoBarValue"></div>
+						<span id="autoBarLabel2" class="label centered"></span>
+					</div>
+					<button id="autoToggle2" class="autoToggle" onclick="toggleAuto(2)">On</button>
+				</div>
+				<div id="auto3">
+					<div id="autoBar3" class="autoBar">
+						<div id="autoBarValue3" class="autoBarValue"></div>
+						<span id="autoBarLabel3" class="label centered"></span>
+					</div>
+					<button id="autoToggle3" class="autoToggle" onclick="toggleAuto(3)">On</button>
+				</div>
+			</div>
+			<div id="autoSect1" class="upgSect">
+				<div id="auto4">
+					<div id="autoBar4" class="autoBar">
+						<div id="autoBarValue4" class="autoBarValue"></div>
+						<span id="autoBarLabel4" class="label centered"></span>
+					</div>
+					<button id="autoToggle4" class="autoToggle" onclick="toggleAuto(4)">On</button>
+				</div>
+				<div id="auto5">
+					<div id="autoBar5" class="autoBar">
+						<div id="autoBarValue5" class="autoBarValue"></div>
+						<span id="autoBarLabel5" class="label centered"></span>
+					</div>
+					<button id="autoToggle5" class="autoToggle" onclick="toggleAuto(5)">On</button>
+				</div>
+				<div id="auto7" style="font-size:40px">
+					Time Machine Multipler:<br>
+					<span id="timeMachineMult">1x</span>
+				</div>
+			</div>
+		</div>
 		<button id="skillMenuOpen" onclick="toggleSideMenu('skill')" class="sideMenuOpen left" style="bottom:0; height:180px;">Skills</button>
 		<div id="skillMenu" class="sideMenu left" style="bottom:0px; height:180px; width:180px;">
 			<button id="skill0" class="tooltip skillButton" onclick="useSkill(0)" style="background-image:url('pics/Sine.png');">
