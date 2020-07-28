@@ -1,6 +1,7 @@
 var lastFrame = 0;
-var lastSave = 0;
 var game = newGame();
+
+const sceenAmount = document.getElementsByClassName("screen").length;
 
 const upgrade = {
 	normal: {
@@ -18,7 +19,7 @@ const upgrade = {
 	auto: {
 		basePrice: [1, 1, 1, 1, 1, 1, 1, 1],
 		priceGrowth: [2, 2, 2, 2, 2, 2, 2, 2],
-		limit: [Infinity,Infinity,Infinity,10,8,1,1,1],
+		limit: [10,10,11,12,8,16,1024,1],
 		type: [1,1,1,1,1,1,1,1]
 	}
 };
@@ -28,17 +29,23 @@ const skill = {
 	duration: [60*1000, 60*1000, 60*1000, 30*1000]
 };
 
+const auto = {
+	baseInterval: [5*60*1000, 5*60*1000, 10*60*1000, 20*60*1000, 1*60*1000, 4*60*60*1000]
+};
+
 function init() {
-	for (let i = 0; i < 2; i++) {
-		let upgCleared = document.createElement("span");
-		upgCleared.appendChild(document.createTextNode("Nothing here..."));
-		id("upgSect"+i).appendChild(upgCleared);
-		upgCleared.classList.add("upgCleared");
-		upgCleared.classList.add("hidden");
-		upgCleared.id = "upgCleared"+i;
+	for (let type of Object.keys(upgrade)) {
+		for (let i = 0; i < screenAmount; i++) {
+			let upgCleared = document.createElement("span");
+			upgCleared.appendChild(document.createTextNode("Nothing here..."));
+			id((type=="normal"?"u":type+"U")+"pgSect"+i).appendChild(upgCleared);
+			upgCleared.classList.add("upgCleared");
+			upgCleared.classList.add("hidden");
+			upgCleared.id = (type=="normal"?"u":type+"U")+"pgCleared"+i;
+		}
 	}
 	for (let topMenu of document.getElementsByClassName("topMenu")) {
-		topMenu.style.width = document.getElementsByClassName("screen").length+"00%";
+		topMenu.style.width = screenAmount+"00%";
 	}
 	for (let leftMenu of document.getElementsByClassName("left")) {
 		leftMenu.style.left = "-"+leftMenu.style.width;
@@ -134,26 +141,47 @@ function doFrame(sinceLastFrame) {
 			updateSkills();
 		}
 	}
+	for (let i = 0; i < 6; i++) {
+		if (game.auto.nextRun[i] > 0) game.auto.nextRun[i] -= sinceLastFrame;
+		if (game.auto.nextRun[i] <= 0 && game.auto.isOn[i]) {
+			switch (i) {
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+					if (game.point[0] >= getUpgPrice(i)) {
+						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]));
+						game.auto.nextRun[i] = Math.max(auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i]), 50);
+					}
+					break;
+				case 4:
+				case 5:
+					if (game.progress[i - 4] >= getBarLength(i - 4)) {
+						redeemPoints(i - 4);
+						game.auto.nextRun[i] = Math.max(auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i]), 50);
+					}
+			}
+		}
+	}
 }
 
 function nextFrame(timeStamp) {
 	game.date = Date.now();
-	let sinceLastFrame = (timeStamp - lastFrame) * game.speed;
-	let sinceLastSave = (timeStamp - lastSave) * game.speed;
+	let sinceLastFrame = timeStamp - lastFrame;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
 		if (sinceLastFrame >= 1000 * game.speed) {
-			simulateTime(sinceLastFrame);
+			simulateTime(sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1));
 		} else {
-			doFrame(sinceLastFrame);
+			doFrame(sinceLastFrame  * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1));
 		}
 		updateProgress();
 	}
-	if (sinceLastSave >= game.autoSaveInterval) {
+	game.nextSave -= sinceLastFrame;
+	if (game.nextSave <= 0) {
 		if (game.doAutoSave) save();
-		lastSave = timeStamp;
+		game.nextSave = game.autoSaveInterval;
 	}
-	
 	window.requestAnimationFrame(nextFrame);
 }
 
@@ -378,6 +406,7 @@ function newGame() {
 		updateSpeed: 50,
 		doAutoSave: true,
 		autoSaveInterval: 1000,
+		nextSave: 0,
 		currentTheme: "light",
 		currentScreen: 0,
 		screenLimit: 1,
@@ -400,36 +429,18 @@ function newGame() {
 			couponNext: 0,
 			couponCount: 0,
 			waitTimer: 0
+		},
+		auto: {
+			isOn: [true,true,true,true,true,true],
+			nextRun: [0,0,0,0,0,0]
 		}
 	};
 }
 
-function redeemPoints(n) {
-	if (game.progress[n] >= getBarLength(n)) {
-		game.points[n] += getPointGain(n);
-		game.lifetimePoints[n] += getPointGain(n);
-		if (n == 1) {
-			game.progress[0] = 0;
-			game.points[0] = 0;
-			for (let i = 0; i < 4; i++) {
-				game.upgrade.normal[i] = 0;
-			}
-		} else {
-			game.progress[n] = game.progress[n] % getBarLength(n);
-		}
-		if (game.skill.durationTimer[1] > 0 && !game.skill.boostOverflow) game.skill.boostProgress += 500;
-		if (game.skill.boostProgress > 10000) game.skill.boostOverflow = true;
-		if (game.skill.waitTimer > 0) {
-			game.skill.waitTimer = 0;
-			game.skill.durationTimer[3] = 0;
-		}
-		updatePoints();
-		updateUpg();
-	}
-}
-
 function getUpgPrice(n, type = "normal") {
-	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]) / Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1) : Infinity);
+	let upgPrice = upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]);
+	if (upgrade[type].type[n] == 0) upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
+	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity);
 }
 
 function getBarLength(n) {
@@ -484,6 +495,10 @@ function getBoostBarMult() {
 	return Math.min(mult,multLimit);
 }
 
+function getTimeMachineMult() {
+	return (game.upgrade.auto.reduce((a,b) => a + b, 0) * 0.2 + 1) + (game.points[1] * 0.01 + 1);
+}
+
 function updateAll() {
 	id("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
 	document.querySelectorAll("*").forEach(function(node) {node.classList.add(game.currentTheme);});
@@ -518,8 +533,7 @@ function updatePoints() {
 		id("pointDisplay"+i).classList[game.lifetimePoints[i] >= 1 ? "remove" : "add"]("hidden");
 	}
 	id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
-	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
-	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
+	id("timeMachineMult").innerHTML = getTimeMachineMult() + "x";
 }
 
 function updateUpg() {
@@ -569,35 +583,36 @@ function updateUpg() {
 				case "auto":
 			}
 			id((type=="normal"?"u":type+"U")+"pgDesc"+i).innerHTML = newDesc;
-			if (getUpgPrice(i) == Infinity) {
+			if (game.upgrade[type][i] == Infinity) {
 				setTimeout(function(){
-					id("upg"+i).classList.add("maxedUpg");
-					setTimeout(function(){id("upg"+i).classList.add("hidden");},500);
+					id((type=="normal"?"u":type+"U")+"pg"+i).classList.add("maxedUpg");
+					setTimeout(function(){id((type=="normal"?"u":type+"U")+"pg"+i).classList.add("hidden");},500);
 				},1000);
 			} else {
-				id("upg"+i).classList.remove("maxedUpg");
-				id("upg"+i).classList.remove("hidden");
+				id((type=="normal"?"u":type+"U")+"pg"+i).classList.remove("maxedUpg");
+				id((type=="normal"?"u":type+"U")+"pg"+i).classList.remove("hidden");
 			}
 			id((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
 		}
-	}
-	id("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
-	for (let i = 0; i < 2; i++) {
-		if (getUpgPrice(i*4) == Infinity &&
-		   getUpgPrice(i*4+1) == Infinity &&
-		   getUpgPrice(i*4+2) == Infinity &&
-		   getUpgPrice(i*4+3) == Infinity) {
-			setTimeout(function(){
-				id("upgCleared"+i).classList.remove("hidden");
-				id("upgCleared"+i).style.flex = "1";
-			},1500);
-		} else {
-			id("upgCleared"+i).classList.add("hidden");
-			id("upgCleared"+i).style.flex = "0";
+		for (let i = 0; i < screenAmount; i++) {
+			if (getUpgPrice(i*4, type) == Infinity &&
+			   getUpgPrice(i*4+1, type) == Infinity &&
+			   getUpgPrice(i*4+2, type) == Infinity &&
+			   getUpgPrice(i*4+3, type) == Infinity) {
+				setTimeout(function(){
+					id((type=="normal"?"u":type+"U")+"pgCleared"+i).classList.remove("hidden");
+					id((type=="normal"?"u":type+"U")+"pgCleared"+i).style.flex = "1";
+				},1500);
+			} else {
+				id((type=="normal"?"u":type+"U")+"pgCleared"+i).classList.add("hidden");
+				id((type=="normal"?"u":type+"U")+"pgCleared"+i).style.flex = "0";
+			}
 		}
 	}
+	id("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
 	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
 	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
+	id("timeMachineMult").innerHTML = getTimeMachineMult() + "x";
 	updateSkills();
 }
 
@@ -664,10 +679,54 @@ function updateBoostBar() {
 	id("boostBarStatus").style.backgroundColor = boostColor;
 }
 
+function updateAuto() {
+	for (let i = 0; i < 6; i++) {
+		let percent = (1 - game.auto.nextRun[i] / auto.baseInterval[i]) * 100;
+		id("autoBarValue"+i).width = percent + "%";
+		id("autoBarLabel"+i).innerHTML = percent + "%";
+	}
+}
+
+function redeemPoints(n) {
+	if (game.progress[n] >= getBarLength(n)) {
+		game.points[n] += getPointGain(n);
+		game.lifetimePoints[n] += getPointGain(n);
+		if (n == 1) {
+			game.progress[0] = 0;
+			game.points[0] = 0;
+			for (let i = 0; i < 4; i++) {
+				game.upgrade.normal[i] = 0;
+			}
+		} else {
+			game.progress[n] = game.progress[n] % getBarLength(n);
+		}
+		if (game.skill.durationTimer[1] > 0 && !game.skill.boostOverflow) game.skill.boostProgress += 500;
+		if (game.skill.boostProgress > 10000) game.skill.boostOverflow = true;
+		if (game.skill.waitTimer > 0) {
+			game.skill.waitTimer = 0;
+			game.skill.durationTimer[3] = 0;
+		}
+		updatePoints();
+		updateUpg();
+	}
+}
+
 function buyUpgrade(n, type = "normal") {
 	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n) && game.upgrade[type][n] < upgrade[type].limit[n] && getUpgPrice(n) != Infinity) {
 		game.points[upgrade[type].type[n]] -= getUpgPrice(n);
 		game.upgrade[type][n]++;
+		updateUpg();
+		updatePoints();
+		updateSkills();
+	}
+}
+
+function bulkUpgrade(n, type = "normal", amount = 1) {
+	let totalAmount = Math.min(Math.floor(Math.log(game.points[0]*(upgrade[type].priceGrowth[n]-1)/getUpgPrice(n)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
+	let totalPrice = getUpgPrice(n)*(1-Math.pow(upgrade[type].priceGrowth[n],totalAmount))/(1-upgrade[type].priceGrowth[n]);
+	if (totalAmount >= 1) {
+		game.points[0] -= totalPrice;
+		game.upgrade[type][n] += totalAmount;
 		updateUpg();
 		updatePoints();
 		updateSkills();
@@ -711,6 +770,10 @@ function couponClick() {
 		id("couponCount").style.opacity = 1;
 	},500);
 	updateUpg();
+}
+
+function toggleAuto(n) {
+	game.auto.inOn = !game.auto.isOn;
 }
 
 function isEven(n) {
