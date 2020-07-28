@@ -1,7 +1,7 @@
 var lastFrame = 0;
 var game = newGame();
 
-const sceenAmount = document.getElementsByClassName("screen").length;
+const screenAmount = document.getElementsByClassName("screen").length;
 
 const upgrade = {
 	normal: {
