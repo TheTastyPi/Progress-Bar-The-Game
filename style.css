@@ -357,6 +357,7 @@ button.dark {
 }
 .autoToggle {
 	height: 50px;
+	width: 50px;
 }
 .skillButton {
 	max-height: 90px;
