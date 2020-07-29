@@ -339,21 +339,21 @@ button.dark {
 	width: 200px;
 	height:70px;
 	border: 4px solid #222222;
-	background-color: #FFFFFF;
+	background-color: #444444;
 	transition: 0.5s;
 }
 .autoBar.dark {
 	border: 4px solid #DDDDDD;
-	background-color: #000000;
+	background-color: #BBBBBB;
 }
 .autoBarValue {
 	width: 0;
 	height: 100%;
-	background-color: #444444;
+	background-color: #666666;
 	transition: 0.1s;
 }
 .autoBarValue.dark {
-	background-color: #BBBBBB;
+	background-color: #999999;
 }
 .autoToggle {
 	height: 50px;
