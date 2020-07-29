@@ -335,13 +335,17 @@ button.dark {
 	width: 200px;
 	height: 80px;
 }
+.auto {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
 .autoBar {
 	width: 200px;
 	height:70px;
 	border: 4px solid #222222;
 	background-color: #444444;
 	transition: 0.5s;
-	vertical-align: middle;
 }
 .autoBar.dark {
 	border: 4px solid #DDDDDD;
@@ -359,7 +363,6 @@ button.dark {
 .autoToggle {
 	height: 50px;
 	width: 50px;
-	vertical-align: middle;
 }
 .skillButton {
 	max-height: 90px;
