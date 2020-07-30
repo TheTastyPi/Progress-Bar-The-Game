@@ -143,7 +143,7 @@ function doFrame(sinceLastFrame) {
 	}
 	for (let i = 0; i < 6; i++) {
 		if (game.auto.nextRun[i] > 0) game.auto.nextRun[i] -= sinceLastFrame;
-		if (game.auto.nextRun[i] <= 0 && game.auto.isOn[i]) {
+		if (game.auto.nextRun[i] <= 0 && game.auto.isOn[i] && game.upgrade.auto[i] != 0) {
 			switch (i) {
 				case 0:
 				case 1:
@@ -591,7 +591,7 @@ function updateUpg() {
 							if (game.upgrade.auto[i] == 0) {
 								newDesc += "Locked";
 							} else {
-								newDesc += formatTime(skill.baseInterval/Math.pow(2,game.upgrade.auto[i]),false)+"/run";
+								newDesc += formatTime(skill.baseInterval/Math.pow(2,game.upgrade.auto[i]),false))+"/run";
 							}
 							break;
 						case 6:
