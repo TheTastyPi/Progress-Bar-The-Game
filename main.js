@@ -5,7 +5,7 @@ const screenAmount = document.getElementsByClassName("screen").length;
 
 const upgrade = {
 	normal: {
-		basePrice: [1, 1, 2, 3, 1, 2, 3, 1e69],
+		basePrice: [1, 1, 2, 3, 1, 2, 3, 4.2e69],
 		priceGrowth: [5, 5, 10, 12, 1, 1, 1, 1],
 		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1],
 		type: [0,0,0,0,1,1,1,1]
@@ -534,7 +534,7 @@ function updatePoints() {
 		id("pointDisplay"+i).classList[game.lifetimePoints[i] >= 1 ? "remove" : "add"]("hidden");
 	}
 	id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
-	id("timeMachineMult").innerHTML = getTimeMachineMult() + "x";
+	id("timeMachineMult").innerHTML = format(getTimeMachineMult(),2) + "x";
 }
 
 function updateUpg() {
@@ -632,7 +632,7 @@ function updateUpg() {
 	id("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
 	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
 	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
-	id("timeMachineMult").innerHTML = getTimeMachineMult() + "x";
+	id("timeMachineMult").innerHTML = format(getTimeMachineMult(),2) + "x";
 	id("autoMenuOpen").classList[game.upgrade.auto.reduce((a,b) => a + b, 0) > 0 ? "remove" : "add"]("hidden");
 	for (let i = 0; i < 6; i++) {
 		id("auto"+i).classList[game.upgrade.auto[i] == 0 ? "add" : "remove"]("hidden");
@@ -802,6 +802,8 @@ function toggleAuto(n) {
 		id("autoToggle"+i).innerHTML = game.auto.isOn[n] ? "ON" : "OFF";
 	}
 }
+
+
 
 function isEven(n) {
 	return Math.floor(n/2) == n/2;
