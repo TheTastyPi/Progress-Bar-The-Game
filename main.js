@@ -6,7 +6,7 @@ const screenAmount = document.getElementsByClassName("screen").length;
 const upgrade = {
 	normal: {
 		basePrice: [1, 1, 2, 3, 1, 2, 3, 4.2e69],
-		priceGrowth: [6, 6, 12, 14, 1, 1, 1, 1],
+		priceGrowth: [7, 7, 11, 14, 1, 1, 1, 1],
 		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1],
 		type: [0,0,0,0,1,1,1,1]
 	},
