@@ -341,6 +341,7 @@ button.dark {
 	flex-wrap: wrap;
 	animation-name: autoInit;
 	animation-duration: 1s;
+	font-size: 20px;
 }
 .autoBar {
 	width: 200px;
