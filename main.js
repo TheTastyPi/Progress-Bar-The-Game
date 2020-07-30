@@ -695,10 +695,11 @@ function updateBoostBar() {
 
 function updateAuto() {
 	for (let i = 0; i < 6; i++) {
+		id("auto"+i).classList[game.upgrade.auto[i] == 0 ? "add" : "remove"]("hidden");
 		let percent = (1 - game.auto.nextRun[i] / auto.baseInterval[i]) * 100;
 		id("autoBarValue"+i).width = percent + "%";
 		id("autoBarLabel"+i).innerHTML = percent + "%";
-		id("autoToggle"+i).innerHTML = game.upgrade.auto[i] == 0 ? "LOCKED" : game.auto.isOn ? "ON" : "OFF";
+		id("autoToggle"+i).innerHTML = game.auto.isOn ? "ON" : "OFF";
 	}
 }
 
