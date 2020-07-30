@@ -841,7 +841,7 @@ function isEven(n) {
 
 function format(n, toFixed = 0) {
 	if (n == "Infinity") return Infinity;
-	else if (-1e3 < n < 1e3) return n.toFixed(toFixed);
+	else if (-1e3 < n && n < 1e3) return n.toFixed(toFixed);
 	return n.toExponential(2).replace("+","");
 }
 
