@@ -803,7 +803,28 @@ function toggleAuto(n) {
 	}
 }
 
-
+document.addEventListener("keydown", function(input){
+	let key = input.key;
+	switch(key) {
+		case "p":
+			redeemPoints(0);
+			break;
+		case "l":
+			redeemPoints(1);
+			break;
+		case "ArrowLeft":
+			switchScreen("backward");
+			break;
+		case "ArrowRight":
+			switchScreen("forward");
+			break;
+		case "1":
+		case "2":
+		case "3":
+		case "4":
+			useSkill(Number(key)-1);
+	}
+})
 
 function isEven(n) {
 	return Math.floor(n/2) == n/2;
