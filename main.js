@@ -640,6 +640,7 @@ function updateUpg() {
 	for (let i = 0; i < 6; i++) {
 		id("auto"+i).classList[game.upgrade.auto[i] == 0 ? "add" : "remove"]("hidden");
 	}
+	id("auto7").classList[game.upgrade.auto[7] == 0 ? "add" : "remove"]("hidden");
 	updateSkills();
 }
 
