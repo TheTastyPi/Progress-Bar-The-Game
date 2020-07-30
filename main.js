@@ -632,6 +632,7 @@ function updateUpg() {
 		}
 	}
 	id("progressBar0").max = getBarLength(0) != Infinity ? getBarLength(0) : 1.79e308;
+	id("skillMenuOpen").classList[game.upgrade.normal[4] > 0 ? "remove" : "add"]("hidden");
 	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
 	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
 	id("timeMachineMult").innerHTML = format(getTimeMachineMult(),2) + "x";
@@ -671,7 +672,6 @@ function updateSineGraph() {
 	let percent = (1 - sineMult) / 2;
 	line.style.top = percent * 100 + "%";
 	line.style.backgroundColor = "rgb(" + (255*percent) + "," + (255*(1-percent)) + ",0)";
-	id("skillMenuOpen").classList[game.upgrade.normal[4] > 0 ? "remove" : "add"]("hidden");
 }
 
 function updateBoostBar() {
