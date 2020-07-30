@@ -591,7 +591,7 @@ function updateUpg() {
 							if (game.upgrade.auto[i] == 0) {
 								newDesc += "Locked";
 							} else {
-								newDesc += formatTime(skill.baseInterval/Math.pow(2,game.upgrade.auto[i]),false))+"/run";
+								newDesc += formatTime(skill.baseInterval[i]/Math.pow(2,game.upgrade.auto[i]),false)+"/run";
 							}
 							break;
 						case 6:
