@@ -338,6 +338,7 @@ button.dark {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	flex-wrap: wrap;
 	animation-name: autoInit;
 	animation-duration: 1s;
 }
