@@ -634,6 +634,9 @@ function updateUpg() {
 	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
 	id("timeMachineMult").innerHTML = getTimeMachineMult() + "x";
 	id("autoMenuOpen").classList[game.upgrade.auto.reduce((a,b) => a + b, 0) > 0 ? "remove" : "add"]("hidden");
+	for (let i = 0; i < 6; i++) {
+		id("auto"+i).classList[game.upgrade.auto[i] == 0 ? "add" : "remove"]("hidden");
+	}
 	updateSkills();
 }
 
@@ -702,11 +705,9 @@ function updateBoostBar() {
 
 function updateAuto() {
 	for (let i = 0; i < 6; i++) {
-		id("auto"+i).classList[game.upgrade.auto[i] == 0 ? "add" : "remove"]("hidden");
 		let percent = (1 - game.auto.nextRun[i] / auto.baseInterval[i] * Math.pow(2,game.upgrade.auto[i])) * 100;
 		id("autoBarValue"+i).style.width = percent + "%";
 		id("autoBarLabel"+i).innerHTML = format(Math.min(percent,100),2) + "%";
-		id("autoToggle"+i).innerHTML = game.auto.isOn ? "ON" : "OFF";
 	}
 }
 
@@ -796,7 +797,10 @@ function couponClick() {
 }
 
 function toggleAuto(n) {
-	game.auto.inOn = !game.auto.isOn;
+	game.auto.isOn[n] = !game.auto.isOn[n];
+	for (let i = 0; i < 6; i++) {
+		id("autoToggle"+i).innerHTML = game.auto.isOn[n] ? "ON" : "OFF";
+	}
 }
 
 function isEven(n) {
