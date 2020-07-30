@@ -203,7 +203,7 @@ function load(auto = true) {
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
 		if (typeof(pastGame.lifetimeProgress) == "number") pastGame.lifetimeProgress = [pastGame.lifetimeProgress];
 		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
-		if (pastGame.skill.durationTimer[2] != undefined) {
+		if (pastGame.skill != undefined) {
 			if (pastGame.skill.durationTimer[2] > 0) {
 				pastGame.skill.couponTimer = 0;
 				pastGame.skill.couponCount = 0;
