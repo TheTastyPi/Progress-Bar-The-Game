@@ -174,7 +174,9 @@ function doFrame(sinceLastFrame, alteredFrame) {
 function nextFrame(timeStamp) {
 	game.date = Date.now();
 	let sinceLastFrame = timeStamp - lastFrame;
+	console.log(sinceLastFrame);
 	let alteredFrame = sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1);
+	console.log(alteredFrame);
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
 		if (sinceLastFrame >= 1000) {
