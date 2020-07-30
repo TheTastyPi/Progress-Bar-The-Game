@@ -801,7 +801,7 @@ function couponClick() {
 function toggleAuto(n) {
 	game.auto.isOn[n] = !game.auto.isOn[n];
 	for (let i = 0; i < 6; i++) {
-		id("autoToggle"+i).innerHTML = game.auto.isOn[n] ? "ON" : "OFF";
+		id("autoToggle"+i).innerHTML = game.auto.isOn[i] ? "ON" : "OFF";
 	}
 }
 
