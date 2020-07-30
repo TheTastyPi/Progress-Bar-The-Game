@@ -348,6 +348,7 @@ button.dark {
 	border: 4px solid #222222;
 	background-color: #444444;
 	transition: 0.5s;
+	position: relative;
 }
 .autoBar.dark {
 	border: 4px solid #DDDDDD;
