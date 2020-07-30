@@ -596,6 +596,7 @@ function updateUpg() {
 							break;
 						case 6:
 							newDesc += Math.pow(2,game.upgrade.auto[i]) + "/buy";
+							break;
 						case 7:
 							newDesc += (game.upgrade.auto[i]?"Unlocked":"Locked");
 					}
