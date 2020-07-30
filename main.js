@@ -212,7 +212,7 @@ function load(auto = true) {
 		}
 		let offlineTime = 0;
 		if (pastGame.date != undefined) offlineTime = Date.now() - pastGame.date;
-		merge(game, pastGame);{
+		merge(game, pastGame);
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		updateAll();
 		if (!auto) {
