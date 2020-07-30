@@ -124,7 +124,7 @@ function doFrame(sinceLastFrame, alteredFrame) {
 						id("coupon").style.opacity = Math.max(game.skill.couponTimer / (game.upgrade.skill[5] ? 2000 : 1000), 0) + "";
 						if (game.skill.couponTimer <= 0) {
 							game.skill.couponCount = 0;
-							updaeUpg();
+							updateUpg();
 						}
 					} else {
 						game.skill.couponTimer = 0;
