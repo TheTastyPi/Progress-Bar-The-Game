@@ -496,7 +496,7 @@ function getBoostBarMult() {
 }
 
 function getTimeMachineMult() {
-	return (game.upgrade.auto.reduce((a,b) => a + b, 0) * 0.2 + 1) + (game.points[1] * 0.01 + 1);
+	return 1 + game.upgrade.auto.reduce((a,b) => a + b, 0) * 0.05 + game.points[1] * 0.01;
 }
 
 function updateAll() {
@@ -581,6 +581,19 @@ function updateUpg() {
 					}
 					break;
 				case "auto":
+					switch(i) {
+						case 0:
+						case 1:
+						case 2:
+						case 3:
+						case 4:
+						case 5:
+							if (game.upgrade.auto[i] == 0) {
+								newDesc += "Locked";
+							} else {
+								newDesc += formatTime(skill.baseInterval/Math.pow(2,game.upgrade.auto[i]),false)+"/run";
+							break;
+					}
 			}
 			id((type=="normal"?"u":type+"U")+"pgDesc"+i).innerHTML = newDesc;
 			if (game.upgrade[type][i] == Infinity) {
@@ -613,6 +626,7 @@ function updateUpg() {
 	id("skillUpgMenuOpen").classList[game.upgrade.normal[5] ? "remove" : "add"]("hidden");
 	id("autoUpgMenuOpen").classList[game.upgrade.normal[6] ? "remove" : "add"]("hidden");
 	id("timeMachineMult").innerHTML = getTimeMachineMult() + "x";
+	id("autoMenuOpen").classList[game.upgrade.auto.reduce((a,b) => a + b, 0) > 0 ? "remove" : "add"]("hidden");
 	updateSkills();
 }
 
@@ -684,6 +698,7 @@ function updateAuto() {
 		let percent = (1 - game.auto.nextRun[i] / auto.baseInterval[i]) * 100;
 		id("autoBarValue"+i).width = percent + "%";
 		id("autoBarLabel"+i).innerHTML = percent + "%";
+		id("autoToggle"+i).innerHTML = game.upgrade.auto[i] == 0 ? "LOCKED" : game.auto.isOn ? "ON" : "OFF";
 	}
 }
 
