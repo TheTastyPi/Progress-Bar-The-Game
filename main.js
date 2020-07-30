@@ -163,6 +163,7 @@ function doFrame(sinceLastFrame) {
 			}
 		}
 	}
+	updateAuto();
 }
 
 function nextFrame(timeStamp) {
