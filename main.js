@@ -210,11 +210,10 @@ function load(auto = true) {
 				pastGame.skill.couponNext = Math.random() * 3000 + 2000;
 			}
 		}
-		if (pastGame.date != undefined) let offlineTime = Date.now() - pastGame.date;
-		merge(game, pastGame);
-		if (pastGame.date != undefined) {
-			if (offlineTime > 1000) simulateTime(offlineTime);
-		}
+		let offlineTime = 0;
+		if (pastGame.date != undefined) offlineTime = Date.now() - pastGame.date;
+		merge(game, pastGame);{
+		if (offlineTime > 1000) simulateTime(offlineTime);
 		updateAll();
 		if (!auto) {
 			id("loadButton").style.backgroundColor = "green";
