@@ -704,8 +704,8 @@ function updateAuto() {
 	for (let i = 0; i < 6; i++) {
 		id("auto"+i).classList[game.upgrade.auto[i] == 0 ? "add" : "remove"]("hidden");
 		let percent = (1 - game.auto.nextRun[i] / auto.baseInterval[i]) * 100;
-		id("autoBarValue"+i).width = percent + "%";
-		id("autoBarLabel"+i).innerHTML = format(percent,2) + "%";
+		id("autoBarValue"+i).style.width = percent + "%";
+		id("autoBarLabel"+i).innerHTML = format(Math.min(percent,100),2) + "%";
 		id("autoToggle"+i).innerHTML = game.auto.isOn ? "ON" : "OFF";
 	}
 }
