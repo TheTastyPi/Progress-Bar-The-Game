@@ -56,14 +56,19 @@ function init() {
 	window.requestAnimationFrame(nextFrame);
 }
 
-function simulateTime(time) {
+function simulateTime(sinceLastFrame, alteredFrame) {
 	for (let i = 0; i < 1000; i++) {
-		doFrame(time/1000);
+		doFrame(sinceLastFrame/1000, alteredFrame);
 	}
 }
 
-function doFrame(sinceLastFrame) {
-	let progressIncrease = sinceLastFrame + getBarSpeed(0);
+function doFrame(sinceLastFrame, alteredFrame) {
+	game.nextSave += sinceLastFrame;
+	if (game.nextSave >= game.autoSaveInterval) {
+		if (game.doAutoSave) save();
+		game.nextSave = 0;
+	}
+	let progressIncrease = alteredFrame * getBarSpeed(0);
 	if (game.progress[0] < getBarLength(0) &&
 	   progressIncrease > getBarLength(0)) {
 		progressIncrease = getBarLength(0);
@@ -142,7 +147,7 @@ function doFrame(sinceLastFrame) {
 		}
 	}
 	for (let i = 0; i < 6; i++) {
-		if (game.auto.nextRun[i] < auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i])) game.auto.nextRun[i] += sinceLastFrame;
+		if (game.auto.nextRun[i] < auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i])) game.auto.nextRun[i] += alteredFrame;
 		if (game.auto.nextRun[i] >= auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i]) && game.auto.isOn[i] && game.upgrade.auto[i] != 0) {
 			switch (i) {
 				case 0:
@@ -169,19 +174,15 @@ function doFrame(sinceLastFrame) {
 function nextFrame(timeStamp) {
 	game.date = Date.now();
 	let sinceLastFrame = timeStamp - lastFrame;
+	let alteredFrame = sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1);
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
 		if (sinceLastFrame >= 1000 * game.speed) {
-			simulateTime(sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1));
+			simulateTime(sinceLastFrame, alteredFrame);
 		} else {
-			doFrame(sinceLastFrame  * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1));
+			doFrame(sinceLastFrame, alteredFrame);
 		}
 		updateProgress();
-	}
-	game.nextSave += sinceLastFrame;
-	if (game.nextSave >= game.autoSaveInterval) {
-		if (game.doAutoSave) save();
-		game.nextSave = 0;
 	}
 	window.requestAnimationFrame(nextFrame);
 }
@@ -573,6 +574,7 @@ function updateUpg() {
 							newDesc += "x" + format(game.upgrade.skill[i] + 1, 0);
 							break
 						case 6:
+							newDesc += formatTime(120*1000 - 10*1000*game.upgrade.skill[6],false);
 							break;
 						case 1:
 						case 3:
@@ -775,7 +777,7 @@ function useSkill(n) {
 	if (game.skill.timer[n] <= 0 && game.upgrade.normal[4] > n) {
 		game.skill.timer[n] = skill.cooldown[n];
 		game.skill.durationTimer[n] = skill.duration[n];
-		if (n == 3) game.skill.waitTimer = 120*1000 / Math.pow(2, game.upgrade.skill[6]);
+		if (n == 3) game.skill.waitTimer = 120*1000 - 10*1000*game.upgrade.skill[6];
 	}
 }
 
