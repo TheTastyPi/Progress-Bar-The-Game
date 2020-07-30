@@ -6,7 +6,7 @@ const screenAmount = document.getElementsByClassName("screen").length;
 const upgrade = {
 	normal: {
 		basePrice: [1, 1, 2, 3, 1, 2, 3, 4.2e69],
-		priceGrowth: [5, 5, 10, 12, 1, 1, 1, 1],
+		priceGrowth: [7, 7, 11, 14, 1, 1, 1, 1],
 		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1],
 		type: [0,0,0,0,1,1,1,1]
 	},
@@ -203,12 +203,15 @@ function load(auto = true) {
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
 		if (typeof(pastGame.lifetimeProgress) == "number") pastGame.lifetimeProgress = [pastGame.lifetimeProgress];
 		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
-		if (pastGame.skill.durationTimer[2] > 0) {
-			pastGame.skill.couponTimer = 0;
-			pastGame.skill.couponCount = 0;
-			pastGame.skill.couponNext = Math.random() * 3000 + 2000;
+		if (pastGame.skill != undefined) {
+			if (pastGame.skill.durationTimer[2] > 0) {
+				pastGame.skill.couponTimer = 0;
+				pastGame.skill.couponCount = 0;
+				pastGame.skill.couponNext = Math.random() * 3000 + 2000;
+			}
 		}
-		let offlineTime = Date.now() - pastGame.date;
+		let offlineTime = 0;
+		if (pastGame.date != undefined) offlineTime = Date.now() - pastGame.date;
 		merge(game, pastGame);
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		updateAll();
@@ -247,6 +250,9 @@ function importSave() {
 
 function wipe() {
 	if (confirm("Are you sure you want to wipe your save?")) {
+		for (let i = 0; i < game.currentScreen; i++) {
+			switchScreen("backward");
+		}
 		game = newGame(); 
 		save();
 		updateAll();
@@ -835,7 +841,7 @@ function isEven(n) {
 
 function format(n, toFixed = 0) {
 	if (n == "Infinity") return Infinity;
-	else if (n < 1e3) return n.toFixed(toFixed);
+	else if (-1e3 < n && n < 1e3) return n.toFixed(toFixed);
 	return n.toExponential(2).replace("+","");
 }
 
