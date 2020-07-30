@@ -177,7 +177,7 @@ function nextFrame(timeStamp) {
 	let alteredFrame = sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1);
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		if (sinceLastFrame >= 1000 * game.speed) {
+		if (sinceLastFrame >= 1000) {
 			simulateTime(sinceLastFrame, alteredFrame);
 		} else {
 			doFrame(sinceLastFrame, alteredFrame);
@@ -258,7 +258,7 @@ function wipe() {
 			menuOpen.style.top = "0";
 		}
 		for (let menu of document.getElementsByClassName("sideMenu")) {
-			let isLeft = id(menu+"Open").classList.contains("left");
+			let isLeft = menu.classList.contains("left");
 			menu.style.left = isLeft?"-"+menu.style.width:"100%";
 			menu.classList.remove("isOpen");
 		}
