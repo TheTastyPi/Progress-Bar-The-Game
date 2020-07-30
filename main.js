@@ -592,7 +592,12 @@ function updateUpg() {
 								newDesc += "Locked";
 							} else {
 								newDesc += formatTime(skill.baseInterval/Math.pow(2,game.upgrade.auto[i]),false)+"/run";
+							}
 							break;
+						case 6:
+							newDesc += Math.pow(2,game.upgrade.auto[i]) + "/buy";
+						case 7:
+							newDesc += (game.upgrade.auto[i]?"Unlocked":"Locked");
 					}
 			}
 			id((type=="normal"?"u":type+"U")+"pgDesc"+i).innerHTML = newDesc;
