@@ -602,7 +602,7 @@ function updateUpg() {
 					}
 			}
 			id((type=="normal"?"u":type+"U")+"pgDesc"+i).innerHTML = newDesc;
-			if (game.upgrade[type][i] == Infinity) {
+			if (game.upgrade[type][i] == upgrade[type].limit[i]) {
 				setTimeout(function(){
 					id((type=="normal"?"u":type+"U")+"pg"+i).classList.add("maxedUpg");
 					setTimeout(function(){id((type=="normal"?"u":type+"U")+"pg"+i).classList.add("hidden");},500);
