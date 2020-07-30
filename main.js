@@ -56,13 +56,14 @@ function init() {
 	window.requestAnimationFrame(nextFrame);
 }
 
-function simulateTime(sinceLastFrame, alteredFrame) {
+function simulateTime(sinceLastFrame) {
 	for (let i = 0; i < 1000; i++) {
-		doFrame(sinceLastFrame/1000, alteredFrame/1000);
+		doFrame(sinceLastFrame/1000);
 	}
 }
 
-function doFrame(sinceLastFrame, alteredFrame) {
+function doFrame(sinceLastFrame) {
+	let alteredFrame = sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1);
 	game.nextSave += sinceLastFrame;
 	if (game.nextSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) save();
@@ -174,13 +175,12 @@ function doFrame(sinceLastFrame, alteredFrame) {
 function nextFrame(timeStamp) {
 	game.date = Date.now();
 	let sinceLastFrame = timeStamp - lastFrame;
-	let alteredFrame = sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1);
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
 		if (sinceLastFrame >= 1000) {
-			simulateTime(sinceLastFrame, alteredFrame);
+			simulateTime(sinceLastFrame);
 		} else {
-			doFrame(sinceLastFrame, alteredFrame);
+			doFrame(sinceLastFrame);
 		}
 		updateProgress();
 	}
