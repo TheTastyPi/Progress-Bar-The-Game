@@ -142,8 +142,8 @@ function doFrame(sinceLastFrame) {
 		}
 	}
 	for (let i = 0; i < 6; i++) {
-		if (game.auto.nextRun[i] > 0) game.auto.nextRun[i] -= sinceLastFrame;
-		if (game.auto.nextRun[i] <= 0 && game.auto.isOn[i] && game.upgrade.auto[i] != 0) {
+		if (game.auto.nextRun[i] < auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i])) game.auto.nextRun[i] += sinceLastFrame;
+		if (game.auto.nextRun[i] >= auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i]) && game.auto.isOn[i] && game.upgrade.auto[i] != 0) {
 			switch (i) {
 				case 0:
 				case 1:
@@ -151,14 +151,14 @@ function doFrame(sinceLastFrame) {
 				case 3:
 					if (game.points[0] >= getUpgPrice(i)) {
 						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]));
-						game.auto.nextRun[i] = Math.max(auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i]), 50);
+						game.auto.nextRun[i] = 0;
 					}
 					break;
 				case 4:
 				case 5:
 					if (game.progress[i - 4] >= getBarLength(i - 4)) {
 						redeemPoints(i - 4);
-						game.auto.nextRun[i] = Math.max(auto.baseInterval[i] / Math.pow(2, game.upgrade.auto[i]), 50);
+						game.auto.nextRun[i] = 0;
 					}
 			}
 		}
@@ -178,10 +178,10 @@ function nextFrame(timeStamp) {
 		}
 		updateProgress();
 	}
-	game.nextSave -= sinceLastFrame;
-	if (game.nextSave <= 0) {
+	game.nextSave += sinceLastFrame;
+	if (game.nextSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) save();
-		game.nextSave = game.autoSaveInterval;
+		game.nextSave = 0;
 	}
 	window.requestAnimationFrame(nextFrame);
 }
@@ -705,7 +705,7 @@ function updateBoostBar() {
 
 function updateAuto() {
 	for (let i = 0; i < 6; i++) {
-		let percent = (1 - game.auto.nextRun[i] / auto.baseInterval[i] * Math.pow(2,game.upgrade.auto[i])) * 100;
+		let percent = game.auto.nextRun[i] / auto.baseInterval[i] * Math.pow(2,game.upgrade.auto[i]) * 100;
 		id("autoBarValue"+i).style.width = percent + "%";
 		id("autoBarLabel"+i).innerHTML = format(Math.min(percent,100),2) + "%";
 	}
