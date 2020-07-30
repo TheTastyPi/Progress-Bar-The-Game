@@ -52,7 +52,6 @@ button.dark {
 	filter: brightness(75%);
 	box-shadow: 0 0 10px red inset;
 }
-.hidden {display: none;}
 .horizonalCentered {
 	display: block;
 	margin-left: auto;
@@ -444,3 +443,4 @@ button.dark {
 	from {flex-grow: 0;}
 	to {flex-grow: 1;}
 }
+.hidden {display: none;}
