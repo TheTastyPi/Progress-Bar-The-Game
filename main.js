@@ -203,14 +203,18 @@ function load(auto = true) {
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
 		if (typeof(pastGame.lifetimeProgress) == "number") pastGame.lifetimeProgress = [pastGame.lifetimeProgress];
 		if (pastGame.upgrade == undefined) pastGame.upgrade = {normal:pastGame.upgradeAmount};
-		if (pastGame.skill.durationTimer[2] > 0) {
-			pastGame.skill.couponTimer = 0;
-			pastGame.skill.couponCount = 0;
-			pastGame.skill.couponNext = Math.random() * 3000 + 2000;
+		if (pastGame.skill.durationTimer[2] != undefined) {
+			if (pastGame.skill.durationTimer[2] > 0) {
+				pastGame.skill.couponTimer = 0;
+				pastGame.skill.couponCount = 0;
+				pastGame.skill.couponNext = Math.random() * 3000 + 2000;
+			}
 		}
-		let offlineTime = Date.now() - pastGame.date;
+		if (pastGame.date != undefined) let offlineTime = Date.now() - pastGame.date;
 		merge(game, pastGame);
-		if (offlineTime > 1000) simulateTime(offlineTime);
+		if (pastGame.date != undefined) {
+			if (offlineTime > 1000) simulateTime(offlineTime);
+		}
 		updateAll();
 		if (!auto) {
 			id("loadButton").style.backgroundColor = "green";
@@ -835,7 +839,7 @@ function isEven(n) {
 
 function format(n, toFixed = 0) {
 	if (n == "Infinity") return Infinity;
-	else if (n < 1e3) return n.toFixed(toFixed);
+	else if (-1e3 < n < 1e3) return n.toFixed(toFixed);
 	return n.toExponential(2).replace("+","");
 }
 
