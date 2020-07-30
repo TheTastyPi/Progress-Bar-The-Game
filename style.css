@@ -339,6 +339,8 @@ button.dark {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	animation-name: autoInit;
+	animation-duration: 1s;
 }
 .autoBar {
 	width: 200px;
@@ -436,4 +438,8 @@ button.dark {
 @keyframes switchScreenInit {
 	from {width: 0; opacity: 0;}
 	to {width: 30px; opacity: 1;}
+}
+@keyframes autoInit {
+	from {flex-grow: 0;}
+	to {flex-grow: 1;}
 }
