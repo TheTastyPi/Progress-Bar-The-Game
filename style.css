@@ -342,6 +342,7 @@ button.dark {
 	animation-name: autoInit;
 	animation-duration: 1s;
 	font-size: 20px;
+	text-align: center;
 }
 .autoBar {
 	width: 200px;
