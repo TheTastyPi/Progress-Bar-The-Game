@@ -250,6 +250,9 @@ function importSave() {
 
 function wipe() {
 	if (confirm("Are you sure you want to wipe your save?")) {
+		for (let i = 0; i < game.currentScreen; i++) {
+			switchScreen("backward");
+		}
 		game = newGame(); 
 		save();
 		updateAll();
