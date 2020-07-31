@@ -398,7 +398,9 @@ function switchScreen(dir) {
 	for (let menu of document.getElementsByClassName("topMenu")) {
 		menu.style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
 	}
-	id("maxAllButton").style.transform = "translate("+game.currentScreen*100+"vw,0)";
+	for (let type of Object.keys(upgrade)) {
+		id((type=="normal"?"m":type+"M")+"axAllButton").style.transform = "rotate(90deg) translate(20px,20px) translate("+game.currentScreen*100+"vw,0)";
+	}
 	id("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
 	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
 }
