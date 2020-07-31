@@ -327,7 +327,8 @@ button.dark {
 	height: 50px;
 	left: 0;
 	top: 0;
-	border-radius: 0 0 20px;
+	border-radius: 0 20px 0 0;
+	transform: rotate(-90deg);
 }
 .upgButton {
 	margin-top: 10px;
