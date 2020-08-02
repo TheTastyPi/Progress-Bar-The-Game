@@ -563,7 +563,7 @@ function updateUpg() {
 							newDesc += format(Math.pow(2, game.upgrade.normal[i])) + "x";
 							break;
 						case 3:
-							newDesc += format(1 + game.upgrade.normal[i] * 2, 1) + "&radic;";
+							newDesc += format(1 + game.upgrade.normal[i] * 2) + "&radic;";
 							break;
 						case 4:
 							newDesc += format(game.upgrade.normal[i]) + " Skill" + pluralCheck(game.upgrade.normal[i]);
