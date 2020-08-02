@@ -467,7 +467,7 @@ function getBarSpeed(n) {
 	switch (n) {
 		case 0: {
 			let upg1Boost = Math.pow(2, game.upgrade.normal[1]);
-			let overflow = game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 5 / (game.upgrade.normal[3] / 2 + 1)) : 1;
+			let overflow = game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 5 / (2 * game.upgrade.normal[3] + 1)) : 1;
 			return upg1Boost / overflow * getBoostBarMult();
 			break;
 		}
@@ -563,7 +563,7 @@ function updateUpg() {
 							newDesc += format(Math.pow(2, game.upgrade.normal[i])) + "x";
 							break;
 						case 3:
-							newDesc += format(1 + game.upgrade.normal[i] / 2, 1) + "&radic;";
+							newDesc += format(1 + game.upgrade.normal[i] * 2, 1) + "&radic;";
 							break;
 						case 4:
 							newDesc += format(game.upgrade.normal[i]) + " Skill" + pluralCheck(game.upgrade.normal[i]);
