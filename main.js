@@ -467,7 +467,7 @@ function getBarSpeed(n) {
 	switch (n) {
 		case 0: {
 			let upg1Boost = Math.pow(2, game.upgrade.normal[1]);
-			let overflow = game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 5 / (game.upgrade.normal[3] / 2 + 1)) : 1;
+			let overflow = game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 5 / (2 * game.upgrade.normal[3] + 1)) : 1;
 			return upg1Boost / overflow * getBoostBarMult();
 			break;
 		}
