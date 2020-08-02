@@ -2,7 +2,7 @@
 A game where you fill progress bars.
 
 # Change Log
-## v0.3: Logarithmic Progress - ???. ?th, 2020
+## v0.3: Logarithmic Progress - Aug. ?th, 2020
 * A new prestige layer added
   * 20 new upgrades added
   * New mechanic: Skills, added
