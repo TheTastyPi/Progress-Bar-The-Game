@@ -508,7 +508,7 @@ function getBoostBarMult() {
 }
 
 function getTimeMachineMult() {
-	return 1 + game.upgrade.auto.reduce((a,b) => a + b, 0) * 0.05 + game.points[1] * 0.01;
+	return 1 + game.upgrade.auto.reduce((a,b) => a + b, 0) * 0.05;
 }
 
 function updateAll() {
@@ -517,7 +517,8 @@ function updateAll() {
 	id("switchScreenRight").classList[game.currentScreen == game.screenLimit[1] ? "add" : "remove"]("disabled");
 	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
 	updateProgress();
-	updatePoints();
+	updatePoints(0);
+	updatePoints(1);
 	updateUpg();
 	updateSkills()
 }
@@ -538,16 +539,49 @@ function updateProgress() {
 	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
 }
 
-function updatePoints() {
-	for (let i = 0; i < 2; i++) {
-		if (isNaN(game.points[i])) game.points[i] = 0;
-		id("pointDisplay"+i).innerHTML = "You have "+format(game.points[i])+" "+(i==0?"pr":"l")+"ogress point"+pluralCheck(game.points[i])+".";
-		id("pointDisplay"+i).classList[game.lifetimePoints[i] >= 1 ? "remove" : "add"]("hidden");
+function updatePoints(n) {
+	switch(n) {
+		case 0:
+			if (isNaN(game.points[0])) game.points[0] = 0;
+			id("pointDisplay0").innerHTML = "You have "+format(game.points[0])+" progress point"+pluralCheck(game.points[0])+".";
+			id("pointDisplay0").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+			id("themeMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+			id("saveMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+			id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+			break;
+		case 1:
+			if (isNaN(game.points[1])) game.points[1] = 0;
+			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
+			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
+			id("logBoostPoints").innerHTML = game.lifetimePoints[1]+" logress point"+pluralCheck(game.lifetimePoints[1]);
+			let logBoostLimit = [5,10,5,20,5,4];
+			let logBoostReq = [1,2,4,5,10,50];
+			for (let i = 0; i < 6; i++) {
+				let level = Math.min(Math.floor(game.lifetimePoints[1] / logBoostReq[i]), logBoostLimit[i]);
+				id("logBoostDisp"+i).classList[game.lifetimePoints[1] > logBoostReq[i] ? "remove" : "add"]("hidden");
+				id("logBoostAmount"+i).innerHTML = level + "/" + logBoostLimit[i] + " | " + (level == logBoostLimit ? "Infinity" : game.lifetimePoints[1] - Math.floor(game.lifetimePoints[1] / logBoostReq[i]) * logBoostReq[i]);
+				let currentBoost;
+				switch(i) {
+					case 0:
+						currentBoost = "-" + level * 10 + "%";
+						break;
+					case 1:
+						currentBoost = "-" + level * 5 + "%";
+						break;
+					case 2:
+						currentBoost = "+" + level * 10 + "%";
+						break;
+					case 3:
+						currentBoost = "-" + level * 6 + "s";
+						break;
+					case 4:
+						currentBoost = level + "%/point";
+						break;
+					case 5:
+						currentBoost = "+" + level * 100 + "%";
+				}
+			}
 	}
-	id("themeMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
-	id("saveMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
-	id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
-	id("timeMachineMult").innerHTML = format(getTimeMachineMult(),2) + "x";
 }
 
 function updateUpg() {
@@ -745,7 +779,7 @@ function redeemPoints(n) {
 			game.skill.waitTimer = 0;
 			game.skill.durationTimer[3] = 0;
 		}
-		updatePoints();
+		updatePoints(n);
 		updateUpg();
 	}
 }
@@ -755,7 +789,7 @@ function buyUpgrade(n, type = "normal") {
 		game.points[upgrade[type].type[n]] -= getUpgPrice(n, type);
 		game.upgrade[type][n]++;
 		updateUpg();
-		updatePoints();
+		updatePoints(upgrade[type].type[n]);
 		updateSkills();
 	}
 }
@@ -764,10 +798,10 @@ function bulkUpgrade(n, type = "normal", amount = 1) {
 	let totalAmount = Math.min(Math.floor(Math.log(game.points[0]*(upgrade[type].priceGrowth[n]-1)/getUpgPrice(n, type)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
 	let totalPrice = getUpgPrice(n, type)*(1-Math.pow(upgrade[type].priceGrowth[n],totalAmount))/(1-upgrade[type].priceGrowth[n]);
 	if (totalAmount >= 1) {
-		game.points[0] -= totalPrice;
+		game.points[upgrade[type].type[n]] -= totalPrice;
 		game.upgrade[type][n] += totalAmount;
 		updateUpg();
-		updatePoints();
+		updatePoints(upgrade[type].type[n]);
 		updateSkills();
 	}
 }
@@ -780,7 +814,7 @@ function maxAll(type = "normal") {
 			game.points[0] -= totalPrice;
 			game.upgrade[type][i] += totalAmount;
 			updateUpg();
-			updatePoints();
+			updatePoints(upgrade[type].type[n]);
 			updateSkills();
 		}
 	}
