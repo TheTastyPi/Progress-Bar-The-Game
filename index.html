@@ -29,8 +29,8 @@
 				<span id="progressBarLabel1" class="label centered">0%</span>
 				<button id="redeemButton1" onclick="redeemPoints(1)" class="hidden centered redeemButton">Redeem Points</button>
 				<span id="pointDisplay1" class="hidden centered pointDisplay">You have 0 logress points.</span>
-				<span id="logBoost" class="logBoost">
-					<span>You've gotten <span id="logBoostPoints" style="color:#FFFF00">logress points</span> in total.</span><br>
+				<div id="logBoost" class="logBoost">
+					You've gotten <span id="logBoostPoints" style="color:#FFFF00">logress points</span> in total.<br>
 					<span id="logBoostDisp0" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost0')">
 						<span id="logBoostTooltip0" class="tooltipText">
 							<span id="logBoostAmount0">0/5 | 1</span> until next level<br>
@@ -73,7 +73,7 @@
 							Currently: <span id="logBoostEffect5">effect</span>
 						</span>
 					</span>
-				</span>
+				</div>
 			</div>
 		</div>
 		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
