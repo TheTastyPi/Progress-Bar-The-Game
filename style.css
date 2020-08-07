@@ -226,9 +226,12 @@ button.dark {
 	color: #FFFFFF;
 }
 .logBoost {
-	transform: translate(calc(50% - 400px), calc(-50% + 200px));
+	transform: translateX(50%);
+	top: 5%;
+	left: 50%;
 	width: 300px;
 	height: 100px;
+	text-align: center;
 }
 .logBoostDisp {
 	width: 50px;
