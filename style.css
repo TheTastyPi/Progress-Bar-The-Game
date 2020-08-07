@@ -240,7 +240,7 @@ button.dark {
 	height: 50px;
 	border: 4px solid #222222;
 }
-.logBoostDisp {
+.logBoostDisp.dark {
 	border: 4px solid #DDDDDD;
 }
 .sideMenuOpen {
