@@ -449,6 +449,7 @@ function newGame() {
 
 function getUpgPrice(n, type = "normal") {
 	let upgPrice = upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]);
+	upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
 	if (upgrade[type].type[n] == 0) upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
 	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity);
 }
@@ -456,7 +457,7 @@ function getUpgPrice(n, type = "normal") {
 function getBarLength(n) {
 	switch (n) {
 		case 0:
-			return 6e4 / Math.pow(2, game.upgrade.normal[0]);
+			return 6e4 / Math.pow(2, game.upgrade.normal[0]) * (1 - 0.1 * Math.min(game.lifetimePoints[1],5));
 			break;
 		case 1:
 			return Math.log10(1.79e308);
@@ -467,8 +468,9 @@ function getBarSpeed(n) {
 	switch (n) {
 		case 0: {
 			let upg1Boost = Math.pow(2, game.upgrade.normal[1]);
-			let overflow = game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 5 / (2 * game.upgrade.normal[3] + 1)) : 1;
-			return upg1Boost / overflow * getBoostBarMult();
+			let overflow = game.progress[0] > getBarLength(0) ? Math.pow(game.progress[0] / getBarLength(0), 5 / ((1 + 0.1 * Math.min(Math.floor(game.lifetimePoints[1] / 4),5)) * 2 * game.upgrade.normal[3] + 1)) : 1;
+			let logBoost = 1 + game.points[1] * 0.01 * Math.min(Math.floor(game.lifetimePoints[1] / 10),5);
+			return upg1Boost / overflow * getBoostBarMult() * logBoost;
 			break;
 		}
 		case 1:
@@ -486,7 +488,7 @@ function getPointGain(n) {
 			break;
 		}
 		case 1:
-			return Math.floor(game.progress[1] / getBarLength(1));
+			return Math.floor(game.progress[1] / getBarLength(1) * (1 + Math.min(Math.floor(game.lifetimePoints[1] / 50),4)));
 	}
 }
 
@@ -786,7 +788,7 @@ function maxAll(type = "normal") {
 
 function useSkill(n) {
 	if (game.skill.timer[n] <= 0 && game.upgrade.normal[4] > n) {
-		game.skill.timer[n] = skill.cooldown[n];
+		game.skill.timer[n] = skill.cooldown[n] - 6000 * Math.min(Math.floor(game.lifetimePoints[1] / 5),20);
 		game.skill.durationTimer[n] = skill.duration[n];
 		if (n == 3) game.skill.waitTimer = 120*1000 - 10*1000*game.upgrade.skill[6];
 	}
