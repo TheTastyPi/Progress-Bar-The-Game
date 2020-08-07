@@ -814,7 +814,7 @@ function maxAll(type = "normal") {
 			game.points[0] -= totalPrice;
 			game.upgrade[type][i] += totalAmount;
 			updateUpg();
-			updatePoints(upgrade[type].type[n]);
+			updatePoints(upgrade[type].type[i]);
 			updateSkills();
 		}
 	}
