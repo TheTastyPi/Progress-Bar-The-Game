@@ -456,7 +456,7 @@ function getUpgPrice(n, type = "normal") {
 function getBarLength(n) {
 	switch (n) {
 		case 0:
-			return 6e4 / Math.pow(2, game.upgrade.normal[0]);
+			return 1.5e4 / Math.pow(2, game.upgrade.normal[0]);
 			break;
 		case 1:
 			return Math.log10(1.79e308);
