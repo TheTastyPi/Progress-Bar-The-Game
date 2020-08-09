@@ -575,7 +575,7 @@ function updatePoints(n) {
 						currentBoost = "-" + level * 6 + "s";
 						break;
 					case 4:
-						currentBoost = level + "%/point";
+						currentBoost = "+" + level + "%/point";
 						break;
 					case 5:
 						currentBoost = "+" + level * 100 + "%";
