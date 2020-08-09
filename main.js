@@ -560,7 +560,7 @@ function updatePoints(n) {
 			for (let i = 0; i < 6; i++) {
 				let level = Math.min(Math.floor(game.lifetimePoints[1] / logBoostReq[i]), logBoostLimit[i]);
 				id("logBoostDisp"+i).classList[game.lifetimePoints[1] > logBoostReq[i] ? "remove" : "add"]("disabledUpg");
-				id("logBoostAmount"+i).innerHTML = level + "/" + logBoostLimit[i] + " | " + (level == logBoostLimit[i] ? "None" : logBoostReq[i] - game.lifetimePoints[1] % logBoostReq[i]);
+				id("logBoostAmount"+i).innerHTML = level + "/" + logBoostLimit[i] + " | " + (level == logBoostLimit[i] ? "N/A" : logBoostReq[i] - game.lifetimePoints[1] % logBoostReq[i]);
 				let currentBoost;
 				switch(i) {
 					case 0:
@@ -582,6 +582,9 @@ function updatePoints(n) {
 						currentBoost = "+" + level * 100 + "%";
 				}
 				id("logBoostEffect"+i).innerHTML = currentBoost;
+			}
+			for (let i = 0; i < 4; i++) {
+				id("skillCooldown"+i).innerHTML = skill.cooldown[i] / 60 / 1000 - 0.1 * Math.min(Math.floor(game.lifetimePoints[1] / 5), 20);
 			}
 	}
 }
