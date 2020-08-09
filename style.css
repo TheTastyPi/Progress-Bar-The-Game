@@ -403,9 +403,10 @@ button.dark {
 	z-index: 1;
 	bottom: 125%;
 	left: 50%;
-	margin-left: -45px;
+	margin-left: -90px;
 	opacity: 0;
 	transition: opacity 0.5s;
+	white=space: normal;
 }
 .tooltipText.dark {
 	background-color: #DDDDDD;
@@ -427,6 +428,9 @@ button.dark {
 .tooltip:hover .tooltipText {
 	visibility: visible;
 	opacity: 1;
+}
+.logBoostTooltip {
+	width: 240px;
 }
 @keyframes progressBarInit {
 	from {width: 0; opacity: 0;}
