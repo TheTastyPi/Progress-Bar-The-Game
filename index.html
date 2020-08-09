@@ -29,6 +29,51 @@
 				<span id="progressBarLabel1" class="label centered">0%</span>
 				<button id="redeemButton1" onclick="redeemPoints(1)" class="hidden centered redeemButton">Redeem Points</button>
 				<span id="pointDisplay1" class="hidden centered pointDisplay">You have 0 logress points.</span>
+				<div id="logBoost" class="logBoost">
+					You've gotten <span id="logBoostPoints" style="color:#FFFF00">logress points</span> in total.<br>
+					<span id="logBoostDisp0" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost0.png')">
+						<span id="logBoostTooltip0" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount0">0/5 | 1</span> until next level<br>
+							<span style="overflow">Bar length is 10% shorter per level.</span><br>
+							Currently: <span id="logBoostEffect0">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp1" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost1.png')">
+						<span id="logBoostTooltip1" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount1">0/10 | 2</span> until next level<br>
+							Upgrades that costs progress points costs 5% less per level.<br>
+							Currently: <span id="logBoostEffect1">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp2" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost2.png')">
+						<span id="logBoostTooltip2" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount2">0/5 | 4</span> until next level<br>
+							Overflow upgrade is 10% more effective per level.<br>
+							Currently: <span id="logBoostEffect2">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp3" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost3.png')">
+						<span id="logBoostTooltip3" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount3">0/20 | 5</span> until next level<br>
+							All skills takes 6 seconds less to cool down per level.<br>
+							Currently: <span id="logBoostEffect3">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp4" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost4.png')">
+						<span id="logBoostTooltip4" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount4">0/5 | 10</span> until next level<br>
+							You gain 1% more bar speed from each logress point you currently have per level.<br>
+							Currently: <span id="logBoostEffect4">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp5" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost5.png')">
+						<span id="logBoostTooltip5" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount5">0/4 | 50</span> until next level<br>
+							You gain 100% more logress points per level.<br>
+							Currently: <span id="logBoostEffect5">effect</span>
+						</span>
+					</span>
+				</div>
 			</div>
 		</div>
 		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
@@ -335,10 +380,10 @@
 		<div id="skillMenu" class="sideMenu left" style="bottom:0px; height:180px; width:180px;">
 			<button id="skill0" class="tooltip skillButton" onclick="useSkill(0)" style="background-image:url('pics/Sine.png');">
 				<span id="skillTimer0"></span>
-				<span class="tooltipText">
+				<span class="tooltipText" style="margin-left:-45px;">
 					"Sine"<br>
 					Gives you a point gain multiplier oscillating between <span id="skillDesc0">x10 and x-8</span> for 1 minute. Click it while it's high!<br>
-					Cooldown: 5 minutes
+					Cooldown: <span id="skillCooldown0">5</span> minutes
 				</span>
 			</button>
 			<button id="skill1" class="tooltip skillButton" onclick="useSkill(1)" style="background-image:url('pics/Exp.png');">
@@ -346,15 +391,15 @@
 				<span class="tooltipText" style="margin-left:-135px;">
 					"Exp"<br>
 					Gives you a "BOOST" bar for 1 minute. Fill it up by redeeming points! It give a bar speed boost that increases exponentially up to x<span id="skillDesc1">30</span> as you fill it up. Be carefull not to overheat!<br>
-					Cooldown: 5 minutes
+					Cooldown: <span id="skillCooldown1">5</span> minutes
 				</span>
 			</button>
 			<button id="skill2" class="tooltip skillButton" onclick="useSkill(2)" style="background-image:url('pics/Inv.png');">
 				<span id="skillTimer2"></span>
-				<span class="tooltipText">
+				<span class="tooltipText" style="margin-left:-45px;">
 					"Inv"<br>
 					Makes discount coupons randomly appear on the screen for 1 minute! All upgrades that cost progress points' price will be divided based on the amount you click, but if you miss one, then it'll all reset! <br>
-					Cooldown: 10 minutes
+					Cooldown: <span id="skillCooldown2">10</span> minutes
 				</span>
 			</button>
 			<button id="skill3" class="tooltip skillButton" onclick="useSkill(3)" style="background-image:url('pics/Squr.png');">
@@ -362,7 +407,7 @@
 				<span class="tooltipText" style="margin-left:-135px;">
 					"Squr"<br>
 					Take <span id="skillDesc3">120 seconds</span> to charge up and squares all other skills' effect for 30 seconds, but if you redeem points while it's charging, then the charging fails and you don't get the boost.<br>
-					Cooldown: 7.5 minutes
+					Cooldown: <span id="skillCooldown3">7.5</span> minutes
 				</span>
 			</button>
 		</div>
