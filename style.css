@@ -226,6 +226,8 @@ button.dark {
 	color: #FFFFFF;
 }
 .logBoost {
+	animation-name: genericInit;
+	animation-duration: 1s;
 	transform: translate(calc(50vw - 50%), 75px);
 	width: 400px;
 	height: 100px;
@@ -433,6 +435,10 @@ button.dark {
 .logBoostTooltip {
 	width: 240px;
 	margin-left: -120px;
+}
+@keyframes genericInit {
+	from {opacity: 0;}
+	to (opacity: 1;}
 }
 @keyframes progressBarInit {
 	from {width: 0; opacity: 0;}
