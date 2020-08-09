@@ -553,6 +553,7 @@ function updatePoints(n) {
 			if (isNaN(game.points[1])) game.points[1] = 0;
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
 			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
+			id("logBoost").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("logBoostPoints").innerHTML = game.lifetimePoints[1]+" logress point"+pluralCheck(game.lifetimePoints[1]);
 			let logBoostLimit = [5,10,5,20,5,4];
 			let logBoostReq = [1,2,4,5,10,50];
