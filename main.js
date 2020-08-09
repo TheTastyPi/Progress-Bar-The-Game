@@ -156,7 +156,7 @@ function doFrame(sinceLastFrame) {
 				case 2:
 				case 3:
 					if (game.points[0] >= getUpgPrice(i)) {
-						bulkUpgrade(i, "normal", Math.pow(2,Math.pow(game.upgrade.auto[6],2)));
+						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]));
 						game.auto.nextRun[i] = 0;
 					}
 					break;
@@ -649,7 +649,7 @@ function updateUpg() {
 							}
 							break;
 						case 6:
-							newDesc += Math.pow(2,game.upgrade.auto[i]) + "/buy";
+							newDesc += format(Math.pow(2,game.upgrade.auto[i]),0) + "/buy";
 							break;
 						case 7:
 							newDesc += (game.upgrade.auto[i]?"Unlocked":"Locked");
