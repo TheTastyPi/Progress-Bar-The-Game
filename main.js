@@ -559,7 +559,7 @@ function updatePoints(n) {
 			for (let i = 0; i < 6; i++) {
 				let level = Math.min(Math.floor(game.lifetimePoints[1] / logBoostReq[i]), logBoostLimit[i]);
 				id("logBoostDisp"+i).classList[game.lifetimePoints[1] > logBoostReq[i] ? "remove" : "add"]("disabledUpg");
-				id("logBoostAmount"+i).innerHTML = level + "/" + logBoostLimit[i] + " | " + (level == logBoostLimit[i] ? "Infinity" : game.lifetimePoints[1] - Math.floor(game.lifetimePoints[1] / logBoostReq[i]) * logBoostReq[i]);
+				id("logBoostAmount"+i).innerHTML = level + "/" + logBoostLimit[i] + " | " + (level == logBoostLimit[i] ? "Infinity" : logBoostReq[i] - game.lifetimePoints[1] % logBoostReq[i]);
 				let currentBoost;
 				switch(i) {
 					case 0:
