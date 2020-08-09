@@ -30,7 +30,7 @@ const skill = {
 };
 
 const auto = {
-	baseInterval: [5*60*1000, 5*60*1000, 10*60*1000, 20*60*1000, 1*60*1000, 4*60*60*1000]
+	baseInterval: [5*60*1000, 5*60*1000, 10*60*1000, 10*60*1000, 1*60*1000, 4*60*60*1000]
 };
 
 function init() {
@@ -156,7 +156,7 @@ function doFrame(sinceLastFrame) {
 				case 2:
 				case 3:
 					if (game.points[0] >= getUpgPrice(i)) {
-						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]));
+						bulkUpgrade(i, "normal", Math.pow(2,Math.pow(game.upgrade.auto[6],2)));
 						game.auto.nextRun[i] = 0;
 					}
 					break;
