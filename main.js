@@ -253,9 +253,6 @@ function wipe() {
 		for (let i = 0; i < game.currentScreen; i++) {
 			switchScreen("backward");
 		}
-		game = newGame(); 
-		save();
-		updateAll();
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+menu.style.height;
 			menu.classList.remove("isOpen");
@@ -272,6 +269,10 @@ function wipe() {
 			let isLeft = menuOpen.classList.contains("left");
 			menuOpen.style[isLeft?"left":"right"] = "0";
 		}
+		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
+		game = newGame(); 
+		save();
+		updateAll();
 		id("wipeButton").style.backgroundColor = "red";
 		setTimeout(function(){id("wipeButton").style.backgroundColor = "";}, 250);
 	}
@@ -520,7 +521,10 @@ function updateAll() {
 	updatePoints(0);
 	updatePoints(1);
 	updateUpg();
-	updateSkills()
+	updateSkills();
+	updateSineGraph();
+	updateBoostBar();
+	updateAuto();
 }
 
 function updateProgress() {
