@@ -794,7 +794,7 @@ function redeemPoints(n) {
 }
 
 function buyUpgrade(n, type = "normal") {
-	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n] && getUpgPrice(n, type) != Infinity) {
+	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		game.points[upgrade[type].type[n]] -= getUpgPrice(n, type);
 		game.upgrade[type][n]++;
 		updateUpg();
@@ -805,6 +805,7 @@ function buyUpgrade(n, type = "normal") {
 
 function bulkUpgrade(n, type = "normal", amount = 1) {
 	let totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[n]]/getUpgPrice(n, type)*(upgrade[type].priceGrowth[n]-1)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
+	if (isNaN(totalAmount)) totalAmount = Infinity;
 	let totalPrice = getUpgPrice(n, type)*(1-Math.pow(upgrade[type].priceGrowth[n],totalAmount))/(1-upgrade[type].priceGrowth[n]);
 	if (totalAmount >= 1) {
 		game.points[upgrade[type].type[n]] -= totalPrice;
@@ -817,15 +818,7 @@ function bulkUpgrade(n, type = "normal", amount = 1) {
 
 function maxAll(type = "normal") {
 	for (let i = game.currentScreen*4; i < (game.currentScreen+1)*4; i++) {
-		let totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[i]]/getUpgPrice(i, type)*(upgrade[type].priceGrowth[i]-1)+1)/Math.log(upgrade[type].priceGrowth[i])),upgrade[type].limit[i]);
-		let totalPrice = getUpgPrice(i, type)*(1-Math.pow(upgrade[type].priceGrowth[i],totalAmount))/(1-upgrade[type].priceGrowth[i]);
-		if (totalAmount >= 1) {
-			game.points[upgrade[type].type[i]] -= totalPrice;
-			game.upgrade[type][i] += totalAmount;
-			updateUpg();
-			updatePoints(upgrade[type].type[i]);
-			updateSkills();
-		}
+		bulkUpgrade(i, type, Infinity);
 	}
 }
 
