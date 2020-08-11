@@ -765,7 +765,7 @@ function updateBoostBar() {
 
 function updateAuto() {
 	for (let i = 0; i < 6; i++) {
-		let percent = game.auto.nextRun[i] / auto.baseInterval[i] * Math.pow(2,game.upgrade.auto[i]) * 100;
+		let percent = Math.min(game.auto.nextRun[i] / auto.baseInterval[i] * Math.pow(2,game.upgrade.auto[i]),1) * 100;
 		id("autoBarValue"+i).style.width = percent + "%";
 		id("autoBarLabel"+i).innerHTML = format(Math.min(percent,100),2) + "%";
 	}
