@@ -596,7 +596,7 @@ function updatePoints(n) {
 function updateUpg() {
 	for (let type of Object.keys(upgrade)) {
 		for (let i = 0; i < 8; i++) {
-			let newDesc = (game.upgrade[type][i]) != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
+			let newDesc = (game.upgrade[type][i] != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
 			switch(type) {
 				case "normal":
 					switch(i) {
