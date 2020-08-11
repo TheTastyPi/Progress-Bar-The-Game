@@ -784,6 +784,7 @@ function redeemPoints(n) {
 			for (let i = 0; i < 4; i++) {
 				game.upgrade.normal[i] = 0;
 			}
+			updatePoints(0);
 		} else {
 			game.progress[n] = game.progress[n] % getBarLength(n);
 		}
