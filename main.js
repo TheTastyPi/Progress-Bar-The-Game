@@ -454,7 +454,7 @@ function getUpgPrice(n, type = "normal") {
 		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
 		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
 	}
-	return Math.floor(game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity);
+	return game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity;
 }
 
 function getBarLength(n) {
@@ -519,6 +519,9 @@ function updateAll() {
 	document.querySelectorAll("*").forEach(function(node) {node.classList.add(game.currentTheme);});
 	id("switchScreenRight").classList[game.currentScreen == game.screenLimit[1] ? "add" : "remove"]("disabled");
 	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
+	for (let i = 0; i < 6; i++) {
+		id("autoToggle"+i).innerHTML = game.auto.isOn[i] ? "ON" : "OFF";
+	}
 	updateProgress();
 	updatePoints(0);
 	updatePoints(1);
@@ -797,7 +800,7 @@ function redeemPoints(n) {
 
 function buyUpgrade(n, type = "normal") {
 	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
-		game.points[upgrade[type].type[n]] -= getUpgPrice(n, type);
+		game.points[upgrade[type].type[n]] -= Math.floor(getUpgPrice(n, type));
 		game.upgrade[type][n]++;
 		updateUpg();
 		updatePoints(upgrade[type].type[n]);
@@ -808,7 +811,7 @@ function buyUpgrade(n, type = "normal") {
 function bulkUpgrade(n, type = "normal", amount = 1) {
 	let totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[n]]/getUpgPrice(n, type)*(upgrade[type].priceGrowth[n]-1)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
 	if (isNaN(totalAmount)) totalAmount = Infinity;
-	let totalPrice = getUpgPrice(n, type)*(1-Math.pow(upgrade[type].priceGrowth[n],totalAmount))/(1-upgrade[type].priceGrowth[n]);
+	let totalPrice = Math.floor(getUpgPrice(n, type)*(1-Math.pow(upgrade[type].priceGrowth[n],totalAmount))/(1-upgrade[type].priceGrowth[n]));
 	if (totalAmount >= 1) {
 		game.points[upgrade[type].type[n]] -= totalPrice;
 		game.upgrade[type][n] += totalAmount;
