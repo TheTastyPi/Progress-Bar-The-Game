@@ -672,10 +672,10 @@ function updateUpg() {
 			id((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
 		}
 		for (let i = 0; i < screenAmount; i++) {
-			if (getUpgPrice(i*4, type) == Infinity &&
-			   getUpgPrice(i*4+1, type) == Infinity &&
-			   getUpgPrice(i*4+2, type) == Infinity &&
-			   getUpgPrice(i*4+3, type) == Infinity) {
+			if (game.upgrade[type][i*4] == Infinity &&
+			   game.upgrade[type][i*4+1] == Infinity &&
+			   game.upgrade[type][i*4+2] == Infinity &&
+			   game.upgrade[type][i*4+3] == Infinity) {
 				setTimeout(function(){
 					id((type=="normal"?"u":type+"U")+"pgCleared"+i).classList.remove("hidden");
 					id((type=="normal"?"u":type+"U")+"pgCleared"+i).style.flex = "1";
