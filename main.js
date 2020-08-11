@@ -546,7 +546,7 @@ function updateProgress() {
 function updatePoints(n) {
 	switch(n) {
 		case 0:
-			if (isNaN(game.points[0])) game.points[0] = 0;
+			if (isNaN(game.points[0]) || game.points[0] == -Infinity) game.points[0] = 0;
 			id("pointDisplay0").innerHTML = "You have "+format(game.points[0])+" progress point"+pluralCheck(game.points[0])+".";
 			id("pointDisplay0").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			id("themeMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
@@ -554,7 +554,7 @@ function updatePoints(n) {
 			id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			break;
 		case 1:
-			if (isNaN(game.points[1])) game.points[1] = 0;
+			if (isNaN(game.points[1]) || game.points[1] == -Infinity) game.points[1] = 0;
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
 			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("logBoost").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
@@ -596,7 +596,7 @@ function updatePoints(n) {
 function updateUpg() {
 	for (let type of Object.keys(upgrade)) {
 		for (let i = 0; i < 8; i++) {
-			let newDesc = (getUpgPrice(i, type) != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
+			let newDesc = (game.upgrade[type][i]) != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
 			switch(type) {
 				case "normal":
 					switch(i) {
