@@ -155,7 +155,7 @@ function doFrame(sinceLastFrame) {
 				case 1:
 				case 2:
 				case 3:
-					if (game.points[0] >= getUpgPrice(i)) {
+					if (game.points[0] >= getUpgPrice(i) && game.upgrade.normal[i] < upgrade.normal.limit[i]) {
 						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]));
 						game.auto.nextRun[i] = 0;
 					}
