@@ -140,7 +140,7 @@ button.dark {
 	width: 100%;
 	text-align: center;
 	font-size: 40px;
-	transform: translate(50%, calc(-50% - 150px));
+	transform: translate(50%, calc(-50% - 120px));
 }
 .sinGraph {
 	transform: translate(calc(50% - 250px), calc(-50% + 200px));
@@ -228,7 +228,7 @@ button.dark {
 .logBoost {
 	animation-name: genericInit;
 	animation-duration: 1s;
-	transform: translate(calc(50vw - 50%), 50px);
+	transform: translate(calc(50vw - 50%), 75px);
 	width: 600px;
 	height: 100px;
 	text-align: center;
