@@ -162,7 +162,7 @@ function doFrame(sinceLastFrame) {
 					break;
 				case 4:
 				case 5:
-					if (game.progress[i - 4] >= getBarLength(i - 4) && game.points[i] != Infinity) {
+					if (game.progress[i - 4] >= getBarLength(i - 4) && game.points[i - 4] != Infinity) {
 						redeemPoints(i - 4);
 						game.auto.nextRun[i] = 0;
 					}
