@@ -214,6 +214,7 @@ function load(auto = true) {
 		if (pastGame.date != undefined) offlineTime = Date.now() - pastGame.date;
 		merge(game, pastGame);
 		if (offlineTime > 1000) simulateTime(offlineTime);
+		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 		updateAll();
 		if (!auto) {
 			id("loadButton").style.backgroundColor = "green";
