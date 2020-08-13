@@ -6,7 +6,7 @@ const screenAmount = document.getElementsByClassName("screen").length;
 const upgrade = {
 	normal: {
 		basePrice: [1, 1, 2, 3, 1, 2, 3, 4.2e69],
-		priceGrowth: [7, 7, 11, 14, 1, 1, 1, 1],
+		priceGrowth: [6, 6, 11, 14, 1, 1, 1, 1],
 		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1],
 		type: [0,0,0,0,1,1,1,1]
 	},
@@ -545,7 +545,7 @@ function updateProgress() {
 	}
 	id("switchScreenLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	id("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
-	game.progress[1] = Math.log10(game.progress[0] == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
+	game.progress[1] = Math.log10(game.progress[0]/getBarLength(0) + 1 == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
 	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
 }
 
