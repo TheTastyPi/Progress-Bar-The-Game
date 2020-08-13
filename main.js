@@ -719,7 +719,7 @@ function updateSkills() {
 			id("skillTimer"+i).innerHTML = formatTime(game.skill.timer[i], false);
 			id("skillTimer"+i).style.color = "red";
 		} else {
-			id("skillTimer"+i).innerHTML = ""
+			id("skillTimer"+i).innerHTML = "";
 		}
 	}
 	id("skillDesc0").innerHTML = `x${format(Math.pow(9, (game.upgrade.skill[0] * 0.5 + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)) + 1,0)} and x${game.upgrade.skill[1] ? "" : "-"}${format(Math.pow(9, (game.upgrade.skill[0] * 0.5 + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)) - 1,0)}`;
@@ -812,15 +812,17 @@ function buyUpgrade(n, type = "normal") {
 }
 
 function bulkUpgrade(n, type = "normal", amount = 1) {
-	let totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[n]]/getUpgPrice(n, type)*(upgrade[type].priceGrowth[n]-1)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
-	if (isNaN(totalAmount)) totalAmount = Infinity;
-	let totalPrice = Math.floor(getUpgPrice(n, type)*(1-Math.pow(upgrade[type].priceGrowth[n],totalAmount))/(1-upgrade[type].priceGrowth[n]));
-	if (totalAmount >= 1) {
-		game.points[upgrade[type].type[n]] -= totalPrice;
-		game.upgrade[type][n] += totalAmount;
-		updateUpg();
-		updatePoints(upgrade[type].type[n]);
-		updateSkills();
+	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
+		let totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[n]]/getUpgPrice(n, type)*(upgrade[type].priceGrowth[n]-1)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
+		if (isNaN(totalAmount)) totalAmount = Infinity;
+		let totalPrice = Math.floor(getUpgPrice(n, type)*(1-Math.pow(upgrade[type].priceGrowth[n],totalAmount))/(1-upgrade[type].priceGrowth[n]));
+		if (totalAmount >= 1) {
+			game.points[upgrade[type].type[n]] -= totalPrice;
+			game.upgrade[type][n] += totalAmount;
+			updateUpg();
+			updatePoints(upgrade[type].type[n]);
+			updateSkills();
+		}
 	}
 }
 
