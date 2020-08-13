@@ -1,57 +1,418 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Timewall: The Game</title>
-		<link rel="shortcut icon" type="image/png" href="Timewall.png">
+		<title>Progress Bar: The Game</title>
+		<link rel="shortcut icon" type="image/png" href="pics/PBTG.png">
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
-		<div id="upgMenu" class="topMenu" style="max-height:200px; left:0;">
-			<button id="maxAllButton0" onclick="maxAll(0)" class="maxall">Max All</button>
-			<div id="upg0" style="text-align:center;">
-				<button id="upgButton0" onclick="buyUpgrade(0)" class="horizonalCentered upgButton" style="background-image:url('upgrade0.png');"></button><br>
-				Bar Length Upgrade<br>
-				Divides bar length by 2.<br>
-				<span id="upgDesc0">
-					Cost: 1 Timewall Point<br>
-					Currently: /1
-				</span>
+		<div id="screenHolder" class="screenHolder">
+			<div id="screen0" class="screen">
+				<progress id="progressBar0" class="progressBar centered" max="1.5e4" value="0"></progress>
+				<span id="progressBarLabel0" class="label centered">0%</span>
+				<button id="redeemButton0" onclick="redeemPoints(0)" class="hidden centered redeemButton">Redeem Points</button>
+				<span id="pointDisplay0" class="hidden centered pointDisplay">You have 0 progress points.</span>
+				<div id="sinGraph" class="hidden centered sinGraph">
+					<div id="sinGraphLine" class="sinGraphLine"></div>
+					<div id="sinGraphLine2" class="sinGraphLine"></div>
+				</div>
+				<div id="boostBar" class="boostBar centered hidden">
+					<div id="boostBarValue" class="boostBarValue"></div>
+				</div>
+				<div id="boostBarStatus" class="centered boostBarStatus hidden">
+					<span id="boostBarStatusText" class="centered label boostBarStatusText">Cold</span>
+				</div>
+				<span id="boostLabel" class="label centered hidden boostLabel">x1</span>
 			</div>
-			<div id="upg1" class="oddUpgrades" style="text-align:center;">
-				<button id="upgButton1" onclick="buyUpgrade(1)" class="horizonalCentered upgButton" style="background-image:url('upgrade1.png');"></button><br>
-				Bar Speed Upgrade<br>
-				Multiplies bar speed by 2.<br>
-				<span id="upgDesc1">
-					Cost: 1 Timewall Point<br>
-					Currently: 1x
-				</span>
-			</div>
-			<div id="upg2" style="text-align:center;">
-				<button id="upgButton2" onclick="buyUpgrade(2)" class="horizonalCentered upgButton" style="background-image:url('upgrade2.png');"></button><br>
-				Point Gain Upgrade<br>
-				Multiplies point gain by 2.<br>
-				<span id="upgDesc2">
-					Cost: 2 Timewall Points<br>
-					Currently: 1x
-				</span>
-			</div>
-			<div id="upg3" class="oddUpgrades" style="text-align:center;">
-				<button id="upgButton3" onclick="buyUpgrade(3)" class="horizonalCentered upgButton" style="background-image:url('upgrade3.png');"></button><br>
-				Overflow Speed Upgrade<br>
-				Subtracts overflow penalty by 0.2<br>
-				<span id="upgDesc3">
-					Cost: 3 Timewall Point<br>
-					Currently: /10
-				</span>
+			<div id="screen1" class="screen" style="left:100%;">
+				<progress id="progressBar1" class="progressBar centered" max="308.2528530309799" value="0"></progress>
+				<span id="progressBarLabel1" class="label centered">0%</span>
+				<button id="redeemButton1" onclick="redeemPoints(1)" class="hidden centered redeemButton">Redeem Points</button>
+				<span id="pointDisplay1" class="hidden centered pointDisplay">You have 0 logress points.</span>
+				<div id="logBoost" class="logBoost">
+					You've gotten <span id="logBoostPoints" style="color:#FFFF00">logress points</span> in total.<br>
+					<span id="logBoostDisp0" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost0.png')">
+						<span id="logBoostTooltip0" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount0">0/5 | 1</span> until next level<br>
+							<span style="overflow">Bar length is 10% shorter per level.</span><br>
+							Currently: <span id="logBoostEffect0">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp1" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost1.png')">
+						<span id="logBoostTooltip1" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount1">0/10 | 2</span> until next level<br>
+							Upgrades that costs progress points costs 5% less per level.<br>
+							Currently: <span id="logBoostEffect1">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp2" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost2.png')">
+						<span id="logBoostTooltip2" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount2">0/5 | 4</span> until next level<br>
+							Overflow upgrade is 10% more effective per level.<br>
+							Currently: <span id="logBoostEffect2">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp3" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost3.png')">
+						<span id="logBoostTooltip3" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount3">0/20 | 5</span> until next level<br>
+							All skills takes 6 seconds less to cool down per level.<br>
+							Currently: <span id="logBoostEffect3">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp4" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost4.png')">
+						<span id="logBoostTooltip4" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount4">0/5 | 10</span> until next level<br>
+							You gain 1% more bar speed from each logress point you currently have per level.<br>
+							Currently: <span id="logBoostEffect4">effect</span>
+						</span>
+					</span>
+					<span id="logBoostDisp5" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost5.png')">
+						<span id="logBoostTooltip5" class="tooltipText logBoostTooltip">
+							<span id="logBoostAmount5">0/4 | 50</span> until next level<br>
+							You gain 100% more logress points per level.<br>
+							Currently: <span id="logBoostEffect5">effect</span>
+						</span>
+					</span>
+				</div>
 			</div>
 		</div>
-		<progress id="progressBar" class="progressBar centered" max="6e4" value="0"></progress>
-		<span id="progressBarLabel" class="label centered">0%</span>
-		<button id="redeemButton" onclick="redeemPoints()" class="hidden centeredButSlightlyLower" style="animation-name:redeemButtonInit; animation-duration:1s; height:200px; width:300px; font-size:40px;">Redeem Points</button>
-		<span id="timewallPoint" class="hidden centeredButSlightlyHigher" style="animation-name:pointDisplayInit; animation-duration:1s; width:100%; text-align:center; font-size:40px;">You have 0 timewall points.</span>
-		<button id="saveMenuOpen" onclick="toggleSideMenu('save')" class="sideMenuOpen">Saving</button>
-		<div id="saveMenu" class="sideMenu" style="bottom:0; height:120px; max-width:280px">
+		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
+		<div id="upgMenu" class="topMenu" style="height:200px; left:0;">
+			<div id="upgSect0" class="upgSect">
+				<div id="upg0" style="text-align:center;">
+					<button id="upgButton0" onclick="buyUpgrade(0)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade0.png');"></button><br>
+					Bar Length Upgrade<br>
+					Divides bar length by 2.<br>
+					<span id="upgDesc0">
+						Cost: 1 Progress Point<br>
+						Currently: /1
+					</span>
+				</div>
+				<div id="upg1" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButton1" onclick="buyUpgrade(1)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade1.png');"></button><br>
+					Bar Speed Upgrade<br>
+					Multiplies bar speed by 2.<br>
+					<span id="upgDesc1">
+						Cost: 1 Progress Point<br>
+						Currently: 1x
+					</span>
+				</div>
+				<div id="upg2" style="text-align:center;">
+					<button id="upgButton2" onclick="buyUpgrade(2)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade2.png');"></button><br>
+					Point Gain Upgrade<br>
+					Multiplies point gain by 2.<br>
+					<span id="upgDesc2">
+						Cost: 2 Progress Points<br>
+						Currently: 1x
+					</span>
+				</div>
+				<div id="upg3" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButton3" onclick="buyUpgrade(3)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade3.png');"></button><br>
+					Overflow Speed Upgrade<br>
+					Reduces overflow penalty.<br>
+					<span id="upgDesc3">
+						Cost: 3 Progress Point<br>
+						Currently: hi
+					</span>
+				</div>
+			</div>
+			<div id="upgSect1" class="upgSect">
+				<div id="upg4" style="text-align:center;">
+					<button id="upgButton4" onclick="buyUpgrade(4)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade4.png');"></button><br>
+					Skill Unlock<br>
+					Unlocks a new skill.<br>
+					<span id="upgDesc4">
+						Cost: 1 Logress Point<br>
+						Currently: 0 Skill
+					</span>
+				</div>
+				<div id="upg5" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButton5" onclick="buyUpgrade(5)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade5.png');"></button><br>
+					Skill Power Upgrades<br>
+					Unlocks the skill upgrade tab.<br>
+					<span id="upgDesc5">
+						Cost: 2 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="upg6" style="text-align:center;">
+					<button id="upgButton6" onclick="buyUpgrade(6)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade6.png');"></button><br>
+					Automation Unlock<br>
+					Unlocks the automation tab.<br>
+					<span id="upgDesc6">
+						Cost: 2 Logress Points<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="upg7" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButton7" onclick="buyUpgrade(7)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade7.png');"></button><br>
+					???<br>
+					Coming soon...<br>
+					<span id="upgDesc7">
+						Cost: ? Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+			</div>
+			<button id="maxAllButton" onclick="maxAll()" class="maxall">Max All</button>
+		</div>
+		<button id="skillUpgMenuOpen" onclick="toggleTopMenu('skillUpg')" class="hidden topMenuOpen" style="left:120px;">Skill Upgrades</button>
+		<div id="skillUpgMenu" class="topMenu" style="height:200px; left:0;">
+			<div id="skillUpgSect0" class="upgSect">
+				<div id="skillUpg0" style="text-align:center;">
+					<button id="skillUpgButton0" onclick="buyUpgrade(0,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade0.png');"></button><br>
+					Sine Upgrade<br>
+					Increases the multiplier from "Sine"<br>
+					<span id="skillUpgDesc0">
+						Cost: 1 Logress Point<br>
+						Currently: x1
+					</span>
+				</div>
+				<div id="skillUpg1" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton1" onclick="buyUpgrade(1,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade1.png');"></button><br>
+					Absolute Value<br>
+					Negative multipliers from "Sine" are turned positive.<br>
+					<span id="skillUpgDesc1">
+						Cost: 1 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="skillUpg2" style="text-align:center;">
+					<button id="skillUpgButton2" onclick="buyUpgrade(2,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade2.png');"></button><br>
+					Exp Upgrade<br>
+					Increases the max multiplier from "Exp"<br>
+					<span id="skillUpgDesc2">
+						Cost: 2 Logress Points<br>
+						Currently: 30x
+					</span>
+				</div>
+				<div id="skillUpg3" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton3" onclick="buyUpgrade(3,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade3.png');"></button><br>
+					Coolant<br>
+					The BOOST bar reaches the max multiplier earlier.<br>
+					<span id="skillUpgDesc3">
+						Cost: 3 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+			</div>
+			<div id="skillUpgSect1" class="upgSect">
+				<div id="skillUpg4" style="text-align:center;">
+					<button id="skillUpgButton4" onclick="buyUpgrade(4,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade4.png');"></button><br>
+					Inv Upgrade<br>
+					Increases the effect of "Inv".<br>
+					<span id="skillUpgDesc4">
+						Cost: 2 Logress Points<br>
+						Currently: x1
+					</span>
+				</div>
+				<div id="skillUpg5" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton5" onclick="buyUpgrade(5,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade5.png');"></button><br>
+					Two for One Special<br>
+					The time before coupons dissappear are doubled.<br>
+					<span id="skillUpgDesc5">
+						Cost: 3 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="skillUpg6" style="text-align:center;">
+					<button id="skillUpgButton6" onclick="buyUpgrade(6,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade6.png');"></button><br>
+					Squr Upgrade<br>
+					Reduces the time it takes for "Squr" to take effect.<br>
+					<span id="skillUpgDesc6">
+						Cost: 1 Logress Point<br>
+						Currently: 2 minutes
+					</span>
+				</div>
+				<div id="skillUpg7" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton7" onclick="buyUpgrade(7,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade7.png');"></button><br>
+					Cube<br>
+					Makes "Squr" cube instead of square the other skills' effect.<br>
+					<span id="skillUpgDesc7">
+						Cost: 2 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+			</div>
+			<button id="skillMaxAllButton" onclick="maxAll('skill')" class="maxall">Max All</button>
+		</div>
+		<button id="autoUpgMenuOpen" onclick="toggleTopMenu('autoUpg')" class="hidden topMenuOpen" style="left:240px;">Automation Upgrades</button>
+		<div id="autoUpgMenu" class="topMenu" style="height:200px; left:0;">
+			<div id="autoUpgSect0" class="upgSect">
+				<div id="autoUpg0" style="text-align:center;">
+					<button id="autoUpgButton0" onclick="buyUpgrade(0,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade0.png');"></button><br>
+					Auto Length Upgrade<br>
+					Automatically buys bar length upgrades.<br>
+					<span id="autoUpgDesc0">
+						Cost: 1 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
+				<div id="autoUpg1" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton1" onclick="buyUpgrade(1,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade1.png');"></button><br>
+					Auto Speed Upgrade<br>
+					Automatically buys bar speed upgrades.<br>
+					<span id="autoUpgDesc1">
+						Cost: 1 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
+				<div id="autoUpg2" style="text-align:center;">
+					<button id="autoUpgButton2" onclick="buyUpgrade(2,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade2.png');"></button><br>
+					Auto Point Upgrade<br>
+					Automatically buys point gain upgrades.<br>
+					<span id="autoUpgDesc2">
+						Cost: 2 Logress Points<br>
+						Currently: 0/s
+					</span>
+				</div>
+				<div id="autoUpg3" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton3" onclick="buyUpgrade(3,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade3.png');"></button><br>
+					Auto Overflow Upgrade<br>
+					Automatically buys overflow speed upgrades.<br>
+					<span id="autoUpgDesc3">
+						Cost: 3 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
+			</div>
+			<div id="autoUpgSect1" class="upgSect">
+				<div id="autoUpg4" style="text-align:center;">
+					<button id="autoUpgButton4" onclick="buyUpgrade(4,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade4.png');"></button><br>
+					Auto Redeem 1<br>
+					Automatically redeem progress points.<br>
+					<span id="autoUpgDesc4">
+						Cost: 1 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
+				<div id="autoUpg5" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton5" onclick="buyUpgrade(5,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade5.png');"></button><br>
+					Auto Redeem 2<br>
+					Automatically redeem logress points.<br>
+					<span id="autoUpgDesc5">
+						Cost: 2 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
+				<div id="autoUpg6" style="text-align:center;">
+					<button id="autoUpgButton6" onclick="buyUpgrade(6,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade6.png');"></button><br>
+					Auto Upgrade Magnitude<br>
+					Increases the buy amount for auto upgrades.<br>
+					<span id="autoUpgDesc6">
+						Cost: 2 Logress Points<br>
+						Currently: 1/buy
+					</span>
+				</div>
+				<div id="autoUpg7" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton7" onclick="buyUpgrade(7,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade7.png');"></button><br>
+					Time Machine<br>
+					Speed up time based on auto upgrades bought and current logress points.<br>
+					<span id="autoUpgDesc7">
+						Cost: 3 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
+				
+			</div>
+			<button id="autoMaxAllButton" onclick="maxAll('auto')" class="maxall">Max All</button>
+		</div>
+		<button id="autoMenuOpen" onclick="toggleTopMenu('auto')" class="hidden topMenuOpen" style="right:0;">Automation</button>
+		<div id="autoMenu" class="topMenu" style="height:200px; left:0;">
+			<div id="autoSect0" class="upgSect">
+				<div id="auto0" class="auto">
+					<span>Bar Length Upgrade Auto-Buyer</span>
+					<div id="autoBar0" class="autoBar">
+						<div id="autoBarValue0" class="autoBarValue"></div>
+						<span id="autoBarLabel0" class="label centered" style="font-size: 30px"></span>
+					</div>
+					<button id="autoToggle0" class="autoToggle" onclick="toggleAuto(0)">On</button>
+				</div>
+				<div id="auto1" class="auto oddUpgrades">
+					<span>Bar Speed Upgrade Auto-Buyer</span>
+					<div id="autoBar1" class="autoBar">
+						<div id="autoBarValue1" class="autoBarValue"></div>
+						<span id="autoBarLabel1" class="label centered" style="font-size: 30px"></span>
+					</div>
+					<button id="autoToggle1" class="autoToggle" onclick="toggleAuto(1)">On</button>
+				</div>
+				<div id="auto2" class="auto">
+					<span>Point Gain Upgrade Auto-Buyer</span>
+					<div id="autoBar2" class="autoBar">
+						<div id="autoBarValue2" class="autoBarValue"></div>
+						<span id="autoBarLabel2" class="label centered" style="font-size: 30px"></span>
+					</div>
+					<button id="autoToggle2" class="autoToggle" onclick="toggleAuto(2)">On</button>
+				</div>
+				<div id="auto3" class="auto oddUpgrades">
+					<span>Overflow Upgrade Auto-Buyer</span>
+					<div id="autoBar3" class="autoBar">
+						<div id="autoBarValue3" class="autoBarValue"></div>
+						<span id="autoBarLabel3" class="label centered" style="font-size: 30px"></span>
+					</div>
+					<button id="autoToggle3" class="autoToggle" onclick="toggleAuto(3)">On</button>
+				</div>
+			</div>
+			<div id="autoSect1" class="upgSect">
+				<div id="auto4" class="auto">
+					<span>Point Auto-Redeemer Level 1</span>
+					<div id="autoBar4" class="autoBar">
+						<div id="autoBarValue4" class="autoBarValue"></div>
+						<span id="autoBarLabel4" class="label centered" style="font-size: 30px"></span>
+					</div>
+					<button id="autoToggle4" class="autoToggle" onclick="toggleAuto(4)">On</button>
+				</div>
+				<div id="auto5" class="auto oddUpgrades">
+					<span>Point Auto-Redeemer Level 2</span>
+					<div id="autoBar5" class="autoBar">
+						<div id="autoBarValue5" class="autoBarValue"></div>
+						<span id="autoBarLabel5" class="label centered" style="font-size: 30px"></span>
+					</div>
+					<button id="autoToggle5" class="autoToggle" onclick="toggleAuto(5)">On</button>
+				</div>
+				<div id="auto7"  class="auto" style="font-size:40px; flex-grow:2; vertical-align: middle">
+					<span>Time Machine Multipler:</span>
+					<span id="timeMachineMult">1x</span>
+				</div>
+			</div>
+		</div>
+		<button id="skillMenuOpen" onclick="toggleSideMenu('skill')" class="hidden sideMenuOpen left" style="bottom:0; height:180px;">Skills</button>
+		<div id="skillMenu" class="sideMenu left" style="bottom:0px; height:180px; width:180px;">
+			<button id="skill0" class="tooltip skillButton" onclick="useSkill(0)" style="background-image:url('pics/Sine.png');">
+				<span id="skillTimer0"></span>
+				<span class="tooltipText" style="margin-left:-45px;">
+					"Sine"<br>
+					Gives you a point gain multiplier oscillating between <span id="skillDesc0">x10 and x-8</span> for 1 minute. Click it while it's high!<br>
+					Cooldown: <span id="skillCooldown0">5</span> minutes
+				</span>
+			</button>
+			<button id="skill1" class="tooltip skillButton" onclick="useSkill(1)" style="background-image:url('pics/Exp.png');">
+				<span id="skillTimer1"></span>
+				<span class="tooltipText" style="margin-left:-135px;">
+					"Exp"<br>
+					Gives you a "BOOST" bar for 1 minute. Fill it up by redeeming points! It give a bar speed boost that increases exponentially up to x<span id="skillDesc1">30</span> as you fill it up. Be carefull not to overheat!<br>
+					Cooldown: <span id="skillCooldown1">5</span> minutes
+				</span>
+			</button>
+			<button id="skill2" class="tooltip skillButton" onclick="useSkill(2)" style="background-image:url('pics/Inv.png');">
+				<span id="skillTimer2"></span>
+				<span class="tooltipText" style="margin-left:-45px;">
+					"Inv"<br>
+					Makes discount coupons randomly appear on the screen for 1 minute! All upgrades that cost progress points' price will be divided based on the amount you click, but if you miss one, then it'll all reset! <br>
+					Cooldown: <span id="skillCooldown2">10</span> minutes
+				</span>
+			</button>
+			<button id="skill3" class="tooltip skillButton" onclick="useSkill(3)" style="background-image:url('pics/Squr.png');">
+				<span id="skillTimer3"></span>
+				<span class="tooltipText" style="margin-left:-135px;">
+					"Squr"<br>
+					Take <span id="skillDesc3">120 seconds</span> to charge up and <span id="skillDesc3.1">square</span>s all other skills' effect for 30 seconds, but if you redeem points while it's charging, then the charging fails and you don't get the boost.<br>
+					Cooldown: <span id="skillCooldown3">7.5</span> minutes
+				</span>
+			</button>
+		</div>
+		<button id="saveMenuOpen" onclick="toggleSideMenu('save')" class="hidden sideMenuOpen" style="bottom:0;">Saving</button>
+		<div id="saveMenu" class="sideMenu" style="bottom:0; height:120px; width:280px">
 			<button id="saveButton" onclick="save(false)">Save</button>
 			<button id="loadButton" onclick="load(false)">Load</button>
 			<button id="autoSaveToggleButton" onclick="toggleAutoSave()">Auto Save<br>ON</button>
@@ -60,12 +421,16 @@
 			<button id="autoSaveIntervalButton" onclick="changeAutoSaveInterval()">Auto Save<br>Interval<br>1s</button>
 			<button id="wipeButton" onclick="wipe()">Wipe</button>
 		</div>
-		<button id="themeMenuOpen" onclick="toggleSideMenu('theme')" class="sideMenuOpen" style="bottom:120px;">Themes</button>
-		<div id="themeMenu" class="sideMenu" style="bottom:120px; height:120px; max-width:100px">
+		<button id="themeMenuOpen" onclick="toggleSideMenu('theme')" class="hidden sideMenuOpen" style="bottom:120px;">Themes</button>
+		<div id="themeMenu" class="sideMenu" style="bottom:120px; height:120px; width:100px">
 			<button id="lightTheme" onclick="toTheme('light')">Light</button>
 			<button id="darkTheme" onclick="toTheme('dark')">Dark</button>
 		</div>
+		<button id="switchScreenLeft" onclick="switchScreen('backward')" class="hidden switchScreenLeft">&lt;</button>
+		<button id="switchScreenRight" onclick="switchScreen('forward')" class="hidden switchScreenRight">&gt;</button>
+		<span id="couponCount" class="couponCount centered hidden"><span id="couponCountText" class="centered">0</span></span>
 		<textarea style="opacity: .01; height:0; position:absolute; z-index: -1;" id="exportArea">export text</textarea>
+		<span style="background-image:url('pics/coupon.png'); opacity:0"></span>
 	</body>
 	<script type="text/javascript" src="main.js"></script>
 </html>

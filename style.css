@@ -1,21 +1,40 @@
 * {
 	font-family: "Lucida Console", Monaco, monospace;
 }
-body {
-	color: #222222;
-	background-color: #DDDDDD;
-	transition: 0.5s;
+progress {
+	-webkit-appearance: none;
+	border: 5px solid #222222;
+	background: #FFFFFF;
 }
-body.dark {
-	color: #DDDDDD;
-	background-color: #222222;
+progress.dark {
+	border: 5px solid #DDDDDD;
+	background: #000000;
 }
+progress::-webkit-progress-bar {
+	background: #FFFFFF;
+}
+progress.dark::-webkit-progress-bar {
+	background: #000000;
+}
+#progressBar0 {color: #6666AA;transition:0.5s;}
+#progressBar0.dark {color: #9999EE;}
+#progressBar0::-webkit-progress-value {background: #6666AA;transition:0.5s;}
+#progressBar0.dark::-webkit-progress-value {background: #9999EE;}
+#progressBar0::-moz-progress-bar {background: #6666AA;transition:0.5s;}
+#progressBar0.dark::-moz-progress-bar {background: #9999EE;}
+#progressBar1 {color: #AAAA66;transition:0.5s;}
+#progressBar1.dark {color: #EEEE99;}
+#progressBar1::-webkit-progress-value {background: #AAAA66;transition:0.5s;}
+#progressBar1.dark::-webkit-progress-value {background: #EEEE99;}
+#progressBar1::-moz-progress-bar {background: #AAAA66;transition:0.5s;}
+#progressBar1.dark::-moz-progress-bar {background: #EEEE99;}
 button {
 	color: #DDDDDD;
 	background-color: #222222;
 	border-style: none;
 	border-radius: 15px;
-	transition: 0.2s;
+	transition: 0.5s;
+	background-size: contain;
 }
 button.dark {
 	color: #222222;
@@ -26,14 +45,12 @@ button.dark {
 	background-color: #666666;
 }
 .disabled.dark {
-	color: #DD0000;
-	background-color: #888888;
+	color: #770000;
+	background-color: #999999;
 }
 .disabledUpg {
-	filter: grayscale() drop-shadow(0px 0px 4px red);
-}
-.hidden {
-	display: none;
+	filter: brightness(75%);
+	box-shadow: 0 0 10px red inset;
 }
 .horizonalCentered {
 	display: block;
@@ -46,17 +63,50 @@ button.dark {
 	right: 50%;
 	transform: translate(50%, -50%);
 }
-.centeredButSlightlyLower {
+.screen {
+	color: #222222;
+	background-color: #DDDDDD;
 	position: absolute;
-	top: 50%;
-	right: 50%;
-	transform: translate(50%, calc(-50% + 200px));
+	display: inline-block;
+	width: 100vw;
+	height: 100%;
+	top: 0;
+	transition: 0.5s;
 }
-.centeredButSlightlyHigher {
+.screen.dark {
+	color: #DDDDDD;
+	background-color: #222222;
+}
+.screenHolder {
 	position: absolute;
-	top: 50%;
-	right: 50%;
-	transform: translate(50%, calc(-50% - 150px));
+	white-space: nowrap;
+	overflow: hidden;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+}
+.switchScreenLeft {
+	animation-name: switchScreenInit;
+	animation-duration: 1s;
+	border-radius: 0px 50px 50px 0px;
+	width: 30px;
+	height: 70px;
+	position: fixed;
+	left: 0;
+	bottom: 50%;
+	transform: translate(0, 50%);
+}
+.switchScreenRight {
+	animation-name: switchScreenInit;
+	animation-duration: 1s;
+	border-radius: 50px 0px 0px 50px;
+	width: 30px;
+	height: 70px;
+	position: fixed;
+	right: 0;
+	bottom: 50%;
+	transform: translate(0, 50%);
 }
 .progressBar {
 	animation-name: progressBarInit;
@@ -67,10 +117,131 @@ button.dark {
 .label {
 	animation-name: barLabelInit;
 	animation-duration: 1s;
-	background-color: rgba(255,255,255,0.2);
+	background-color: rgba(255,255,255,0.3);
 	color: #222222;
 	font-size: 50px;
 	transition: 0.5s;
+}
+.label.dark {
+	background-color: rgba(0,0,0,0.2);
+	color: #DDDDDD;
+}
+.redeemButton {
+	animation-name: redeemButtonInit;
+	animation-duration: 1s;
+	height: 200px;
+	width: 300px;
+	font-size: 40px;
+	transform: translate(50%, calc(-50% + 200px));
+}
+.pointDisplay {
+	animation-name: pointDisplayInit;
+	animation-duration: 1s;
+	width: 100%;
+	text-align: center;
+	font-size: 40px;
+	transform: translate(50%, calc(-50% - 120px));
+}
+.sinGraph {
+	transform: translate(calc(50% - 250px), calc(-50% + 200px));
+	width: 75px;
+	height: 200px;
+	background-color: #DDDDDD;
+	border: 4px solid #222222;
+}
+.sinGraph.dark {
+	background-color: #222222;
+	border: 4px solid #DDDDDD;
+}
+.sinGraphLine {
+	transform: translate(0, -50%);
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	top: 50%;
+	background-color: #222222;
+}
+.sinGraphLine.dark {
+	background-color: #DDDDDD;
+}
+.boostBar {
+	width: 450px;
+	height:100px;
+	background-color: #FFFFFF;
+	color: #0000FF;
+	border: 4px solid #222222;
+	transform: translate(635px, 150px);
+}
+.boostBar.dark {
+	background-color: #000000;
+	border: 4px solid #DDDDDD;
+}
+.boostBarValue {
+	width: 0;
+	height: 100%;
+	background-color: blue;
+	transition: 0.1s;
+}
+.boostBarStatus {
+	width: 100px;
+	height:40px;
+	background-color: #FFFFFF;
+	border: 4px solid #222222;
+	transform: translate(285px, 105px);
+	font-size: 20px;
+	transition: 0.1s;
+}
+.boostBarStatus.dark {
+	background-color: #000000;
+	border: 4px solid #DDDDDD;
+}
+.boostLabel {
+	animation-name: none;
+	transform: translate(475px, 175px);
+}
+.boostBarStatusText {
+	font-size:20px;
+	animation-name: none;
+}
+.coupon {
+	width: 248px;
+	height: 77px;
+	background-image: url('pics/coupon.png');
+	z-index: 2;
+	transition: none;
+	border-radius: 0px;
+	position: absolute;
+}
+.couponCount {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(255,255,255,0.5);
+	transition: opacity 0.5s;
+	opacity: 1;
+	font-size: 400px;
+	z-index: 2;
+}
+.couponCount.dark {
+	background-color: rgba(0,0,0,0.5);
+	color: #FFFFFF;
+}
+.logBoost {
+	animation-name: genericInit;
+	animation-duration: 1s;
+	transform: translate(calc(50vw - 50%), 75px);
+	width: 600px;
+	height: 100px;
+	text-align: center;
+	font-size: 20px;
+}
+.logBoostDisp {
+	width: 75px;
+	height: 75px;
+	border: 4px solid #222222;
+	background-size: contain;
+}
+.logBoostDisp.dark {
+	border: 4px solid #DDDDDD;
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
@@ -82,27 +253,32 @@ button.dark {
 	position: fixed;
 	z-index: 1;
 	right: 0;
-	bottom: 0;
 	transition: 0.5s;
 }
 .sideMenuOpen.dark {
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(255,255,255,0.7);
+}
+.sideMenuOpen.left {
+	border-radius: 0px 50px 50px 0px;
+	right: auto;
+	left: 0
 }
 .sideMenu {
 	display: flex;
 	flex-wrap: wrap;
 	align-content: stretch;
 	height: 100%;
-	width: 0;
 	position: fixed;
-	overflow: hidden;
 	z-index: 1;
-	right: 0;
+	left: 100%;
 	background-color: rgba(0,0,0,0.5);
 	transition: 0.5s;
 }
 .sideMenu.dark {
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(255,255,255,0.7);
+}
+.sideMenu.left {
+	left: -100%;
 }
 .sideMenu > * {
 	flex: 1 0 75px;	
@@ -120,50 +296,150 @@ button.dark {
 	transition: 0.5s;
 }
 .topMenuOpen.dark {
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(255,255,255,0.7);
 }
 .topMenu {
 	display: flex;
 	flex-wrap: wrap;
-	height: 0;
-	width: 100%;
+	width: 1000%;
 	position: fixed;
-	overflow: hidden;
 	z-index: 1;
-	top: 0;
+	top: -200px;
 	background-color: rgba(0,0,0,0.5);
 	transition: 0.5s;
 	color: #DDDDDD;
 }
 .topMenu.dark {
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(255,255,255,0.7);
+	color: #222222;
 }
-.topMenu > * {
+.upgSect {
+	display: flex;
 	flex: 1 0 75px;
-	transition: 0.5s;
+	max-height: 100%;
+	justify-content: center;
+}
+.upgSect > * {
+	flex: 1 0 75px;
+	transition: flex 0.5s;
+	overflow: hidden;
+	max-height: 100%;
 }
 .oddUpgrades {
 	background-color: rgba(0,0,0,0.2);
 }
-.oddUpgrades.dark {
-	background-color: rgba(255,255,255,0.2);
+.maxedUpg {
+	flex: 0 0 0px;
 }
-.maxedUpgrade {
-	flex: 0 0 0;
+.upgCleared {
+	flex: 0;
+	align-self: center;
+	text-align: center;
+	font-size: 40px;
+	transition: flex 0.5s;
+	overflow: hidden;
 }
 .maxall {
 	position: absolute;
 	width: 80px;
-	height: 50px;
-	left: 0;
-	top: 0;
-	border-radius: 0 0 20px;
+	height: 40px;
+	border-radius: 0 20px 0 0;
+	transform: rotate(90deg) translate(20px,20px);
 }
 .upgButton {
 	margin-top: 10px;
 	width: 200px;
 	height: 80px;
-	background-size: contain;
+}
+.auto {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	animation-name: autoInit;
+	animation-duration: 1s;
+	font-size: 30px;
+	text-align: center;
+}
+.autoBar {
+	width: 200px;
+	height:70px;
+	border: 4px solid #222222;
+	background-color: #444444;
+	transition: 0.5s;
+	position: relative;
+}
+.autoBar.dark {
+	border: 4px solid #DDDDDD;
+	background-color: #BBBBBB;
+}
+.autoBarValue {
+	width: 0;
+	height: 100%;
+	background-color: #666666;
+	transition: 0.1s;
+}
+.autoBarValue.dark {
+	background-color: #999999;
+}
+.autoToggle {
+	height: 50px;
+	width: 50px;
+}
+.skillButton {
+	max-height: 90px;
+	min-height: 90px;
+}
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+.tooltipText {
+	visibility: hidden;
+	width: 180px;
+	background-color: #222222;
+	color: #DDDDDD;
+	text-align: center;
+	font-size: 13px;
+	padding: 5px 0;
+	border-radius: 6px;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -90px;
+	opacity: 0;
+	transition: opacity 0.5s;
+	white-space: normal;
+}
+.tooltipText.dark {
+	background-color: #DDDDDD;
+	color: #222222;
+}
+.tooltipText::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #222222 transparent transparent transparent;
+}
+.tooltipText.dark::after {
+	border-color: #DDDDDD transparent transparent transparent;
+}
+.tooltip:hover .tooltipText {
+	visibility: visible;
+	opacity: 1;
+}
+.logBoostTooltip {
+	width: 240px;
+	margin-left: -120px;
+}
+@keyframes genericInit {
+	from {opacity: 0;}
+	to {opacity: 1;}
 }
 @keyframes progressBarInit {
 	from {width: 0; opacity: 0;}
@@ -189,3 +465,12 @@ button.dark {
 	from {height: 0; opacity: 0;}
 	to {height: 100px; opacity: 1;}
 }
+@keyframes switchScreenInit {
+	from {width: 0; opacity: 0;}
+	to {width: 30px; opacity: 1;}
+}
+@keyframes autoInit {
+	from {flex-grow: 0;}
+	to {flex-grow: 1;}
+}
+.hidden {display: none;}
