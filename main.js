@@ -552,7 +552,8 @@ function updateProgress() {
 function updatePoints(n) {
 	switch(n) {
 		case 0:
-			if (isNaN(game.points[0]) || game.points[0] == -Infinity) game.points[0] = 0;
+			if (isNaN(game.points[0]) || game.points[0] == -Infinity || typeof(game.points[0]) != "number") game.points[0] = 0;
+			if (isNaN(game.lifetimePoints[0]) || game.lifetimePoints[0] == -Infinity || typeof(game.lifetimePoints[0]) != "number") game.lifetimePoints[0] = 0;
 			id("pointDisplay0").innerHTML = "You have "+format(game.points[0])+" progress point"+pluralCheck(game.points[0])+".";
 			id("pointDisplay0").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			id("themeMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
@@ -560,7 +561,6 @@ function updatePoints(n) {
 			id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			break;
 		case 1:
-			if (isNaN(game.points[1]) || game.points[1] == -Infinity) game.points[1] = 0;
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
 			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("logBoost").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
@@ -569,7 +569,7 @@ function updatePoints(n) {
 			let logBoostReq = [1,2,4,5,10,50];
 			for (let i = 0; i < 6; i++) {
 				let level = Math.min(Math.floor(game.lifetimePoints[1] / logBoostReq[i]), logBoostLimit[i]);
-				id("logBoostDisp"+i).classList[game.lifetimePoints[1] > logBoostReq[i] ? "remove" : "add"]("disabledUpg");
+				id("logBoostDisp"+i).classList[game.lifetimePoints[1] >= logBoostReq[i] ? "remove" : "add"]("disabledUpg");
 				id("logBoostAmount"+i).innerHTML = level + "/" + logBoostLimit[i] + " | " + (level == logBoostLimit[i] ? "N/A" : logBoostReq[i] - game.lifetimePoints[1] % logBoostReq[i]);
 				let currentBoost;
 				switch(i) {
