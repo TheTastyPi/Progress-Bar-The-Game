@@ -787,9 +787,8 @@ function redeemPoints(n) {
 				game.upgrade.normal[i] = 0;
 			}
 			updatePoints(0);
-		} else {
-			game.progress[n] = game.progress[n] % getBarLength(n);
 		}
+		game.progress[n] = game.progress[n] % getBarLength(n);
 		if (game.skill.durationTimer[1] > 0 && !game.skill.boostOverflow) game.skill.boostProgress += 500;
 		if (game.skill.boostProgress > 10000) game.skill.boostOverflow = true;
 		if (game.skill.waitTimer > 0) {
