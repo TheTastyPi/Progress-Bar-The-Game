@@ -302,7 +302,7 @@ button.dark {
 	width: 33%;
 	position: fixed;
 	z-index: 1;
-	bottom: calc(100% - 100px);
+	bottom: calc(-100% + 100px);
 	background-color: rgba(0,0,0,0.5);
 	transition: 0.5s;
 	color: #DDDDDD;
