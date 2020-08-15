@@ -346,7 +346,7 @@ function toggleSideMenu(name) {
 }
 
 function toggleTopMenu(name) {
-	if (document.getElementsByClassName("isOpen").length = 0) {
+	if (document.getElementsByClassName("isOpen").length == 0) {
 		id(name+"Menu").style.top = "0";
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = id(name+"Menu").style.height;
