@@ -345,16 +345,13 @@ function toggleSideMenu(name) {
 	}
 }
 
-var topMenuOpen = false;
-
 function toggleTopMenu(name) {
-	if (!topMenuOpen) {
+	if (document.getElementsByClassName("isOpen").length = 0) {
 		id(name+"Menu").style.top = "0";
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = id(name+"Menu").style.height;
 		}
 		id(name+"Menu").classList.add("isOpen");
-		topMenuOpen = true;
 	} else if (!id(name+"Menu").classList.contains("isOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+menu.style.height;
@@ -369,7 +366,6 @@ function toggleTopMenu(name) {
 		setTimeout(function(){
 			id(name+"Menu").style.top = "0";
 			id(name+"Menu").classList.add("isOpen");
-			topMenuOpen = true;
 		},500);
 	} else {
 		id(name+"Menu").style.top = "-"+id(name+"Menu").style.height;
@@ -378,8 +374,18 @@ function toggleTopMenu(name) {
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
 		}
-		topMenuOpen = false;
-		
+	}
+}
+
+function toggleStatsMenu() {
+	if (!id("statsMenu").classList.contains("statsOpen")) {
+		id("statsMenu").style.bottom = "0"
+		id("statsMenuOpen").style.bottom = id("statsMenu").style.height;
+		id("statsMenu").classList.add("isOpen");
+	} else {
+		id("statsMenu").style.bottom = "-"+id("statsMenu").style.height;
+		id("statsMenuOpen").style.bottom = "0";
+		id("statsMenu").classList.remove("isOpen");
 	}
 }
 
