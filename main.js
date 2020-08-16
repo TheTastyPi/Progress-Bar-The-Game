@@ -383,7 +383,7 @@ function toggleStatsMenu() {
 		id("statsMenuOpen").style.bottom = id("statsMenu").style.height;
 		id("statsMenu").classList.add("statsOpen");
 	} else {
-		id("statsMenu").style.bottom = "calc("id("statsMenu").style.height"*-1)";
+		id("statsMenu").style.bottom = "calc("+id("statsMenu").style.height+"*-1)";
 		id("statsMenuOpen").style.bottom = "0";
 		id("statsMenu").classList.remove("statsOpen");
 	}
