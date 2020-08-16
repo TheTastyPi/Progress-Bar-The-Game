@@ -380,10 +380,10 @@ function toggleTopMenu(name) {
 function toggleStatsMenu() {
 	if (!id("statsMenu").classList.contains("statsOpen")) {
 		id("statsMenu").style.bottom = "0"
-		id("statsMenuOpen").style.bottom = id("statsMenu").style.height;
+		id("statsMenuOpen").style.bottom = "calc("+id("statsMenu").style.height+" + 10px)";
 		id("statsMenu").classList.add("statsOpen");
 	} else {
-		id("statsMenu").style.bottom = "calc("+id("statsMenu").style.height+"*-1)";
+		id("statsMenu").style.bottom = "calc(("+id("statsMenu").style.height+" + 10px)*-1)";
 		id("statsMenuOpen").style.bottom = "0";
 		id("statsMenu").classList.remove("statsOpen");
 	}
