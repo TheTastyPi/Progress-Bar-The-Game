@@ -334,28 +334,28 @@ function changeAutoSaveInterval() {
 
 function toggleSideMenu(name) {
 	let isLeft = id(name+"MenuOpen").classList.contains("left");
-	if (!id(name+"Menu").classList.contains("isOpen")) {
+	if (!id(name+"Menu").classList.contains("sideOpen")) {
 		id(name+"Menu").style.left = isLeft?"0":"calc(100% - "+id(name+"Menu").style.width+")";
 		id(name+"MenuOpen").style[isLeft?"left":"right"] = id(name+"Menu").style.width;
-		id(name+"Menu").classList.add("isOpen");
+		id(name+"Menu").classList.add("sideOpen");
 	} else {
 		id(name+"Menu").style.left = isLeft?"-"+id(name+"Menu").style.width:"100%";
 		id(name+"MenuOpen").style[isLeft?"left":"right"] = "0";
-		id(name+"Menu").classList.remove("isOpen");
+		id(name+"Menu").classList.remove("sideOpen");
 	}
 }
 
 function toggleTopMenu(name) {
-	if (document.getElementsByClassName("isOpen").length == 0) {
+	if (document.getElementsByClassName("topOpen").length == 0) {
 		id(name+"Menu").style.top = "0";
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = id(name+"Menu").style.height;
 		}
-		id(name+"Menu").classList.add("isOpen");
-	} else if (!id(name+"Menu").classList.contains("isOpen")) {
+		id(name+"Menu").classList.add("topOpen");
+	} else if (!id(name+"Menu").classList.contains("topOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+menu.style.height;
-			menu.classList.remove("isOpen");
+			menu.classList.remove("topOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
@@ -370,7 +370,7 @@ function toggleTopMenu(name) {
 	} else {
 		id(name+"Menu").style.top = "-"+id(name+"Menu").style.height;
 		id(name+"MenuOpen").style.top = "0";
-		id(name+"Menu").classList.remove("isOpen");
+		id(name+"Menu").classList.remove("topOpen");
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
 		}
