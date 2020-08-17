@@ -35,7 +35,7 @@ const auto = {
 };
 
 function init() {
-	for (let type of Object.keys(upgrade)) {
+	for (let type of upgrade.list) {
 		for (let i = 0; i < screenAmount; i++) {
 			let upgCleared = document.createElement("span");
 			upgCleared.appendChild(document.createTextNode("Nothing here..."));
@@ -409,7 +409,7 @@ function switchScreen(dir) {
 	for (let menu of document.getElementsByClassName("topMenu")) {
 		menu.style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
 	}
-	for (let type of Object.keys(upgrade)) {
+	for (let type of upgrade.list) {
 		id((type=="normal"?"m":type+"M")+"axAllButton").style.transform = "rotate(90deg) translate(20px,20px) translate(0,-"+game.currentScreen*100+"vw)";
 	}
 	id("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
