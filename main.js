@@ -586,7 +586,7 @@ function updatePoints(n) {
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
 			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("totalLP").innerHTML = format(game.lifetimePoints[1],0);
-			id("fastestLP").innerHTML = formatTime(game.fastestLP);
+			id("fastestLP").innerHTML = game.fastestLP == Infinity ? "Infinity" : formatTime(game.fastestLP);
 			id("logBoost").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("logBoostPoints").innerHTML = game.lifetimePoints[1]+" logress point"+pluralCheck(game.lifetimePoints[1]);
 			let logBoostLimit = [5,10,5,20,5,4];
@@ -751,6 +751,7 @@ function updateSkills() {
 	id("skillDesc1").innerHTML = format(Math.pow(36, (0.5 * game.upgrade.skill[2] + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)),0);
 	id("skillDesc3").innerHTML = 120 - 10*game.upgrade.skill[6] + " second" + pluralCheck(120 - 10*game.upgrade.skill[6]);
 	id("skillDesc3.1").innerHTML = game.upgrade.skill[7] ? "cube" : "square";
+	id("couponClicked").innerHTML = game.skill.couponTotal;
 	id("chargeFailed").innerHTML = format(game.skill.waitFailed,0);
 }
 
@@ -876,7 +877,6 @@ function useSkill(n) {
 
 function couponClick() {
 	game.skill.couponTotal++;
-	id("couponClicked").innerHTML = game.skill.couponTotal;
 	game.skill.couponCount++;
 	game.skill.couponTimer = 0;
 	id("couponCountText").innerHTML = game.skill.couponCount;
