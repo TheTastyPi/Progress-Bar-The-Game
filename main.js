@@ -437,11 +437,11 @@ function newGame() {
 		lifetimePoints: [0,0],
 		points: [0,0],
 		upgrade: {
+			selected: 0,
 			normal: [0,0,0,0,0,0,0,0],
 			skill: [0,0,0,0,0,0,0,0],
 			auto: [0,0,0,0,0,0,0,0]
 		},
-		upgradeSelected: 0,
 		skill: {
 			uses: [0,0,0,0],
 			timer: [0,0,0,0],
@@ -907,13 +907,47 @@ document.addEventListener("keydown", function(input){
 			redeemPoints(0);
 			break;
 		case "m":
-			maxall(upgrade.list[game.upgSelected]);
+			maxall(upgrade.list[game.upgrade.selected]);
 			break;
 		case ",":
-			if (game.upgSelected < upgrades.list.length - 1) game.upgSelected++;
+			if (game.upgrade.selected < upgrades.list.length - 1) {
+				game.upgrade.selected++;
+			} else {
+				game.upgrade.selected = 0;
+			}
+			while (id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").classList.contains("hidden")) {
+				if (game.upgrade.selected < upgrades.list.length - 1) {
+					game.upgrade.selected++;
+				} else {
+					game.upgrade.selected = 0;
+				}
+			}
+			id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.transition = "none";
+			id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "0px 0px 10px yellow inset";
+			setTimeout(function(){
+				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.transition = "";
+				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "none";
+			},1);
 			break;
 		case ".":
-			if (game.upgSelected > 0) game.upgSelected--;
+			if (game.upgrade.selected > 0) {
+				game.upgrade.selected--;
+			} else {
+				game.upgrade.selected = upgrades.list.length - 1;
+			}
+			while (id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").classList.contains("hidden")) {
+				if (game.upgrade.selected > 0) {
+					game.upgrade.selected--;
+				} else {
+					game.upgrade.selected = upgrades.list.length - 1;
+				}
+			}
+			id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.transition = "none";
+			id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "0px 0px 10px yellow inset";
+			setTimeout(function(){
+				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.transition = "";
+				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "none";
+			},1);
 			break;
 		case "l":
 			redeemPoints(1);
