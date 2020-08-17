@@ -745,7 +745,7 @@ function updateSkills() {
 		} else {
 			id("skillTimer"+i).innerHTML = ""
 		}
-		id("skillUse"+i) = format(game.skill.uses[i],0)
+		id("skillUse"+i).innerHTML = format(game.skill.uses[i],0)
 	}
 	id("skillDesc0").innerHTML = `x${format(Math.pow(9, (game.upgrade.skill[0] * 0.5 + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)) + 1,0)} and x${game.upgrade.skill[1] ? "" : "-"}${format(Math.pow(9, (game.upgrade.skill[0] * 0.5 + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)) - 1,0)}`;
 	id("skillDesc1").innerHTML = format(Math.pow(36, (0.5 * game.upgrade.skill[2] + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)),0);
