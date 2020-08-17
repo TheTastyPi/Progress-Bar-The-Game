@@ -4,6 +4,7 @@ var game = newGame();
 const screenAmount = document.getElementsByClassName("screen").length;
 
 const upgrade = {
+	list: ["normal","skill","auto"],
 	normal: {
 		basePrice: [1, 1, 2, 3, 1, 2, 3, 4.2e69],
 		priceGrowth: [6, 6, 11, 14, 1, 1, 1, 1],
@@ -64,6 +65,8 @@ function simulateTime(sinceLastFrame) {
 
 function doFrame(sinceLastFrame) {
 	let alteredFrame = sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1);
+	game.timePlayed += sinceLastFrame;
+	game.sinceLastLP += sinceLastFrame;
 	game.nextSave += sinceLastFrame;
 	if (game.nextSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) save();
@@ -420,6 +423,7 @@ function pluralCheck(n) {
 function newGame() {
 	return {
 		date: Date.now(),
+		timePlayed: 0,
 		speed: 1,
 		updateSpeed: 50,
 		doAutoSave: true,
@@ -437,21 +441,29 @@ function newGame() {
 			skill: [0,0,0,0,0,0,0,0],
 			auto: [0,0,0,0,0,0,0,0]
 		},
+		upgradeSelected: 0,
 		skill: {
+			uses: [0,0,0,0],
 			timer: [0,0,0,0],
 			isActive: [false, false, false, false],
 			durationTimer: [0,0,0,0],
 			boostProgress: 0,
 			boostOverflow: false,
+			boostOverflowAmt: 0,
 			couponTimer: 0,
 			couponNext: 0,
 			couponCount: 0,
-			waitTimer: 0
+			couponTotal: 0,
+			waitTimer: 0,
+			waitFailed: 0,
 		},
 		auto: {
 			isOn: [true,true,true,true,true,true],
 			nextRun: [0,0,0,0,0,0]
-		}
+		},
+		sinceLastLP: 0,
+		fastestLP: Infinity,
+		lowestPP: 0,
 	};
 }
 
@@ -553,6 +565,7 @@ function updateProgress() {
 	id("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	game.progress[1] = Math.log10(game.progress[0]/getBarLength(0) + 1 == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
 	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
+	id("timePlayed").innerHTML = formatTime(game.timePlayed);
 }
 
 function updatePoints(n) {
@@ -566,10 +579,14 @@ function updatePoints(n) {
 			id("saveMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			id("statsMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+			id("totalPP").innerHTML = format(game.lifetimePoints[0],0);
+			id("lowestPP").innerHTML = format(game.lowestPP,0);
 			break;
 		case 1:
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
 			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
+			id("totalLP").innerHTML = format(game.lifetimePoints[1],0);
+			id("fastestLP").innerHTML = formatTime(game.fastestLP);
 			id("logBoost").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("logBoostPoints").innerHTML = game.lifetimePoints[1]+" logress point"+pluralCheck(game.lifetimePoints[1]);
 			let logBoostLimit = [5,10,5,20,5,4];
@@ -607,7 +624,7 @@ function updatePoints(n) {
 }
 
 function updateUpg() {
-	for (let type of Object.keys(upgrade)) {
+	for (let type of upgrade.list) {
 		for (let i = 0; i < 8; i++) {
 			let newDesc = (game.upgrade[type][i] != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
 			switch(type) {
@@ -726,13 +743,15 @@ function updateSkills() {
 			id("skillTimer"+i).innerHTML = formatTime(game.skill.timer[i], false);
 			id("skillTimer"+i).style.color = "red";
 		} else {
-			id("skillTimer"+i).innerHTML = "";
+			id("skillTimer"+i).innerHTML = ""
 		}
+		id("skillUse"+i) = format(game.skill.uses[i],0)
 	}
 	id("skillDesc0").innerHTML = `x${format(Math.pow(9, (game.upgrade.skill[0] * 0.5 + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)) + 1,0)} and x${game.upgrade.skill[1] ? "" : "-"}${format(Math.pow(9, (game.upgrade.skill[0] * 0.5 + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)) - 1,0)}`;
 	id("skillDesc1").innerHTML = format(Math.pow(36, (0.5 * game.upgrade.skill[2] + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)),0);
 	id("skillDesc3").innerHTML = 120 - 10*game.upgrade.skill[6] + " second" + pluralCheck(120 - 10*game.upgrade.skill[6]);
 	id("skillDesc3.1").innerHTML = game.upgrade.skill[7] ? "cube" : "square";
+	id("chargeFailed").innerHTML = format(game.skill.waitFailed,0);
 }
 
 function updateSineGraph() {
@@ -773,6 +792,7 @@ function updateBoostBar() {
 	if (game.skill.boostOverflow) boostStatus = "OVERHEAT";
 	id("boostBarStatusText").innerText = boostStatus;
 	id("boostBarStatus").style.backgroundColor = boostColor;
+	id("overflowAmt").innerHTML = format(game.skill.boostOverflowAmt,0);
 }
 
 function updateAuto() {
@@ -793,15 +813,22 @@ function redeemPoints(n) {
 			for (let i = 0; i < 4; i++) {
 				game.upgrade.normal[i] = 0;
 			}
+			if (game.sinceLastLP < game.fastestLP) game.fastestLP = game.sinceLastLP;
+			game.sinceLastLP = 0;
 			updatePoints(0);
 		}
 		game.progress[n] = game.progress[n] % getBarLength(n);
 		if (game.skill.durationTimer[1] > 0 && !game.skill.boostOverflow) game.skill.boostProgress += 500;
-		if (game.skill.boostProgress > 10000) game.skill.boostOverflow = true;
+		if (game.skill.boostProgress > 10000) {
+			game.skill.boostOverflow = true;
+			game.skill.boostOverflowAmt++;
+		}
 		if (game.skill.waitTimer > 0) {
 			game.skill.waitTimer = 0;
 			game.skill.durationTimer[3] = 0;
+			game.skill.waitFailed++;
 		}
+		if (game.points[0] < game.lowestPP) game.lowestPP = game.points[0];
 		updatePoints(n);
 		updateUpg();
 	}
@@ -840,6 +867,7 @@ function maxAll(type = "normal") {
 
 function useSkill(n) {
 	if (game.skill.timer[n] <= 0 && game.upgrade.normal[4] > n) {
+		game.skill.uses[n]++;
 		game.skill.timer[n] = skill.cooldown[n] - 6000 * Math.min(Math.floor(game.lifetimePoints[1] / 5),20);
 		game.skill.durationTimer[n] = skill.duration[n];
 		if (n == 3) game.skill.waitTimer = 120*1000 - 10*1000*game.upgrade.skill[6];
@@ -847,6 +875,8 @@ function useSkill(n) {
 }
 
 function couponClick() {
+	game.skill.couponTotal++;
+	id("couponClicked").innerHTML = game.skill.couponTotal;
 	game.skill.couponCount++;
 	game.skill.couponTimer = 0;
 	id("couponCountText").innerHTML = game.skill.couponCount;
@@ -875,6 +905,15 @@ document.addEventListener("keydown", function(input){
 	switch(key) {
 		case "p":
 			redeemPoints(0);
+			break;
+		case "m":
+			maxall(upgrade.list[game.upgSelected]);
+			break;
+		case ",":
+			if (game.upgSelected < upgrades.list.length - 1) game.upgSelected++;
+			break;
+		case ".":
+			if (game.upgSelected > 0) game.upgSelected--;
 			break;
 		case "l":
 			redeemPoints(1);
