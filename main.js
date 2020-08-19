@@ -52,6 +52,8 @@ function init() {
 		leftMenu.style.left = "-"+leftMenu.style.width;
 	}
 	
+	allAchievements();
+	
 	load();
 	
 	window.requestAnimationFrame(nextFrame);
@@ -464,6 +466,7 @@ function newGame() {
 		sinceLastLP: 0,
 		fastestLP: Infinity,
 		lowestPP: 0,
+		achievements: [],
 	};
 }
 
@@ -898,6 +901,23 @@ function toggleAuto(n) {
 	for (let i = 0; i < 6; i++) {
 		id("autoToggle"+i).innerHTML = game.auto.isOn[i] ? "ON" : "OFF";
 	}
+}
+
+function newAchievement(name, id, desc) {
+	let ach = document.createElement("span");
+	id("achievementContainer").appendChild(ach);
+	ach.id = id + "Ach";
+	ach.classList.add("achDisp", "tooltip");
+	ach.style.backgroundImage = "url(pics/ach/" + id + "Ach)";
+	let desc = document.createElement("span");
+	ach.appendChild(desc);
+	desc.id = id + "AchDesc";
+	desc.classList.add("tooltipText");
+	desc.innerHTML = name + "\n" + desc;
+}
+
+function allAchievements() {
+	newAchievement("this is a name", "test", "description");
 }
 
 document.addEventListener("keydown", function(input){
