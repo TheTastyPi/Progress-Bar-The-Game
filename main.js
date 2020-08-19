@@ -904,7 +904,7 @@ function toggleAuto(n) {
 }
 
 function newAchievement(name, ids, desc) {
-	let ach = document.createElement("span");
+	let ach = document.createElement("div");
 	id("achievementContainer").appendChild(ach);
 	ach.id = ids + "Ach";
 	ach.classList.add("achDisp", "tooltip");
