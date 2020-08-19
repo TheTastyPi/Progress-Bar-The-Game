@@ -910,7 +910,7 @@ function newAchievement(name, ids, desc) {
 	ach.classList.add("achDisp", "tooltip");
 	ach.style.backgroundImage = "url(pics/ach/" + ids + "Ach)";
 	let tooltip = document.createElement("span");
-	ach.appendChild(desc);
+	ach.appendChild(tooltip);
 	tooltip.id = ids + "AchDesc";
 	tooltip.classList.add("tooltipText");
 	tooltip.innerHTML = name + "\n" + desc;
