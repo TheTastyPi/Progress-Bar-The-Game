@@ -315,6 +315,7 @@ button.dark {
 	color: #222222;
 }
 .achDisp {
+	display: inline-block;
 	width: 12.5%;
 	height: 12.5%;
 }
