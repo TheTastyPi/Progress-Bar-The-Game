@@ -903,15 +903,15 @@ function toggleAuto(n) {
 	}
 }
 
-function newAchievement(name, id, desc) {
+function newAchievement(name, ids, desc) {
 	let ach = document.createElement("span");
 	id("achievementContainer").appendChild(ach);
-	ach.id = id + "Ach";
+	ach.id = ids + "Ach";
 	ach.classList.add("achDisp", "tooltip");
-	ach.style.backgroundImage = "url(pics/ach/" + id + "Ach)";
+	ach.style.backgroundImage = "url(pics/ach/" + ids + "Ach)";
 	let tooltip = document.createElement("span");
 	ach.appendChild(desc);
-	tooltip.id = id + "AchDesc";
+	tooltip.id = ids + "AchDesc";
 	tooltip.classList.add("tooltipText");
 	tooltip.innerHTML = name + "\n" + desc;
 }
