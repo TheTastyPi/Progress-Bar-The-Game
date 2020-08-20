@@ -323,6 +323,7 @@ button.dark {
 	display: inline-block;
 	width: 75px;
 	height: 75px;
+	background-color: #DDDDDD;
 }
 .topMenuOpen {
 	animation-name: topMenuInit;
