@@ -317,11 +317,12 @@ button.dark {
 .achievementContainer {
 	height: auto;
 	width: calc(100% - 20px);
+	text-align: center;
 }
 .achDisp {
 	display: inline-block;
-	width: 12.5%;
-	height: 12.5%;
+	width: 75px;
+	height: 75px;
 }
 .topMenuOpen {
 	animation-name: topMenuInit;
