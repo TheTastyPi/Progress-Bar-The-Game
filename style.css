@@ -459,9 +459,6 @@ button.dark {
 	position: absolute;
 }
 .note {
-	display: flex;
-	justify-content: center;
-  	align-content: center;
 	width: 200px;
 	height: auto;
 	min-height: 50px;
