@@ -464,7 +464,7 @@ button.dark {
   	align-content: center;
 	width: 200px;
 	height: auto;
-	minHeight: 50px;
+	min-height: 50px;
 	background-color: #222222;
 	color: #DDDDDD;
 	border-radius: 5px;
