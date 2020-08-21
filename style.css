@@ -466,7 +466,6 @@ button.dark {
 	color: #DDDDDD;
 	border-radius: 5px;
 	bottom: 100%;
-	transition: 0.5s;
 	position: relative;
 }
 .note.dark {
