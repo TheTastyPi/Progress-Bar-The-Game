@@ -65,18 +65,16 @@ function init() {
 		});
 		tooltip.addEventListener("mousemove", function(mouse){
 			let tooltipText = id(tooltip.id+"Tooltip");
-			tooltipText.style.left = "calc("+mouse.clientX+"px - "+(mouse.clientX >= window.innerWidth / 2 ? tooltipText.style.width : "0px")+")";
-			tooltipText.style.top = "calc("+mouse.clientY+"px - "+(mouse.clientY >= window.innerHeight / 2 ? tooltipText.style.height : "0px")+")";
+			tooltipText.style.left = "calc("+mouse.clientX+"px - "+(mouse.clientX >= window.innerWidth / 2 ? tooltipText.offsetWidth : "0px")+")";
+			tooltipText.style.top = "calc("+mouse.clientY+"px - "+(mouse.clientY >= window.innerHeight / 2 ? tooltipText.offsetHeight : "0px")+")";
 			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "0 6px 6px 6px";
 			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "6px 0 6px 6px";
 			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 0 6px";
 			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 6px 0";
-			console.log("MOVING");
 		});
 		tooltip.addEventListener("mouseleave", function(mouse){
 			let tooltipText = id(tooltip.id+"Tooltip");
 			document.body.removeChild(tooltipText);
-			console.log("LEAVING");
 		});
 	}
 	
