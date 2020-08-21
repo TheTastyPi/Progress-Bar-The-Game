@@ -432,52 +432,20 @@ button.dark {
 	max-height: 90px;
 	min-height: 90px;
 }
-.tooltip {
-	position: relative;
-	display: inline-block;
-}
 .tooltipText {
-	visibility: hidden;
 	width: 180px;
 	background-color: #222222;
 	color: #DDDDDD;
 	text-align: center;
 	font-size: 13px;
 	padding: 5px 0;
-	border-radius: 6px;
 	position: absolute;
 	z-index: 1;
-	bottom: 125%;
-	left: 50%;
-	margin-left: -90px;
-	opacity: 0;
-	transition: opacity 0.5s;
 	white-space: normal;
 }
 .tooltipText.dark {
 	background-color: #DDDDDD;
 	color: #222222;
-}
-.tooltipText::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: #222222 transparent transparent transparent;
-}
-.tooltipText.dark::after {
-	border-color: #DDDDDD transparent transparent transparent;
-}
-.tooltip:hover .tooltipText {
-	visibility: visible;
-	opacity: 1;
-}
-.logBoostTooltip {
-	width: 240px;
-	margin-left: -120px;
 }
 @keyframes genericInit {
 	from {opacity: 0;}
