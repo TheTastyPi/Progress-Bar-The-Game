@@ -65,8 +65,8 @@ function init() {
 		});
 		tooltip.addEventListener("mousemove", function(mouse){
 			let tooltipText = id(tooltip.id+"Tooltip");
-			tooltipText.style.left = "calc("+mouse.clientX+"px - "+(mouse.clientX >= window.innerWidth / 2 ? tooltipText.offsetWidth : 0)+"px)";
-			tooltipText.style.top = "calc("+mouse.clientY+"px - "+(mouse.clientY >= window.innerHeight / 2 ? tooltipText.offsetHeight : 0)+"px)";
+			tooltipText.style.left = "calc("+(mouse.clientX+10)+"px - "+(mouse.clientX >= window.innerWidth / 2 ? tooltipText.offsetWidth + 20 : 0)+"px)";
+			tooltipText.style.top = "calc("+(mouse.clientY+10)+"px - "+(mouse.clientY >= window.innerHeight / 2 ? tooltipText.offsetHeight + 20 : 0)+"px)";
 			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "0 6px 6px 6px";
 			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "6px 0 6px 6px";
 			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 0 6px";
