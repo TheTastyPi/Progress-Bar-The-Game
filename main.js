@@ -969,7 +969,9 @@ function giveAchievement(id) {
 function notify(message) {
 	let note = document.createElement("div");
 	note.classList.add("note");
-	note.innerHTML = message;
+	let text = document.createElement("span");
+	text.innerHTML = message;
+	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
 	note.style.height = "auto";
 	setTimeout(function() {
