@@ -973,7 +973,8 @@ function notify(message) {
 	text.innerHTML = message;
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
-	note.style.height = "auto";
+	note.style.bottom = "auto";
+	note.style.top = "0";
 	setTimeout(function() {
 		note.left = "100%";
 		setTimeout(function(){
