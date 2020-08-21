@@ -451,6 +451,24 @@ button.dark {
 .tooltipData {
 	display: none;
 }
+.noteContainer {
+	width: 200px;
+	height: auto;
+	right: 0;
+	top: 0;
+	position: absolute;
+}
+.note {
+	width: 200px;
+	height: 0;
+	background-color: #222222;
+	color: #DDDDDD;
+	transition: 0.5s;
+}
+.note.dark {
+	background-color: #DDDDDD;
+	color: #222222;
+}
 @keyframes genericInit {
 	from {opacity: 0;}
 	to {opacity: 1;}
