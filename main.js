@@ -971,7 +971,7 @@ function notify(message) {
 	note.classList.add("note");
 	note.innerHTML = message;
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
-	note.height = "auto";
+	note.style.height = "auto";
 	setTimeout(function() {
 		note.left = "100%";
 		setTimeout(function(){
