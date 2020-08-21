@@ -54,6 +54,29 @@ function init() {
 	
 	allAchievements();
 	
+	for (let tooltip of document.getElementsByClassName("tooltip")) {
+		tooltip.addEventListener("mouseenter", function(mouse){
+			let tooltipText = document.createElement("div");
+			document.body.appendChild(tooltipText);
+			tooltipText.classList.add("tooltipText");
+			tooltipText.id = tooltip.id + "Tooltip";
+			tooltipText.innerHTML = document.querySelector("#"+tooltip.id+">.tooltipData").innerHTML;
+		});
+		tooltip.addEventListener("mousemove", function(mouse){
+			let tooltipText = id(tooltip.id+"Tooltip");
+			tooltipText.style.left = mouse.clientX+"px";
+			tooltipText.style.top = mouse.clientY+"px";
+			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "0 6px 6px 6px";
+			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "6px 0 6px 6px";
+			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 0 6px";
+			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 6px 0";
+		});
+		tooltip.addEvenListener("mouseexit", function(mouse){
+			let tooltipText = id(tooltip.id+"Tooltip");
+			document.body.removeChild(tooltipText);
+		});
+	}
+	
 	load();
 	
 	window.requestAnimationFrame(nextFrame);
@@ -912,7 +935,7 @@ function newAchievement(name, ids, desc) {
 	let tooltip = document.createElement("span");
 	ach.appendChild(tooltip);
 	tooltip.id = ids + "AchDesc";
-	tooltip.classList.add("tooltipText");
+	tooltip.classList.add("tooltipData");
 	tooltip.innerHTML = name + "\n" + desc;
 }
 
