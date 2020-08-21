@@ -971,6 +971,7 @@ function notify(message) {
 	note.classList.add("note");
 	let text = document.createElement("div");
 	text.innerHTML = message;
+	text.classList.add("centered");
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
 	note.style.bottom = "auto";
