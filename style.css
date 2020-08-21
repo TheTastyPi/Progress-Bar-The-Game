@@ -463,12 +463,13 @@ button.dark {
 	justify-content: center;
   	align-content: center;
 	width: 200px;
-	height: 0;
+	height: auto;
 	minHeight: 50px;
 	background-color: #222222;
 	color: #DDDDDD;
 	border-radius: 5px;
-	transition: 0.5s;
+	bottom: 100%;
+	transition: top, left 0.5s;
 }
 .note.dark {
 	background-color: #DDDDDD;
