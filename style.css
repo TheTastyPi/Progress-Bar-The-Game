@@ -447,6 +447,9 @@ button.dark {
 	background-color: #DDDDDD;
 	color: #222222;
 }
+.tooltipData {
+	display: none;
+}
 @keyframes genericInit {
 	from {opacity: 0;}
 	to {opacity: 1;}
