@@ -974,13 +974,8 @@ function notify(message) {
 	text.classList.add("centered");
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
-	note.style.bottom = "calc(100% - "+note.clientHeight+"px)";
-	setTimeout(function() {
-		note.style.left = "100%";
-		setTimeout(function(){
-			id("noteContainer").removeChild(note);
-		},1000);
-	},5000);
+	note.style.transform = "translate(0,-"+note.clientHeight+"px)";
+	setTimeout(function(){note.style.transform = "";},1)
 }
 
 document.addEventListener("keydown", function(input){
