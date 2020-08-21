@@ -840,7 +840,7 @@ function updateAuto() {
 
 function updateAchievements() {
 	for (let ach of document.getElementsByClassname("achDisp").id) {
-		if (game.achievements.includes(ach.slice(0,-4))) {
+		if (game.achievements.includes(ach.slice(0,-3))) {
 			ach.style.backgroundImage = "url(pics/ach/" + ach + ")";
 		} else {
 			ach.style.backgroundImage = "url(pics/ach/unknownAch)";
@@ -964,6 +964,19 @@ function allAchievements() {
 function giveAchievement(id) {
 	game.achievements.push(id);
 	updateAchievements();
+}
+
+function notify(message) {
+	let note = document.createElement("div");
+	note.classList.add("note");
+	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
+	note.height = "auto";
+	setTimeout(function() {
+		note.left = "100%";
+		setTimeout(function(){
+			id("noteContainer").removeChild(note);
+		},1000);
+	},5000);
 }
 
 document.addEventListener("keydown", function(input){
