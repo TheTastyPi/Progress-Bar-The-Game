@@ -974,8 +974,15 @@ function notify(message) {
 	text.classList.add("centered");
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
+	note.style.transition = 0;
 	note.style.transform = "translate(0,-"+note.clientHeight+"px)";
-	setTimeout(function(){note.style.transform = "";},1)
+	setTimeout(function(){
+		note.style.transition = "0.5s";
+		note.style.transform = "";
+	},1);
+	note.onclick = function(){
+		id("noteContainer").removeChild(note);
+	}
 }
 
 document.addEventListener("keydown", function(input){
