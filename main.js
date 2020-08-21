@@ -974,10 +974,9 @@ function notify(message) {
 	text.classList.add("centered");
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
-	note.style.bottom = "auto";
-	note.style.top = "0";
+	note.style.bottom = "calc(100% - "+note.clientHeight+"px)";
 	setTimeout(function() {
-		note.left = "100%";
+		note.style.left = "100%";
 		setTimeout(function(){
 			id("noteContainer").removeChild(note);
 		},1000);
