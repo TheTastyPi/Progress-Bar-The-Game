@@ -71,7 +71,7 @@ function init() {
 			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 0 6px";
 			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 6px 0";
 		});
-		tooltip.addEventListener("mouseexit", function(mouse){
+		tooltip.addEventListener("mouseleave", function(mouse){
 			let tooltipText = id(tooltip.id+"Tooltip");
 			document.body.removeChild(tooltipText);
 		});
