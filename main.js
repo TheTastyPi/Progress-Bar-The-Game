@@ -838,6 +838,16 @@ function updateAuto() {
 	}
 }
 
+function updateAchievements() {
+	for (let ach of document.getElementsByClassname("achDisp").id) {
+		if (game.achievements.includes(ach.slice(0,-4))) {
+			ach.style.backgroundImage = "url(pics/ach/" + ach + ")";
+		} else {
+			ach.style.backgroundImage = "url(pics/ach/unknownAch)";
+		}
+	}
+}
+
 function redeemPoints(n) {
 	if (game.progress[n] >= getBarLength(n)) {
 		game.points[n] += getPointGain(n);
@@ -939,7 +949,7 @@ function newAchievement(name, ids, desc) {
 	id("achievementContainer").appendChild(ach);
 	ach.id = ids + "Ach";
 	ach.classList.add("achDisp", "tooltip");
-	ach.style.backgroundImage = "url(pics/ach/" + ids + "Ach)";
+	ach.style.backgroundImage = "url(pics/ach/unknownAch)";
 	let tooltip = document.createElement("span");
 	ach.appendChild(tooltip);
 	tooltip.id = ids + "AchDesc";
@@ -949,6 +959,11 @@ function newAchievement(name, ids, desc) {
 
 function allAchievements() {
 	newAchievement("this is a name", "test", "description");
+}
+
+function giveAchievement(id) {
+	game.achievements.push(id);
+	updateAchievements();
 }
 
 document.addEventListener("keydown", function(input){
