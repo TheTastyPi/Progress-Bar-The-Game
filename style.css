@@ -452,19 +452,20 @@ button.dark {
 	display: none;
 }
 .noteContainer {
-	width: 200px;
+	width: 300px;
 	height: auto;
 	right: 0;
 	top: 0;
 	position: absolute;
+	z-index: 5;
 }
 .note {
-	width: 200px;
+	width: 300px;
 	height: auto;
-	min-height: 50px;
+	min-height: 100px;
 	background-color: #222222;
 	color: #DDDDDD;
-	border-radius: 5px;
+	border-radius: 10px;
 	bottom: 100%;
 	position: relative;
 }
