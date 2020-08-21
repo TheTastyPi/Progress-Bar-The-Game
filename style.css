@@ -235,6 +235,7 @@ button.dark {
 	font-size: 20px;
 }
 .logBoostDisp {
+	display: inline-block;
 	width: 75px;
 	height: 75px;
 	border: 4px solid #222222;
