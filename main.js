@@ -498,7 +498,7 @@ function newGame() {
 		sinceLastLP: 0,
 		fastestLP: Infinity,
 		lowestPP: 0,
-		achievements: [],
+		achievements: ["hi"]
 	};
 }
 
