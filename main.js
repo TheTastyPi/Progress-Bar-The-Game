@@ -403,7 +403,7 @@ function deepCopy(inObject) { //definitely not copied from somewhere else
 	outObject = Array.isArray(inObject) ? [] : {}
 	for (key in inObject) {
 		value = inObject[key]
-		outObject[key] = deepCopyFunction(value)
+		outObject[key] = deepCopy(value)
 	}
 	return outObject
 }
