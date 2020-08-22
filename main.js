@@ -993,10 +993,12 @@ function newAchievement(name, ids, desc) {
 	ach.id = ids + "Ach";
 	ach.classList.add("achDisp", "tooltip");
 	ach.style.backgroundImage = "url(pics/ach/unknownAch.png)";
+	let tooltipData = document.createElement("span");
+	ach.appendChild(tooltipData);
+	tooltipData.classList.add("tooltipData");
 	let tooltip = document.createElement("span");
-	ach.appendChild(tooltip);
+	tooltipData.appendChild(toolTip)
 	tooltip.id = ids + "AchDesc";
-	tooltip.classList.add("tooltipData");
 	tooltip.innerHTML = "???<br>???";
 	achData[ids] = [name,desc];
 }
