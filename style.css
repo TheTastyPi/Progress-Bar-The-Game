@@ -463,17 +463,6 @@ button.dark {
 	width: 200px;
 	height: auto;
 	min-height: 75px;
-	background-color: #222222;
-	color: #DDDDDD;
-	border-radius: 10px;
-	bottom: 100%;
-	position: relative;
-	vertical-align: middle;
-	text-align: center;
-}
-.note.dark {
-	background-color: #DDDDDD;
-	color: #222222;
 }
 @keyframes genericInit {
 	from {opacity: 0;}
