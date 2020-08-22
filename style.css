@@ -468,6 +468,7 @@ button.dark {
 	border-radius: 10px;
 	bottom: 100%;
 	position: relative;
+	vertical-align: middle;
 }
 .note.dark {
 	background-color: #DDDDDD;
