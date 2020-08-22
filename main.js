@@ -839,9 +839,9 @@ function updateAuto() {
 }
 
 function updateAchievements() {
-	for (let ach of document.getElementsByClassName("achDisp").id) {
-		if (game.achievements.includes(ach.slice(0,-3))) {
-			ach.style.backgroundImage = "url(pics/ach/" + ach + ")";
+	for (let ach of document.getElementsByClassName("achDisp")) {
+		if (game.achievements.includes(ach.id.slice(0,-3))) {
+			ach.style.backgroundImage = "url(pics/ach/" + ach.id + ")";
 		} else {
 			ach.style.backgroundImage = "url(pics/ach/unknownAch)";
 		}
