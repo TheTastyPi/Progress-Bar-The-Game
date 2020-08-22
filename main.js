@@ -972,7 +972,7 @@ function notify(message) {
 	let text = document.createElement("div");
 	text.innerHTML = message;
 	text.style.verticalAlign = "middle";
-	text.style.textAlign = "center";
+	text.style.display = "inline-block";
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
 	note.onclick = function(){
