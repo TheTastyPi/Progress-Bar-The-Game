@@ -839,7 +839,7 @@ function updateAuto() {
 }
 
 function updateAchievements() {
-	for (let ach of document.getElementsByClassname("achDisp").id) {
+	for (let ach of document.getElementsByClassName("achDisp").id) {
 		if (game.achievements.includes(ach.slice(0,-3))) {
 			ach.style.backgroundImage = "url(pics/ach/" + ach + ")";
 		} else {
