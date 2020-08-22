@@ -249,6 +249,7 @@ function load(auto = true) {
 		let offlineTime = 0;
 		if (pastGame.date != undefined) offlineTime = Date.now() - pastGame.date;
 		merge(game, pastGame);
+		if (pastGame.achievements != undefined) game.achievements = pastGame.achievements;
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 		updateAll();
