@@ -192,14 +192,14 @@ function doFrame(sinceLastFrame) {
 				case 2:
 				case 3:
 					if (game.points[0] >= getUpgPrice(i) && game.upgrade.normal[i] < upgrade.normal.limit[i]) {
-						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]));
+						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]), true);
 						game.auto.nextRun[i] = 0;
 					}
 					break;
 				case 4:
 				case 5:
 					if (game.progress[i - 4] >= getBarLength(i - 4) && game.points[i - 4] != Infinity) {
-						redeemPoints(i - 4);
+						redeemPoints(i - 4, true);
 						game.auto.nextRun[i] = 0;
 					}
 			}
@@ -268,7 +268,8 @@ function newGame() {
 		sinceLastLP: 0,
 		fastestLP: Infinity,
 		lowestPP: 0,
-		achievements: []
+		achievements: [],
+		afkLog: true
 	};
 }
 
@@ -612,6 +613,11 @@ function updateProgress() {
 	game.progress[1] = Math.log10(game.progress[0]/getBarLength(0) + 1 == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
 	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
 	id("timePlayed").innerHTML = formatTime(game.timePlayed);
+	if (game.progress[0] / getBarLength(0) >= 10) giveAchievement("k");
+	if (game.progress[0] / getBarLength(0) >= 1e4) giveAchievement("kk");
+	if (game.progress[0] / getBarLength(0) >= 1e10) giveAchievement("kkkk");
+	if (game.progress[0] / getBarLength(0) >= 1e48) giveAchievement("goingFast");
+	if (game.progress[0] == Infinity) giveAchievement("somethingBreak");
 }
 
 function updatePoints(n) {
@@ -627,6 +633,8 @@ function updatePoints(n) {
 			id("statsMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			id("totalPP").innerHTML = format(game.lifetimePoints[0],0);
 			id("lowestPP").innerHTML = format(game.lowestPP,0);
+			if (game.points[0] >= 1) giveAchievement("justABar");
+			if (game.points[0] == -Infinity) giveAchievement("wrongWay");
 			break;
 		case 1:
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
@@ -666,6 +674,9 @@ function updatePoints(n) {
 			for (let i = 0; i < 4; i++) {
 				id("skillCooldown"+i).innerHTML = skill.cooldown[i] / 60 / 1000 - 0.1 * Math.min(Math.floor(game.lifetimePoints[1] / 5), 20);
 			}
+			if (game.lifetimePoints[1] >= 5) giveAchievement("theseAreLogBoosts");
+			if (game.lifetimePoints[1] >= 50) giveAchievement("runes");
+			if (game.lifetimePoints[1] >= 200) giveAchievement("feelBoosted");
 	}
 }
 
@@ -772,6 +783,7 @@ function updateUpg() {
 		id("auto"+i).classList[game.upgrade.auto[i] == 0 ? "add" : "remove"]("hidden");
 	}
 	id("auto7").classList[game.upgrade.auto[7] == 0 ? "add" : "remove"]("hidden");
+	if (!game.upgrade.skill.includes(0) && !game.upgrade.auto.includes(0)) giveAchievement("stillF");
 	updateSkills();
 }
 
@@ -799,6 +811,11 @@ function updateSkills() {
 	id("skillDesc3.1").innerHTML = game.upgrade.skill[7] ? "cube" : "square";
 	id("couponClicked").innerHTML = game.skill.couponTotal;
 	id("chargeFailed").innerHTML = format(game.skill.waitFailed,0);
+	if (!game.skill.uses.includes(0)) giveAchievement("goodMath");
+	if (game.skill.uses[0] >= 50) giveAchievement("sineNotSin");
+	if (game.skill.uses[1] >= 50) giveAchievement("expExp");
+	if (game.skill.uses[2] >= 50) giveAchievement("sponsoredHoney");
+	if (game.skill.uses[3] >= 50) giveAchievement("madeACube");
 }
 
 function updateSineGraph() {
@@ -840,6 +857,7 @@ function updateBoostBar() {
 	id("boostBarStatusText").innerText = boostStatus;
 	id("boostBarStatus").style.backgroundColor = boostColor;
 	id("overflowAmt").innerHTML = format(game.skill.boostOverflowAmt,0);
+	if (game.skill.boostOverflowAmt >= 50) giveAchievement("expExpBoom");
 }
 
 function updateAuto() {
@@ -859,7 +877,7 @@ function updateAchievements() {
 	}
 }
 
-function redeemPoints(n) {
+function redeemPoints(n, auto = false) {
 	if (game.progress[n] >= getBarLength(n)) {
 		game.points[n] += getPointGain(n);
 		game.lifetimePoints[n] += getPointGain(n);
@@ -870,7 +888,10 @@ function redeemPoints(n) {
 				game.upgrade.normal[i] = 0;
 			}
 			if (game.sinceLastLP < game.fastestLP) game.fastestLP = game.sinceLastLP;
+			if (game.sinceLastLP <= 5*60*1000) giveAchievement("logNoSlow");
 			game.sinceLastLP = 0;
+			if (game.afkLog) giveAchievement("afk");
+			game.afkLog = true;
 			updatePoints(0);
 		}
 		game.progress[n] = game.progress[n] % getBarLength(n);
@@ -884,23 +905,26 @@ function redeemPoints(n) {
 			game.skill.durationTimer[3] = 0;
 			game.skill.waitFailed++;
 		}
+		if (game.skill.waitFailed >= 25) giveAchievement("thereYet");
 		if (game.points[0] < game.lowestPP) game.lowestPP = game.points[0];
+		if (!auto && n == 0) game.afkLog = false;
 		updatePoints(n);
 		updateUpg();
 	}
 }
 
-function buyUpgrade(n, type = "normal") {
+function buyUpgrade(n, type = "normal", auto = false) {
 	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		game.points[upgrade[type].type[n]] -= Math.floor(getUpgPrice(n, type));
 		game.upgrade[type][n]++;
+		if (!auto) game.afkLog = false;
 		updateUpg();
 		updatePoints(upgrade[type].type[n]);
 		updateSkills();
 	}
 }
 
-function bulkUpgrade(n, type = "normal", amount = 1) {
+function bulkUpgrade(n, type = "normal", amount = 1, auto = false) {
 	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		let totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[n]]/getUpgPrice(n, type)*(upgrade[type].priceGrowth[n]-1)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
 		if (isNaN(totalAmount)) totalAmount = Infinity;
@@ -908,6 +932,7 @@ function bulkUpgrade(n, type = "normal", amount = 1) {
 		if (totalAmount >= 1) {
 			game.points[upgrade[type].type[n]] -= totalPrice;
 			game.upgrade[type][n] += totalAmount;
+			if (!auto) game.afkLog = false;
 			updateUpg();
 			updatePoints(upgrade[type].type[n]);
 			updateSkills();
@@ -915,18 +940,19 @@ function bulkUpgrade(n, type = "normal", amount = 1) {
 	}
 }
 
-function maxAll(type = "normal") {
+function maxAll(type = "normal", auto = false) {
 	for (let i = game.currentScreen*4; i < (game.currentScreen+1)*4; i++) {
-		bulkUpgrade(i, type, Infinity);
+		bulkUpgrade(i, type, Infinity, auto);
 	}
 }
 
-function useSkill(n) {
+function useSkill(n, auto = false) {
 	if (game.skill.timer[n] <= 0 && game.upgrade.normal[4] > n) {
 		game.skill.uses[n]++;
 		game.skill.timer[n] = skill.cooldown[n] - 6000 * Math.min(Math.floor(game.lifetimePoints[1] / 5),20);
 		game.skill.durationTimer[n] = skill.duration[n];
 		if (n == 3) game.skill.waitTimer = 120*1000 - 10*1000*game.upgrade.skill[6];
+		if (!auto) game.afkLog = false;
 	}
 }
 
@@ -945,6 +971,7 @@ function couponClick() {
 		id("couponCount").style.transition = "opacity 0s";
 		id("couponCount").style.opacity = 1;
 	},500);
+	if (game.skill.couponTotal >= 200) giveAchievement("saveMoney")
 	updateUpg();
 }
 
@@ -992,13 +1019,14 @@ function allAchievements() {
 	
 	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points.");
 	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.");
-	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 100 coupons.");
+	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.");
 	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.");
 	
 	newAchievement("But my grades are still all F...", "stillF", "Buy all skill and automation upgrades in the first two screens at least once.");
-	newAchievement("Logarithmic progress doesn't feel so slow anymore!", "logNoSlow", "Redeem a logress point in 5 minutes.");
-	newAchievement("afk", "afk", "Redeem a logress point without manually redeeming points or using skills.");
+	newAchievement("Logarithmic progress doesn't feel so slow anymore!", "logNoSlow", "Redeem a logress point in 5 minutes or less.");
+	newAchievement("afk", "afk", "Redeem a logress point without manually redeeming points, buying upgrades, or using skills.");
 	newAchievement("That tickles!", "tickle", "Click this achievement.");
+	id("tickleAch").onclick = function(){giveAchievement("tickle")};
 }
 
 function giveAchievement(id) {
