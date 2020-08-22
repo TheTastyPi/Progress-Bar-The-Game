@@ -2,7 +2,14 @@
 A game where you fill progress bars.
 
 # Change Log
-## v0.3: Logarithmic Progress - Aug. ?th, 2020
+## v0.31: Achievable Statistics - Aug. ??th, 2020
+* Statistics tab added
+  * Several numbery things for you to look at
+  * ___ Achievements
+  * Credits
+  * Hotkey information
+* Oh I added max all hotkey "m".
+## v0.3: Logarithmic Progress - Aug. 13th, 2020
 * A new prestige layer added
   * 20 new upgrades added
   * New mechanic: Skills, added
