@@ -223,6 +223,55 @@ function nextFrame(timeStamp) {
 	window.requestAnimationFrame(nextFrame);
 }
 
+
+function newGame() {
+	return {
+		date: Date.now(),
+		timePlayed: 0,
+		speed: 1,
+		updateSpeed: 50,
+		doAutoSave: true,
+		autoSaveInterval: 1000,
+		nextSave: 0,
+		currentTheme: "light",
+		currentScreen: 0,
+		screenLimit: 1,
+		lifetimeProgress: [0,0],
+		progress: [0,0],
+		lifetimePoints: [0,0],
+		points: [0,0],
+		upgrade: {
+			selected: 0,
+			normal: [0,0,0,0,0,0,0,0],
+			skill: [0,0,0,0,0,0,0,0],
+			auto: [0,0,0,0,0,0,0,0]
+		},
+		skill: {
+			uses: [0,0,0,0],
+			timer: [0,0,0,0],
+			isActive: [false, false, false, false],
+			durationTimer: [0,0,0,0],
+			boostProgress: 0,
+			boostOverflow: false,
+			boostOverflowAmt: 0,
+			couponTimer: 0,
+			couponNext: 0,
+			couponCount: 0,
+			couponTotal: 0,
+			waitTimer: 0,
+			waitFailed: 0,
+		},
+		auto: {
+			isOn: [true,true,true,true,true,true],
+			nextRun: [0,0,0,0,0,0]
+		},
+		sinceLastLP: 0,
+		fastestLP: Infinity,
+		lowestPP: 0,
+		achievements: []
+	};
+}
+
 function save(auto = true) {
 	localStorage.setItem('twsave', JSON.stringify(deinfinify(game)));
 	if (!auto) {
@@ -250,6 +299,7 @@ function load(auto = true) {
 		let offlineTime = 0;
 		if (pastGame.date != undefined) offlineTime = Date.now() - pastGame.date;
 		merge(game, pastGame);
+		if (pastGame.achievements != undefined) game.achievements = pastGame.achievements;
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 		updateAll();
@@ -319,7 +369,7 @@ function wipe() {
 function merge(base, source) {
 	for (let i in base) {
 		if (source[i] != undefined) {
-			if (typeof(base[i]) == "object" && typeof(source[i]) == "object" && base[i] != game.achievements) {
+			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
 				merge(base[i], source[i]);
 			} else {
 				base[i] = source[i];
@@ -448,58 +498,6 @@ function switchScreen(dir) {
 	}
 	id("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
 	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
-}
-
-function pluralCheck(n) {
-	return n == 1 ? "" : "s";
-}
-
-function newGame() {
-	return {
-		date: Date.now(),
-		timePlayed: 0,
-		speed: 1,
-		updateSpeed: 50,
-		doAutoSave: true,
-		autoSaveInterval: 1000,
-		nextSave: 0,
-		currentTheme: "light",
-		currentScreen: 0,
-		screenLimit: 1,
-		lifetimeProgress: [0,0],
-		progress: [0,0],
-		lifetimePoints: [0,0],
-		points: [0,0],
-		upgrade: {
-			selected: 0,
-			normal: [0,0,0,0,0,0,0,0],
-			skill: [0,0,0,0,0,0,0,0],
-			auto: [0,0,0,0,0,0,0,0]
-		},
-		skill: {
-			uses: [0,0,0,0],
-			timer: [0,0,0,0],
-			isActive: [false, false, false, false],
-			durationTimer: [0,0,0,0],
-			boostProgress: 0,
-			boostOverflow: false,
-			boostOverflowAmt: 0,
-			couponTimer: 0,
-			couponNext: 0,
-			couponCount: 0,
-			couponTotal: 0,
-			waitTimer: 0,
-			waitFailed: 0,
-		},
-		auto: {
-			isOn: [true,true,true,true,true,true],
-			nextRun: [0,0,0,0,0,0]
-		},
-		sinceLastLP: 0,
-		fastestLP: Infinity,
-		lowestPP: 0,
-		achievements: []
-	};
 }
 
 function getUpgPrice(n, type = "normal") {
@@ -1074,6 +1072,10 @@ document.addEventListener("keydown", function(input){
 			useSkill(Number(key)-1);
 	}
 })
+
+function pluralCheck(n) {
+	return n == 1 ? "" : "s";
+}
 
 function isEven(n) {
 	return Math.floor(n/2) == n/2;
