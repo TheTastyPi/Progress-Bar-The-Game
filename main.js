@@ -873,6 +873,9 @@ function updateAchievements() {
 		if (game.achievements.includes(ach.id.slice(0,-3))) {
 			ach.style.backgroundImage = "url(pics/ach/" + ach.id + ".png)";
 			id(ach.id+"Desc").innerHTML = achData[ach.id.slice(0,-3)][0] + "<br>" + achData[ach.id.slice(0,-3)][1];
+		} else {
+			ach.style.backgroundImage = "url(pics/ach/unknownAch.png)";
+			id(ach.id+"Desc").innerHTML = "???<br>???";
 		}
 	}
 }
