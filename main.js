@@ -965,9 +965,11 @@ function allAchievements() {
 }
 
 function giveAchievement(id) {
-	game.achievements.push(id);
-	notify("Achievement Got!<br>"+achNames[id]);
-	updateAchievements();
+	if (!game.schievements.contains(id)) {
+		game.achievements.push(id);
+		notify("Achievement Got!<br>"+achNames[id]);
+		updateAchievements();
+	}
 }
 
 function notify(message) {
