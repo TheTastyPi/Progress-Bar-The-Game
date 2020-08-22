@@ -469,6 +469,7 @@ button.dark {
 	bottom: 100%;
 	position: relative;
 	vertical-align: middle;
+	text-align: center;
 }
 .note.dark {
 	background-color: #DDDDDD;
