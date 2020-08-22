@@ -319,7 +319,7 @@ function wipe() {
 function merge(base, source) {
 	for (let i in base) {
 		if (source[i] != undefined) {
-			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
+			if (typeof(base[i]) == "object" && typeof(source[i]) == "object" && base[i] != game.achievements) {
 				merge(base[i], source[i]);
 			} else {
 				base[i] = source[i];
