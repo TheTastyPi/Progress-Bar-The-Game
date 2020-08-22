@@ -343,7 +343,7 @@ function wipe() {
 		}
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+menu.style.height;
-			menu.classList.remove("isOpen");
+			menu.classList.remove("topOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
@@ -351,12 +351,13 @@ function wipe() {
 		for (let menu of document.getElementsByClassName("sideMenu")) {
 			let isLeft = menu.classList.contains("left");
 			menu.style.left = isLeft?"-"+menu.style.width:"100%";
-			menu.classList.remove("isOpen");
+			menu.classList.remove("sideOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("sideMenuOpen")) {
 			let isLeft = menuOpen.classList.contains("left");
 			menuOpen.style[isLeft?"left":"right"] = "0";
 		}
+		if (id("statsMenu").classList.contains("statsOpen")) toggleStatsMenu();
 		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 		game = newGame(); 
 		save();
