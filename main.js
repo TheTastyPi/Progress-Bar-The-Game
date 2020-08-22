@@ -965,9 +965,9 @@ function newAchievement(name, ids, desc) {
 function allAchievements() {
 	// newAchievement("name", "id", "desc");
 	newAchievement("I thought it was just a progress bar!", "justABar", "Get a single progress point.");
-	newAchievement("k", "1k", "Reach 1000%.");
-	newAchievement("kk", "1kk", "Reach 1e6%.");
-	newAchievement("kkkk- wait we skiped one", "1kkkk", "Reach 1e12%.");
+	newAchievement("k", "k", "Reach 1000%.");
+	newAchievement("kk", "kk", "Reach 1e6%.");
+	newAchievement("kkkk- wait we skiped one", "kkkk", "Reach 1e12%.");
 	newAchievement("Hey, this is going pretty fast", "goingFast", "Reach 1e50%.");
 	newAchievement("Did something break?", "somethingBreak", "Reach Infinity%.");
 	
