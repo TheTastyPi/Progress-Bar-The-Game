@@ -249,7 +249,6 @@ function load(auto = true) {
 		let offlineTime = 0;
 		if (pastGame.date != undefined) offlineTime = Date.now() - pastGame.date;
 		merge(game, pastGame);
-		if (pastGame.achievements != undefined) game.achievements = pastGame.achievements;
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 		updateAll();
@@ -319,7 +318,7 @@ function wipe() {
 function merge(base, source) {
 	for (let i in base) {
 		if (source[i] != undefined) {
-			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
+			if (typeof(base[i]) == "object" && typeof(source[i]) == "object" && base[i] != game.achievements) {
 				merge(base[i], source[i]);
 			} else {
 				base[i] = source[i];
