@@ -463,6 +463,7 @@ button.dark {
 	width: 200px;
 	height: auto;
 	min-height: 75px;
+	font-size: 15px;
 }
 @keyframes genericInit {
 	from {opacity: 0;}
