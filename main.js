@@ -1,4 +1,3 @@
-import { clone, cloneDeep } from "lodash"
 var lastFrame = 0;
 var game = newGame();
 
@@ -379,7 +378,7 @@ function merge(base, source) {
 }
 
 function deinfinify(object) {
-	let o = cloneDeep(object);
+	let o = deepCopy(object);
 	for (let i in o) {
 		if (o[i] === Infinity) o[i] = "Infinity";
 		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = deinfinify(o[i]);
@@ -388,12 +387,25 @@ function deinfinify(object) {
 }
 
 function infinify(object) {
-	let o = cloneDeep(object);
+	let o = deepCopy(object);
 	for (let i in o) {
 		if (o[i] === "Infinity") o[i] = Infinity;
 		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = infinify(o[i]);
 	}
 	return o;
+}
+
+function deepCopy(inObject) { //definitely not copied from somewhere else
+	let outObject, value, key
+	if (typeof inObject !== "object" || inObject === null) {
+		return inObject
+	}
+	outObject = Array.isArray(inObject) ? [] : {}
+	for (key in inObject) {
+		value = inObject[key]
+		outObject[key] = deepCopyFunction(value)
+	}
+	return outObject
 }
 
 function toggleAutoSave() {
