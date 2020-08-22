@@ -966,7 +966,7 @@ function allAchievements() {
 
 function giveAchievement(id) {
 	game.achievements.push(id);
-	notify("Achievement Obtained!<br>"+achNames[id]);
+	notify("Achievement Got!<br>"+achNames[id]);
 	updateAchievements();
 }
 
