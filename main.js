@@ -233,7 +233,8 @@ function save(auto = true) {
 
 function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
-		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
+		let pastGame = JSON.parse(localStorage.getItem('twsave'));
+		pastGame = infinify(pastGame);
 		if (pastGame.points == undefined) pastGame.points = [pastGame.timewallPoint];
 		if (typeof(pastGame.lifetimePoints) == "number") pastGame.lifetimePoints = [pastGame.lifetimePoints];
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
