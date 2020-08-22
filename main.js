@@ -944,6 +944,8 @@ function toggleAuto(n) {
 	}
 }
 
+const achNames = {};
+
 function newAchievement(name, ids, desc) {
 	let ach = document.createElement("div");
 	id("achievementContainer").appendChild(ach);
@@ -955,6 +957,7 @@ function newAchievement(name, ids, desc) {
 	tooltip.id = ids + "AchDesc";
 	tooltip.classList.add("tooltipData");
 	tooltip.innerHTML = name + "\n" + desc;
+	achList[ids] = name;
 }
 
 function allAchievements() {
@@ -963,6 +966,7 @@ function allAchievements() {
 
 function giveAchievement(id) {
 	game.achievements.push(id);
+	notify("Achievement Obtained!<br>"+achList[id]);
 	updateAchievements();
 }
 
