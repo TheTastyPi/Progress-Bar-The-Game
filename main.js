@@ -965,7 +965,7 @@ function allAchievements() {
 }
 
 function giveAchievement(id) {
-	if (!game.achievements.contains(id)) {
+	if (!game.achievements.includes(id)) {
 		game.achievements.push(id);
 		notify("Achievement Got!<br>"+achNames[id]);
 		updateAchievements();
