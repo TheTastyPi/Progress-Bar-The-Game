@@ -319,7 +319,7 @@ function wipe() {
 function merge(base, source) {
 	for (let i in base) {
 		if (source[i] != undefined) {
-			if (typeof(base[i]) == "object" && typeof(source[i]) == "object" && base[i] != game.achievements) {
+			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
 				merge(base[i], source[i]);
 			} else {
 				base[i] = source[i];
@@ -498,7 +498,7 @@ function newGame() {
 		sinceLastLP: 0,
 		fastestLP: Infinity,
 		lowestPP: 0,
-		achievements: ["hi"]
+		achievements: []
 	};
 }
 
