@@ -583,6 +583,7 @@ function updateAll() {
 	updateSineGraph();
 	updateBoostBar();
 	updateAuto();
+	updateAchievements();
 }
 
 function updateProgress() {
@@ -964,14 +965,14 @@ function newAchievement(name, ids, desc) {
 function allAchievements() {
 	// newAchievement("name", "id", "desc");
 	newAchievement("I thought it was just a progress bar!", "justABar", "Get a single progress point.");
-	newAchievement("k", "1k%", "Reach 1000%.");
-	newAchievement("kk", "1kk%", "Reach 1e6%.");
-	newAchievement("kkkk- wait we skiped one", "1kkkk%", "Reach 1e12%.");
+	newAchievement("k", "1k", "Reach 1000%.");
+	newAchievement("kk", "1kk", "Reach 1e6%.");
+	newAchievement("kkkk- wait we skiped one", "1kkkk", "Reach 1e12%.");
 	newAchievement("Hey, this is going pretty fast", "goingFast", "Reach 1e50%.");
-	newAchievement("Did something break?", "somethingBreak?", "Reach Infinity%.");
+	newAchievement("Did something break?", "somethingBreak", "Reach Infinity%.");
 	
 	newAchievement("These are called log boosts", "theseAreLogBoosts", "Max out the first log boost.");
-	newAchievement("What are these, runes?", "runes?", "Unlock all log boosts.");
+	newAchievement("What are these, runes?", "runes", "Unlock all log boosts.");
 	newAchievement("I feel boosted", "feelBoosted", "Max out all log boosts.");
 	
 	newAchievement("I is good at maff", "goodMath", "Use all skills at least once.");
@@ -981,9 +982,9 @@ function allAchievements() {
 	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.");
 	
 	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points.");
-	newAchievement("Expert Explosioner", "expExp?", "Overflow a total of 50 times.");
+	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.");
 	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 100 coupons.");
-	newAchievement("Are we there yet?", "thereYet?", "Fail at charging 'Squr' a total of 25 times.");
+	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.");
 	
 	newAchievement("But my grades are still all F...", "stillF", "Buy all skill and automation upgrades in the first two screens at least once.");
 	newAchievement("Logarithmic progress doesn't feel so slow anymore!", "logNoSlow", "Redeem a logress point in 5 minutes.");
