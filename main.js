@@ -842,6 +842,7 @@ function updateAchievements() {
 	for (let ach of document.getElementsByClassName("achDisp")) {
 		if (game.achievements.includes(ach.id.slice(0,-3))) {
 			ach.style.backgroundImage = "url(pics/ach/" + ach.id + ")";
+			id(ach.id+"Desc").innerHTML = achData[ach.id.slice(0,-3)][0] + "\n" + achData[ach.id.slice(0,-3)][1];
 		} else {
 			ach.style.backgroundImage = "url(pics/ach/unknownAch)";
 		}
@@ -944,7 +945,7 @@ function toggleAuto(n) {
 	}
 }
 
-const achNames = {};
+const achData = {};
 
 function newAchievement(name, ids, desc) {
 	let ach = document.createElement("div");
@@ -956,18 +957,44 @@ function newAchievement(name, ids, desc) {
 	ach.appendChild(tooltip);
 	tooltip.id = ids + "AchDesc";
 	tooltip.classList.add("tooltipData");
-	tooltip.innerHTML = name + "\n" + desc;
-	achNames[ids] = name;
+	tooltip.innerHTML = "???\n???";
+	achData[ids] = [name,desc];
 }
 
 function allAchievements() {
-	newAchievement("this is a name", "test", "description");
+	// newAchievement("name", "id", "desc");
+	newAchievement("I thought it was just a progress bar!", "justABar", "Get a single progress point.");
+	newAchievement("k", "1k%", "Reach 1000%.");
+	newAchievement("kk", "1kk%", "Reach 1e6%.");
+	newAchievement("kkkk- wait we skiped one", "1kkkk%", "Reach 1e12%.");
+	newAchievement("Hey, this is going pretty fast", "goingFast", "Reach 1e50%.");
+	newAchievement("Did something break?", "somethingBreak?", "Reach Infinity%.");
+	
+	newAchievement("These are called log boosts", "theseAreLogBoosts", "Max out the first log boost.");
+	newAchievement("What are these, runes?", "runes?", "Unlock all log boosts.");
+	newAchievement("I feel boosted", "feelBoosted", "Max out all log boosts.");
+	
+	newAchievement("I is good at maff", "goodMath", "Use all skills at least once.");
+	newAchievement("I don't sin, I sine", "sineNotSin", "Use the skill 'Sine' a total of 50 times.");
+	newAchievement("Experienced Expert", "expExp", "Use the skill 'Exp' a total of 50 times.");
+	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Inv' a total of 50 times.");
+	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.");
+	
+	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points.");
+	newAchievement("Expert Explosioner", "expExp?", "Overflow a total of 50 times.");
+	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 100 coupons.");
+	newAchievement("Are we there yet?", "thereYet?", "Fail at charging 'Squr' a total of 25 times.");
+	
+	newAchievement("But my grades are still all F...", "stillF", "Buy all skill and automation upgrades in the first two screens at least once.");
+	newAchievement("Logarithmic progress doesn't feel so slow anymore!", "logNoSlow", "Redeem a logress point in 5 minutes.");
+	newAchievement("afk", "afk", "Redeem a logress point without manually redeeming points or using skills.");
+	newAchievement("That tickles!", "tickle", "Click this achievement.");
 }
 
 function giveAchievement(id) {
 	if (!game.achievements.includes(id)) {
 		game.achievements.push(id);
-		notify("Achievement Got!<br>"+achNames[id]);
+		notify("Achievement Got!<br>"+achData[id]);
 		updateAchievements();
 	}
 }
