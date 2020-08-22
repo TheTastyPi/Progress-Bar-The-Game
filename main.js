@@ -973,6 +973,7 @@ function notify(message) {
 	text.innerHTML = message;
 	text.classList.add("centered");
 	text.style.textAlign = "center";
+	text.style.width = "90%";
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
 	note.onclick = function(){
