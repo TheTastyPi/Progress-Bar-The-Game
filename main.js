@@ -969,10 +969,9 @@ function giveAchievement(id) {
 function notify(message) {
 	let note = document.createElement("div");
 	note.classList.add("note");
-	let text = document.createElement("div");
+	let text = document.createElement("span");
 	text.innerHTML = message;
-	text.style.verticalAlign = "middle";
-	text.style.display = "inline-block";
+	text.style.textAlign = "center";
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
 	note.onclick = function(){
