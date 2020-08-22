@@ -967,12 +967,9 @@ function giveAchievement(id) {
 }
 
 function notify(message) {
-	let note = document.createElement("div");
+	let note = document.createElement("button");
 	note.classList.add("note");
-	let text = document.createElement("span");
-	text.innerHTML = message;
-	text.style.textAlign = "center";
-	note.appendChild(text);
+	note.innerHTML = message;
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
 	note.onclick = function(){
 		id("noteContainer").removeChild(note);
