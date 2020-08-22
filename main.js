@@ -957,7 +957,7 @@ function newAchievement(name, ids, desc) {
 	tooltip.id = ids + "AchDesc";
 	tooltip.classList.add("tooltipData");
 	tooltip.innerHTML = name + "\n" + desc;
-	achList[ids] = name;
+	achNames[ids] = name;
 }
 
 function allAchievements() {
@@ -966,7 +966,7 @@ function allAchievements() {
 
 function giveAchievement(id) {
 	game.achievements.push(id);
-	notify("Achievement Obtained!<br>"+achList[id]);
+	notify("Achievement Obtained!<br>"+achNames[id]);
 	updateAchievements();
 }
 
