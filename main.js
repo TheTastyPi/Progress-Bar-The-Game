@@ -853,7 +853,7 @@ function updateAuto() {
 function updateAchievements() {
 	for (let ach of document.getElementsByClassName("achDisp")) {
 		if (game.achievements.includes(ach.id.slice(0,-3))) {
-			ach.style.backgroundImage = "url(pics/ach/" + ach.id + ")";
+			ach.style.backgroundImage = "url(pics/ach/" + ach.id + ".png)";
 			id(ach.id+"Desc").innerHTML = achData[ach.id.slice(0,-3)][0] + "<br>" + achData[ach.id.slice(0,-3)][1];
 		}
 	}
@@ -962,7 +962,7 @@ function newAchievement(name, ids, desc) {
 	id("achievementContainer").appendChild(ach);
 	ach.id = ids + "Ach";
 	ach.classList.add("achDisp", "tooltip");
-	ach.style.backgroundImage = "url(pics/ach/unknownAch)";
+	ach.style.backgroundImage = "url(pics/ach/unknownAch.png)";
 	let tooltip = document.createElement("span");
 	ach.appendChild(tooltip);
 	tooltip.id = ids + "AchDesc";
