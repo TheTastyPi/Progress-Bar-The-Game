@@ -971,9 +971,8 @@ function notify(message) {
 	note.classList.add("note");
 	let text = document.createElement("div");
 	text.innerHTML = message;
-	text.classList.add("centered");
+	text.style.verticalAlign = "middle";
 	text.style.textAlign = "center";
-	text.style.width = "90%";
 	note.appendChild(text);
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
 	note.onclick = function(){
