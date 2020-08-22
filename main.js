@@ -331,7 +331,7 @@ function deinfinify(object) {
 	let o = {...object};
 	for (let i in o) {
 		if (o[i] === Infinity) o[i] = "Infinity";
-		if (typeof(o[i]) == "object") o[i] = deinfinify(o[i]);
+		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = deinfinify(o[i]);
 	}
 	return o;
 }
@@ -340,7 +340,7 @@ function infinify(object) {
 	let o = {...object};
 	for (let i in o) {
 		if (o[i] === "Infinity") o[i] = Infinity;
-		if (typeof(o[i]) == "object") o[i] = infinify(o[i]);
+		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = infinify(o[i]);
 	}
 	return o;
 }
