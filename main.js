@@ -997,7 +997,7 @@ function newAchievement(name, ids, desc) {
 	ach.appendChild(tooltipData);
 	tooltipData.classList.add("tooltipData");
 	let tooltip = document.createElement("span");
-	tooltipData.appendChild(toolTip)
+	tooltipData.appendChild(tooltip)
 	tooltip.id = ids + "AchDesc";
 	tooltip.innerHTML = "???<br>???";
 	achData[ids] = [name,desc];
