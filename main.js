@@ -873,7 +873,7 @@ function updateAchievements() {
 	for (let ach of document.getElementsByClassName("achDisp")) {
 		if (game.achievements.includes(ach.id.slice(0,-3))) {
 			ach.style.backgroundImage = "url(pics/ach/" + ach.id.slice(0,-3) + ".png)";
-			id(ach.id+"Desc").innerHTML = achData[ach.id.slice(0,-3)][0] + "<br>" + achData[ach.id.slice(0,-3)][1];
+			id(ach.id+"Desc").innerHTML = "<span style='font-size:18px'>" + achData[ach.id.slice(0,-3)][0] + "</span><br>" + achData[ach.id.slice(0,-3)][1];
 		} else {
 			ach.style.backgroundImage = "url(pics/ach/unknownAch.png)";
 			id(ach.id+"Desc").innerHTML = "???<br>???";
@@ -1037,7 +1037,7 @@ function allAchievements() {
 function giveAchievement(id) {
 	if (!game.achievements.includes(id)) {
 		game.achievements.push(id);
-		notify("Achievement Got!<br>"+achData[id][0]);
+		notify("<span style='font-size:18px'>Achievement Got!</span><br>"+achData[id][0]);
 		updateAchievements();
 	}
 }
