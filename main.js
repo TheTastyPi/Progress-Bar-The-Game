@@ -1037,7 +1037,7 @@ function allAchievements() {
 function giveAchievement(id) {
 	if (!game.achievements.includes(id)) {
 		game.achievements.push(id);
-		notify("<span style='font-size:18px'>Achievement Got!</span><br>"+achData[id][0]);
+		notify("<span style='font-size:20px'>Achievement Got!</span><br>"+achData[id][0]);
 		updateAchievements();
 	}
 }
