@@ -1005,7 +1005,6 @@ function newAchievement(name, ids, desc) {
 }
 
 function allAchievements() {
-	// newAchievement("name", "id", "desc");
 	newAchievement("I thought it was just a progress bar!", "justABar", "Get a single progress point.");
 	newAchievement("k", "k", "Reach 1000%.");
 	newAchievement("kk", "kk", "Reach 1e6%.");
@@ -1040,6 +1039,12 @@ function giveAchievement(id) {
 		game.achievements.push(id);
 		notify("Achievement Got!<br>"+achData[id][0]);
 		updateAchievements();
+	}
+}
+
+function giveAllAchievements() {
+	for (let ach of Object.keys(achData)) {
+		giveAchievement(ach);
 	}
 }
 
