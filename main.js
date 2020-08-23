@@ -87,6 +87,8 @@ function init() {
 	
 	load();
 	
+	updateAll();
+	
 	window.requestAnimationFrame(nextFrame);
 }
 
@@ -302,7 +304,6 @@ function load(auto = true) {
 		merge(game, pastGame);
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
-		updateAll();
 		if (!auto) {
 			id("loadButton").style.backgroundColor = "green";
 			setTimeout(function(){id("loadButton").style.backgroundColor = "";}, 250);
