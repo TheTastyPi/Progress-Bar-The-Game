@@ -872,8 +872,8 @@ function updateAuto() {
 function updateAchievements() {
 	for (let ach of document.getElementsByClassName("achDisp")) {
 		if (game.achievements.includes(ach.id.slice(0,-3))) {
-			ach.style.backgroundImage = "url(pics/ach/" + ach.id + ".png)";
-			id(ach.id+"Desc").innerHTML = achData[ach.id.slice(0,-3)][0] + "<br>" + achData[ach.id.slice(0,-3)][1];
+			ach.style.backgroundImage = "url(pics/ach/" + ach.id.slice(0,-3) + ".png)";
+			id(ach.id+"Desc").innerHTML = "<span style='font-size:18px'>" + achData[ach.id.slice(0,-3)][0] + "</span><br>" + achData[ach.id.slice(0,-3)][1];
 		} else {
 			ach.style.backgroundImage = "url(pics/ach/unknownAch.png)";
 			id(ach.id+"Desc").innerHTML = "???<br>???";
@@ -1005,7 +1005,6 @@ function newAchievement(name, ids, desc) {
 }
 
 function allAchievements() {
-	// newAchievement("name", "id", "desc");
 	newAchievement("I thought it was just a progress bar!", "justABar", "Get a single progress point.");
 	newAchievement("k", "k", "Reach 1000%.");
 	newAchievement("kk", "kk", "Reach 1e6%.");
@@ -1038,8 +1037,14 @@ function allAchievements() {
 function giveAchievement(id) {
 	if (!game.achievements.includes(id)) {
 		game.achievements.push(id);
-		notify("Achievement Got!<br>"+achData[id][0]);
+		notify("<span style='font-size:20px'>Achievement Got!</span><br>"+achData[id][0]);
 		updateAchievements();
+	}
+}
+
+function giveAllAchievements() {
+	for (let ach of Object.keys(achData)) {
+		giveAchievement(ach);
 	}
 }
 
