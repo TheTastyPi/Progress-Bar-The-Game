@@ -904,6 +904,7 @@ function redeemPoints(n, auto = false) {
 		if (game.skill.boostProgress > 10000) {
 			game.skill.boostOverflow = true;
 			game.skill.boostOverflowAmt++;
+			game.skill.boostProgress = 10000;
 		}
 		if (game.skill.waitTimer > 0) {
 			game.skill.waitTimer = 0;
