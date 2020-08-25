@@ -884,6 +884,7 @@ function updateAchievements() {
 
 function redeemPoints(n, auto = false) {
 	if (game.progress[n] >= getBarLength(n)) {
+		if (!auto) game.afkLog = false;
 		game.points[n] += getPointGain(n);
 		game.lifetimePoints[n] += getPointGain(n);
 		if (n == 1) {
@@ -913,7 +914,6 @@ function redeemPoints(n, auto = false) {
 		}
 		if (game.skill.waitFailed >= 25) giveAchievement("thereYet");
 		if (game.points[0] < game.lowestPP) game.lowestPP = game.points[0];
-		if (!auto && n == 0) game.afkLog = false;
 		updatePoints(n);
 		updateUpg();
 	}
