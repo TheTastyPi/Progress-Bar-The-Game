@@ -469,7 +469,7 @@ function toggleTopMenu(name) {
 		}
 		setTimeout(function(){
 			id(name+"Menu").style.top = "0";
-			id(name+"Menu").classList.add("isOpen");
+			id(name+"Menu").classList.add("topOpen");
 		},500);
 	} else {
 		id(name+"Menu").style.top = "-"+id(name+"Menu").style.height;
