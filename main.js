@@ -625,6 +625,7 @@ function updateProgress() {
 function updatePoints(n) {
 	switch(n) {
 		case 0:
+			if (game.points[0] == -Infinity) giveAchievement("wrongWay");
 			if (isNaN(game.points[0]) || game.points[0] == -Infinity || typeof(game.points[0]) != "number") game.points[0] = 0;
 			if (isNaN(game.lifetimePoints[0]) || game.lifetimePoints[0] == -Infinity || typeof(game.lifetimePoints[0]) != "number") game.lifetimePoints[0] = Infinity;
 			id("pointDisplay0").innerHTML = "You have "+format(game.points[0])+" progress point"+pluralCheck(game.points[0])+".";
@@ -636,7 +637,6 @@ function updatePoints(n) {
 			id("totalPP").innerHTML = format(game.lifetimePoints[0],0);
 			id("lowestPP").innerHTML = format(game.lowestPP,0);
 			if (game.points[0] >= 1) giveAchievement("justABar");
-			if (game.points[0] == -Infinity) giveAchievement("wrongWay");
 			break;
 		case 1:
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
@@ -1023,7 +1023,7 @@ function allAchievements() {
 	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Inv' a total of 50 times.");
 	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.");
 	
-	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points.");
+	newAchievement("Wrong way buddy", "wrongWay", "Redeem -Infinity progress points.");
 	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.");
 	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.");
 	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.");
