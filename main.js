@@ -384,6 +384,7 @@ function deinfinify(object) {
 	let o = deepCopy(object);
 	for (let i in o) {
 		if (o[i] === Infinity) o[i] = "Infinity";
+		if (o[i] === -Infinity) o[i] = "-Infinity";
 		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = deinfinify(o[i]);
 	}
 	return o;
@@ -393,6 +394,7 @@ function infinify(object) {
 	let o = deepCopy(object);
 	for (let i in o) {
 		if (o[i] === "Infinity") o[i] = Infinity;
+		if (o[i] === "-Infinity") o[i] = -Infinity;
 		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = infinify(o[i]);
 	}
 	return o;
