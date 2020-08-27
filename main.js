@@ -1023,7 +1023,7 @@ function allAchievements() {
 	newAchievement("I is good at maff", "goodMath", "Use all skills at least once.");
 	newAchievement("I don't sin, I sine", "sineNotSin", "Use the skill 'Sine' a total of 50 times.");
 	newAchievement("Experienced Expert", "expExp", "Use the skill 'Exp' a total of 50 times.");
-	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Inv' a total of 50 times.");
+	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Reci' a total of 50 times.");
 	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.");
 	
 	newAchievement("Wrong way buddy", "wrongWay", "Redeem -Infinity progress points.");
