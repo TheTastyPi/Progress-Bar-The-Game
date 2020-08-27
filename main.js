@@ -108,10 +108,6 @@ function doFrame(sinceLastFrame) {
 		game.nextSave = 0;
 	}
 	let progressIncrease = alteredFrame * getBarSpeed(0);
-	if (game.progress[0] < getBarLength(0) &&
-	   progressIncrease > getBarLength(0)) {
-		progressIncrease = getBarLength(0);
-	}
 	game.lifetimeProgress[0] += progressIncrease;
 	game.progress[0] += progressIncrease;
 	for (let i = 0; i < 4; i++) {
@@ -215,7 +211,7 @@ function nextFrame(timeStamp) {
 	let sinceLastFrame = timeStamp - lastFrame;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		if (sinceLastFrame >= 1000) {
+		if (sinceLastFrame >= 10000) {
 			simulateTime(sinceLastFrame);
 		} else {
 			doFrame(sinceLastFrame);
@@ -384,6 +380,7 @@ function deinfinify(object) {
 	let o = deepCopy(object);
 	for (let i in o) {
 		if (o[i] === Infinity) o[i] = "Infinity";
+		if (o[i] === -Infinity) o[i] = "-Infinity";
 		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = deinfinify(o[i]);
 	}
 	return o;
@@ -393,6 +390,7 @@ function infinify(object) {
 	let o = deepCopy(object);
 	for (let i in o) {
 		if (o[i] === "Infinity") o[i] = Infinity;
+		if (o[i] === "-Infinity") o[i] = -Infinity;
 		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = infinify(o[i]);
 	}
 	return o;
@@ -467,7 +465,7 @@ function toggleTopMenu(name) {
 		}
 		setTimeout(function(){
 			id(name+"Menu").style.top = "0";
-			id(name+"Menu").classList.add("isOpen");
+			id(name+"Menu").classList.add("topOpen");
 		},500);
 	} else {
 		id(name+"Menu").style.top = "-"+id(name+"Menu").style.height;
@@ -625,6 +623,7 @@ function updateProgress() {
 function updatePoints(n) {
 	switch(n) {
 		case 0:
+			if (game.points[0] == -Infinity) giveAchievement("wrongWay");
 			if (isNaN(game.points[0]) || game.points[0] == -Infinity || typeof(game.points[0]) != "number") game.points[0] = 0;
 			if (isNaN(game.lifetimePoints[0]) || game.lifetimePoints[0] == -Infinity || typeof(game.lifetimePoints[0]) != "number") game.lifetimePoints[0] = Infinity;
 			id("pointDisplay0").innerHTML = "You have "+format(game.points[0])+" progress point"+pluralCheck(game.points[0])+".";
@@ -636,7 +635,6 @@ function updatePoints(n) {
 			id("totalPP").innerHTML = format(game.lifetimePoints[0],0);
 			id("lowestPP").innerHTML = format(game.lowestPP,0);
 			if (game.points[0] >= 1) giveAchievement("justABar");
-			if (game.points[0] == -Infinity) giveAchievement("wrongWay");
 			break;
 		case 1:
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
@@ -884,6 +882,7 @@ function updateAchievements() {
 
 function redeemPoints(n, auto = false) {
 	if (game.progress[n] >= getBarLength(n)) {
+		if (!auto) game.afkLog = false;
 		game.points[n] += getPointGain(n);
 		game.lifetimePoints[n] += getPointGain(n);
 		if (n == 1) {
@@ -904,6 +903,7 @@ function redeemPoints(n, auto = false) {
 		if (game.skill.boostProgress > 10000) {
 			game.skill.boostOverflow = true;
 			game.skill.boostOverflowAmt++;
+			game.skill.boostProgress = 10000;
 		}
 		if (game.skill.waitTimer > 0) {
 			game.skill.waitTimer = 0;
@@ -912,7 +912,6 @@ function redeemPoints(n, auto = false) {
 		}
 		if (game.skill.waitFailed >= 25) giveAchievement("thereYet");
 		if (game.points[0] < game.lowestPP) game.lowestPP = game.points[0];
-		if (!auto && n == 0) game.afkLog = false;
 		updatePoints(n);
 		updateUpg();
 	}
@@ -1020,10 +1019,10 @@ function allAchievements() {
 	newAchievement("I is good at maff", "goodMath", "Use all skills at least once.");
 	newAchievement("I don't sin, I sine", "sineNotSin", "Use the skill 'Sine' a total of 50 times.");
 	newAchievement("Experienced Expert", "expExp", "Use the skill 'Exp' a total of 50 times.");
-	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Inv' a total of 50 times.");
+	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Reci' a total of 50 times.");
 	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.");
 	
-	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points.");
+	newAchievement("Wrong way buddy", "wrongWay", "Redeem -Infinity progress points.");
 	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.");
 	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.");
 	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.");
