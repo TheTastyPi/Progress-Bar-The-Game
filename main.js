@@ -900,6 +900,7 @@ function redeemPoints(n, auto = false) {
 			if (game.afkLog) giveAchievement("afk");
 			game.afkLog = true;
 			updatePoints(0);
+			updateUpg()
 		}
 		game.progress[n] = game.progress[n] % getBarLength(n);
 		if (game.skill.durationTimer[1] > 0 && !game.skill.boostOverflow) game.skill.boostProgress += 500;
