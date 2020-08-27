@@ -610,6 +610,7 @@ function updateProgress() {
 	}
 	id("switchScreenLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	id("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
+	id("switchScreenHotkey").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	game.progress[1] = Math.log10(game.progress[0]/getBarLength(0) + 1 == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
 	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
 	id("timePlayed").innerHTML = formatTime(game.timePlayed);
@@ -639,6 +640,8 @@ function updatePoints(n) {
 		case 1:
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
 			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
+			id("logStat").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
+			id("logHotkey").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("totalLP").innerHTML = format(game.lifetimePoints[1],0);
 			id("fastestLP").innerHTML = game.fastestLP == Infinity ? "Infinity" : formatTime(game.fastestLP);
 			id("logBoost").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
