@@ -381,19 +381,21 @@
 			<h1>Statistics</h1>
 			Time Played: <span id="timePlayed">if you're seeing this, then something broke</span><br>
 			Total Progress Points Ever: <span id="totalPP">if you're seeing this, then something broke</span><br>
-			Total Logress Points Ever: <span id="totalLP">if you're seeing this, then something broke</span><br>
-			Fastest Logress Point Redeem: <span id="fastestLP">if you're seeing this, then something broke</span><br>
-			Skill Uses:<br>
-			<div style="margin-left:40px">
-				Sine: <span id="skillUse0">if you're seeing this, then something broke</span><br>
-				Exp: <span id="skillUse1">if you're seeing this, then something broke</span><br>
-				Reci: <span id="skillUse2">if you're seeing this, then something broke</span><br>
-				Squr: <span id="skillUse3">if you're seeing this, then something broke</span><br>
-			</div>
-			Lowest Progress Points Ever: <span id="lowestPP">if you're seeing this, then something broke</span><br>
-			Amount of Times Overflowed: <span id="overflowAmt">if you're seeing this, then something broke</span><br>
-			Discount Coupons Clicked: <span id="couponClicked">if you're seeing this, then something broke</span><br>
-			Total Charges Failed: <span id="chargeFailed">if you're seeing this, then something broke</span><br>
+			<span id="logStat" class="hidden">
+				Total Logress Points Ever: <span id="totalLP">if you're seeing this, then something broke</span><br>
+				Fastest Logress Point Redeem: <span id="fastestLP">if you're seeing this, then something broke</span><br>
+				Skill Uses:<br>
+				<div style="margin-left:40px">
+					Sine: <span id="skillUse0">if you're seeing this, then something broke</span><br>
+					Exp: <span id="skillUse1">if you're seeing this, then something broke</span><br>
+					Reci: <span id="skillUse2">if you're seeing this, then something broke</span><br>
+					Squr: <span id="skillUse3">if you're seeing this, then something broke</span><br>
+				</div>
+				Lowest Progress Points Ever: <span id="lowestPP">if you're seeing this, then something broke</span><br>
+				Amount of Times Overflowed: <span id="overflowAmt">if you're seeing this, then something broke</span><br>
+				Discount Coupons Clicked: <span id="couponClicked">if you're seeing this, then something broke</span><br>
+				Total Charges Failed: <span id="chargeFailed">if you're seeing this, then something broke</span><br>
+			</span>
 			<h3>Achievements</h3>
 			<div id="achievementContainer"></div><br>
 			<h1>Information</h1>
@@ -403,11 +405,13 @@
 			Testers: The Bongo Mad Lad & CoolDoge<br>
 			<h3>Hotkeys</h3>
 			[p]: Redeem Progress Points<br>
+			<span id="switchScreenHotkey" class="hidden">[left & right arrows]: Switch screen<br></span>
 			[m]: Max all selected upgrade tab for this screen<br>
+			<span id="logHotkey">
 			[, and .] Select upgrade tab for max all<br>
-			[left & right arrows]: Switch screen<br>
 			[l]: Redeem Logress Points<br>
-			[1 - 4]: Use skills
+			[1 - 4]: Use skills<br>
+			</span>
 		</div>
 		<button id="skillMenuOpen" onclick="toggleSideMenu('skill')" class="hidden sideMenuOpen left" style="bottom:0; height:180px;">Skills</button>
 		<div id="skillMenu" class="sideMenu left" style="bottom:0px; height:180px; width:180px;">
