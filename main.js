@@ -519,7 +519,7 @@ function getUpgPrice(n, type = "normal") {
 		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
 		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
 	}
-	return game.upgrade[type][n] < upgrade[type].limit[n] ? Math.floor(upgPrice) : Infinity;
+	return game.upgrade[type][n] < upgrade[type].limit[n] ? Math.round(upgPrice) : Infinity;
 }
 
 function getBarLength(n) {
