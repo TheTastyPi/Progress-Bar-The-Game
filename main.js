@@ -20,18 +20,18 @@ const upgrade = {
 	auto: {
 		basePrice: [1, 1, 1, 1, 1, 1, 1, 1],
 		priceGrowth: [2, 2, 2, 2, 2, 2, 2, 2],
-		limit: [10,10,11,12,8,16,1024,1],
+		limit: [9,9,9,9,7,16,1024,1],
 		type: [1,1,1,1,1,1,1,1]
 	}
 };
 
 const skill = {
-	cooldown: [5*60*1000, 5*60*1000, 10*60*1000, 7.5*60*1000],
+	cooldown: [7.5*60*1000, 7.5*60*1000, 5*60*1000, 75*60*1000],
 	duration: [60*1000, 60*1000, 60*1000, 30*1000]
 };
 
 const auto = {
-	baseInterval: [2*60*1000, 2*60*1000, 4*60*1000, 5*60*1000, 30*1000, 4*60*60*1000]
+	baseInterval: [60*1000, 60*1000, 60*1000, 60*1000, 15*1000, 4*60*60*1000]
 };
 
 function init() {
@@ -958,7 +958,7 @@ function useSkill(n, auto = false) {
 		game.skill.uses[n]++;
 		game.skill.timer[n] = skill.cooldown[n] - 6000 * Math.min(Math.floor(game.lifetimePoints[1] / 5),20);
 		game.skill.durationTimer[n] = skill.duration[n];
-		if (n == 3) game.skill.waitTimer = 120*1000 - 10*1000*game.upgrade.skill[6];
+		if (n == 3) game.skill.waitTimer = 60*1000 - 5*1000*game.upgrade.skill[6];
 		if (!auto) game.afkLog = false;
 	}
 }
