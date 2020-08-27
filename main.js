@@ -108,10 +108,6 @@ function doFrame(sinceLastFrame) {
 		game.nextSave = 0;
 	}
 	let progressIncrease = alteredFrame * getBarSpeed(0);
-	if (game.progress[0] < getBarLength(0) &&
-	   progressIncrease > getBarLength(0)) {
-		progressIncrease = getBarLength(0);
-	}
 	game.lifetimeProgress[0] += progressIncrease;
 	game.progress[0] += progressIncrease;
 	for (let i = 0; i < 4; i++) {
