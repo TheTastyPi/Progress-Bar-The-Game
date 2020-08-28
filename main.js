@@ -878,7 +878,7 @@ function updateAchievements() {
 			id(ach.id+"Desc").innerHTML = "<span style='font-size:18px'>" + achData[ach.id.slice(0,-3)][0] + "</span><br>" + achData[ach.id.slice(0,-3)][1];
 		} else {
 			ach.style.backgroundImage = "url(pics/ach/unknownAch.png)";
-			id(ach.id+"Desc").innerHTML = "???<br>???";
+			id(ach.id+"Desc").innerHTML = achData[ach.id.slice(0,-3)][2];
 		}
 	}
 }
@@ -992,7 +992,7 @@ function toggleAuto(n) {
 
 const achData = {};
 
-function newAchievement(name, ids, desc) {
+function newAchievement(name, ids, desc, hint) {
 	let ach = document.createElement("div");
 	id("achievementContainer").appendChild(ach);
 	ach.id = ids + "Ach";
@@ -1004,37 +1004,37 @@ function newAchievement(name, ids, desc) {
 	let tooltip = document.createElement("span");
 	tooltipData.appendChild(tooltip)
 	tooltip.id = ids + "AchDesc";
-	tooltip.innerHTML = "???<br>???";
-	achData[ids] = [name,desc];
+	tooltip.innerHTML = hint;
+	achData[ids] = [name,desc,hint];
 }
 
 function allAchievements() {
-	newAchievement("I thought it was just a progress bar!", "justABar", "Get a single progress point.");
-	newAchievement("k", "k", "Reach 1000%.");
-	newAchievement("kk", "kk", "Reach 1e6%.");
-	newAchievement("kkkk- wait we skiped one", "kkkk", "Reach 1e12%.");
-	newAchievement("Hey, this is going pretty fast", "goingFast", "Reach 1e50%.");
-	newAchievement("Did something break?", "somethingBreak", "Reach Infinity%.");
+	newAchievement("I thought it was just a progress bar!", "justABar", "Get a single progress point.", "Reading this is pointless");
+	newAchievement("k", "k", "Reach 1000%.", "Keep playing");
+	newAchievement("kk", "kk", "Reach 1e6%.", "Go further");
+	newAchievement("kkkk- wait we skiped one", "kkkk", "Reach 1e12%.", "You'll get this eventually");
+	newAchievement("Hey, this is going pretty fast", "goingFast", "Reach 1e50%.", "I don't think you'll need help with this one");
+	newAchievement("Did something break?", "somethingBreak", "Reach Infinity%.", "You get this when you get a really high number-not-number");
 	
-	newAchievement("These are called log boosts", "theseAreLogBoosts", "Max out the first log boost.");
-	newAchievement("What are these, runes?", "runes", "Unlock all log boosts.");
-	newAchievement("I feel boosted", "feelBoosted", "Max out all log boosts.");
+	newAchievement("These are called log boosts", "theseAreLogBoosts", "Max out the first log boost.", "Progression-related achievement");
+	newAchievement("What are these, runes?", "runes", "Unlock all log boosts.", "Just keep going");
+	newAchievement("I feel boosted", "feelBoosted", "Max out all log boosts.", "You don't need a hint");
 	
-	newAchievement("I is good at maff", "goodMath", "Use all skills at least once.");
-	newAchievement("I don't sin, I sine", "sineNotSin", "Use the skill 'Sine' a total of 50 times.");
-	newAchievement("Experienced Expert", "expExp", "Use the skill 'Exp' a total of 50 times.");
-	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Reci' a total of 50 times.");
-	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.");
+	newAchievement("I is good at maff", "goodMath", "Use all skills at least once.", "Don't miss out on a whole new mechanic");
+	newAchievement("I don't sin, I sine", "sineNotSin", "Use the skill 'Sine' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
+	newAchievement("Experienced Expert", "expExp", "Use the skill 'Exp' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
+	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Reci' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
+	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
 	
-	newAchievement("Wrong way buddy", "wrongWay", "Redeem -Infinity progress points.");
-	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.");
-	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.");
-	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.");
+	newAchievement("Wrong way buddy", "wrongWay", "Redeem -Infinity progress points.", "Go the wrong way");
+	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.", "Boom boom boom");
+	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.", "Practice your reaction time");
+	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.", "Impatient");
 	
-	newAchievement("But my grades are still all F...", "stillF", "Buy all skill and automation upgrades in the first two screens at least once.");
-	newAchievement("Logarithmic progress doesn't feel so slow anymore!", "logNoSlow", "Redeem a logress point in 5 minutes or less.");
-	newAchievement("afk", "afk", "Redeem a logress point without manually redeeming points, buying upgrades, or using skills.");
-	newAchievement("That tickles!", "tickle", "Click this achievement.");
+	newAchievement("But my grades are still all F...", "stillF", "Buy all skill and automation upgrades in the first two screens at least once.", "One of each");
+	newAchievement("Logarithmic progress doesn't feel so slow anymore!", "logNoSlow", "Redeem a logress point in 5 minutes or less.", "Be fast");
+	newAchievement("afk", "afk", "Redeem a logress point without manually redeeming points, buying upgrades, or using skills.", "Idling paid off");
+	newAchievement("That tickles!", "tickle", "Click this achievement.", "I'm ticklish");
 	id("tickleAch").onclick = function(){giveAchievement("tickle")};
 }
 
