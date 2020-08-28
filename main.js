@@ -4,6 +4,7 @@ var game = newGame();
 const screenAmount = document.getElementsByClassName("screen").length;
 
 const upgrade = {
+	list: ["normal","skill","auto"],
 	normal: {
 		basePrice: [1, 1, 2, 3, 1, 2, 3, 4.2e69],
 		priceGrowth: [6, 6, 11, 14, 1, 1, 1, 1],
@@ -19,22 +20,22 @@ const upgrade = {
 	auto: {
 		basePrice: [1, 1, 1, 1, 1, 1, 1, 1],
 		priceGrowth: [2, 2, 2, 2, 2, 2, 2, 2],
-		limit: [10,10,11,12,8,16,1024,1],
+		limit: [9,9,9,9,7,16,1024,1],
 		type: [1,1,1,1,1,1,1,1]
 	}
 };
 
 const skill = {
-	cooldown: [5*60*1000, 5*60*1000, 10*60*1000, 7.5*60*1000],
+	cooldown: [7.5*60*1000, 7.5*60*1000, 5*60*1000, 75*60*1000],
 	duration: [60*1000, 60*1000, 60*1000, 30*1000]
 };
 
 const auto = {
-	baseInterval: [2*60*1000, 2*60*1000, 4*60*1000, 5*60*1000, 30*1000, 4*60*60*1000]
+	baseInterval: [60*1000, 60*1000, 60*1000, 60*1000, 15*1000, 4*60*60*1000]
 };
 
 function init() {
-	for (let type of Object.keys(upgrade)) {
+	for (let type of upgrade.list) {
 		for (let i = 0; i < screenAmount; i++) {
 			let upgCleared = document.createElement("span");
 			upgCleared.appendChild(document.createTextNode("Nothing here..."));
@@ -51,7 +52,42 @@ function init() {
 		leftMenu.style.left = "-"+leftMenu.style.width;
 	}
 	
+	allAchievements();
+	
+	for (let tooltip of document.getElementsByClassName("tooltip")) {
+		tooltip.addEventListener("mouseenter", function(mouse){
+			let tooltipText = document.createElement("div");
+			document.body.appendChild(tooltipText);
+			tooltipText.classList.add("tooltipText");
+			tooltipText.id = tooltip.id + "Tooltip";
+			tooltipText.innerHTML = document.querySelector("#"+tooltip.id+">.tooltipData").innerHTML;
+			document.querySelector("#"+tooltip.id+">.tooltipData").innerHTML = "";
+			tooltipText.style.left = "calc("+(mouse.clientX+10)+"px - "+(mouse.clientX >= window.innerWidth / 2 ? tooltipText.offsetWidth + 20 : 0)+"px)";
+			tooltipText.style.top = "calc("+(mouse.clientY+10)+"px - "+(mouse.clientY >= window.innerHeight / 2 ? tooltipText.offsetHeight + 20 : 0)+"px)";
+			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "0 6px 6px 6px";
+			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "6px 0 6px 6px";
+			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 0 6px";
+			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 6px 0";
+		});
+		tooltip.addEventListener("mousemove", function(mouse){
+			let tooltipText = id(tooltip.id+"Tooltip");
+			tooltipText.style.left = "calc("+(mouse.clientX+10)+"px - "+(mouse.clientX >= window.innerWidth / 2 ? tooltipText.offsetWidth + 20 : 0)+"px)";
+			tooltipText.style.top = "calc("+(mouse.clientY+10)+"px - "+(mouse.clientY >= window.innerHeight / 2 ? tooltipText.offsetHeight + 20 : 0)+"px)";
+			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "0 6px 6px 6px";
+			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY < window.innerHeight / 2) tooltipText.style.borderRadius = "6px 0 6px 6px";
+			if (mouse.clientX >= window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 0 6px";
+			if (mouse.clientX < window.innerWidth / 2 && mouse.clientY >= window.innerHeight / 2) tooltipText.style.borderRadius = "6px 6px 6px 0";
+		});
+		tooltip.addEventListener("mouseleave", function(mouse){
+			let tooltipText = id(tooltip.id+"Tooltip");
+			document.querySelector("#"+tooltip.id+">.tooltipData").innerHTML = tooltipText.innerHTML;
+			document.body.removeChild(tooltipText);
+		});
+	}
+	
 	load();
+	
+	updateAll();
 	
 	window.requestAnimationFrame(nextFrame);
 }
@@ -64,16 +100,14 @@ function simulateTime(sinceLastFrame) {
 
 function doFrame(sinceLastFrame) {
 	let alteredFrame = sinceLastFrame * game.speed * (game.upgrade.auto[7] ? getTimeMachineMult() : 1);
+	game.timePlayed += sinceLastFrame;
+	game.sinceLastLP += sinceLastFrame;
 	game.nextSave += sinceLastFrame;
 	if (game.nextSave >= game.autoSaveInterval) {
 		if (game.doAutoSave) save();
 		game.nextSave = 0;
 	}
 	let progressIncrease = alteredFrame * getBarSpeed(0);
-	if (game.progress[0] < getBarLength(0) &&
-	   progressIncrease > getBarLength(0)) {
-		progressIncrease = getBarLength(0);
-	}
 	game.lifetimeProgress[0] += progressIncrease;
 	game.progress[0] += progressIncrease;
 	for (let i = 0; i < 4; i++) {
@@ -156,14 +190,14 @@ function doFrame(sinceLastFrame) {
 				case 2:
 				case 3:
 					if (game.points[0] >= getUpgPrice(i) && game.upgrade.normal[i] < upgrade.normal.limit[i]) {
-						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]));
+						bulkUpgrade(i, "normal", Math.pow(2,game.upgrade.auto[6]), true);
 						game.auto.nextRun[i] = 0;
 					}
 					break;
 				case 4:
 				case 5:
-					if (game.progress[i - 4] >= getBarLength(i - 4) && game.points[i - 4] != Infinity) {
-						redeemPoints(i - 4);
+					if (game.progress[i - 4] >= getBarLength(i - 4) && game.points[i - 4] != Infinity && getPointGain(i - 4) >= 0) {
+						redeemPoints(i - 4, true);
 						game.auto.nextRun[i] = 0;
 					}
 			}
@@ -177,7 +211,7 @@ function nextFrame(timeStamp) {
 	let sinceLastFrame = timeStamp - lastFrame;
 	if (sinceLastFrame >= game.updateSpeed) {
 		lastFrame = timeStamp;
-		if (sinceLastFrame >= 1000) {
+		if (sinceLastFrame >= 10000) {
 			simulateTime(sinceLastFrame);
 		} else {
 			doFrame(sinceLastFrame);
@@ -185,6 +219,56 @@ function nextFrame(timeStamp) {
 		updateProgress();
 	}
 	window.requestAnimationFrame(nextFrame);
+}
+
+
+function newGame() {
+	return {
+		date: Date.now(),
+		timePlayed: 0,
+		speed: 1,
+		updateSpeed: 50,
+		doAutoSave: true,
+		autoSaveInterval: 1000,
+		nextSave: 0,
+		currentTheme: "light",
+		currentScreen: 0,
+		screenLimit: 1,
+		lifetimeProgress: [0,0],
+		progress: [0,0],
+		lifetimePoints: [0,0],
+		points: [0,0],
+		upgrade: {
+			selected: 0,
+			normal: [0,0,0,0,0,0,0,0],
+			skill: [0,0,0,0,0,0,0,0],
+			auto: [0,0,0,0,0,0,0,0]
+		},
+		skill: {
+			uses: [0,0,0,0],
+			timer: [0,0,0,0],
+			isActive: [false, false, false, false],
+			durationTimer: [0,0,0,0],
+			boostProgress: 0,
+			boostOverflow: false,
+			boostOverflowAmt: 0,
+			couponTimer: 0,
+			couponNext: 0,
+			couponCount: 0,
+			couponTotal: 0,
+			waitTimer: 0,
+			waitFailed: 0,
+		},
+		auto: {
+			isOn: [true,true,true,true,true,true],
+			nextRun: [0,0,0,0,0,0]
+		},
+		sinceLastLP: 0,
+		fastestLP: Infinity,
+		lowestPP: 0,
+		achievements: [],
+		afkLog: true
+	};
 }
 
 function save(auto = true) {
@@ -197,7 +281,8 @@ function save(auto = true) {
 
 function load(auto = true) {
 	if (localStorage.getItem('twsave')) {
-		let pastGame = infinify(JSON.parse(localStorage.getItem('twsave')));
+		let pastGame = JSON.parse(localStorage.getItem('twsave'));
+		pastGame = infinify(pastGame);
 		if (pastGame.points == undefined) pastGame.points = [pastGame.timewallPoint];
 		if (typeof(pastGame.lifetimePoints) == "number") pastGame.lifetimePoints = [pastGame.lifetimePoints];
 		if (typeof(pastGame.progress) == "number") pastGame.progress = [pastGame.progress];
@@ -215,7 +300,6 @@ function load(auto = true) {
 		merge(game, pastGame);
 		if (offlineTime > 1000) simulateTime(offlineTime);
 		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
-		updateAll();
 		if (!auto) {
 			id("loadButton").style.backgroundColor = "green";
 			setTimeout(function(){id("loadButton").style.backgroundColor = "";}, 250);
@@ -256,7 +340,7 @@ function wipe() {
 		}
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+menu.style.height;
-			menu.classList.remove("isOpen");
+			menu.classList.remove("topOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
@@ -264,12 +348,13 @@ function wipe() {
 		for (let menu of document.getElementsByClassName("sideMenu")) {
 			let isLeft = menu.classList.contains("left");
 			menu.style.left = isLeft?"-"+menu.style.width:"100%";
-			menu.classList.remove("isOpen");
+			menu.classList.remove("sideOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("sideMenuOpen")) {
 			let isLeft = menuOpen.classList.contains("left");
 			menuOpen.style[isLeft?"left":"right"] = "0";
 		}
+		if (id("statsMenu").classList.contains("statsOpen")) toggleStatsMenu();
 		if (document.body.contains(id("coupon"))) document.body.removeChild(id("coupon"));
 		game = newGame(); 
 		save();
@@ -282,7 +367,7 @@ function wipe() {
 function merge(base, source) {
 	for (let i in base) {
 		if (source[i] != undefined) {
-			if (typeof(base[i]) == "object" && typeof(source[i]) == "object") {
+			if (typeof(base[i]) == "object" && typeof(source[i]) == "object" && base[i] != game.achievements) {
 				merge(base[i], source[i]);
 			} else {
 				base[i] = source[i];
@@ -292,21 +377,36 @@ function merge(base, source) {
 }
 
 function deinfinify(object) {
-	let o = {...object};
+	let o = deepCopy(object);
 	for (let i in o) {
 		if (o[i] === Infinity) o[i] = "Infinity";
-		if (typeof(o[i]) == "object") o[i] = deinfinify(o[i]);
+		if (o[i] === -Infinity) o[i] = "-Infinity";
+		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = deinfinify(o[i]);
 	}
 	return o;
 }
 
 function infinify(object) {
-	let o = {...object};
+	let o = deepCopy(object);
 	for (let i in o) {
 		if (o[i] === "Infinity") o[i] = Infinity;
-		if (typeof(o[i]) == "object") o[i] = infinify(o[i]);
+		if (o[i] === "-Infinity") o[i] = -Infinity;
+		if (typeof(o[i]) == "object" && o[i] != game.achievements) o[i] = infinify(o[i]);
 	}
 	return o;
+}
+
+function deepCopy(inObject) { //definitely not copied from somewhere else
+	let outObject, value, key
+	if (typeof inObject !== "object" || inObject === null) {
+		return inObject
+	}
+	outObject = Array.isArray(inObject) ? [] : {}
+	for (key in inObject) {
+		value = inObject[key]
+		outObject[key] = deepCopy(value)
+	}
+	return outObject
 }
 
 function toggleAutoSave() {
@@ -334,31 +434,28 @@ function changeAutoSaveInterval() {
 
 function toggleSideMenu(name) {
 	let isLeft = id(name+"MenuOpen").classList.contains("left");
-	if (!id(name+"Menu").classList.contains("isOpen")) {
+	if (!id(name+"Menu").classList.contains("sideOpen")) {
 		id(name+"Menu").style.left = isLeft?"0":"calc(100% - "+id(name+"Menu").style.width+")";
 		id(name+"MenuOpen").style[isLeft?"left":"right"] = id(name+"Menu").style.width;
-		id(name+"Menu").classList.add("isOpen");
+		id(name+"Menu").classList.add("sideOpen");
 	} else {
 		id(name+"Menu").style.left = isLeft?"-"+id(name+"Menu").style.width:"100%";
 		id(name+"MenuOpen").style[isLeft?"left":"right"] = "0";
-		id(name+"Menu").classList.remove("isOpen");
+		id(name+"Menu").classList.remove("sideOpen");
 	}
 }
 
-var topMenuOpen = false;
-
 function toggleTopMenu(name) {
-	if (!topMenuOpen) {
+	if (document.getElementsByClassName("topOpen").length == 0) {
 		id(name+"Menu").style.top = "0";
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = id(name+"Menu").style.height;
 		}
-		id(name+"Menu").classList.add("isOpen");
-		topMenuOpen = true;
-	} else if (!id(name+"Menu").classList.contains("isOpen")) {
+		id(name+"Menu").classList.add("topOpen");
+	} else if (!id(name+"Menu").classList.contains("topOpen")) {
 		for (let menu of document.getElementsByClassName("topMenu")) {
 			menu.style.top = "-"+menu.style.height;
-			menu.classList.remove("isOpen");
+			menu.classList.remove("topOpen");
 		}
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
@@ -368,18 +465,27 @@ function toggleTopMenu(name) {
 		}
 		setTimeout(function(){
 			id(name+"Menu").style.top = "0";
-			id(name+"Menu").classList.add("isOpen");
-			topMenuOpen = true;
+			id(name+"Menu").classList.add("topOpen");
 		},500);
 	} else {
 		id(name+"Menu").style.top = "-"+id(name+"Menu").style.height;
 		id(name+"MenuOpen").style.top = "0";
-		id(name+"Menu").classList.remove("isOpen");
+		id(name+"Menu").classList.remove("topOpen");
 		for (let menuOpen of document.getElementsByClassName("topMenuOpen")) {
 			menuOpen.style.top = "0";
 		}
-		topMenuOpen = false;
-		
+	}
+}
+
+function toggleStatsMenu() {
+	if (!id("statsMenu").classList.contains("statsOpen")) {
+		id("statsMenu").style.bottom = "0"
+		id("statsMenuOpen").style.bottom = "calc("+id("statsMenu").style.height+" + 10px)";
+		id("statsMenu").classList.add("statsOpen");
+	} else {
+		id("statsMenu").style.bottom = "calc(("+id("statsMenu").style.height+" + 10px)*-1)";
+		id("statsMenuOpen").style.bottom = "0";
+		id("statsMenu").classList.remove("statsOpen");
 	}
 }
 
@@ -400,53 +506,11 @@ function switchScreen(dir) {
 	for (let menu of document.getElementsByClassName("topMenu")) {
 		menu.style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
 	}
-	for (let type of Object.keys(upgrade)) {
+	for (let type of upgrade.list) {
 		id((type=="normal"?"m":type+"M")+"axAllButton").style.transform = "rotate(90deg) translate(20px,20px) translate(0,-"+game.currentScreen*100+"vw)";
 	}
 	id("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
 	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
-}
-
-function pluralCheck(n) {
-	return n == 1 ? "" : "s";
-}
-
-function newGame() {
-	return {
-		date: Date.now(),
-		speed: 1,
-		updateSpeed: 50,
-		doAutoSave: true,
-		autoSaveInterval: 1000,
-		nextSave: 0,
-		currentTheme: "light",
-		currentScreen: 0,
-		screenLimit: 1,
-		lifetimeProgress: [0,0],
-		progress: [0,0],
-		lifetimePoints: [0,0],
-		points: [0,0],
-		upgrade: {
-			normal: [0,0,0,0,0,0,0,0],
-			skill: [0,0,0,0,0,0,0,0],
-			auto: [0,0,0,0,0,0,0,0]
-		},
-		skill: {
-			timer: [0,0,0,0],
-			isActive: [false, false, false, false],
-			durationTimer: [0,0,0,0],
-			boostProgress: 0,
-			boostOverflow: false,
-			couponTimer: 0,
-			couponNext: 0,
-			couponCount: 0,
-			waitTimer: 0
-		},
-		auto: {
-			isOn: [true,true,true,true,true,true],
-			nextRun: [0,0,0,0,0,0]
-		}
-	};
 }
 
 function getUpgPrice(n, type = "normal") {
@@ -455,7 +519,7 @@ function getUpgPrice(n, type = "normal") {
 		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
 		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
 	}
-	return game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity;
+	return game.upgrade[type][n] < upgrade[type].limit[n] ? Math.round(upgPrice) : Infinity;
 }
 
 function getBarLength(n) {
@@ -531,6 +595,7 @@ function updateAll() {
 	updateSineGraph();
 	updateBoostBar();
 	updateAuto();
+	updateAchievements();
 }
 
 function updateProgress() {
@@ -545,13 +610,21 @@ function updateProgress() {
 	}
 	id("switchScreenLeft").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	id("switchScreenRight").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
+	id("switchScreenHotkey").classList[game.lifetimeProgress[1] >= getBarLength(1)/100 ? "remove" : "add"]("hidden");
 	game.progress[1] = Math.log10(game.progress[0]/getBarLength(0) + 1 == Infinity ? 1.79e308 : game.progress[0]/getBarLength(0) + 1);
 	if (game.progress[1] > game.lifetimeProgress[1]) game.lifetimeProgress[1] = game.progress[1];
+	id("timePlayed").innerHTML = formatTime(game.timePlayed);
+	if (game.progress[0] / getBarLength(0) >= 10) giveAchievement("k");
+	if (game.progress[0] / getBarLength(0) >= 1e4) giveAchievement("kk");
+	if (game.progress[0] / getBarLength(0) >= 1e10) giveAchievement("kkkk");
+	if (game.progress[0] / getBarLength(0) >= 1e48) giveAchievement("goingFast");
+	if (game.progress[0] == Infinity) giveAchievement("somethingBreak");
 }
 
 function updatePoints(n) {
 	switch(n) {
 		case 0:
+			if (game.points[0] == -Infinity) giveAchievement("wrongWay");
 			if (isNaN(game.points[0]) || game.points[0] == -Infinity || typeof(game.points[0]) != "number") game.points[0] = 0;
 			if (isNaN(game.lifetimePoints[0]) || game.lifetimePoints[0] == -Infinity || typeof(game.lifetimePoints[0]) != "number") game.lifetimePoints[0] = Infinity;
 			id("pointDisplay0").innerHTML = "You have "+format(game.points[0])+" progress point"+pluralCheck(game.points[0])+".";
@@ -559,10 +632,18 @@ function updatePoints(n) {
 			id("themeMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			id("saveMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
 			id("upgMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+			id("statsMenuOpen").classList[game.lifetimePoints[0] >= 1 ? "remove" : "add"]("hidden");
+			id("totalPP").innerHTML = format(game.lifetimePoints[0],0);
+			id("lowestPP").innerHTML = format(game.lowestPP,0);
+			if (game.points[0] >= 1) giveAchievement("justABar");
 			break;
 		case 1:
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
 			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
+			id("logStat").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
+			id("logHotkey").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
+			id("totalLP").innerHTML = format(game.lifetimePoints[1],0);
+			id("fastestLP").innerHTML = game.fastestLP == Infinity ? "Infinity" : formatTime(game.fastestLP);
 			id("logBoost").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("logBoostPoints").innerHTML = game.lifetimePoints[1]+" logress point"+pluralCheck(game.lifetimePoints[1]);
 			let logBoostLimit = [5,10,5,20,5,4];
@@ -596,11 +677,14 @@ function updatePoints(n) {
 			for (let i = 0; i < 4; i++) {
 				id("skillCooldown"+i).innerHTML = skill.cooldown[i] / 60 / 1000 - 0.1 * Math.min(Math.floor(game.lifetimePoints[1] / 5), 20);
 			}
+			if (game.lifetimePoints[1] >= 5) giveAchievement("theseAreLogBoosts");
+			if (game.lifetimePoints[1] >= 50) giveAchievement("runes");
+			if (game.lifetimePoints[1] >= 200) giveAchievement("feelBoosted");
 	}
 }
 
 function updateUpg() {
-	for (let type of Object.keys(upgrade)) {
+	for (let type of upgrade.list) {
 		for (let i = 0; i < 8; i++) {
 			let newDesc = (game.upgrade[type][i] != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
 			switch(type) {
@@ -702,6 +786,7 @@ function updateUpg() {
 		id("auto"+i).classList[game.upgrade.auto[i] == 0 ? "add" : "remove"]("hidden");
 	}
 	id("auto7").classList[game.upgrade.auto[7] == 0 ? "add" : "remove"]("hidden");
+	if (!game.upgrade.skill.includes(0) && !game.upgrade.auto.includes(0)) giveAchievement("stillF");
 	updateSkills();
 }
 
@@ -719,13 +804,21 @@ function updateSkills() {
 			id("skillTimer"+i).innerHTML = formatTime(game.skill.timer[i], false);
 			id("skillTimer"+i).style.color = "red";
 		} else {
-			id("skillTimer"+i).innerHTML = "";
+			id("skillTimer"+i).innerHTML = ""
 		}
+		id("skillUse"+i).innerHTML = format(game.skill.uses[i],0)
 	}
 	id("skillDesc0").innerHTML = `x${format(Math.pow(9, (game.upgrade.skill[0] * 0.5 + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)) + 1,0)} and x${game.upgrade.skill[1] ? "" : "-"}${format(Math.pow(9, (game.upgrade.skill[0] * 0.5 + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)) - 1,0)}`;
 	id("skillDesc1").innerHTML = format(Math.pow(36, (0.5 * game.upgrade.skill[2] + 1) * (game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1)),0);
 	id("skillDesc3").innerHTML = 120 - 10*game.upgrade.skill[6] + " second" + pluralCheck(120 - 10*game.upgrade.skill[6]);
 	id("skillDesc3.1").innerHTML = game.upgrade.skill[7] ? "cube" : "square";
+	id("couponClicked").innerHTML = game.skill.couponTotal;
+	id("chargeFailed").innerHTML = format(game.skill.waitFailed,0);
+	if (!game.skill.uses.includes(0)) giveAchievement("goodMath");
+	if (game.skill.uses[0] >= 50) giveAchievement("sineNotSin");
+	if (game.skill.uses[1] >= 50) giveAchievement("expExp");
+	if (game.skill.uses[2] >= 50) giveAchievement("sponsoredHoney");
+	if (game.skill.uses[3] >= 50) giveAchievement("madeACube");
 }
 
 function updateSineGraph() {
@@ -766,6 +859,8 @@ function updateBoostBar() {
 	if (game.skill.boostOverflow) boostStatus = "OVERHEAT";
 	id("boostBarStatusText").innerText = boostStatus;
 	id("boostBarStatus").style.backgroundColor = boostColor;
+	id("overflowAmt").innerHTML = format(game.skill.boostOverflowAmt,0);
+	if (game.skill.boostOverflowAmt >= 50) giveAchievement("expExpBoom");
 }
 
 function updateAuto() {
@@ -776,8 +871,21 @@ function updateAuto() {
 	}
 }
 
-function redeemPoints(n) {
+function updateAchievements() {
+	for (let ach of document.getElementsByClassName("achDisp")) {
+		if (game.achievements.includes(ach.id.slice(0,-3))) {
+			ach.style.backgroundImage = "url(pics/ach/" + ach.id.slice(0,-3) + ".png)";
+			id(ach.id+"Desc").innerHTML = "<span style='font-size:18px'>" + achData[ach.id.slice(0,-3)][0] + "</span><br>" + achData[ach.id.slice(0,-3)][1];
+		} else {
+			ach.style.backgroundImage = "url(pics/ach/unknownAch.png)";
+			id(ach.id+"Desc").innerHTML = achData[ach.id.slice(0,-3)][2];
+		}
+	}
+}
+
+function redeemPoints(n, auto = false) {
 	if (game.progress[n] >= getBarLength(n)) {
+		if (!auto) game.afkLog = false;
 		game.points[n] += getPointGain(n);
 		game.lifetimePoints[n] += getPointGain(n);
 		if (n == 1) {
@@ -786,31 +894,45 @@ function redeemPoints(n) {
 			for (let i = 0; i < 4; i++) {
 				game.upgrade.normal[i] = 0;
 			}
+			if (game.sinceLastLP < game.fastestLP) game.fastestLP = game.sinceLastLP;
+			if (game.sinceLastLP <= 5*60*1000) giveAchievement("logNoSlow");
+			game.sinceLastLP = 0;
+			if (game.afkLog) giveAchievement("afk");
+			game.afkLog = true;
 			updatePoints(0);
+			updateUpg()
 		}
 		game.progress[n] = game.progress[n] % getBarLength(n);
 		if (game.skill.durationTimer[1] > 0 && !game.skill.boostOverflow) game.skill.boostProgress += 500;
-		if (game.skill.boostProgress > 10000) game.skill.boostOverflow = true;
+		if (game.skill.boostProgress > 10000) {
+			game.skill.boostOverflow = true;
+			game.skill.boostOverflowAmt++;
+			game.skill.boostProgress = 10000;
+		}
 		if (game.skill.waitTimer > 0) {
 			game.skill.waitTimer = 0;
 			game.skill.durationTimer[3] = 0;
+			game.skill.waitFailed++;
 		}
+		if (game.skill.waitFailed >= 25) giveAchievement("thereYet");
+		if (game.points[0] < game.lowestPP) game.lowestPP = game.points[0];
 		updatePoints(n);
 		updateUpg();
 	}
 }
 
-function buyUpgrade(n, type = "normal") {
+function buyUpgrade(n, type = "normal", auto = false) {
 	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		game.points[upgrade[type].type[n]] -= Math.floor(getUpgPrice(n, type));
 		game.upgrade[type][n]++;
+		if (!auto) game.afkLog = false;
 		updateUpg();
 		updatePoints(upgrade[type].type[n]);
 		updateSkills();
 	}
 }
 
-function bulkUpgrade(n, type = "normal", amount = 1) {
+function bulkUpgrade(n, type = "normal", amount = 1, auto = false) {
 	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		let totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[n]]/getUpgPrice(n, type)*(upgrade[type].priceGrowth[n]-1)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
 		if (isNaN(totalAmount)) totalAmount = Infinity;
@@ -818,6 +940,7 @@ function bulkUpgrade(n, type = "normal", amount = 1) {
 		if (totalAmount >= 1) {
 			game.points[upgrade[type].type[n]] -= totalPrice;
 			game.upgrade[type][n] += totalAmount;
+			if (!auto) game.afkLog = false;
 			updateUpg();
 			updatePoints(upgrade[type].type[n]);
 			updateSkills();
@@ -825,21 +948,24 @@ function bulkUpgrade(n, type = "normal", amount = 1) {
 	}
 }
 
-function maxAll(type = "normal") {
+function maxAll(type = "normal", auto = false) {
 	for (let i = game.currentScreen*4; i < (game.currentScreen+1)*4; i++) {
-		bulkUpgrade(i, type, Infinity);
+		bulkUpgrade(i, type, Infinity, auto);
 	}
 }
 
-function useSkill(n) {
+function useSkill(n, auto = false) {
 	if (game.skill.timer[n] <= 0 && game.upgrade.normal[4] > n) {
+		game.skill.uses[n]++;
 		game.skill.timer[n] = skill.cooldown[n] - 6000 * Math.min(Math.floor(game.lifetimePoints[1] / 5),20);
 		game.skill.durationTimer[n] = skill.duration[n];
-		if (n == 3) game.skill.waitTimer = 120*1000 - 10*1000*game.upgrade.skill[6];
+		if (n == 3) game.skill.waitTimer = 60*1000 - 5*1000*game.upgrade.skill[6];
+		if (!auto) game.afkLog = false;
 	}
 }
 
 function couponClick() {
+	game.skill.couponTotal++;
 	game.skill.couponCount++;
 	game.skill.couponTimer = 0;
 	id("couponCountText").innerHTML = game.skill.couponCount;
@@ -853,6 +979,7 @@ function couponClick() {
 		id("couponCount").style.transition = "opacity 0s";
 		id("couponCount").style.opacity = 1;
 	},500);
+	if (game.skill.couponTotal >= 200) giveAchievement("saveMoney")
 	updateUpg();
 }
 
@@ -863,11 +990,126 @@ function toggleAuto(n) {
 	}
 }
 
+const achData = {};
+
+function newAchievement(name, ids, desc, hint) {
+	let ach = document.createElement("div");
+	id("achievementContainer").appendChild(ach);
+	ach.id = ids + "Ach";
+	ach.classList.add("achDisp", "tooltip");
+	ach.style.backgroundImage = "url(pics/ach/unknownAch.png)";
+	let tooltipData = document.createElement("span");
+	ach.appendChild(tooltipData);
+	tooltipData.classList.add("tooltipData");
+	let tooltip = document.createElement("span");
+	tooltipData.appendChild(tooltip)
+	tooltip.id = ids + "AchDesc";
+	tooltip.innerHTML = hint;
+	achData[ids] = [name,desc,hint];
+}
+
+function allAchievements() {
+	newAchievement("I thought it was just a progress bar!", "justABar", "Get a single progress point.", "Reading this is pointless");
+	newAchievement("k", "k", "Reach 1000%.", "Keep playing");
+	newAchievement("kk", "kk", "Reach 1e6%.", "Go further");
+	newAchievement("kkkk- wait we skiped one", "kkkk", "Reach 1e12%.", "You'll get this eventually");
+	newAchievement("Hey, this is going pretty fast", "goingFast", "Reach 1e50%.", "I don't think you'll need help with this one");
+	newAchievement("Did something break?", "somethingBreak", "Reach Infinity%.", "You get this when you get a really high number-not-number");
+	
+	newAchievement("These are called log boosts", "theseAreLogBoosts", "Max out the first log boost.", "Progression-related achievement");
+	newAchievement("What are these, runes?", "runes", "Unlock all log boosts.", "Just keep going");
+	newAchievement("I feel boosted", "feelBoosted", "Max out all log boosts.", "You don't need a hint");
+	
+	newAchievement("I is good at maff", "goodMath", "Use all skills at least once.", "Don't miss out on a whole new mechanic");
+	newAchievement("I don't sin, I sine", "sineNotSin", "Use the skill 'Sine' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
+	newAchievement("Experienced Expert", "expExp", "Use the skill 'Exp' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
+	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Reci' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
+	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
+	
+	newAchievement("Wrong way buddy", "wrongWay", "Redeem -Infinity progress points.", "Go the wrong way");
+	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.", "Boom boom boom");
+	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.", "Practice your reaction time");
+	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.", "Impatient");
+	
+	newAchievement("But my grades are still all F...", "stillF", "Buy all skill and automation upgrades in the first two screens at least once.", "One of each");
+	newAchievement("Logarithmic progress doesn't feel so slow anymore!", "logNoSlow", "Redeem a logress point in 5 minutes or less.", "Be fast");
+	newAchievement("afk", "afk", "Redeem a logress point without manually redeeming points, buying upgrades, or using skills.", "Idling paid off");
+	newAchievement("That tickles!", "tickle", "Click this achievement.", "I'm ticklish");
+	id("tickleAch").onclick = function(){giveAchievement("tickle")};
+}
+
+function giveAchievement(id) {
+	if (!game.achievements.includes(id)) {
+		game.achievements.push(id);
+		notify("<span style='font-size:20px'>Achievement Got!</span><br>"+achData[id][0]);
+		updateAchievements();
+	}
+}
+
+function giveAllAchievements() {
+	for (let ach of Object.keys(achData)) {
+		giveAchievement(ach);
+	}
+}
+
+function notify(message) {
+	let note = document.createElement("button");
+	note.classList.add("note");
+	note.innerHTML = message;
+	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
+	note.onclick = function(){
+		id("noteContainer").removeChild(note);
+	}
+}
+
 document.addEventListener("keydown", function(input){
 	let key = input.key;
 	switch(key) {
 		case "p":
 			redeemPoints(0);
+			break;
+		case "m":
+			maxAll(upgrade.list[game.upgrade.selected]);
+			break;
+		case ",":
+			if (game.upgrade.selected < upgrade.list.length - 1) {
+				game.upgrade.selected++;
+			} else {
+				game.upgrade.selected = 0;
+			}
+			while (id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").classList.contains("hidden")) {
+				if (game.upgrade.selected < upgrade.list.length - 1) {
+					game.upgrade.selected++;
+				} else {
+					game.upgrade.selected = 0;
+				}
+			}
+			id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.transition = "none";
+			id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "0px 0px 10px yellow inset";
+			setTimeout(function(){
+				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.transition = "";
+				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "none";
+			},1);
+			break;
+		case ".":
+			if (game.upgrade.selected > 0) {
+				game.upgrade.selected--;
+			} else {
+				game.upgrade.selected = upgrade.list.length - 1;
+			}
+			while (id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").classList.contains("hidden")) {
+				if (game.upgrade.selected > 0) {
+					game.upgrade.selected--;
+				} else {
+					game.upgrade.selected = upgrade.list.length - 1;
+				}
+			}
+			id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.transition = "none";
+			id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "0px 0px 10px yellow inset";
+			setTimeout(function(){
+				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.transition = "";
+				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "none";
+			},1);
 			break;
 		case "l":
 			redeemPoints(1);
@@ -885,6 +1127,10 @@ document.addEventListener("keydown", function(input){
 			useSkill(Number(key)-1);
 	}
 })
+
+function pluralCheck(n) {
+	return n == 1 ? "" : "s";
+}
 
 function isEven(n) {
 	return Math.floor(n/2) == n/2;

@@ -5,7 +5,7 @@
 		<link rel="shortcut icon" type="image/png" href="pics/PBTG.png">
 		<link rel="stylesheet" href="style.css">
 	</head>
-	<body>
+	<body style="overflow:hidden">
 		<div id="screenHolder" class="screenHolder">
 			<div id="screen0" class="screen">
 				<progress id="progressBar0" class="progressBar centered" max="1.5e4" value="0"></progress>
@@ -31,48 +31,48 @@
 				<span id="pointDisplay1" class="hidden centered pointDisplay">You have 0 logress points.</span>
 				<div id="logBoost" class="logBoost">
 					You've gotten <span id="logBoostPoints" style="color:#FFFF00">logress points</span> in total.<br>
-					<span id="logBoostDisp0" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost0.png')">
-						<span id="logBoostTooltip0" class="tooltipText logBoostTooltip">
+					<div id="logBoostDisp0" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost0.png')">
+						<span id="logBoostTooltip0" class="tooltipData">
 							<span id="logBoostAmount0">0/5 | 1</span> until next level<br>
 							<span style="overflow">Bar length is 10% shorter per level.</span><br>
 							Currently: <span id="logBoostEffect0">effect</span>
 						</span>
-					</span>
-					<span id="logBoostDisp1" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost1.png')">
-						<span id="logBoostTooltip1" class="tooltipText logBoostTooltip">
+					</div>
+					<div id="logBoostDisp1" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost1.png')">
+						<span id="logBoostTooltip1" class="tooltipData">
 							<span id="logBoostAmount1">0/10 | 2</span> until next level<br>
 							Upgrades that costs progress points costs 5% less per level.<br>
 							Currently: <span id="logBoostEffect1">effect</span>
 						</span>
-					</span>
-					<span id="logBoostDisp2" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost2.png')">
-						<span id="logBoostTooltip2" class="tooltipText logBoostTooltip">
+					</div>
+					<div id="logBoostDisp2" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost2.png')">
+						<span id="logBoostTooltip2" class="tooltipData">
 							<span id="logBoostAmount2">0/5 | 4</span> until next level<br>
 							Overflow upgrade is 10% more effective per level.<br>
 							Currently: <span id="logBoostEffect2">effect</span>
 						</span>
-					</span>
-					<span id="logBoostDisp3" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost3.png')">
-						<span id="logBoostTooltip3" class="tooltipText logBoostTooltip">
+					</div>
+					<div id="logBoostDisp3" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost3.png')">
+						<span id="logBoostTooltip3" class="tooltipData">
 							<span id="logBoostAmount3">0/20 | 5</span> until next level<br>
-							All skills takes 6 seconds less to cool down per level.<br>
+							All skills take 6 seconds less to cool down per level.<br>
 							Currently: <span id="logBoostEffect3">effect</span>
 						</span>
-					</span>
+					</div>
 					<span id="logBoostDisp4" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost4.png')">
-						<span id="logBoostTooltip4" class="tooltipText logBoostTooltip">
+						<span id="logBoostTooltip4" class="tooltipData">
 							<span id="logBoostAmount4">0/5 | 10</span> until next level<br>
 							You gain 1% more bar speed from each logress point you currently have per level.<br>
 							Currently: <span id="logBoostEffect4">effect</span>
 						</span>
 					</span>
-					<span id="logBoostDisp5" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost5.png')">
-						<span id="logBoostTooltip5" class="tooltipText logBoostTooltip">
+					<div id="logBoostDisp5" class="logBoostDisp tooltip" style="background-image:url('pics/logBoost5.png')">
+						<span id="logBoostTooltip5" class="tooltipData">
 							<span id="logBoostAmount5">0/4 | 50</span> until next level<br>
 							You gain 100% more logress points per level.<br>
 							Currently: <span id="logBoostEffect5">effect</span>
 						</span>
-					</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -199,8 +199,8 @@
 			<div id="skillUpgSect1" class="upgSect">
 				<div id="skillUpg4" style="text-align:center;">
 					<button id="skillUpgButton4" onclick="buyUpgrade(4,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade4.png');"></button><br>
-					Inv Upgrade<br>
-					Increases the effect of "Inv".<br>
+					Reci Upgrade<br>
+					Increases the effect of "Reci".<br>
 					<span id="skillUpgDesc4">
 						Cost: 2 Logress Points<br>
 						Currently: x1
@@ -376,11 +376,47 @@
 				</div>
 			</div>
 		</div>
+		<button id="statsMenuOpen" onclick="toggleStatsMenu()" class="hidden statsMenuOpen" style="left:50%; transform:translateX(-50%)">Statistics & Information</button>
+		<div id="statsMenu" class="statsMenu" style="height:calc(100% - 110px); left:50%; transform:translateX(-50%)">
+			<h1>Statistics</h1>
+			Time Played: <span id="timePlayed">if you're seeing this, then something broke</span><br>
+			Total Progress Points Ever: <span id="totalPP">if you're seeing this, then something broke</span><br>
+			<span id="logStat" class="hidden">
+				Total Logress Points Ever: <span id="totalLP">if you're seeing this, then something broke</span><br>
+				Fastest Logress Point Redeem: <span id="fastestLP">if you're seeing this, then something broke</span><br>
+				Skill Uses:<br>
+				<div style="margin-left:40px">
+					Sine: <span id="skillUse0">if you're seeing this, then something broke</span><br>
+					Exp: <span id="skillUse1">if you're seeing this, then something broke</span><br>
+					Reci: <span id="skillUse2">if you're seeing this, then something broke</span><br>
+					Squr: <span id="skillUse3">if you're seeing this, then something broke</span><br>
+				</div>
+				Lowest Progress Points Ever: <span id="lowestPP">if you're seeing this, then something broke</span><br>
+				Amount of Times Overflowed: <span id="overflowAmt">if you're seeing this, then something broke</span><br>
+				Discount Coupons Clicked: <span id="couponClicked">if you're seeing this, then something broke</span><br>
+				Total Charges Failed: <span id="chargeFailed">if you're seeing this, then something broke</span><br>
+			</span>
+			<h3>Achievements</h3>
+			<div id="achievementContainer"></div><br>
+			<h1>Information</h1>
+			Version: 0.31<br>
+			<h3>Credit</h3>
+			Creator: TheTastyPi<br>
+			Testers: The Bongo Mad Lad & CoolDoge<br>
+			<h3>Hotkeys</h3>
+			[p]: Redeem Progress Points<br>
+			<span id="switchScreenHotkey" class="hidden">[left & right arrows]: Switch screen<br></span>
+			[m]: Max all upgrades<span id="logHotkey" class="hidden"> in selected upgrade tab for this screen<br>
+			[, and .] Select upgrade tab for max all<br>
+			[l]: Redeem Logress Points<br>
+			[1 - 4]: Use skills<br>
+			</span>
+		</div>
 		<button id="skillMenuOpen" onclick="toggleSideMenu('skill')" class="hidden sideMenuOpen left" style="bottom:0; height:180px;">Skills</button>
 		<div id="skillMenu" class="sideMenu left" style="bottom:0px; height:180px; width:180px;">
 			<button id="skill0" class="tooltip skillButton" onclick="useSkill(0)" style="background-image:url('pics/Sine.png');">
 				<span id="skillTimer0"></span>
-				<span class="tooltipText" style="margin-left:-45px;">
+				<span class="tooltipData" style="margin-left:-45px;">
 					"Sine"<br>
 					Gives you a point gain multiplier oscillating between <span id="skillDesc0">x10 and x-8</span> for 1 minute. Click it while it's high!<br>
 					Cooldown: <span id="skillCooldown0">5</span> minutes
@@ -388,23 +424,23 @@
 			</button>
 			<button id="skill1" class="tooltip skillButton" onclick="useSkill(1)" style="background-image:url('pics/Exp.png');">
 				<span id="skillTimer1"></span>
-				<span class="tooltipText" style="margin-left:-135px;">
+				<span class="tooltipData" style="margin-left:-135px;">
 					"Exp"<br>
-					Gives you a "BOOST" bar for 1 minute. Fill it up by redeeming points! It give a bar speed boost that increases exponentially up to x<span id="skillDesc1">30</span> as you fill it up. Be carefull not to overheat!<br>
+					Gives you a "BOOST" bar for 1 minute. Fill it up by redeeming points! It gives a bar speed boost that increases exponentially up to x<span id="skillDesc1">30</span> as you fill it up. Be carefull not to overheat!<br>
 					Cooldown: <span id="skillCooldown1">5</span> minutes
 				</span>
 			</button>
 			<button id="skill2" class="tooltip skillButton" onclick="useSkill(2)" style="background-image:url('pics/Inv.png');">
 				<span id="skillTimer2"></span>
-				<span class="tooltipText" style="margin-left:-45px;">
-					"Inv"<br>
+				<span class="tooltipData" style="margin-left:-45px;">
+					"Reci"<br>
 					Makes discount coupons randomly appear on the screen for 1 minute! All upgrades that cost progress points' price will be divided based on the amount you click, but if you miss one, then it'll all reset! <br>
 					Cooldown: <span id="skillCooldown2">10</span> minutes
 				</span>
 			</button>
 			<button id="skill3" class="tooltip skillButton" onclick="useSkill(3)" style="background-image:url('pics/Squr.png');">
 				<span id="skillTimer3"></span>
-				<span class="tooltipText" style="margin-left:-135px;">
+				<span class="tooltipData" style="margin-left:-135px;">
 					"Squr"<br>
 					Take <span id="skillDesc3">120 seconds</span> to charge up and <span id="skillDesc3.1">square</span>s all other skills' effect for 30 seconds, but if you redeem points while it's charging, then the charging fails and you don't get the boost.<br>
 					Cooldown: <span id="skillCooldown3">7.5</span> minutes
@@ -429,6 +465,7 @@
 		<button id="switchScreenLeft" onclick="switchScreen('backward')" class="hidden switchScreenLeft">&lt;</button>
 		<button id="switchScreenRight" onclick="switchScreen('forward')" class="hidden switchScreenRight">&gt;</button>
 		<span id="couponCount" class="couponCount centered hidden"><span id="couponCountText" class="centered">0</span></span>
+		<div id="noteContainer" class="noteContainer"></div>
 		<textarea style="opacity: .01; height:0; position:absolute; z-index: -1;" id="exportArea">export text</textarea>
 		<span style="background-image:url('pics/coupon.png'); opacity:0"></span>
 	</body>
