@@ -2,7 +2,7 @@
 A game where you fill progress bars.
 
 # Change Log
-## v0.31: Achievable Statistics - Aug. ??th, 2020
+## v0.31: Achievable Statistics - Aug. 28th, 2020
 * Statistics tab added
   * Several numbery things for you to look at
   * 22 Achievements
