@@ -519,7 +519,7 @@ function getUpgPrice(n, type = "normal") {
 		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
 		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
 	}
-	return game.upgrade[type][n] < upgrade[type].limit[n] ? Math.max(Math.round(upgPrice),1) : Infinity;
+	return game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity;
 }
 
 function getBarLength(n) {
@@ -686,7 +686,7 @@ function updatePoints(n) {
 function updateUpg() {
 	for (let type of upgrade.list) {
 		for (let i = 0; i < 8; i++) {
-			let newDesc = (game.upgrade[type][i] != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
+			let newDesc = (game.upgrade[type][i] != Infinity ? "Cost: "+format(Math.floor(getUpgPrice(i, type)))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
 			switch(type) {
 				case "normal":
 					switch(i) {
@@ -759,7 +759,7 @@ function updateUpg() {
 				id((type=="normal"?"u":type+"U")+"pg"+i).classList.remove("maxedUpg");
 				id((type=="normal"?"u":type+"U")+"pg"+i).classList.remove("hidden");
 			}
-			id((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
+			id((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= Math.floor(getUpgPrice(i, type)) ? "remove" : "add"]("disabledUpg");
 		}
 		for (let i = 0; i < screenAmount; i++) {
 			if (game.upgrade[type][i*4] == Infinity &&
