@@ -792,6 +792,8 @@ function updateUpg() {
 	}
 	id("auto7").classList[game.upgrade.auto[7] == 0 ? "add" : "remove"]("hidden");
 	if (!game.upgrade.skill.includes(0) && !game.upgrade.auto.includes(0)) giveAchievement("stillF");
+	id("switchScreenRight").classList[currentScreen == getScreenLimit() ? "add" : "remove"]("disabled");
+	id("switchScreenLeft").classList[currentScreen == 0 ? "add" : "remove"]("disabled");
 	updateSkills();
 }
 
