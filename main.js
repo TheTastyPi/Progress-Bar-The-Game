@@ -52,7 +52,6 @@ function init() {
 	for (let leftMenu of document.getElementsByClassName("left")) {
 		leftMenu.style.left = "-"+leftMenu.style.width;
 	}
-	for (let i = 0;)
 	
 	allAchievements();
 	
