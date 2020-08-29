@@ -2,11 +2,12 @@ var lastFrame = 0;
 var game = newGame();
 
 const screenAmount = document.getElementsByClassName("screen").length;
+const currentScreen = 0;
 
 const upgrade = {
 	list: ["normal","skill","auto"],
 	normal: {
-		basePrice: [1, 1, 2, 3, 1, 2, 3, 4.2e69],
+		basePrice: [1, 1, 2, 3, 1, 2, 3, 250],
 		priceGrowth: [6, 6, 11, 14, 1, 1, 1, 1],
 		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1],
 		type: [0,0,0,0,1,1,1,1]
@@ -51,6 +52,7 @@ function init() {
 	for (let leftMenu of document.getElementsByClassName("left")) {
 		leftMenu.style.left = "-"+leftMenu.style.width;
 	}
+	for (let i = 0;)
 	
 	allAchievements();
 	
@@ -232,8 +234,6 @@ function newGame() {
 		autoSaveInterval: 1000,
 		nextSave: 0,
 		currentTheme: "light",
-		currentScreen: 0,
-		screenLimit: 1,
 		lifetimeProgress: [0,0],
 		progress: [0,0],
 		lifetimePoints: [0,0],
@@ -335,7 +335,7 @@ function importSave() {
 
 function wipe() {
 	if (confirm("Are you sure you want to wipe your save?")) {
-		for (let i = 0; i < game.currentScreen; i++) {
+		for (let i = 0; i < currentScreen; i++) {
 			switchScreen("backward");
 		}
 		for (let menu of document.getElementsByClassName("topMenu")) {
@@ -498,28 +498,25 @@ function toTheme(newTheme) {
 }
 
 function switchScreen(dir) {
-	if (dir == "forward" && game.currentScreen != game.screenLimit) game.currentScreen++;
-	if (dir == "backward" && game.currentScreen != 0) game.currentScreen--;
+	if (dir == "forward" && currentScreen != getScreenLimit()) currentScreen++;
+	if (dir == "backward" && currentScreen != 0) currentScreen--;
 	for (let i = 0; i < document.getElementsByClassName("screen").length; i++) {
-		id("screen"+i).style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
+		id("screen"+i).style.transform = "translate(-"+currentScreen*100+"vw,0)";
 	}
 	for (let menu of document.getElementsByClassName("topMenu")) {
-		menu.style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
+		menu.style.transform = "translate(-"+currentScreen*100+"vw,0)";
 	}
 	for (let type of upgrade.list) {
-		id((type=="normal"?"m":type+"M")+"axAllButton").style.transform = "rotate(90deg) translate(20px,20px) translate(0,-"+game.currentScreen*100+"vw)";
+		id((type=="normal"?"m":type+"M")+"axAllButton").style.transform = "rotate(90deg) translate(20px,20px) translate(0,-"+currentScreen*100+"vw)";
 	}
-	id("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
-	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
+	id("switchScreenRight").classList[currentScreen == getScreenLimit() ? "add" : "remove"]("disabled");
+	id("switchScreenLeft").classList[currentScreen == 0 ? "add" : "remove"]("disabled");
 }
 
-function getUpgPrice(n, type = "normal") {
-	let upgPrice = upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]);
-	if (upgrade[type].type[n] == 0) {
-		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
-		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
-	}
-	return game.upgrade[type][n] < upgrade[type].limit[n] ? Math.max(Math.round(upgPrice),1) : Infinity;
+function getMaxScreen() {
+	let maxScreen = 1;
+	if (game.upgrade.normal[7]) maxScreen++;
+	return maxScreen;
 }
 
 function getBarLength(n) {
@@ -560,6 +557,15 @@ function getPointGain(n) {
 	}
 }
 
+function getUpgPrice(n, type = "normal") {
+	let upgPrice = upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]);
+	if (upgrade[type].type[n] == 0) {
+		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
+		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
+	}
+	return game.upgrade[type][n] < upgrade[type].limit[n] ? Math.max(Math.round(upgPrice),1) : Infinity;
+}
+
 function getSineMult() {
 	let mult = Math.sin(game.skill.durationTimer[0] / 250);
 	mult *= Math.pow(9, game.upgrade.skill[0] * 0.5 + 1);
@@ -582,8 +588,8 @@ function getTimeMachineMult() {
 function updateAll() {
 	id("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
 	document.querySelectorAll("*").forEach(function(node) {node.classList.add(game.currentTheme);});
-	id("switchScreenRight").classList[game.currentScreen == game.screenLimit[1] ? "add" : "remove"]("disabled");
-	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
+	id("switchScreenRight").classList[currentScreen == getScreenLimit() ? "add" : "remove"]("disabled");
+	id("switchScreenLeft").classList[currentScreen == 0 ? "add" : "remove"]("disabled");
 	for (let i = 0; i < 6; i++) {
 		id("autoToggle"+i).innerHTML = game.auto.isOn[i] ? "ON" : "OFF";
 	}
@@ -949,7 +955,7 @@ function bulkUpgrade(n, type = "normal", amount = 1, auto = false) {
 }
 
 function maxAll(type = "normal", auto = false) {
-	for (let i = game.currentScreen*4; i < (game.currentScreen+1)*4; i++) {
+	for (let i = currentScreen*4; i < (currentScreen+1)*4; i++) {
 		bulkUpgrade(i, type, Infinity, auto);
 	}
 }
