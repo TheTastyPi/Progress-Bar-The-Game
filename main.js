@@ -512,7 +512,7 @@ function switchScreen(dir) {
 	id("switchScreenLeft").classList[currentScreen == 0 ? "add" : "remove"]("disabled");
 }
 
-function getMaxScreen() {
+function getScreenLimit() {
 	let maxScreen = 1;
 	if (game.upgrade.normal[7]) maxScreen++;
 	return maxScreen;
