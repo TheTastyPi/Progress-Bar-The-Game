@@ -2,7 +2,7 @@ var lastFrame = 0;
 var game = newGame();
 
 const screenAmount = document.getElementsByClassName("screen").length;
-const currentScreen = 0;
+var currentScreen = 0;
 
 const upgrade = {
 	list: ["normal","skill","auto"],
