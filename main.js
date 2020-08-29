@@ -1032,7 +1032,7 @@ function allAchievements() {
 	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Reci' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
 	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
 	
-	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points. Gained automatically upon redeeming points if 'Absolute Value' is bought.", "Go the wrong way");
+	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points. Gained automatically if 'Absolute Value' is bought.", "Go the wrong way");
 	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.", "Boom boom boom");
 	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.", "Practice your reaction time");
 	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.", "Impatient");
