@@ -629,7 +629,7 @@ function updateProgress() {
 function updatePoints(n) {
 	switch(n) {
 		case 0:
-			if (game.points[0] == -Infinity) giveAchievement("wrongWay");
+			if (game.points[0] == -Infinity || game.upgrade.skill[1]) giveAchievement("wrongWay");
 			if (isNaN(game.points[0]) || game.points[0] == -Infinity || typeof(game.points[0]) != "number") game.points[0] = 0;
 			if (isNaN(game.lifetimePoints[0]) || game.lifetimePoints[0] == -Infinity || typeof(game.lifetimePoints[0]) != "number") game.lifetimePoints[0] = Infinity;
 			id("pointDisplay0").innerHTML = "You have "+format(game.points[0])+" progress point"+pluralCheck(game.points[0])+".";
@@ -794,7 +794,6 @@ function updateUpg() {
 	if (!game.upgrade.skill.includes(0) && !game.upgrade.auto.includes(0)) giveAchievement("stillF");
 	id("switchScreenRight").classList[currentScreen == getScreenLimit() ? "add" : "remove"]("disabled");
 	id("switchScreenLeft").classList[currentScreen == 0 ? "add" : "remove"]("disabled");
-	updateSkills();
 }
 
 function updateSkills() {
@@ -1033,7 +1032,7 @@ function allAchievements() {
 	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Reci' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
 	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
 	
-	newAchievement("Wrong way buddy", "wrongWay", "Redeem -Infinity progress points.", "Go the wrong way");
+	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points. Gained automatically upon redeeming points if 'Absolute Value' is bought.", "Go the wrong way");
 	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.", "Boom boom boom");
 	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.", "Practice your reaction time");
 	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.", "Impatient");
