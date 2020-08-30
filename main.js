@@ -2,11 +2,12 @@ var lastFrame = 0;
 var game = newGame();
 
 const screenAmount = document.getElementsByClassName("screen").length;
+var currentScreen = 0;
 
 const upgrade = {
 	list: ["normal","skill","auto"],
 	normal: {
-		basePrice: [1, 1, 2, 3, 1, 2, 3, 4.2e69],
+		basePrice: [1, 1, 2, 3, 1, 2, 3, 250],
 		priceGrowth: [6, 6, 11, 14, 1, 1, 1, 1],
 		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1],
 		type: [0,0,0,0,1,1,1,1]
@@ -230,8 +231,6 @@ function newGame() {
 		autoSaveInterval: 1000,
 		nextSave: 0,
 		currentTheme: "light",
-		currentScreen: 0,
-		screenLimit: 1,
 		lifetimeProgress: [0,0],
 		progress: [0,0],
 		lifetimePoints: [0,0],
@@ -334,7 +333,7 @@ function importSave() {
 
 function wipe() {
 	if (confirm("Are you sure you want to wipe your save?")) {
-		for (let i = 0; i < game.currentScreen; i++) {
+		for (let i = 0; i < currentScreen; i++) {
 			switchScreen("backward");
 		}
 		for (let menu of document.getElementsByClassName("topMenu")) {
@@ -497,28 +496,25 @@ function toTheme(newTheme) {
 }
 
 function switchScreen(dir) {
-	if (dir == "forward" && game.currentScreen != game.screenLimit) game.currentScreen++;
-	if (dir == "backward" && game.currentScreen != 0) game.currentScreen--;
+	if (dir == "forward" && currentScreen != getScreenLimit()) currentScreen++;
+	if (dir == "backward" && currentScreen != 0) currentScreen--;
 	for (let i = 0; i < document.getElementsByClassName("screen").length; i++) {
-		id("screen"+i).style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
+		id("screen"+i).style.transform = "translate(-"+currentScreen*100+"vw,0)";
 	}
 	for (let menu of document.getElementsByClassName("topMenu")) {
-		menu.style.transform = "translate(-"+game.currentScreen*100+"vw,0)";
+		menu.style.transform = "translate(-"+currentScreen*100+"vw,0)";
 	}
 	for (let type of upgrade.list) {
-		id((type=="normal"?"m":type+"M")+"axAllButton").style.transform = "rotate(90deg) translate(20px,20px) translate(0,-"+game.currentScreen*100+"vw)";
+		id((type=="normal"?"m":type+"M")+"axAllButton").style.transform = "rotate(90deg) translate(20px,20px) translate(0,-"+currentScreen*100+"vw)";
 	}
-	id("switchScreenRight").classList[game.currentScreen == game.screenLimit ? "add" : "remove"]("disabled");
-	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
+	id("switchScreenRight").classList[currentScreen == getScreenLimit() ? "add" : "remove"]("disabled");
+	id("switchScreenLeft").classList[currentScreen == 0 ? "add" : "remove"]("disabled");
 }
 
-function getUpgPrice(n, type = "normal") {
-	let upgPrice = upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]);
-	if (upgrade[type].type[n] == 0) {
-		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
-		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
-	}
-	return game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity;
+function getScreenLimit() {
+	let maxScreen = 1;
+	if (game.upgrade.normal[7]) maxScreen++;
+	return maxScreen;
 }
 
 function getBarLength(n) {
@@ -559,6 +555,15 @@ function getPointGain(n) {
 	}
 }
 
+function getUpgPrice(n, type = "normal") {
+	let upgPrice = upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]);
+	if (upgrade[type].type[n] == 0) {
+		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
+		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
+	}
+	return game.upgrade[type][n] < upgrade[type].limit[n] ? Math.max(Math.round(upgPrice),1) : Infinity;
+}
+
 function getSineMult() {
 	let mult = Math.sin(game.skill.durationTimer[0] / 250);
 	mult *= Math.pow(9, game.upgrade.skill[0] * 0.5 + 1);
@@ -581,8 +586,8 @@ function getTimeMachineMult() {
 function updateAll() {
 	id("autoSaveToggleButton").innerHTML = game.doAutoSave ? "Auto Save<br>ON" : "Auto Save<br>OFF";
 	document.querySelectorAll("*").forEach(function(node) {node.classList.add(game.currentTheme);});
-	id("switchScreenRight").classList[game.currentScreen == game.screenLimit[1] ? "add" : "remove"]("disabled");
-	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
+	id("switchScreenRight").classList[currentScreen == getScreenLimit() ? "add" : "remove"]("disabled");
+	id("switchScreenLeft").classList[currentScreen == 0 ? "add" : "remove"]("disabled");
 	for (let i = 0; i < 6; i++) {
 		id("autoToggle"+i).innerHTML = game.auto.isOn[i] ? "ON" : "OFF";
 	}
@@ -623,7 +628,7 @@ function updateProgress() {
 function updatePoints(n) {
 	switch(n) {
 		case 0:
-			if (game.points[0] == -Infinity) giveAchievement("wrongWay");
+			if (game.points[0] == -Infinity || game.upgrade.skill[1]) giveAchievement("wrongWay");
 			if (isNaN(game.points[0]) || game.points[0] == -Infinity || typeof(game.points[0]) != "number") game.points[0] = 0;
 			if (isNaN(game.lifetimePoints[0]) || game.lifetimePoints[0] == -Infinity || typeof(game.lifetimePoints[0]) != "number") game.lifetimePoints[0] = Infinity;
 			id("pointDisplay0").innerHTML = "You have "+format(game.points[0])+" progress point"+pluralCheck(game.points[0])+".";
@@ -786,7 +791,8 @@ function updateUpg() {
 	}
 	id("auto7").classList[game.upgrade.auto[7] == 0 ? "add" : "remove"]("hidden");
 	if (!game.upgrade.skill.includes(0) && !game.upgrade.auto.includes(0)) giveAchievement("stillF");
-	updateSkills();
+	id("switchScreenRight").classList[currentScreen == getScreenLimit() ? "add" : "remove"]("disabled");
+	id("switchScreenLeft").classList[currentScreen == 0 ? "add" : "remove"]("disabled");
 }
 
 function updateSkills() {
@@ -948,7 +954,7 @@ function bulkUpgrade(n, type = "normal", amount = 1, auto = false) {
 }
 
 function maxAll(type = "normal", auto = false) {
-	for (let i = game.currentScreen*4; i < (game.currentScreen+1)*4; i++) {
+	for (let i = currentScreen*4; i < (currentScreen+1)*4; i++) {
 		bulkUpgrade(i, type, Infinity, auto);
 	}
 }
@@ -1025,7 +1031,7 @@ function allAchievements() {
 	newAchievement("This video is sponsored by Honey", "sponsoredHoney", "Use the skill 'Reci' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
 	newAchievement("So many squares it made a cube", "madeACube", "Use the skill 'Squr' a total of 50 times.", "Do something a lot of times, may or may not be related to the previous achievement");
 	
-	newAchievement("Wrong way buddy", "wrongWay", "Redeem -Infinity progress points.", "Go the wrong way");
+	newAchievement("Wrong way buddy", "wrongWay", "Have -Infinity progress points. Gained automatically if 'Absolute Value' is bought.", "Go the wrong way");
 	newAchievement("Expert Explosioner", "expExpBoom", "Overflow a total of 50 times.", "Boom boom boom");
 	newAchievement("I've gotta save those money!", "saveMoney", "Click a total of 200 coupons.", "Practice your reaction time");
 	newAchievement("Are we there yet?", "thereYet", "Fail at charging 'Squr' a total of 25 times.", "Impatient");

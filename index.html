@@ -75,6 +75,8 @@
 					</div>
 				</div>
 			</div>
+			<div id="screen2" class="screen" style="left:200%;">
+			</div>
 		</div>
 		<button id="upgMenuOpen" onclick="toggleTopMenu('upg')" class="hidden topMenuOpen" style="left:0;">Upgrades</button>
 		<div id="upgMenu" class="topMenu" style="height:200px; left:0;">
@@ -147,8 +149,46 @@
 				<div id="upg7" class="oddUpgrades" style="text-align:center;">
 					<button id="upgButton7" onclick="buyUpgrade(7)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade7.png');"></button><br>
 					???<br>
-					Coming soon...<br>
+					Unlocks the next screen.<br>
 					<span id="upgDesc7">
+						Cost: 250 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+			</div>
+			<div id="upgSect2" class="upgSect">
+				<div id="upg8" style="text-align:center;">
+					<button id="upgButton8" onclick="buyUpgrade(8)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade8.png');"></button><br>
+					Skill Unlock<br>
+					Unlocks a new skill.<br>
+					<span id="upgDesc8">
+						Cost: 1 Logress Point<br>
+						Currently: 0 Skill
+					</span>
+				</div>
+				<div id="upg9" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButton9" onclick="buyUpgrade(9)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade9.png');"></button><br>
+					Skill Power Upgrades<br>
+					Unlocks the skill upgrade tab.<br>
+					<span id="upgDesc9">
+						Cost: 2 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="upg10" style="text-align:center;">
+					<button id="upgButton10" onclick="buyUpgrade(10)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade10.png');"></button><br>
+					Automation Unlock<br>
+					Unlocks the automation tab.<br>
+					<span id="upgDesc10">
+						Cost: 2 Logress Points<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="upg11" class="oddUpgrades" style="text-align:center;">
+					<button id="upgButton11" onclick="buyUpgrade(11)" class="horizonalCentered upgButton" style="background-image:url('pics/upgrade11.png');"></button><br>
+					???<br>
+					Coming soon...<br>
+					<span id="upgDesc11">
 						Cost: ? Logress Point<br>
 						Currently: Locked
 					</span>
@@ -234,6 +274,44 @@
 					</span>
 				</div>
 			</div>
+			<div id="skillUpgSect2" class="upgSect">
+				<div id="skillUpg8" style="text-align:center;">
+					<button id="skillUpgButton8" onclick="buyUpgrade(8,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade8.png');"></button><br>
+					Reci Upgrade<br>
+					Increases the effect of "Reci".<br>
+					<span id="skillUpgDesc8">
+						Cost: 2 Logress Points<br>
+						Currently: x1
+					</span>
+				</div>
+				<div id="skillUpg9" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton9" onclick="buyUpgrade(9,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade9.png');"></button><br>
+					Two for One Special<br>
+					The time before coupons dissappear are doubled.<br>
+					<span id="skillUpgDesc9">
+						Cost: 3 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+				<div id="skillUpg10" style="text-align:center;">
+					<button id="skillUpgButton10" onclick="buyUpgrade(10,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade10.png');"></button><br>
+					Squr Upgrade<br>
+					Reduces the time it takes for "Squr" to take effect.<br>
+					<span id="skillUpgDesc10">
+						Cost: 1 Logress Point<br>
+						Currently: 2 minutes
+					</span>
+				</div>
+				<div id="skillUpg11" class="oddUpgrades" style="text-align:center;">
+					<button id="skillUpgButton11" onclick="buyUpgrade(11,'skill')" class="horizonalCentered upgButton" style="background-image:url('pics/skillUpgrade11.png');"></button><br>
+					Cube<br>
+					Makes "Squr" cube instead of square the other skills' effect.<br>
+					<span id="skillUpgDesc11">
+						Cost: 2 Logress Point<br>
+						Currently: Locked
+					</span>
+				</div>
+			</div>
 			<button id="skillMaxAllButton" onclick="maxAll('skill')" class="maxall">Max All</button>
 		</div>
 		<button id="autoUpgMenuOpen" onclick="toggleTopMenu('autoUpg')" class="hidden topMenuOpen" style="left:240px;">Automation Upgrades</button>
@@ -313,7 +391,44 @@
 						Currently: 0/s
 					</span>
 				</div>
-				
+			</div>
+			<div id="autoUpgSect2" class="upgSect">
+				<div id="autoUpg8" style="text-align:center;">
+					<button id="autoUpgButton8" onclick="buyUpgrade(8,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade8.png');"></button><br>
+					Auto Redeem 1<br>
+					Automatically redeem progress points.<br>
+					<span id="autoUpgDesc8">
+						Cost: 1 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
+				<div id="autoUpg9" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton9" onclick="buyUpgrade(9,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade9.png');"></button><br>
+					Auto Redeem 2<br>
+					Automatically redeem logress points.<br>
+					<span id="autoUpgDesc9">
+						Cost: 2 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
+				<div id="autoUpg10" style="text-align:center;">
+					<button id="autoUpgButton10" onclick="buyUpgrade(10,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade10.png');"></button><br>
+					Auto Upgrade Magnitude<br>
+					Increases the buy amount for auto upgrades.<br>
+					<span id="autoUpgDesc10">
+						Cost: 2 Logress Points<br>
+						Currently: 1/buy
+					</span>
+				</div>
+				<div id="autoUpg11" class="oddUpgrades" style="text-align:center;">
+					<button id="autoUpgButton11" onclick="buyUpgrade(11,'auto')" class="horizonalCentered upgButton" style="background-image:url('pics/autoUpgrade11.png');"></button><br>
+					Time Machine<br>
+					Speed up time based on auto upgrades bought and current logress points.<br>
+					<span id="autoUpgDesc11">
+						Cost: 3 Logress Point<br>
+						Currently: 0/s
+					</span>
+				</div>
 			</div>
 			<button id="autoMaxAllButton" onclick="maxAll('auto')" class="maxall">Max All</button>
 		</div>
@@ -373,6 +488,16 @@
 				<div id="auto7"  class="auto" style="font-size:40px; flex-grow:2; vertical-align: middle">
 					<span>Time Machine Multipler:</span>
 					<span id="timeMachineMult">1x</span>
+				</div>
+			</div>
+			<div id="autoSect1" class="upgSect">
+				<div id="auto8" class="auto">
+					<span>Point Auto-Redeemer Level 1</span>
+					<div id="autoBar8" class="autoBar">
+						<div id="autoBarValue8" class="autoBarValue"></div>
+						<span id="autoBarLabel8" class="label centered" style="font-size: 30px"></span>
+					</div>
+					<button id="autoToggle8" class="autoToggle" onclick="toggleAuto(8)">On</button>
 				</div>
 			</div>
 		</div>
