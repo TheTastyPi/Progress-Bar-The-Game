@@ -88,8 +88,6 @@ function init() {
 	
 	load();
 	
-	updateAll();
-	
 	window.requestAnimationFrame(nextFrame);
 }
 
@@ -304,6 +302,7 @@ function load(auto = true) {
 			setTimeout(function(){id("loadButton").style.backgroundColor = "";}, 250);
 		}
 	}
+	updateAll();
 }
 
 function exportSave() {
@@ -691,7 +690,7 @@ function updatePoints(n) {
 function updateUpg() {
 	for (let type of upgrade.list) {
 		for (let i = 0; i < 8; i++) {
-			let newDesc = (game.upgrade[type][i] != Infinity ? "Cost: "+format(getUpgPrice(i, type))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
+			let newDesc = (game.upgrade[type][i] != Infinity ? "Cost: "+format(Math.floor(getUpgPrice(i, type)))+" "+(upgrade[type].type[i]==0?"Pr":"L")+"ogress Point"+pluralCheck(getUpgPrice(i, type)) : "Maxed Out")+"<br>Currently: ";
 			switch(type) {
 				case "normal":
 					switch(i) {
@@ -764,7 +763,7 @@ function updateUpg() {
 				id((type=="normal"?"u":type+"U")+"pg"+i).classList.remove("maxedUpg");
 				id((type=="normal"?"u":type+"U")+"pg"+i).classList.remove("hidden");
 			}
-			id((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= getUpgPrice(i, type) ? "remove" : "add"]("disabledUpg");
+			id((type == "normal"?"u":type+"U")+"pgButton"+i).classList[game.points[upgrade[type].type[i]] >= Math.floor(getUpgPrice(i, type)) ? "remove" : "add"]("disabledUpg");
 		}
 		for (let i = 0; i < screenAmount; i++) {
 			if (game.upgrade[type][i*4] == Infinity &&
