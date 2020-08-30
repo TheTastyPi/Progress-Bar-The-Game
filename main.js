@@ -87,8 +87,6 @@ function init() {
 	
 	load();
 	
-	updateAll();
-	
 	window.requestAnimationFrame(nextFrame);
 }
 
@@ -305,6 +303,7 @@ function load(auto = true) {
 			setTimeout(function(){id("loadButton").style.backgroundColor = "";}, 250);
 		}
 	}
+	updateAll();
 }
 
 function exportSave() {
