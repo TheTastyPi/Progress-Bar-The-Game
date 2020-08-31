@@ -940,7 +940,12 @@ function buyUpgrade(n, type = "normal", auto = false) {
 
 function bulkUpgrade(n, type = "normal", amount = 1, auto = false) {
 	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
-		let totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[n]]/getUpgPrice(n, type)*(upgrade[type].priceGrowth[n]-1)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
+		let totalAmount 
+		if (upgrade[type].priceGrowth[n] == 1) {
+			totalAmount = Math.min(Math.floor(game.points[upgrade[type].type[n]]/upgrade[type].basePrice[n]),upgrade[type].limit[n],amount);
+		} else {
+			totalAmount = Math.min(Math.floor(Math.log(game.points[upgrade[type].type[n]]/getUpgPrice(n, type)*(upgrade[type].priceGrowth[n]-1)+1)/Math.log(upgrade[type].priceGrowth[n])),upgrade[type].limit[n],amount);
+		}
 		if (isNaN(totalAmount)) totalAmount = Infinity;
 		let totalPrice = Math.floor(getUpgPrice(n, type)*(1-Math.pow(upgrade[type].priceGrowth[n],totalAmount))/(1-upgrade[type].priceGrowth[n]));
 		if (totalAmount >= 1) {
