@@ -7,22 +7,22 @@ var currentScreen = 0;
 const upgrade = {
 	list: ["normal","skill","auto"],
 	normal: {
-		basePrice: [1, 1, 2, 3, 1, 2, 3, 250],
-		priceGrowth: [6, 6, 11, 14, 1, 1, 1, 1],
-		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1],
-		type: [0,0,0,0,1,1,1,1]
+		basePrice: [1, 1, 2, 3, 1, 2, 3, 250, 1, 1, 1, 1],
+		priceGrowth: [6, 6, 11, 14, 1, 1, 1, 1, 1, 1, 1, 1],
+		limit: [Infinity,Infinity,Infinity,Infinity,4,1,1,1,1,1,1,1],
+		type: [0,0,0,0,1,1,1,1,1,1,1,1]
 	},
 	skill: {
-		basePrice: [1, 5, 1, 5, 1, 5, 1, 5],
-		priceGrowth: [2, 1, 2, 1, 2, 1, 2, 1],
-		limit: [Infinity,1,Infinity,1,Infinity,1,Infinity,1],
-		type: [1,1,1,1,1,1,1,1]
+		basePrice: [1, 5, 1, 5, 1, 5, 1, 5, 1, 1, 1, 1],
+		priceGrowth: [2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1],
+		limit: [Infinity,1,Infinity,1,Infinity,1,Infinity,1, 1, 1, 1, 1],
+		type: [1,1,1,1,1,1,1,1,1,1,1,1]
 	},
 	auto: {
-		basePrice: [1, 1, 1, 1, 1, 1, 1, 1],
-		priceGrowth: [2, 2, 2, 2, 2, 2, 2, 2],
-		limit: [9,9,9,9,7,16,1024,1],
-		type: [1,1,1,1,1,1,1,1]
+		basePrice: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+		priceGrowth: [2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1],
+		limit: [9,9,9,9,7,16,1024,1,1,1,1,1],
+		type: [1,1,1,1,1,1,1,1,1,1,1,1]
 	}
 };
 
