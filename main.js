@@ -642,6 +642,7 @@ function updatePoints(n) {
 			if (game.points[0] >= 1) giveAchievement("justABar");
 			break;
 		case 1:
+			if (isNaN(game.points[1]) || game.points[1] == -Infinity || typeof(game.points[0]) != "number") game.points[1] = 0;
 			id("pointDisplay1").innerHTML = "You have "+format(game.points[1])+" logress point"+pluralCheck(game.points[1])+".";
 			id("pointDisplay1").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
 			id("logStat").classList[game.lifetimePoints[1] >= 1 ? "remove" : "add"]("hidden");
