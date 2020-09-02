@@ -512,15 +512,6 @@ function switchScreen(dir) {
 	id("switchScreenLeft").classList[game.currentScreen == 0 ? "add" : "remove"]("disabled");
 }
 
-function getUpgPrice(n, type = "normal") {
-	let upgPrice = upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]);
-	if (upgrade[type].type[n] == 0) {
-		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
-		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
-	}
-	return game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity;
-}
-
 function getBarLength(n) {
 	switch (n) {
 		case 0:
@@ -557,6 +548,15 @@ function getPointGain(n) {
 		case 1:
 			return Math.floor(game.progress[1] / getBarLength(1) * (1 + Math.min(Math.floor(game.lifetimePoints[1] / 50),4)));
 	}
+}
+
+function getUpgPrice(n, type = "normal") {
+	let upgPrice = upgrade[type].basePrice[n] * Math.pow(upgrade[type].priceGrowth[n], game.upgrade[type][n]);
+	if (upgrade[type].type[n] == 0) {
+		upgPrice *= 1 - 0.05 * Math.min(Math.floor(game.lifetimePoints[1] / 2),10);
+		upgPrice /= Math.pow((game.upgrade.skill[4] * 0.5 + 0.5) * game.skill.couponCount + 1, game.skill.waitTimer == 0 && game.skill.durationTimer[3] > 0 ? (game.upgrade.skill[7] ? 3 : 2) : 1);
+	}
+	return game.upgrade[type][n] < upgrade[type].limit[n] ? upgPrice : Infinity;
 }
 
 function getSineMult() {
@@ -922,7 +922,7 @@ function redeemPoints(n, auto = false) {
 }
 
 function buyUpgrade(n, type = "normal", auto = false) {
-	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
+	if (game.points[upgrade[type].type[n]] >= Math.floor(getUpgPrice(n, type)) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		game.points[upgrade[type].type[n]] -= Math.floor(getUpgPrice(n, type));
 		game.upgrade[type][n]++;
 		if (!auto) game.afkLog = false;
@@ -933,7 +933,7 @@ function buyUpgrade(n, type = "normal", auto = false) {
 }
 
 function bulkUpgrade(n, type = "normal", amount = 1, auto = false) {
-	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
+	if (game.points[upgrade[type].type[n]] >= Math.floor(getUpgPrice(n, type)) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		let totalAmount;
 		let totalPrice;
 		if (upgrade[type].priceGrowth[n] == 1) {
