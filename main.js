@@ -928,7 +928,7 @@ function redeemPoints(n, auto = false) {
 }
 
 function buyUpgrade(n, type = "normal", auto = false) {
-	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
+	if (game.points[upgrade[type].type[n]] >= Math.floor(getUpgPrice(n, type)) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		game.points[upgrade[type].type[n]] -= Math.floor(getUpgPrice(n, type));
 		game.upgrade[type][n]++;
 		if (!auto) game.afkLog = false;
@@ -939,7 +939,7 @@ function buyUpgrade(n, type = "normal", auto = false) {
 }
 
 function bulkUpgrade(n, type = "normal", amount = 1, auto = false) {
-	if (game.points[upgrade[type].type[n]] >= getUpgPrice(n, type) && game.upgrade[type][n] < upgrade[type].limit[n]) {
+	if (game.points[upgrade[type].type[n]] >= Math.floor(getUpgPrice(n, type)) && game.upgrade[type][n] < upgrade[type].limit[n]) {
 		let totalAmount;
 		let totalPrice;
 		if (upgrade[type].priceGrowth[n] == 1) {
