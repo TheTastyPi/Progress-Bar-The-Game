@@ -1131,7 +1131,7 @@ document.addEventListener("keydown", function(input){
 		case "Digit2":
 		case "Digit3":
 		case "Digit4":
-			useSkill(Number(key)-1);
+			useSkill(key[key.length-1]-1);
 	}
 })
 
