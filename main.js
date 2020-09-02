@@ -1072,7 +1072,7 @@ function notify(message) {
 document.addEventListener("keydown", function(input){
 	let key = input.code;
 	switch(key) {
-		case "KeyL":
+		case "KeyP":
 			redeemPoints(0);
 			break;
 		case "KeyM":
