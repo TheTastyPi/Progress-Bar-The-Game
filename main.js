@@ -1070,15 +1070,15 @@ function notify(message) {
 }
 
 document.addEventListener("keydown", function(input){
-	let key = input.key;
+	let key = input.code;
 	switch(key) {
-		case "p":
+		case "KeyL":
 			redeemPoints(0);
 			break;
-		case "m":
+		case "KeyM":
 			maxAll(upgrade.list[game.upgrade.selected]);
 			break;
-		case ",":
+		case "Comma":
 			if (game.upgrade.selected < upgrade.list.length - 1) {
 				game.upgrade.selected++;
 			} else {
@@ -1098,7 +1098,7 @@ document.addEventListener("keydown", function(input){
 				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "none";
 			},1);
 			break;
-		case ".":
+		case "Period":
 			if (game.upgrade.selected > 0) {
 				game.upgrade.selected--;
 			} else {
@@ -1118,7 +1118,7 @@ document.addEventListener("keydown", function(input){
 				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "none";
 			},1);
 			break;
-		case "l":
+		case "KeyL":
 			redeemPoints(1);
 			break;
 		case "ArrowLeft":
@@ -1127,10 +1127,10 @@ document.addEventListener("keydown", function(input){
 		case "ArrowRight":
 			switchScreen("forward");
 			break;
-		case "1":
-		case "2":
-		case "3":
-		case "4":
+		case "Digit1":
+		case "Digit2":
+		case "Digit3":
+		case "Digit4":
 			useSkill(Number(key)-1);
 	}
 })
