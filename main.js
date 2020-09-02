@@ -264,7 +264,16 @@ function newGame() {
 		fastestLP: Infinity,
 		lowestPP: 0,
 		achievements: [],
-		afkLog: true
+		afkLog: true,
+		battle: {
+			area: 0,
+			fragments: 0,
+			xp: 0,
+			effect: [],
+			inventory: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			equip: [0,0,0,0,0],
+			ability: [0,0,0,0,0,0,0,0,0,0,0,0],
+		},
 	};
 }
 
