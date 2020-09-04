@@ -1078,7 +1078,7 @@ document.addEventListener("keydown", function(input){
 		case "KeyM":
 			maxAll(upgrade.list[game.upgrade.selected]);
 			break;
-		case "Comma":
+		case "Period":
 			if (game.upgrade.selected < upgrade.list.length - 1) {
 				game.upgrade.selected++;
 			} else {
@@ -1098,7 +1098,7 @@ document.addEventListener("keydown", function(input){
 				id((upgrade.list[game.upgrade.selected]=="normal"?"u":upgrade.list[game.upgrade.selected]+"U")+"pgMenuOpen").style.boxShadow = "none";
 			},1);
 			break;
-		case "Period":
+		case "Comma":
 			if (game.upgrade.selected > 0) {
 				game.upgrade.selected--;
 			} else {
