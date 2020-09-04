@@ -256,7 +256,7 @@ button.dark {
 	border-radius: 10px;
 }
 .HPBar {
-	width: 100%;
+	width: calc(100% - 4px);
 	height: 50px;
 	border: 4px solid #222222;
 	background-color: #FFFFFF;
