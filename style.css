@@ -250,6 +250,10 @@ button.dark {
 	height: 100vh;
 	padding: 10%;
 }
+.attackButton {
+	width: 25%;
+	height: 100px;
+}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
