@@ -255,37 +255,19 @@ button.dark {
 	height: 50px;
 	border-radius: 10px;
 }
-.HPBar {
+.battleBar {
 	width: calc(100% - 8px);
 	height: 50px;
 	border: 4px solid #222222;
 	background-color: #FFFFFF;
 }
-.HPBar.dark {
+.battleBar.dark {
 	border: 4px solid #DDDDDD;
 	background-color: #000000;
 }
-.HPBarValue {
+.battleBarValue {
 	width: 50%;
 	height: 100%;
-}
-.attackBar {
-	width: calc(100% - 8px);
-	height: 50px;
-	border: 4px solid #222222;
-	background-color: #FFFFFF;
-}
-.attackBar.dark {
-	border: 4px solid #DDDDDD;
-	background-color: #000000;
-}
-.attackBarValue {
-	width: 50%;
-	height: 100%;
-	background-color: #444444;
-}
-.attackBarValue.dark {
-	background-color: #BBBBBB;
 }
 .sideMenuOpen {
 	animation-name: sideMenuInit;
