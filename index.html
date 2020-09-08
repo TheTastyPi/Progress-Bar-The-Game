@@ -85,18 +85,21 @@
 					</div>
 					<div id="battlePlayerSect" class="centered" style="right:80%; text-align:center">
 						<div id="battlePlayer">insert player here</div><br>
-						<div id="battlePlayerHP" class="HPBar">
-							<div id="battlePlayerHPValue" class="HPBarValue" style="background-color:#0000FF"></div>
+						<div id="battlePlayerHP" class="battleBar" style="height:25px">
+							<div id="battlePlayerHPValue" class="battleBarValue" style="background-color:#0000FF"></div>
+						</div>
+						<div id="battlePlayerSP" class="battleBar" style="height:25px">
+							<div id="battlePlayerSPValue" class="battleBarValue" style="background-color:#6666FF"></div>
 						</div>
 						<button id="attackZ" class="attackButton" onclick="playerAttack(0)">Z</button><button id="attackX" class="attackButton" onclick="playerAttack(1)">X</button><button id="attackC" class="attackButton" onclick="playerAttack(2)">C</button><button id="attackV" class="attackButton" onclick="playerAttack(3)">V</button>
 					</div>
 					<div id="battleEnemySect" class="centered" style="right:20%; text-align:center">
 						<div id="battleEnemy">insert enemy here</div><br>
-						<div id="battleEnemyHP" class="HPBar">
-							<div id="battleEnemyHPValue" class="HPBarValue" style="background-color:#FF0000"></div>
+						<div id="battleEnemyHP" class="battleBar">
+							<div id="battleEnemyHPValue" class="battleBarValue" style="background-color:#FF0000"></div>
 						</div>
-						<div id="battleEnemyHAttack" class="attackBar">
-							<div id="battleEnemyAttackValue" class="attackBarValue"></div>
+						<div id="battleEnemyAttack" class="battleBar">
+							<div id="battleEnemyAttackValue" class="battleBarValue" style="background-color:#444444"></div>
 						</div>
 					</div>
 				</div>
