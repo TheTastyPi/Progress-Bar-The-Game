@@ -77,11 +77,11 @@
 			</div>
 			<div id="screen2" class="screen" style="left:200%;">
 				<div id="battleContainer" class="battleContainer">
-					<div id="battleTop" class="centered" style="top:20%; text-align:center">
+					<div id="battleTop" class="centered battleTop" style="top:20%; text-align:center">
 						<div id="battleArea">Area Name</div>
-						<button id="battleInv" onclick="openBattleTab('inv')">Inv</button>
-						<button id="battleAbil" onclick="openBattleTab('abil')">Abil</button>
-						<button id="battleCraft" onclick="openBattleTab('craft')">Craft</button>
+						<button id="battleInvButton" class="battleTabButton" onclick="openBattleTab('inv')">Inv</button>
+						<button id="battleAbilButton" class="battleTabButton" onclick="openBattleTab('abil')">Abil</button>
+						<button id="battleCraftButton" class="battleTabButton" onclick="openBattleTab('craft')">Craft</button>
 					</div>
 					<div id="battlePlayerSect" class="centered" style="right:80%; text-align:center">
 						<div id="battlePlayer">insert player here</div><br>
@@ -101,6 +101,15 @@
 						<div id="battleEnemyAttack" class="battleBar">
 							<div id="battleEnemyAttackValue" class="battleBarValue" style="background-color:#777777"></div>
 						</div>
+					</div>
+					<div id="battleInvTab" class="centered battleTab">
+						
+					</div>
+					<div id="battleAbilTab" class="centered battleTab">
+						
+					</div>
+					<div id="battleCraftTab" class="centered battleTab">
+						
 					</div>
 				</div>
 			</div>
