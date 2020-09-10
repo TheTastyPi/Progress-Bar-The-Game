@@ -250,6 +250,38 @@ button.dark {
 	height: 100vh;
 	padding: 10%;
 }
+.battleTop {
+	width: 200px;
+	height: 75px;
+	color: #DDDDDD;
+	background-color: #222222;
+	border-radius: 5px 5px 0 0;
+}
+.battleTop.dark {
+	color: #222222;
+	background-color: #DDDDDD;
+}
+.battleTab {
+	height: 0;
+	width: 200px;
+	color: #DDDDDD;
+	background-color: #222222;
+}
+.battleTab.dark {
+	color: #222222;
+	background-color: #DDDDDD;
+}
+.battleTabButton {
+	height: 50px;
+	width: calc(200px/3);
+	color: #DDDDDD;
+	background-color: #222222;
+	border-radius: 0 0 5px 5px;
+}
+.battleTabButton.dark {
+	color: #222222;
+	background-color: #DDDDDD;
+}
 .attackButton {
 	width: 25%;
 	height: 50px;
