@@ -254,12 +254,12 @@ button.dark {
 	width: 200px;
 	height: 75px;
 	color: #DDDDDD;
-	background-color: #222222;
+	background-color: rgba(0,0,0,0.5);
 	border-radius: 5px;
 }
 .battleTop.dark {
 	color: #222222;
-	background-color: #DDDDDD;
+	background-color: rgba(255,255,255,0.7);
 }
 .battleTab {
 	height: 0;
