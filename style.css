@@ -276,21 +276,22 @@ button.dark {
 	width: calc(200px/3);
 	color: #DDDDDD;
 	background-color: #222222;
+	border-radius: 15px 15px 0 0;
 }
 .battleTabButton.dark {
 	color: #222222;
 	background-color: #DDDDDD;
 }
-#battleInvTab {background-color:#BB0000}
-#battleInvTab.dark {background-color:#FF4444}
-#battleAbilTab {background-color:#00BB00}
-#battleAbilTab.dark {background-color:#44FF44}
-#battleCraftTab {background-color:#0000BB}
-#battleCraftTab.dark {background-color:#4444FF}
+#battleInvButton {background-color:#BB0000}
+#battleInvButton.dark {background-color:#FF4444}
+#battleAbilButton {background-color:#00BB00}
+#battleAbilButton.dark {background-color:#44FF44}
+#battleCraftButton {background-color:#0000BB}
+#battleCraftButton.dark {background-color:#4444FF}
 .attackButton {
 	width: 25%;
 	height: 50px;
-	border-radius: 10px 10px 0 0;
+	border-radius: 10px;
 }
 .battleBar {
 	width: calc(100% - 8px);
