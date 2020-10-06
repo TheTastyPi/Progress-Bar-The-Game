@@ -265,6 +265,7 @@ button.dark {
 	height: 0;
 	width: 200px;
 	color: #DDDDDD;
+	transition: 0.5s;
 }
 .battleTab.dark {
 	color: #222222;
@@ -279,6 +280,7 @@ button.dark {
 	height: calc(57px/2);
 	width: calc(200px/3);
 	color: #DDDDDD;
+	transition: 0.5s;
 }
 .battleTabButton.dark {
 	color: #222222;
