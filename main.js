@@ -279,11 +279,9 @@ function toggleStatsMenu() {
 function toggleBattleTab(tab) {
 	if (!id("battle"+tab+"Tab").classList.contains("battleOpen")) {
 		id("battle"+tab+"Tab").style.height = "60%";
-		id("battleTopBottom").style.top = id("battle"+tab+"Tab").style.height;
 		id("battle"+tab+"Tab").classList.add("battleOpen");
 	} else {
 		id("battle"+tab+"Tab").style.height = 0;
-		id("battleTopBottom").style.top = 0;
 		id("battle"+tab+"Tab").classList.remove("battleOpen");
 	}
 }
