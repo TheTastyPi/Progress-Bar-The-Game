@@ -250,9 +250,9 @@ function toggleTopMenu(name) {
 				menuOpen.style.top = id(name+"Menu").style.height;
 			},500);
 		}
+		id(name+"Menu").classList.add("topOpen");
 		setTimeout(function(){
 			id(name+"Menu").style.top = "0";
-			id(name+"Menu").classList.add("topOpen");
 		},500);
 	} else {
 		id(name+"Menu").style.top = "-"+id(name+"Menu").style.height;
@@ -285,9 +285,9 @@ function toggleBattleTab(tab) {
 			tab.style.height = 0
 			tab.classList.remove("battleOpen");
 		}
+		id("battle"+tab+"Tab").classList.add("battleOpen");
 		setTimeout(function(){
 			id("battle"+tab+"Tab").style.height = "60vh";
-			id("battle"+tab+"Tab").classList.add("battleOpen");
 		},500);
 	} else {
 		id("battle"+tab+"Tab").style.height = 0;
