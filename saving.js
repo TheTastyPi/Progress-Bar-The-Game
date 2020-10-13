@@ -48,7 +48,17 @@ function newGame() {
 			area: 0,
 			fragments: 0,
 			xp: 0,
-			effect: [],
+			player: {
+				hp: 100,
+				sf: 0,
+				cooldown: [0,0,0,0],
+				effect: [0,0,0,0,0,0]
+			},
+			enemy: {
+				hp: 100,
+				cooldown: 0,
+				effect: [0,0,0,0,0,0]
+			},
 			inventory: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			equip: [0,0,0,0,0],
 			ability: [0,0,0,0,0,0,0,0,0,0,0,0],
