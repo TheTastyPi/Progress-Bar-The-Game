@@ -52,12 +52,14 @@ function newGame() {
 				hp: 100,
 				sf: 0,
 				cooldown: [0,0,0,0],
-				effect: [0,0,0,0,0,0]
+				effectType: [0,0,0,0,0,0],
+				effectDuration: [0,0,0,0,0,0]
 			},
 			enemy: {
 				hp: 100,
 				cooldown: 0,
-				effect: [0,0,0,0,0,0]
+				effectType: [0,0,0,0,0,0],
+				effectDuration: [0,0,0,0,0,0]
 			},
 			inventory: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			equip: [0,0,0,0,0],
