@@ -49,6 +49,7 @@ function newGame() {
 			fragments: 0,
 			xp: 0,
 			currentEnemy: 0,
+			nextSpawn: 10000,
 			player: {
 				hp: 100,
 				sf: 0,
