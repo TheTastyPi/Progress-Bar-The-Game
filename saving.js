@@ -45,7 +45,7 @@ function newGame() {
 		achievements: [],
 		afkLog: true,
 		battle: {
-			area: 0,
+			currentArea: 0,
 			fragments: 0,
 			xp: 0,
 			currentEnemy: 0,
