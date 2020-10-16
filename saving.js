@@ -52,7 +52,7 @@ function newGame() {
 			nextSpawn: 10000,
 			player: {
 				hp: 100,
-				sf: 0,
+				sp: 0,
 				cooldown: [0,0,0,0],
 				effectLevel: [0,0,0,0,0,0],
 				effectDuration: [0,0,0,0,0,0]
