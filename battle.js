@@ -31,7 +31,7 @@ class Enemy {
 		this.effSelfChance = effSelfChance;
 		this.special = special;
 		enemyList[enemyIdCount] = this;
-		currentEnemyId++;
+		enemyIdCount++;
 	}
 }
 new Enemy("test", 100, 5, 0, 3000, 1);
