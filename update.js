@@ -307,6 +307,6 @@ function updateAchievements() {
 
 function updateBattle() {
 	id("battlePlayerHPValue").style.width = Math.floor(game.battle.player.hp / getPlayerMaxHP() * 100) + "%";
-	id("battlePlayerSPValue").style.width = Math.floor(game.battle.player.hp / getPlayerMaxSP() * 100) + "%";
+	id("battlePlayerSPValue").style.width = Math.floor(game.battle.player.sp / getPlayerMaxSP() * 100) + "%";
 	id("battleEnemyHPValue").style.width = Math.floor(game.battle.enemy.hp / enemyList[game.battle.currentEnemy].maxHP * 100) + "%";
 }
