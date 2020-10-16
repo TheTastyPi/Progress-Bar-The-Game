@@ -202,7 +202,7 @@ function doFrame(sinceLastFrame) {
 		}
 	}
 	updateAuto();
-	let area = AreaList[game.battle.currentArea];
+	let area = areaList[game.battle.currentArea];
 	if (game.battle.currentEnemy == 0) {
 		game.battle.nextSpawn -= sinceLastFrame;
 	}
