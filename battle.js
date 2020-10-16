@@ -17,7 +17,7 @@ class Area {
 new Area("Obligatory Safe Zone", [0], Infinity);
 new Area("Weak Area", [1], 4000);
 
-var enemyIdCount = 1;
+var enemyIdCount = 0;
 class Enemy {
 	constructor(name, maxHP, str, def, cooldown, xp, effType = [], effChance = [], effSelf = [], effSelfChance = [], special = function(){}) {
 		this.name = name;
@@ -34,6 +34,7 @@ class Enemy {
 		enemyIdCount++;
 	}
 }
+new Enemy("Nothing", Infinity, 0, 0, Infinity, 0);
 new Enemy("test", 100, 5, 0, 3000, 1);
 function getPlayerLevel() {
 	let lvl = 1 + Math.floor(Math.sqrt(game.battle.xp / 5));
