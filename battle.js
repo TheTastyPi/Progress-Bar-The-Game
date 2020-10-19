@@ -1,6 +1,6 @@
 const baseAttackPower = [5, 5, 30, 50];
 const baseAttackCost = [0, 10, 20, 40];
-const effectList = ["overpump","underpump","autodrain","autofill","accelerate","decelerate"];
+const effectList = ["overpump","underpump","underfill","overfill","autodrain","autofill","accelerate","decelerate"];
 const areaList = [];
 const enemyList = [];
 
@@ -45,6 +45,11 @@ function getPlayerStrength() {
 	let str = Math.sqrt(getPlayerLevel()) * (1 + 0.2*(player.effLevel[0]-player.effLevel[1]));
 	return str;
 }
+function getPlayerDefense() {
+	let player = game.battle.player;
+	let def = Math.sqrt(getPlayerLevel()) * (1 + 0.2*(player.effLevel[2]-player.effLevel[3]));
+	return def;
+}
 function getPlayerMaxHP() {
 	let maxHP = 80 + 20 * getPlayerLevel();
 	return maxHP;
@@ -58,13 +63,18 @@ function getPlayerDamage(power) {
 	let dmg = Math.floor(power * getPlayerStrength()) - enemy.def;
 	return dmg;
 }
+function getEnemyDamage() {
+	let enemy = enemyList[game.battle.currentEnemy];
+	let dmg = Math.floor(enemy.str) - getPlayerDefense();
+	return dmg;
+}
 function getAttackCost(type) {
 	let cost = baseAttackCost[type];
 	return cost;
 }
 function playerAttack(type) {
 	let player = game.battle.player;
-	let enemy = enemyList[game.battle.currentEnemy];
+	let enemy = game.battle.enemy;
 	if (player.sf >= getAttackCost(type)) {
 		player.sf -= getAttackCost(type);
 		enemy.hp -= getPlayerDamage(baseAttackPower[type]);
@@ -72,7 +82,22 @@ function playerAttack(type) {
 			enemy.hp -= getPlayerDamage(baseAttackPower[type]);
 			enemy.hp -= getPlayerDamage(baseAttackPower[type]);
 		}
-		if (enemy.hp <= 0) game.battle.currentEnemy = 0;
+		if (enemy.hp <= 0) {
+			game.battle.xp += enemyList[game.battle.currentEnemy].xp;
+			game.battle.currentEnemy = 0;
+			enemy.hp = Infinity;
+		}
 		updateBattle();
 	}
+}
+function enemyAttack() {
+	let player = game.battle.player;
+	let enemy = game.battle.enemy;
+	enemy.cooldown = enemyList[game.battle.currentEnemy].cooldown;
+	player.hp -= getEnemyDamage();
+	if (player.hp <= 0) {
+		game.battle.currentEnemy = 0;
+		game.battle.currentArea = 0;
+	}
+	updateBattle();
 }
