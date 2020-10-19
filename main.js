@@ -203,12 +203,19 @@ function doFrame(sinceLastFrame) {
 	}
 	updateAuto();
 	let area = areaList[game.battle.currentArea];
+	let currentEnemyStat = enemyList[game.battle.currentEnemy];
+	let enemy = game.battle.enemy
+	enemy.cooldown -= sinceLastFrame;
+	if (enemy.cooldown <= 0) {
+		enemyAttack();
+	}
 	if (game.battle.currentEnemy == 0) {
 		game.battle.nextSpawn -= sinceLastFrame;
 	}
 	if (game.battle.nextSpawn <= 0) {
 		game.battle.currentEnemy = area.spawnType[Math.floor(Math.random() * area.spawnType.length)];
-		game.battle.enemy.hp = enemyList[game.battle.currentEnemy].maxHP;
+		enemy.hp = currentEnemyStat.maxHP;
+		enemy.cooldown = currentEnemyStat.cooldown;
 		game.battle.nextSpawn = area.spawnRate;
 	}
 }
