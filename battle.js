@@ -104,20 +104,18 @@ function enemyAttack() {
 function switchArea(dir) {
 	switch (dir) {
 		case "left":
-			if (area > 0) {
-				let area = game.battle.currentArea;
-				area--;
+			if (game.battle.currentArea > 0) {
+				game.battle.currentArea--;
 				game.battle.currentEnemy = 0;
-				game.battle.nextSpawn = areaList[area].spawnRate;
+				game.battle.nextSpawn = areaList[game.battle.currentArea].spawnRate;
 				updateBattle();
 			}
 			break;
 		case "right":
-			if (area < areaList.length - 1) {
-				let area = game.battle.currentArea;
-				area++;
+			if (game.battle.currentArea < areaList.length - 1) {
+				game.battle.currentArea++;
 				game.battle.currentEnemy = 0;
-				game.battle.nextSpawn = areaList[area].spawnRate;
+				game.battle.nextSpawn = areaList[game.battle.currentArea].spawnRate;
 				updateBattle();
 			}
 			break;
