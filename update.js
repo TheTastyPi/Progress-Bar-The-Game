@@ -312,4 +312,6 @@ function updateBattle() {
 	id("battlePlayerSPValue").style.width = Math.floor(player.sp / getPlayerMaxSP() * 100) + "%";
 	id("battleEnemyHPValue").style.width = (enemy.hp == Infinity ? 100 : Math.floor(enemy.hp / enemyList[game.battle.currentEnemy].maxHP * 100)) + "%";
 	id("battleEnemyAttackValue").style.width = (enemy.cooldown == Infinity ? 100 : Math.floor(enemy.cooldown / enemyList[game.battle.currentEnemy].cooldown * 100)) + "%";
+	id("battleAreaName").innerHTML = areaList[game.battle.currentArea].name;
+	id("battleContainer").style.backgroundImage = "url('pics/battle/area/" + areaList[game.battle.currentArea].name + "')";
 }
