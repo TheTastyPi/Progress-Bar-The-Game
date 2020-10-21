@@ -101,3 +101,24 @@ function enemyAttack() {
 	}
 	updateBattle();
 }
+function switchArea(dir) {
+	let area = game.battle.currentArea;
+	switch (dir) {
+		case "left":
+			if (area > 0) {
+				area--;
+				game.battle.currentEnemy = 0;
+				game.battle.nextSpawn = areaList[area].spawnRate;
+				updateBattle();
+			}
+			break;
+		case "right":
+			if (area < areaList.length - 1) {
+				area++;
+				game.battle.currentEnemy = 0;
+				game.battle.nextSpawn = areaList[area].spawnRate;
+				updateBattle();
+			}
+			break;
+	}
+}
