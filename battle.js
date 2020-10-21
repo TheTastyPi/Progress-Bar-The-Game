@@ -102,10 +102,10 @@ function enemyAttack() {
 	updateBattle();
 }
 function switchArea(dir) {
-	let area = game.battle.currentArea;
 	switch (dir) {
 		case "left":
 			if (area > 0) {
+				let area = game.battle.currentArea;
 				area--;
 				game.battle.currentEnemy = 0;
 				game.battle.nextSpawn = areaList[area].spawnRate;
@@ -114,6 +114,7 @@ function switchArea(dir) {
 			break;
 		case "right":
 			if (area < areaList.length - 1) {
+				let area = game.battle.currentArea;
 				area++;
 				game.battle.currentEnemy = 0;
 				game.battle.nextSpawn = areaList[area].spawnRate;
