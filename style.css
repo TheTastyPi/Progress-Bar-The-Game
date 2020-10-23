@@ -301,7 +301,8 @@ button.dark {
 .battlePlayerPart {
 	display:inline-block;
 	width:60px;
-	height:60px
+	height:60px;
+	background-color:#222222;
 }
 .attackButton {
 	width: 25%;
