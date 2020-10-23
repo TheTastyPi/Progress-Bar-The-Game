@@ -298,6 +298,11 @@ button.dark {
 #battleAbilButton2.dark {background-color:#44FF44}
 #battleCraftButton2 {background-color:#0000BB}
 #battleCraftButton2.dark {background-color:#4444FF}
+.battlePlayerPart {
+	display:inline-block;
+	width:60px;
+	height:60px
+}
 .attackButton {
 	width: 25%;
 	height: 50px;
