@@ -92,7 +92,12 @@
 						<button id="battleInvButton2" class="battleTabButton" onclick="toggleBattleTab('Inv')" style="border-radius: 0 0 15px 15px;"></button><button id="battleAbilButton2" class="battleTabButton" onclick="toggleBattleTab('Abil')" style="border-radius: 0 0 15px 15px;"></button><button id="battleCraftButton2" class="battleTabButton" onclick="toggleBattleTab('Craft')" style="border-radius: 0 0 15px 15px;"></button>
 					</div>
 					<div id="battlePlayerSect" style="text-align:center; float:left">
-						<div id="battlePlayer">insert player here</div><br>
+						<div id="battlePlayer">
+							<div id="playerHead" class="battlePlayerPart"></div>
+							<div id="playerBody" class="battlePlayerPart" style="height:120px"></div><br>
+							<div id="playerWeapon" class="battlePlayerPart"></div>
+							<div id="playerBottom" class="battlePlayerPart"></div>
+						</div><br>
 						<div id="battlePlayerHP" class="battleBar" style="height:25px">
 							<div id="battlePlayerHPValue" class="battleBarValue" style="background-color:#0000FF"></div>
 						</div>
