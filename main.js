@@ -223,6 +223,7 @@ function doFrame(sinceLastFrame) {
 		enemy.cooldown = currentEnemyStat.cooldown;
 		game.battle.nextSpawn = area.spawnRate;
 	}
+	updateBattle();
 }
 
 function nextFrame(timeStamp) {
