@@ -99,7 +99,7 @@ function enemyAttack() {
 	}
 	updateBattle();
 }
-function enemyDeath(xp == false) {
+function enemyDeath(xp = false) {
 	game.battle.currentEnemy = 0;
 	game.battle.enemy.hp = Infinity;
 	game.battle.enemy.cooldown = Infinity;
