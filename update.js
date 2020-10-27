@@ -309,8 +309,11 @@ function updateBattle() {
 	let player = game.battle.player;
 	let enemy = game.battle.enemy;
 	id("battlePlayerHPValue").style.width = Math.floor(player.hp / getPlayerMaxHP() * 100) + "%";
+	id("battlePlayerHPLabel").innerHTML = player.hp + "/" + getPlayerMaxHP();
 	id("battlePlayerSPValue").style.width = Math.floor(player.sp / getPlayerMaxSP() * 100) + "%";
+	id("battlePlayerSPLabel").innerHTML = player.sp + "/" + getPlayerMaxSP();
 	id("battleEnemyHPValue").style.width = (enemy.hp == Infinity ? 100 : Math.floor(enemy.hp / enemyList[game.battle.currentEnemy].maxHP * 100)) + "%";
+	id("battleEnemyHPLabel").innerHTML = enemyList[game.battle.currentEnemy].name;
 	id("battleEnemyAttackValue").style.width = (enemy.cooldown == Infinity ? 100 : Math.floor(enemy.cooldown / enemyList[game.battle.currentEnemy].cooldown * 100)) + "%";
 	id("battleAreaName").innerHTML = areaList[game.battle.currentArea].name;
 	id("battleContainer").style.backgroundImage = "url('pics/battle/area/" + game.battle.currentArea + "')";
