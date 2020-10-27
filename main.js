@@ -204,7 +204,6 @@ function doFrame(sinceLastFrame) {
 	updateAuto();
 	let area = areaList[game.battle.currentArea];
 	let player = game.battle.player;
-	let currentEnemyStat = enemyList[game.battle.currentEnemy];
 	let enemy = game.battle.enemy
 	if (player.hp < getPlayerMaxHP()) {
 		player.hp += sinceLastFrame/200;
@@ -219,8 +218,11 @@ function doFrame(sinceLastFrame) {
 	}
 	if (game.battle.nextSpawn <= 0) {
 		game.battle.currentEnemy = area.spawnType[Math.floor(Math.random() * area.spawnType.length)];
-		enemy.hp = currentEnemyStat.maxHP;
-		enemy.cooldown = currentEnemyStat.cooldown;
+		let currentEnemyStat = enemyList[game.battle.currentEnemy];
+		game.battle.enemy.hp = currentEnemyStat.maxHP;
+		game.battle.enemy.cooldown = currentEnemyStat.cooldown;
+		game.battle.enemy.effLevel = [0,0,0,0,0,0,0,0];
+		game.battle.enemy.effDuration = [0,0,0,0,0,0,0,0];
 		game.battle.nextSpawn = area.spawnRate;
 	}
 	updateBattle();
