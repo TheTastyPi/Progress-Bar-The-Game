@@ -75,8 +75,8 @@ function getAttackCost(type) {
 function playerAttack(type) {
 	let player = game.battle.player;
 	let enemy = game.battle.enemy;
-	if (player.sf >= getAttackCost(type)) {
-		player.sf -= getAttackCost(type);
+	if (player.sp >= getAttackCost(type)) {
+		player.sp -= getAttackCost(type);
 		enemy.hp -= getPlayerDamage(baseAttackPower[type]);
 		if (type == 1) {
 			enemy.hp -= getPlayerDamage(baseAttackPower[type]);
