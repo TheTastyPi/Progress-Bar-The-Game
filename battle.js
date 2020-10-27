@@ -83,9 +83,7 @@ function playerAttack(type) {
 			enemy.hp -= getPlayerDamage(baseAttackPower[type]);
 		}
 		if (enemy.hp <= 0) {
-			game.battle.xp += enemyList[game.battle.currentEnemy].xp;
-			game.battle.currentEnemy = 0;
-			enemy.hp = Infinity;
+			enemyDeath(true);
 		}
 		updateBattle();
 	}
@@ -101,12 +99,20 @@ function enemyAttack() {
 	}
 	updateBattle();
 }
+function enemyDeath(xp == false) {
+	game.battle.currentEnemy = 0;
+	game.battle.enemy.hp = Infinity;
+	game.battle.enemy.cooldown = Infinity;
+	game.battle.enemy.effLevel = [0,0,0,0,0,0,0,0];
+	game.battle.enemy.effDuration = [0,0,0,0,0,0,0,0];
+	if (xp) game.battle.xp += enemyList[game.battle.currentEnemy].xp;
+}
 function switchArea(dir) {
 	switch (dir) {
 		case "left":
 			if (game.battle.currentArea > 0) {
 				game.battle.currentArea--;
-				game.battle.currentEnemy = 0;
+				enemyDeath()
 				game.battle.nextSpawn = areaList[game.battle.currentArea].spawnRate;
 				updateBattle();
 			}
@@ -114,7 +120,7 @@ function switchArea(dir) {
 		case "right":
 			if (game.battle.currentArea < areaList.length - 1) {
 				game.battle.currentArea++;
-				game.battle.currentEnemy = 0;
+				enemyDeath()
 				game.battle.nextSpawn = areaList[game.battle.currentArea].spawnRate;
 				updateBattle();
 			}
