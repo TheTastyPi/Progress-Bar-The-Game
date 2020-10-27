@@ -323,6 +323,13 @@ button.dark {
 	width: 50%;
 	height: 100%;
 }
+.battleLabel {
+	font-size: 12px;
+	background-color: rgba(255,255,255,0.3);
+}
+.battleLabel.dark {
+	background-color: rgba(0,0,0,0.2);
+}
 .sideMenuOpen {
 	animation-name: sideMenuInit;
 	animation-duration: 1s;
