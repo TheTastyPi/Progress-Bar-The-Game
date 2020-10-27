@@ -203,8 +203,13 @@ function doFrame(sinceLastFrame) {
 	}
 	updateAuto();
 	let area = areaList[game.battle.currentArea];
+	let player = game.battle.player;
 	let currentEnemyStat = enemyList[game.battle.currentEnemy];
 	let enemy = game.battle.enemy
+	if (player.hp < getPlayerMaxHP()) {
+		player.hp += sinceLastFrame/200;
+		if (player.hp > getPlayerMaxHP()) player.hp = getPlayerMaxHP();
+	}
 	enemy.cooldown -= sinceLastFrame;
 	if (enemy.cooldown <= 0) {
 		enemyAttack();
