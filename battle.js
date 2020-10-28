@@ -25,6 +25,7 @@ class Enemy {
 		this.str = str;
 		this.def = def;
 		this.cooldown = cooldown;
+		this.xp = xp;
 		this.effType = effType;
 		this.effChance = effChance;
 		this.effSelf = effSelf;
@@ -100,12 +101,12 @@ function enemyAttack() {
 	updateBattle();
 }
 function enemyDeath(xp = false) {
+	if (xp) game.battle.xp += enemyList[game.battle.currentEnemy].xp;
 	game.battle.currentEnemy = 0;
 	game.battle.enemy.hp = Infinity;
 	game.battle.enemy.cooldown = Infinity;
 	game.battle.enemy.effLevel = [0,0,0,0,0,0,0,0];
 	game.battle.enemy.effDuration = [0,0,0,0,0,0,0,0];
-	if (xp) game.battle.xp += enemyList[game.battle.currentEnemy].xp;
 }
 function switchArea(dir) {
 	switch (dir) {
