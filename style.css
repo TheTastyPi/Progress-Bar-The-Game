@@ -267,12 +267,18 @@ button.dark {
 	width: 200px;
 	color: #DDDDDD;
 	transition: 0.5s;
+	text-align: center;
 }
 .battleTab.dark {
 	color: #222222;
 }
 #battleInvTab {background-color:#BB0000}
 #battleInvTab.dark {background-color:#FF4444}
+.battleInvSpace {
+	width: 75px;
+	height: 75px;
+	background-color: #222222;
+}
 #battleAbilTab {background-color:#00BB00}
 #battleAbilTab.dark {background-color:#44FF44}
 #battleCraftTab {background-color:#0000BB}
