@@ -252,7 +252,7 @@ button.dark {
 	text-align: center;
 }
 .battleTop {
-	width: 200px;
+	width: 400px;
 	height: 45px;
 	color: #DDDDDD;
 	background-color: rgba(0,0,0,0.5);
@@ -264,7 +264,7 @@ button.dark {
 }
 .battleTab {
 	height: 0;
-	width: 200px;
+	width: 400px;
 	color: #DDDDDD;
 	transition: 0.5s;
 	text-align: center;
@@ -272,12 +272,16 @@ button.dark {
 .battleTab.dark {
 	color: #222222;
 }
+#battleStatTab {background-color:#BBBB00}
+#battleStatTab.dark {background-color:#FFFF44}
 #battleInvTab {background-color:#BB0000}
 #battleInvTab.dark {background-color:#FF4444}
 .battleInvSpace {
 	width: 75px;
 	height: 75px;
 	background-color: #222222;
+	margin: 5px;
+	display: inline-block;
 }
 #battleAbilTab {background-color:#00BB00}
 #battleAbilTab.dark {background-color:#44FF44}
@@ -285,7 +289,7 @@ button.dark {
 #battleCraftTab.dark {background-color:#4444FF}
 .battleTabButton {
 	height: calc(57px/2);
-	width: calc(200px/3);
+	width: 100px;
 	color: #DDDDDD;
 	transition: 0.5s;
 }
