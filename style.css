@@ -268,7 +268,7 @@ button.dark {
 	color: #DDDDDD;
 	transition: 0.5s;
 	text-align: center;
-	overflow: hidden;
+	overflow: scroll;
 }
 .battleTab.dark {
 	color: #222222;
@@ -278,8 +278,8 @@ button.dark {
 #battleInvTab {background-color:#BB0000}
 #battleInvTab.dark {background-color:#FF4444}
 .battleInvSpace {
-	width: 75px;
-	height: 75px;
+	width: 50px;
+	height: 50px;
 	background-color: #222222;
 	margin: 5px;
 	display: inline-block;
