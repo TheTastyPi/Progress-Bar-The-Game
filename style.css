@@ -262,6 +262,10 @@ button.dark {
 	color: #222222;
 	background-color: rgba(255,255,255,0.7);
 }
+.battleAreaSwitch {
+	height: 25px;
+	width: 35px;
+}
 .battleTab {
 	height: 0;
 	width: 400px;
