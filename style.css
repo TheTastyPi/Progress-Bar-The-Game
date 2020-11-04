@@ -297,12 +297,16 @@ button.dark {
 .battleTabButton.dark {
 	color: #222222;
 }
+#battleStatButton1 {background-color:#BBBB00}
+#battleStatButton1.dark {background-color:#FFFF44}
 #battleInvButton1 {background-color:#BB0000}
 #battleInvButton1.dark {background-color:#FF4444}
 #battleAbilButton1 {background-color:#00BB00}
 #battleAbilButton1.dark {background-color:#44FF44}
 #battleCraftButton1 {background-color:#0000BB}
 #battleCraftButton1.dark {background-color:#4444FF}
+#battleStatButton2 {background-color:#BBBB00}
+#battleStatButton2.dark {background-color:#FFFF44}
 #battleInvButton2 {background-color:#BB0000}
 #battleInvButton2.dark {background-color:#FF4444}
 #battleAbilButton2 {background-color:#00BB00}
