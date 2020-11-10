@@ -284,8 +284,8 @@ button.dark {
 #battleInvTab {background-color:#BB0000}
 #battleInvTab.dark {background-color:#FF4444}
 .battleInvSpace {
-	width: 50px;
-	height: 50px;
+	width: 45px;
+	height: 45px;
 	background-color: #DDDDDD;
 	border: 5px #BBBBBB solid;
 	margin: 5px;
