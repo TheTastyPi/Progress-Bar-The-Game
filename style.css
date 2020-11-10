@@ -291,6 +291,10 @@ button.dark {
 	margin: 5px;
 	display: inline-block;
 }
+.battleInvSpace.selected {
+	border-color: #00BB00;
+	background-color: #00DD00;
+}
 #battleAbilTab {background-color:#00BB00}
 #battleAbilTab.dark {background-color:#44FF44}
 #battleCraftTab {background-color:#0000BB}
