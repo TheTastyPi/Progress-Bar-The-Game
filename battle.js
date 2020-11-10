@@ -128,7 +128,13 @@ function switchArea(dir) {
 			break;
 	}
 }
+
+{for (let i = 0; i < 36; i++) {
+	id("battleInvSpace"+i).addEventListener("click",selectInvSpace(i)); 
+}}
+
 function selectInvSpace(n) {
 	if (game.battle.invSelected != undefined) id("battleInvSpace"+game.battle.invSelected).classList.remove("invSelected");
 	id("battleInvSpace"+n).classList.add("invSelected");
+	game.battle.invSelected = n;
 }
