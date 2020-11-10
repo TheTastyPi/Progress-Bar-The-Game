@@ -86,7 +86,7 @@ function init() {
 	}
 	
 	for (let i = 0; i < 36; i++) {
-		id("battleInvSpace"+i).addEventListener("click",selectInvSpace(i)); 
+		id("battleInvSpace"+i).addEventListener("click",function(){selectInvSpace(i)}); 
 	}
 	
 	load();
