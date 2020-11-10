@@ -291,7 +291,7 @@ button.dark {
 	margin: 5px;
 	display: inline-block;
 }
-.battleInvSpace.selected {
+.invSelected {
 	border-color: #00BB00;
 	background-color: #00DD00;
 }
