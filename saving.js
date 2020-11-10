@@ -65,6 +65,7 @@ function newGame() {
 			},
 			inventory: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			equip: [0,0,0,0,0],
+			invSelected: undefined,
 			ability: [0,0,0,0,0,0,0,0,0,0,0,0],
 		},
 	};
