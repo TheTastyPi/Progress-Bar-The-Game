@@ -658,10 +658,10 @@ document.addEventListener("keydown", function(input){
 			redeemPoints(1);
 			break;
 		case "ArrowLeft":
-			switchScreen("backward");
+			if (game.lifetimeProgress[1] >= getBarLength(1)/100) switchScreen("backward");
 			break;
 		case "ArrowRight":
-			switchScreen("forward");
+			if (game.lifetimeProgress[1] >= getBarLength(1)/100) switchScreen("forward");
 			break;
 		case "Digit1":
 		case "Digit2":
