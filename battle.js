@@ -1,5 +1,6 @@
 const baseAttackPower = [5, 5, 30, 50];
 const baseAttackCost = [0, 10, 20, 40];
+const baseAttackCooldown = [1000, 2000, 4000, 10000];
 const effectList = ["overpump","underpump","underfill","overfill","autodrain","autofill","accelerate","decelerate"];
 const areaList = [];
 const enemyList = [];
@@ -76,7 +77,7 @@ function getAttackCost(type) {
 function playerAttack(type) {
 	let player = game.battle.player;
 	let enemy = game.battle.enemy;
-	if (player.sp >= getAttackCost(type)) {
+	if (player.sp >= getAttackCost(type) && player.cooldown[type] == 0) {
 		player.sp -= getAttackCost(type);
 		enemy.hp -= getPlayerDamage(baseAttackPower[type]);
 		if (type == 1) {
@@ -86,6 +87,7 @@ function playerAttack(type) {
 		if (enemy.hp <= 0) {
 			enemyDeath(true);
 		}
+		player.cooldown[type] = baseAttackCooldown[type];
 		updateBattle();
 	}
 }
