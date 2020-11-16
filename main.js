@@ -217,10 +217,10 @@ function doFrame(sinceLastFrame) {
 		player.sp += sinceLastFrame/2000;
 		if (player.sp > getPlayerMaxSP()) player.sp = getPlayerMaxSP();
 	}
-	for (let cooldown in player.cooldown) {
-		if (cooldown > 0) {
-			cooldown -= sinceLastFrame;
-			if (cooldown < 0) cooldown = 0;
+	for (let i in player.cooldown) {
+		if (player.cooldown[i] > 0) {
+			player.cooldown[i] -= sinceLastFrame;
+			if (player.cooldown[i] < 0) player.cooldown[i] = 0;
 		}
 	}
 	enemy.cooldown -= sinceLastFrame;
