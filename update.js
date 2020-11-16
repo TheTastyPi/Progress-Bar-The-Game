@@ -314,9 +314,9 @@ function updateBattle() {
 	id("battlePlayerSPLabel").innerHTML = format(player.sp) + "/" + getPlayerMaxSP();
 	for (let i = 0; i < 4; i++) {
 		id("battleAttackCooldownDisp"+i).style.width = Math.floor(player.cooldown[i] / baseAttackCooldown[i] * 100) + "%";
-		id("battleAttackCost"+i).innerHTML = baseAttackCost[i];
-		id("battleAttackCooldown"+i).innerHTML = baseAttackCooldown[i]/1000;
-		id("battleAttackBasePower"+i).innerHTML = baseAttackPower[i];
+		id("battleAttackCost"+i).innerHTML = format(baseAttackCost[i]);
+		id("battleAttackCooldown"+i).innerHTML = format(baseAttackCooldown[i]/1000,1);
+		id("battleAttackBasePower"+i).innerHTML = format(baseAttackPower[i]);
 	}
 	id("battleEnemyHPValue").style.width = (enemy.hp == Infinity ? 100 : Math.floor(enemy.hp / enemyList[game.battle.currentEnemy].maxHP * 100)) + "%";
 	id("battleEnemyHPLabel").innerHTML = enemyList[game.battle.currentEnemy].name;
@@ -324,7 +324,7 @@ function updateBattle() {
 	id("battleAreaName").innerHTML = areaList[game.battle.currentArea].name;
 	id("battleContainer").style.backgroundImage = "url('pics/battle/area/" + game.battle.currentArea + "')";
 	id("battlePlayerLevel").innerHTML = getPlayerLevel();
-	id("battlePlayerXPToNext").innerHTML = Math.pow(getPlayerLevel(),2) * 5 - game.battle.xp;
-	id("battlePlayerStr").innerHTML = getPlayerStrength();
-	id("battlePlayerDef").innerHTML = getPlayerDefense();
+	id("battlePlayerXPToNext").innerHTML = format(Math.pow(getPlayerLevel(),2) * 5 - game.battle.xp);
+	id("battlePlayerStr").innerHTML = format(getPlayerStrength(),2);
+	id("battlePlayerDef").innerHTML = format(getPlayerDefense(),2);
 }
