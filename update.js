@@ -323,4 +323,8 @@ function updateBattle() {
 	id("battleEnemyAttackValue").style.width = (enemy.cooldown == Infinity ? 0 : 100-Math.floor(enemy.cooldown / enemyList[game.battle.currentEnemy].cooldown * 100)) + "%";
 	id("battleAreaName").innerHTML = areaList[game.battle.currentArea].name;
 	id("battleContainer").style.backgroundImage = "url('pics/battle/area/" + game.battle.currentArea + "')";
+	id("battlePlayerLevel").innerHTML = getPlayerLevel();
+	id("battlePlayerXPToNext").innerHTML = Math.pow(getPlayerLevel(),2) * 5 - player.xp;
+	id("battlePlayerStr").innerHTML = getPlayerStrength();
+	id("battlePlayerDef").innerHTML = getPlayerDefense();
 }
