@@ -115,7 +115,53 @@
 							<div id="battlePlayerSPValue" class="battleBarValue" style="background-color:#8888FF"></div>
 							<span id="battlePlayerSPLabel" class="battleLabel centered">50/50</span>
 						</div>
-						<button id="attackZ" class="attackButton" onclick="playerAttack(0)">Z<div id="battleAttackCooldownDisp0" class="battleAttackCooldownDisp centered"></div></button><button id="attackX" class="attackButton" onclick="playerAttack(1)">X<div id="battleAttackCooldownDisp1" class="battleAttackCooldownDisp centered"></div></button><button id="attackC" class="attackButton" onclick="playerAttack(2)">C<div id="battleAttackCooldownDisp2" class="battleAttackCooldownDisp centered"></div></button><button id="attackV" class="attackButton" onclick="playerAttack(3)">V<div id="battleAttackCooldownDisp3" class="battleAttackCooldownDisp centered"></div></button>
+						<span id="battleAttackTooltip0" class="tooltipData">
+							<span style="font-size:16px">Normal Attack</span><br>
+							Cost: <span id="battleAttackCost0">0</span> SP<br>
+							Cooldown: <span id="battleAttackCooldown0">1</span>s<br>
+							Does a little bit of damage. Just your basic attack.
+						</span>
+						<button id="attackZ" class="attackButton tooltip" onclick="playerAttack(0)">
+							Z
+							<div id="battleAttackCooldownDisp0" class="battleAttackCooldownDisp centered"></div>
+							<span id="battleAttackTooltip0" class="tooltipData">
+								<span style="font-size:16px">Normal Attack</span><br>
+								Cost: <span id="battleAttackCost0">0</span> SP<br>
+								Cooldown: <span id="battleAttackCooldown0">1</span>s<br>
+								Base Power: <span id="battleAttackBasePower0">5</span><br>
+								Does a little bit of damage. Just your basic attack.
+							</span>
+						</button><button id="attackX" class="attackButton tooltip" onclick="playerAttack(1)">
+							X
+							<div id="battleAttackCooldownDisp1" class="battleAttackCooldownDisp centered"></div>
+							<span id="battleAttackTooltip1" class="tooltipData">
+								<span style="font-size:16px">Multi Attack</span><br>
+								Cost: <span id="battleAttackCost1">10</span> SP<br>
+								Cooldown: <span id="battleAttackCooldown1">2</span>s<br>
+								Base Power: <span id="battleAttackBasePower1">5</span>x3<br>
+								Does 3 attacks at once. Goes like bing bang boom.
+							</span>
+						</button><button id="attackC" class="attackButton tooltip" onclick="playerAttack(2)">
+							C
+							<div id="battleAttackCooldownDisp2" class="battleAttackCooldownDisp centered"></div>
+							<span id="battleAttackTooltip2" class="tooltipData">
+								<span style="font-size:16px">Power Attack</span><br>
+								Cost: <span id="battleAttackCost2">20</span> SP<br>
+								Cooldown: <span id="battleAttackCooldown2">4</span>s<br>
+								Base Power: <span id="battleAttackBasePower2">30</span><br>
+								A singular big attack. Really packs a punch.
+							</span>
+						</button><button id="attackV" class="attackButton tooltip" onclick="playerAttack(3)">
+							V
+							<div id="battleAttackCooldownDisp3" class="battleAttackCooldownDisp centered"></div>
+							<span id="battleAttackTooltip3" class="tooltipData">
+								<span style="font-size:16px">Special Attack</span><br>
+								Cost: <span id="battleAttackCost3">40</span> SP<br>
+								Cooldown: <span id="battleAttackCooldown3">10</span>s<br>
+								Base Power: <span id="battleAttackBasePower3">50</span><br>
+								Even more powerful than a power attack. Has special effects depending on weapon.
+							</span>
+						</button>
 					</div>
 					<div id="battleEnemySect" style="text-align:center; float:right; width:180px">
 						<div id="battleEnemy" style="display:inline-block; text-align:left; line-height:0; width:120px; height:210px; margin-top:15vh; background-color:#222222"></div><br>
