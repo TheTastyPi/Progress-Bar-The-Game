@@ -274,14 +274,13 @@ button.dark {
 	transition: 0.5s;
 	text-align: center;
 	overflow: scroll;
-	line-height: 0;
 }
 .battleTab.dark {
 	color: #222222;
 }
 #battleStatTab {background-color:#BBBB00}
 #battleStatTab.dark {background-color:#FFFF44}
-#battleInvTab {background-color:#BB0000}
+#battleInvTab {background-color:#BB0000; line-height: 0}
 #battleInvTab.dark {background-color:#FF4444}
 .battleInvSpace {
 	width: 45px;
