@@ -316,7 +316,7 @@ function updateBattle() {
 		id("battleAttackCooldownDisp"+i).style.width = Math.floor(player.cooldown[i] / baseAttackCooldown[i] * 100) + "%";
 		id("battleAttackCost"+i).innerHTML = baseAttackCost[i];
 		id("battleAttackCooldown"+i).innerHTML = baseAttackCooldown[i]/1000;
-		id("battleAttackPower"+i).innerHTML = baseAttackPower[i];
+		id("battleAttackBasePower"+i).innerHTML = baseAttackPower[i];
 	}
 	id("battleEnemyHPValue").style.width = (enemy.hp == Infinity ? 100 : Math.floor(enemy.hp / enemyList[game.battle.currentEnemy].maxHP * 100)) + "%";
 	id("battleEnemyHPLabel").innerHTML = enemyList[game.battle.currentEnemy].name;
