@@ -343,7 +343,7 @@ button.dark {
 	background-color: rgba(255,255,255,0.5);
 	display: inline-block;
 	position: absolute;
-	transition: 0.5s;
+	transition: 0.5s background-color;
 }
 .battleAttackCooldownDisp.dark {
 	background-color: rgba(0,0,0,0.5);
