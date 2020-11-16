@@ -678,6 +678,19 @@ document.addEventListener("keydown", function(input){
 		case "Digit3":
 		case "Digit4":
 			useSkill(key[key.length-1]-1);
+			break;
+		case "KeyZ":
+			playerAttack(0);
+			break;
+		case "KeyX":
+			playerAttack(1);
+			break;
+		case "KeyC":
+			playerAttack(2);
+			break;
+		case "KeyV":
+			playerAttack(3);
+			break;
 	}
 })
 
