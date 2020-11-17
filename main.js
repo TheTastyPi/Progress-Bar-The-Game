@@ -239,7 +239,7 @@ function doFrame(sinceLastFrame) {
 		game.battle.enemy.effDuration = [0,0,0,0,0,0,0,0];
 		game.battle.nextSpawn = area.spawnRate;
 	}
-	updateBattle();
+	updateBattleMain();
 }
 
 function nextFrame(timeStamp) {
