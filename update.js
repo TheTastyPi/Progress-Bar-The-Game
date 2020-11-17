@@ -6,6 +6,7 @@ function updateAll() {
 	for (let i = 0; i < 6; i++) {
 		id("autoToggle"+i).innerHTML = game.auto.isOn[i] ? "ON" : "OFF";
 	}
+	id("battleInvSpace"+game.battle.invSelected).classList.add("invSelected");
 	updateProgress();
 	updatePoints(0);
 	updatePoints(1);
@@ -15,7 +16,8 @@ function updateAll() {
 	updateBoostBar();
 	updateAuto();
 	updateAchievements();
-	updateBattle();
+	updateBattleMain();
+	updateBattleStat();
 }
 
 function updateProgress() {
