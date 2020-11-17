@@ -140,6 +140,7 @@ function switchArea(dir) {
 
 function selectInvSpace(n) {
 	if (n != game.battle.invSelected) {
+		id("battleInvSpace"+game.battle.invSelected).classList.remove("invSelected");	
 		id("battleInvSpace"+n).classList.add("invSelected");
 		game.battle.invSelected = n;
 	} else {
