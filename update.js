@@ -305,7 +305,7 @@ function updateAchievements() {
 	}
 }
 
-function updateBattle() {
+function updateBattleMain() {
 	let player = game.battle.player;
 	let enemy = game.battle.enemy;
 	id("battlePlayerHPValue").style.width = Math.floor(player.hp / getPlayerMaxHP() * 100) + "%";
@@ -323,8 +323,12 @@ function updateBattle() {
 	id("battleEnemyAttackValue").style.width = (enemy.cooldown == Infinity ? 0 : 100-Math.floor(enemy.cooldown / enemyList[game.battle.currentEnemy].cooldown * 100)) + "%";
 	id("battleAreaName").innerHTML = areaList[game.battle.currentArea].name;
 	id("battleContainer").style.backgroundImage = "url('pics/battle/area/" + game.battle.currentArea + "')";
+}
+function updateBattleStat() {
 	id("battlePlayerLevel").innerHTML = getPlayerLevel();
 	id("battlePlayerXPToNext").innerHTML = format(Math.pow(getPlayerLevel(),2) * 5 - game.battle.xp);
 	id("battlePlayerStr").innerHTML = format(getPlayerStrength(),2);
 	id("battlePlayerDef").innerHTML = format(getPlayerDefense(),2);
+	id("battlePlayerHPRegen").innerHTML = format(getPlayerHPRegen(),2);
+	id("battlePlayerSPRegen").innerHTML = format(getPlayerSPRegen(),2);
 }
