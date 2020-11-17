@@ -96,7 +96,6 @@ function playerAttack(type) {
 			enemyDeath(true);
 		}
 		player.cooldown[type] = baseAttackCooldown[type];
-		updateBattle();
 	}
 }
 function enemyAttack() {
@@ -108,10 +107,12 @@ function enemyAttack() {
 		game.battle.currentEnemy = 0;
 		game.battle.currentArea = 0;
 	}
-	updateBattle();
 }
 function enemyDeath(xp = false) {
-	if (xp) game.battle.xp += enemyList[game.battle.currentEnemy].xp;
+	if (xp) {
+		game.battle.xp += enemyList[game.battle.currentEnemy].xp;
+		updateBattleStat();
+	}
 	game.battle.currentEnemy = 0;
 	game.battle.enemy.hp = Infinity;
 	game.battle.enemy.cooldown = Infinity;
@@ -125,7 +126,6 @@ function switchArea(dir) {
 				game.battle.currentArea--;
 				enemyDeath()
 				game.battle.nextSpawn = areaList[game.battle.currentArea].spawnRate;
-				updateBattle();
 			}
 			break;
 		case "right":
@@ -133,7 +133,6 @@ function switchArea(dir) {
 				game.battle.currentArea++;
 				enemyDeath()
 				game.battle.nextSpawn = areaList[game.battle.currentArea].spawnRate;
-				updateBattle();
 			}
 			break;
 	}
