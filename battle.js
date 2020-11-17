@@ -139,7 +139,11 @@ function switchArea(dir) {
 }
 
 function selectInvSpace(n) {
-	if (game.battle.invSelected != undefined) id("battleInvSpace"+game.battle.invSelected).classList.remove("invSelected");
-	id("battleInvSpace"+n).classList.add("invSelected");
-	game.battle.invSelected = n;
+	if (n != game.battle.invSelected) {
+		id("battleInvSpace"+n).classList.add("invSelected");
+		game.battle.invSelected = n;
+	} else {
+		id("battleInvSpace"+n).classList.remove("invSelected");
+		game.battle.invSelected = undefined;
+	}
 }
