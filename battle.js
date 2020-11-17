@@ -60,6 +60,14 @@ function getPlayerMaxSP() {
 	let maxSP = 45 + 5 * getPlayerLevel();
 	return maxSP;
 }
+function getPlayerHPRegen() {
+	let regen = 2;
+	return regen;
+}
+function getPlayerSPRegen() {
+	let regen = 0.5;
+	return regen;
+}
 function getPlayerDamage(power) {
 	let enemy = enemyList[game.battle.currentEnemy];
 	let dmg = Math.floor(power * getPlayerStrength()) - enemy.def;
