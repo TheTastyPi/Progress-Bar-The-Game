@@ -210,13 +210,13 @@ function doFrame(sinceLastFrame) {
 	let player = game.battle.player;
 	let enemy = game.battle.enemy
 	if (player.hp < getPlayerMaxHP()) {
-		player.hp += sinceLastFrame/500;
-		if (player.hp > getPlayerMaxHP()) player.hp = getPlayerMaxHP();
+		player.hp += sinceLastFrame*getPlayerHPRegen()/1000;
 	}
+	if (player.hp > getPlayerMaxHP()) player.hp = getPlayerMaxHP();
 	if (player.sp < getPlayerMaxSP()) {
-		player.sp += sinceLastFrame/2000;
-		if (player.sp > getPlayerMaxSP()) player.sp = getPlayerMaxSP();
+		player.sp += sinceLastFrame*getPlayerSPRegen()/1000;
 	}
+	if (player.sp > getPlayerMaxSP()) player.sp = getPlayerMaxSP();
 	for (let i in player.cooldown) {
 		if (player.cooldown[i] > 0) {
 			player.cooldown[i] -= sinceLastFrame;
