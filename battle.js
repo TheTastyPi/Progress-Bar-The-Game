@@ -20,13 +20,13 @@ new Area("Weak Area", [1,2], 4000);
 
 var enemyIdCount = 0;
 class Enemy {
-	constructor(name, maxHP, str, def, cooldown, xp, effType = [], effChance = [], effSelf = [], effSelfChance = [], special = function(){}) {
+	constructor(name, maxHP, str, def, cooldown, reward, effType = [], effChance = [], effSelf = [], effSelfChance = [], special = function(){}) {
 		this.name = name;
 		this.maxHP = maxHP;
 		this.str = str;
 		this.def = def;
 		this.cooldown = cooldown;
-		this.xp = xp;
+		this.reward = reward;
 		this.effType = effType;
 		this.effChance = effChance;
 		this.effSelf = effSelf;
@@ -43,6 +43,14 @@ function getPlayerLevel() {
 	let lvl = 1 + Math.floor(Math.sqrt(game.battle.xp / 5));
 	return lvl;
 }
+function getPlayerMaxHP() {
+	let maxHP = 80 + 20 * getPlayerLevel();
+	return maxHP;
+}
+function getPlayerMaxSP() {
+	let maxSP = 45 + 5 * getPlayerLevel();
+	return maxSP;
+}
 function getPlayerStrength() {
 	let player = game.battle.player;
 	let str = Math.sqrt(getPlayerLevel()) * (1 + 0.2*(player.effLevel[0]-player.effLevel[1]));
@@ -53,13 +61,13 @@ function getPlayerDefense() {
 	let def = Math.sqrt(getPlayerLevel()) * (1 + 0.2*(player.effLevel[2]-player.effLevel[3]));
 	return def;
 }
-function getPlayerMaxHP() {
-	let maxHP = 80 + 20 * getPlayerLevel();
-	return maxHP;
+function getPlayerCritRate() {
+	let rate = 0.01;
+	return rate;
 }
-function getPlayerMaxSP() {
-	let maxSP = 45 + 5 * getPlayerLevel();
-	return maxSP;
+function getPlayerCritMult() {
+	let mult = 2;
+	return mult;
 }
 function getPlayerHPRegen() {
 	let regen = 2;
@@ -69,9 +77,14 @@ function getPlayerSPRegen() {
 	let regen = 0.5;
 	return regen;
 }
+function getPlayerLPDropRate() {
+	let rate = 0.1;
+	return rate;
+}
 function getPlayerDamage(power) {
 	let enemy = enemyList[game.battle.currentEnemy];
 	let dmg = Math.floor(power * getPlayerStrength()) - enemy.def;
+	if (Math.random < getPlayerCritRate()) dmg = dmg * getPlayerCritMult();
 	return dmg;
 }
 function getEnemyDamage() {
@@ -111,9 +124,14 @@ function enemyAttack() {
 		game.battle.xp = Math.pow(getPlayerLevel()-1,2) * 5;
 	}
 }
-function enemyDeath(xp = false) {
-	if (xp) {
-		game.battle.xp += enemyList[game.battle.currentEnemy].xp;
+function enemyDeath(reward = false) {
+	if (reward) {
+		game.battle.xp += enemyList[game.battle.currentEnemy].reward;
+		game.battle.fragments += enemyList[game.battle.currentEnemy].reward * (0.5+Math.random);
+		if (Math.random < getPlayerLPDropRate()) {
+			game.points[1] += enemyList[game.battle.currentEnemy].reward;
+			game.lifetimePoints[1] += enemyList[game.battle.currentEnemy].reward;
+		}
 		updateBattleStat();
 	}
 	game.battle.currentEnemy = 0;
