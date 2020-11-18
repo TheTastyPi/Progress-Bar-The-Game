@@ -104,8 +104,10 @@ function enemyAttack() {
 	enemy.cooldown = enemyList[game.battle.currentEnemy].cooldown;
 	player.hp -= getEnemyDamage();
 	if (player.hp <= 0) {
+		player.hp = 0;
 		game.battle.currentEnemy = 0;
 		game.battle.currentArea = 0;
+		game.battle.xp = Math.pow(getPlayerLevel()-1,2) * 5;
 	}
 }
 function enemyDeath(xp = false) {
