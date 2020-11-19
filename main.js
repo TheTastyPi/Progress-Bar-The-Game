@@ -607,7 +607,7 @@ function giveAllAchievements() {
 
 function notify(message) {
 	let note = document.createElement("button");
-	note.classList.add("note");
+	note.classList.add("note", game.currentTheme);
 	note.innerHTML = message;
 	id("noteContainer").insertBefore(note, id("noteContainer").firstChild);
 	note.onclick = function(){
