@@ -339,7 +339,7 @@ function updateBattleInv() {
 		if (i == 0) {
 			id("battleInvSpace"+i).backgroundImage = "";
 		} else {
-			id("battleInvSpace"+i).backgroundImage = "url('pics/battle/item" + i + "')";
+			id("battleInvSpace"+i).backgroundImage = "url('pics/battle/item" + i.id + "')";
 		}
 	}
 }
