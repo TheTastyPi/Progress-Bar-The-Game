@@ -199,6 +199,7 @@ function switchItem(first, second) {
 	let temp = game.battle.inventory[first]
 	game.battle.inventory[first] = game.battle.inventory[second];
 	game.battle.inventory[second] = temp;
+	selectInvSpace(second);
 	updateBattleInv();
 }
 
