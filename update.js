@@ -18,6 +18,7 @@ function updateAll() {
 	updateAchievements();
 	updateBattleMain();
 	updateBattleStat();
+	updateBattleInv();
 }
 
 function updateProgress() {
@@ -337,9 +338,9 @@ function updateBattleStat() {
 function updateBattleInv() {
 	for (let i in game.battle.inventory) {
 		if (i == 0) {
-			id("battleInvSpace"+i).backgroundImage = "";
+			id("battleInvSpace"+i).style.backgroundImage = "";
 		} else {
-			id("battleInvSpace"+i).backgroundImage = "url('pics/battle/item" + i.id + "')";
+			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + i.id + "')";
 		}
 	}
 }
