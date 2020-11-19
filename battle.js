@@ -4,6 +4,7 @@ const baseAttackCooldown = [1000, 2000, 4000, 10000];
 const effectList = ["overpump","underpump","underfill","overfill","autodrain","autofill","accelerate","decelerate"];
 const areaList = [];
 const enemyList = [];
+const itemList = [];
 
 var areaIdCount = 0;
 class Area {
@@ -39,6 +40,27 @@ class Enemy {
 new Enemy("Nothing", Infinity, 0, 0, Infinity, 0);
 new Enemy("A very weak enemy", 100, 5, 0, 3000, 1);
 new Enemy("SomethingSomething", 200, 10, 0, 3000, 5);
+
+var itemIdCount = 0;
+class Item {
+	constructor(name, type, modifiersLeft, maxHP = 0, maxSP = 0, str = 0, def = 0, critRate = 0, critMult = 0, HPRegen = 0, SPRegen = 0) {
+		this.name = name;
+		this.type = type;
+		this.modifiersLeft = modifiersLeft;
+		this.maxHP = maxHP;
+		this.maxSP = maxSP;
+		this.str = str;
+		this.def = def;
+		this.critRate = critRate;
+		this.critMult = critMult;
+		this.HPRegen = HPRegen;
+		this.SPRegen = SPRegen;
+		itemList[itemIdCount] = this;
+		itemIdCount++;
+	}
+}
+// types: armor:[top(0), body(1), bottom(2)], weapon:[bucket(3), gun(4), pump(5)]
+new Item("Invisible body", 1, 10, 10, 5, 0, 15, 0.01, 0.5);
 function getPlayerLevel() {
 	let lvl = 1 + Math.floor(Math.sqrt(game.battle.xp / 5));
 	return lvl;
@@ -167,5 +189,22 @@ function selectInvSpace(n) {
 	} else {
 		id("battleInvSpace"+n).classList.remove("invSelected");
 		game.battle.invSelected = undefined;
+	}
+}
+
+var invFullNotified = false;
+function giveItem(itemId) {
+	if (game.battle.inventory.includes(0)) {
+		for (let i in game.battle.inventory) {
+			if (i == 0) {
+				game.battle.inventory[i] = itemList[itemId];
+				break;
+			}
+		}
+	} else {
+		if (!invFullNotified) {
+			notify("Inventory full. Deleting excess items.");
+			invFullNotified = true;
+		}
 	}
 }
