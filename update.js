@@ -341,6 +341,7 @@ function updateBattleInv() {
 			id("battleInvSpace"+i).style.backgroundImage = "";
 		} else {
 			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + game.battle.inventory[i].id + "')";
+			id("battleInvSpace"+i).style.backgroundColor = "#222222";
 		}
 	}
 }
