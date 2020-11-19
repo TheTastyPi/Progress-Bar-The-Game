@@ -334,3 +334,12 @@ function updateBattleStat() {
 	id("battlePlayerHPRegen").innerHTML = format(getPlayerHPRegen(),2);
 	id("battlePlayerSPRegen").innerHTML = format(getPlayerSPRegen(),2);
 }
+function updateBattleInv() {
+	for (let i in game.battle.inventory) {
+		if (i == 0) {
+			id("battleInvSpace"+i).backgroundImage = "";
+		} else {
+			id("battleInvSpace"+i).backgroundImage = "url('pics/battle/item" + i + "')";
+		}
+	}
+}
