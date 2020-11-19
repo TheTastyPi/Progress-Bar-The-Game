@@ -339,6 +339,7 @@ function updateBattleInv() {
 	for (let i in game.battle.inventory) {
 		if (game.battle.inventory[i] == 0) {
 			id("battleInvSpace"+i).style.backgroundImage = "";
+			id("battleInvSpace"+i).style.backgroundColor = "#DDDDDD";
 		} else {
 			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + game.battle.inventory[i].id + "')";
 			id("battleInvSpace"+i).style.backgroundColor = "#222222";
