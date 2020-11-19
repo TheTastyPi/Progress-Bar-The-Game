@@ -337,10 +337,10 @@ function updateBattleStat() {
 }
 function updateBattleInv() {
 	for (let i in game.battle.inventory) {
-		if (i == 0) {
+		if (game.battle.inventory[i] == 0) {
 			id("battleInvSpace"+i).style.backgroundImage = "";
 		} else {
-			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + i.id + "')";
+			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + game.battle.inventory[i].id + "')";
 		}
 	}
 }
