@@ -195,6 +195,13 @@ function selectInvSpace(n) {
 	}
 }
 
+function switchItem(first, second) {
+	let temp = game.battle.inventory[first]
+	game.battle.inventory[first] = game.battle.inventory[second];
+	game.battle.inventory[second] = temp;
+	updateBattleInv();
+}
+
 var invFullNotified = false;
 function giveItem(itemId) {
 	if (game.battle.inventory.includes(0)) {
