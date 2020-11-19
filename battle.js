@@ -12,6 +12,7 @@ class Area {
 		this.name = name;
 		this.spawnType = spawnType;
 		this.spawnRate = spawnRate;
+		this.id = areaIdCount;
 		areaList[areaIdCount] = this;
 		areaIdCount++;
 	}
@@ -33,6 +34,7 @@ class Enemy {
 		this.effSelf = effSelf;
 		this.effSelfChance = effSelfChance;
 		this.special = special;
+		this.id = enemyIdCount;
 		enemyList[enemyIdCount] = this;
 		enemyIdCount++;
 	}
@@ -55,6 +57,7 @@ class Item {
 		this.critMult = critMult;
 		this.HPRegen = HPRegen;
 		this.SPRegen = SPRegen;
+		this.id = itemIdCount;
 		itemList[itemIdCount] = this;
 		itemIdCount++;
 	}
