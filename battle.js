@@ -204,6 +204,7 @@ function giveItem(itemId) {
 				break;
 			}
 		}
+		updateBattleInv();
 	} else {
 		if (!invFullNotified) {
 			notify("Inventory full. Deleting excess items.");
