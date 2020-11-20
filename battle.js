@@ -5,6 +5,10 @@ const effectList = ["overpump","underpump","underfill","overfill","autodrain","a
 const areaList = [];
 const enemyList = [];
 const itemList = [];
+const itemTypeList = {
+	weapon: ["bucket","gun","cannon"],
+	armor: ["top","body","bottom"]
+}
 
 var areaIdCount = 0;
 class Area {
@@ -62,8 +66,7 @@ class Item {
 		itemIdCount++;
 	}
 }
-// types: armor:[top(0), body(1), bottom(2)], weapon:[bucket(3), gun(4), pump(5)]
-new Item("Invisible body", 1, 10, 10, 5, 0, 15, 0.01, 0.5);
+new Item("Invisible body", [0,1], 10, 10, 5, 0, 15, 0.01, 0.5);
 function getPlayerLevel() {
 	let lvl = 1 + Math.floor(Math.sqrt(game.battle.xp / 5));
 	return lvl;
@@ -203,6 +206,28 @@ function switchItem(first, second) {
 	updateBattleInv();
 }
 
+function useItem(invId) {
+	let type = game.battle.inventory[invId].type;
+	if (type[0] < 2) {
+		if (invId < 36) {
+			if (type[0] == 0) {
+				switchItem(invId,type[1]+36);
+			} else {
+				switchItem(invId,39);
+			}
+		} else {
+			if (game.battle.inventory.includes(0)) {
+				for (let i in game.battle.inventory) {
+					if (i == 0) {
+						switchItem(invId,i);
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
 var invFullNotified = false;
 function giveItem(itemId) {
 	if (game.battle.inventory.includes(0)) {
@@ -212,6 +237,7 @@ function giveItem(itemId) {
 				break;
 			}
 		}
+		invFullNotified = false;
 		updateBattleInv();
 	} else {
 		if (!invFullNotified) {
