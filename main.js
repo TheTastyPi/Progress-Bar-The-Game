@@ -85,7 +85,7 @@ function init() {
 		});
 	}
 	
-	for (let i = 0; i < 36; i++) {
+	for (let i = 0; i < 40; i++) {
 		id("battleInvSpace"+i).addEventListener("click",function(mouse){
 			if (mouse.ctrlKey) {
 				if (game.battle.invSelected != undefined) switchItem(game.battle.invSelected,i);
