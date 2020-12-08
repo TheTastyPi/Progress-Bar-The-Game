@@ -341,18 +341,22 @@ function updateBattleInv() {
 		if (item == 0) {
 			id("battleInvSpace"+i).style.backgroundImage = "";
 			id("battleInvSpace"+i).style.backgroundColor = "";
+			id("battleInvSpace"+i).classList.remove("tooltip");
 		} else {
 			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + item.id + "')";
 			id("battleInvSpace"+i).style.backgroundColor = "#222222";
+			id("battleInvSpace"+i).classList.add("tooltip");
 		}
 		let propPriorityList = ["name","type","modifiersLeft","maxHP","maxSP","str","def","critRate","critMult","HPRegen","SPRegen","HPGain","baseCooldown","cooldown"];
-		let tooltip = "";
-		for (let i in propPriorityList) {
-			if (item.keys.includes(propPriorityList[i])) {
-				tooltip += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
+		if (id("battleInvSpace"+i).classList.contains("tooltip")) {
+			let tooltip = "";
+			for (let i in propPriorityList) {
+				if (item.keys.includes(propPriorityList[i])) {
+					tooltip += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
+				}
 			}
+			tooltip = tooltip.substr(0,tooltip.length-3);
+			id("battleInvTooltip"+i).innerHTML = tooltip;
 		}
-		tooltip = tooltip.substr(0,tooltip.length-3);
-		id("battleInvTooltip"+i).innerHTML = tooltip;
 	}
 }
