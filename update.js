@@ -348,7 +348,7 @@ function updateBattleInv() {
 			id("battleInvSpace"+i).style.backgroundColor = "#222222";
 			let tooltip = "";
 			for (let i in propPriorityList) {
-				if (item.keys.includes(propPriorityList[i])) {
+				if (Object.keys(item).includes(propPriorityList[i])) {
 					tooltip += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
 				}
 			}
