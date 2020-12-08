@@ -337,12 +337,22 @@ function updateBattleStat() {
 }
 function updateBattleInv() {
 	for (let i in game.battle.inventory) {
-		if (game.battle.inventory[i] == 0) {
+		let item = game.battle.inventory[i];
+		if (item == 0) {
 			id("battleInvSpace"+i).style.backgroundImage = "";
 			id("battleInvSpace"+i).style.backgroundColor = "";
 		} else {
-			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + game.battle.inventory[i].id + "')";
+			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + item.id + "')";
 			id("battleInvSpace"+i).style.backgroundColor = "#222222";
 		}
+		let propPriorityList = ["name","type","modifiersLeft","maxHP","maxSP","str","def","critRate","critMult","HPRegen","SPRegen","HPGain","baseCooldown","cooldown"];
+		let tooltip = "";
+		for (let i in propPriorityList) {
+			if (item.keys.includes(propPriorityList[i])) {
+				tooltip += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
+			}
+		}
+		tooltip = tooltip.substr(0,tooltip.length-3);
+		id("battleInvTooltip"+i).innerHTML = tooltip;
 	}
 }
