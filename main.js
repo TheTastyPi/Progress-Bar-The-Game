@@ -64,7 +64,7 @@ function init() {
 		});
 		let tooltipData = document.createElement("span");
 		tooltipData.id = "battleInvTooltip"+i;
-		tooltipData.classlist.add("tooltipData");
+		tooltipData.classList.add("tooltipData");
 		id("battleInvSpace"+i).appendChild(tooltipData);
 	}
 	
