@@ -5,10 +5,12 @@ const effectList = ["overpump","underpump","underfill","overfill","autodrain","a
 const areaList = [];
 const enemyList = [];
 const itemList = [];
-const itemTypeList = {
-	weapon: ["bucket","gun","cannon"],
-	armor: ["top","body","bottom"]
-}
+const itemGroupList = ["weapon","armor","healing"];
+const itemTypeList = [
+	["bucket","gun","cannon"],
+	["top","body","bottom"],
+	["instant","gradual"]
+]
 
 var areaIdCount = 0;
 class Area {
@@ -22,7 +24,7 @@ class Area {
 	}
 }
 new Area("Obligatory Safe Zone", [0], Infinity);
-new Area("Weak Area", [1,2], 4000);
+new Area("Weak Area", [1,1,2,3], 4000);
 
 var enemyIdCount = 0;
 class Enemy {
@@ -44,29 +46,49 @@ class Enemy {
 	}
 }
 new Enemy("Nothing", Infinity, 0, 0, Infinity, 0);
-new Enemy("A very weak enemy", 100, 5, 0, 3000, 1);
-new Enemy("SomethingSomething", 200, 10, 0, 3000, 5);
+new Enemy("A very weak enemy", 25, 5, 0, 3000, 1);
+new Enemy("A slightly stronger enemy", 75, 10, 0, 3000, 5);
+new Enemy("A very effective training dummy", 100, 10, 0, Infinity, 10);
 
 var itemIdCount = 0;
 class Item {
-	constructor(name, type, modifiersLeft, maxHP = 0, maxSP = 0, str = 0, def = 0, critRate = 0, critMult = 0, HPRegen = 0, SPRegen = 0) {
+	constructor(name, type, modifiersLeft, p0 = 0, p1 = 0, p2 = 0, p3 = 0, p4 = 0, p5 = 0, p6 = 0, p7 = 0) {
 		this.name = name;
 		this.type = type;
-		this.modifiersLeft = modifiersLeft;
-		this.maxHP = maxHP;
-		this.maxSP = maxSP;
-		this.str = str;
-		this.def = def;
-		this.critRate = critRate;
-		this.critMult = critMult;
-		this.HPRegen = HPRegen;
-		this.SPRegen = SPRegen;
+		if (type[0] <= 1) {
+			this.modifiersLeft = modifiersLeft;
+			this.maxHP = p0;
+			this.maxSP = p1;
+			this.str = p2;
+			this.def = p3;
+			this.critRate = p4;
+			this.critMult = p5;
+			this.HPRegen = p6;
+			this.SPRegen = p7;
+		}
+		if (type[0] = 2) {
+			this.hpGain = p0;
+			this.baseCooldown = p1;
+			this.cooldown = 0;
+		}
 		this.id = itemIdCount;
 		itemList[itemIdCount] = this;
 		itemIdCount++;
 	}
 }
-new Item("Invisible body", [0,1], 10, 10, 5, 0, 15, 0.01, 0.5);
+// weapons&armors: (name,type=[0||1,n],modifiersLeft,maxHP,maxSP,str,def,critRate,critMult,HPRegen,SPRegen)
+// weapons
+new Item("Unnamed Weapon", [0,0], 10, 10, 5, 0, 15, 0.01, 0.5);
+
+// armors
+itemIdCount = 1000; // just in case
+new Item("Unnamed Body", [1,1], 10, 10, 5, 0, 15, 0.01, 0.5);
+
+// healing: (name,type=[2,n],modifiersLeft,hpGain,cooldown)
+// healing
+itemIdCount = 2000; // jUsT iN cAsE
+new Item("Healing Stone", [2,0], 0, 25, 5000);
+
 function getPlayerLevel() {
 	let lvl = 1 + Math.floor(Math.sqrt(game.battle.xp / 5));
 	return lvl;
@@ -207,24 +229,36 @@ function switchItem(first, second) {
 }
 
 function useItem(invId) {
-	let type = game.battle.inventory[invId].type;
-	if (type[0] < 2) {
-		if (invId < 36) {
-			if (type[0] == 0) {
-				switchItem(invId,type[1]+36);
+	let player = game.battle.player;
+	let item = game.battle.inventory[invId];
+	let type = item.type;
+	switch (type[0]) {
+		case 0:
+		case 1:
+			if (invId < 36) {
+				if (type[0] == 1) {
+					switchItem(invId,type[1]+36);
+				} else {
+					switchItem(invId,39);
+				}
 			} else {
-				switchItem(invId,39);
-			}
-		} else {
-			if (game.battle.inventory.includes(0)) {
-				for (let i in game.battle.inventory) {
-					if (i == 0) {
-						switchItem(invId,i);
-						break;
+				if (game.battle.inventory.includes(0)) {
+					for (let i in game.battle.inventory) {
+						if (i == 0) {
+							switchItem(invId,i);
+							break;
+						}
 					}
 				}
 			}
-		}
+			break;
+		case 2:
+			if (item.cooldown <= 0) {
+				player.hp += item.hpGain;
+				if (player.hp > getPlayerMaxHP()) player.hp = getPlayerMaxHP();
+				item.cooldown = item.baseCooldown;
+			}
+			break;
 	}
 }
 
