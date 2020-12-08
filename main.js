@@ -52,6 +52,22 @@ function init() {
 		leftMenu.style.left = "-"+leftMenu.style.width;
 	}
 	
+	for (let i in game.battle.inventory) {
+		id("battleInvSpace"+i).addEventListener("click",function(mouse){
+			if (mouse.ctrlKey) {
+				if (game.battle.invSelected != undefined && i < 36) switchItem(game.battle.invSelected,i);
+			} else if (mouse.shiftKey) {
+				if (game.battle.inventory[i] != 0) useItem(i);
+			} else {
+				selectInvSpace(i);
+			}
+		});
+		let tooltipData = document.createElement("span");
+		tooltipData.id = "battleInvTooltip"+i;
+		tooltipData.classlist.add("tooltipData");
+		id("battleInvSpace"+i).appendChild(tooltipData);
+	}
+	
 	allAchievements();
 	
 	for (let tooltip of document.getElementsByClassName("tooltip")) {
@@ -83,18 +99,6 @@ function init() {
 			document.querySelector("#"+tooltip.id+">.tooltipData").innerHTML = tooltipText.innerHTML;
 			document.body.removeChild(tooltipText);
 		});
-	}
-	
-	for (let i = 0; i < 40; i++) {
-		id("battleInvSpace"+i).addEventListener("click",function(mouse){
-			if (mouse.ctrlKey) {
-				if (game.battle.invSelected != undefined && i < 36) switchItem(game.battle.invSelected,i);
-			} else if (mouse.shiftKey) {
-				if (game.battle.inventory[i] != 0) useItem(i);
-			} else {
-				selectInvSpace(i);
-			}
-		}); 
 	}
 	
 	load();
@@ -217,13 +221,9 @@ function doFrame(sinceLastFrame) {
 	let area = areaList[game.battle.currentArea];
 	let player = game.battle.player;
 	let enemy = game.battle.enemy
-	if (player.hp < getPlayerMaxHP()) {
-		player.hp += sinceLastFrame*getPlayerHPRegen()/1000;
-	}
+	if (player.hp < getPlayerMaxHP()) player.hp += sinceLastFrame*getPlayerHPRegen()/1000;
 	if (player.hp > getPlayerMaxHP()) player.hp = getPlayerMaxHP();
-	if (player.sp < getPlayerMaxSP()) {
-		player.sp += sinceLastFrame*getPlayerSPRegen()/1000;
-	}
+	if (player.sp < getPlayerMaxSP()) player.sp += sinceLastFrame*getPlayerSPRegen()/1000;
 	if (player.sp > getPlayerMaxSP()) player.sp = getPlayerMaxSP();
 	for (let i in player.cooldown) {
 		if (player.cooldown[i] > 0) {
@@ -232,12 +232,8 @@ function doFrame(sinceLastFrame) {
 		}
 	}
 	enemy.cooldown -= sinceLastFrame;
-	if (enemy.cooldown <= 0) {
-		enemyAttack();
-	}
-	if (game.battle.currentEnemy == 0) {
-		game.battle.nextSpawn -= sinceLastFrame;
-	}
+	if (enemy.cooldown <= 0) enemyAttack();
+	if (game.battle.currentEnemy == 0) game.battle.nextSpawn -= sinceLastFrame;
 	if (game.battle.nextSpawn <= 0) {
 		game.battle.currentEnemy = area.spawnType[Math.floor(Math.random() * area.spawnType.length)];
 		let currentEnemyStat = enemyList[game.battle.currentEnemy];
@@ -247,6 +243,18 @@ function doFrame(sinceLastFrame) {
 		game.battle.enemy.effDuration = [0,0,0,0,0,0,0,0];
 		game.battle.nextSpawn = area.spawnRate;
 	}
+	let updateBattleInvPlz = false;
+	for (let i in game.battle.inventory) {
+		let item = game.battle.inventory[i];
+		if (item.cooldown != undefined) {
+			if (item.cooldown > 0) {
+				item.cooldown -= sinceLastFrame;
+				updateBattleInvPlz = true;
+			}
+			if (item.cooldown < 0) item.cooldown = 0;
+		}
+	}
+	if (updateBattleInvPlz) updateBattleInv();
 	updateBattleMain();
 }
 
