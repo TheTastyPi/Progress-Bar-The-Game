@@ -341,14 +341,12 @@ function updateBattleInv() {
 		if (item == 0) {
 			id("battleInvSpace"+i).style.backgroundImage = "";
 			id("battleInvSpace"+i).style.backgroundColor = "";
-			id("battleInvSpace"+i).classList.remove("tooltip");
 		} else {
 			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + item.id + "')";
 			id("battleInvSpace"+i).style.backgroundColor = "#222222";
-			id("battleInvSpace"+i).classList.add("tooltip");
 		}
 		let propPriorityList = ["name","type","modifiersLeft","maxHP","maxSP","str","def","critRate","critMult","HPRegen","SPRegen","HPGain","baseCooldown","cooldown"];
-		if (id("battleInvSpace"+i).classList.contains("tooltip")) {
+		if (item != 0) {
 			let tooltip = "";
 			for (let i in propPriorityList) {
 				if (item.keys.includes(propPriorityList[i])) {
