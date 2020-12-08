@@ -278,6 +278,9 @@ button.dark {
 .battleTab.dark {
 	color: #222222;
 }
+.battleOpen {
+	height: 60vh;
+}
 #battleStatTab {background-color:#BBBB00; line-height: 30px}
 #battleStatTab.dark {background-color:#FFFF44}
 #battleInvTab {background-color:#BB0000; line-height: 0}
