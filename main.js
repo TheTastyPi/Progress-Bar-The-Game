@@ -324,19 +324,13 @@ function toggleStatsMenu() {
 
 function toggleBattleTab(tab) {
 	if (document.getElementsByClassName("battleOpen").length == 0) {
-		id("battle"+tab+"Tab").style.height = "60vh";
 		id("battle"+tab+"Tab").classList.add("battleOpen");
 	} else if (!id("battle"+tab+"Tab").classList.contains("battleOpen")) {
 		for (let tab of document.getElementsByClassName("battleTab")) {
-			tab.style.height = 0
 			tab.classList.remove("battleOpen");
 		}
 		id("battle"+tab+"Tab").classList.add("battleOpen");
-		setTimeout(function(){
-			id("battle"+tab+"Tab").style.height = "60vh";
-		},500);
 	} else {
-		id("battle"+tab+"Tab").style.height = 0;
 		id("battle"+tab+"Tab").classList.remove("battleOpen");
 	}
 }
