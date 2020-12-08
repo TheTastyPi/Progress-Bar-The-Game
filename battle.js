@@ -67,7 +67,7 @@ class Item {
 			this.SPRegen = p7;
 		}
 		if (type[0] = 2) {
-			this.hpGain = p0;
+			this.HPGain = p0;
 			this.baseCooldown = p1;
 			this.cooldown = 0;
 		}
@@ -84,7 +84,7 @@ new Item("Unnamed Weapon", [0,0], 10, 10, 5, 0, 15, 0.01, 0.5);
 itemIdCount = 1000; // just in case
 new Item("Unnamed Body", [1,1], 10, 10, 5, 0, 15, 0.01, 0.5);
 
-// healing: (name,type=[2,n],modifiersLeft,hpGain,cooldown)
+// healing: (name,type=[2,n],modifiersLeft,HPGain,cooldown)
 // healing
 itemIdCount = 2000; // jUsT iN cAsE
 new Item("Healing Stone", [2,0], 0, 25, 5000);
@@ -254,7 +254,7 @@ function useItem(invId) {
 			break;
 		case 2:
 			if (item.cooldown <= 0) {
-				player.hp += item.hpGain;
+				player.hp += item.HPGain;
 				if (player.hp > getPlayerMaxHP()) player.hp = getPlayerMaxHP();
 				item.cooldown = item.baseCooldown;
 			}
