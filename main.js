@@ -66,6 +66,7 @@ function init() {
 		tooltipData.id = "battleInvTooltip"+i;
 		tooltipData.classList.add("tooltipData");
 		id("battleInvSpace"+i).appendChild(tooltipData);
+		id("battleInvSpace"+i).classList.add("tooltip");
 	}
 	
 	allAchievements();
