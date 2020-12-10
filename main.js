@@ -62,7 +62,7 @@ function init() {
 				selectInvSpace(i);
 			}
 		});
-		let dataContainer = document.creatElement("span");
+		let dataContainer = document.createElement("span");
 		let tooltipData = document.createElement("span");
 		dataContainer.appendChild(tooltipData);
 		tooltipData.id = "battleInvTooltip"+i;
