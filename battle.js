@@ -66,7 +66,7 @@ class Item {
 			this.HPRegen = p6;
 			this.SPRegen = p7;
 		}
-		if (type[0] = 2) {
+		if (type[0] == 2) {
 			this.HPGain = p0;
 			this.baseCooldown = p1;
 			this.cooldown = 0;
