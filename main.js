@@ -54,7 +54,9 @@ function init() {
 	
 	for (let i in game.battle.inventory) {
 		id("battleInvSpace"+i).addEventListener("click",function(mouse){
-			if (mouse.ctrlKey) {
+			if (mouse.ctrlKey && mouse.shiftKey) {
+				discardItem(i);
+			} else if (mouse.ctrlKey) {
 				if (game.battle.invSelected != undefined && i < 36) switchItem(game.battle.invSelected,i);
 			} else if (mouse.shiftKey) {
 				if (game.battle.inventory[i] != 0) useItem(i);
