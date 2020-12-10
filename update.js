@@ -352,7 +352,7 @@ function updateBattleInv() {
 					tooltip += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
 				}
 			}
-			tooltip = tooltip.substr(0,tooltip.length-3);
+			tooltip = tooltip.substr(0,tooltip.length-4);
 			id("battleInvTooltip"+i).innerHTML = tooltip;
 		}
 	}
