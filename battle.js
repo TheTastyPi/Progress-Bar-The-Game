@@ -262,6 +262,11 @@ function useItem(invId) {
 	}
 }
 
+function discardItem(invId) {
+	game.battle.inventory[invId] = 0;
+	updateBattleInv();
+}
+
 var invFullNotified = false;
 function giveItem(itemId) {
 	if (game.battle.inventory.includes(0)) {
