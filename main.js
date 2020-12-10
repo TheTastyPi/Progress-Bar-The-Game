@@ -62,10 +62,12 @@ function init() {
 				selectInvSpace(i);
 			}
 		});
+		let dataContainer = document.creatElement("span");
 		let tooltipData = document.createElement("span");
+		dataContainer.appendChild(tooltipData);
 		tooltipData.id = "battleInvTooltip"+i;
-		tooltipData.classList.add("tooltipData");
-		id("battleInvSpace"+i).appendChild(tooltipData);
+		dataContainer.classList.add("tooltipData");
+		id("battleInvSpace"+i).appendChild(dataContainer);
 		id("battleInvSpace"+i).classList.add("tooltip");
 	}
 	
