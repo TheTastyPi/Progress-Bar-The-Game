@@ -343,6 +343,7 @@ function updateBattleInv() {
 			id("battleInvSpace"+i).style.backgroundImage = "";
 			id("battleInvSpace"+i).style.backgroundColor = "";
 			id("battleInvTooltip"+i).innerHTML = "";
+			id("battleInvSpace"+i).classList.remove("tooltip");
 		} else {
 			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + item.id + "')";
 			id("battleInvSpace"+i).style.backgroundColor = "#222222";
@@ -354,6 +355,7 @@ function updateBattleInv() {
 			}
 			tooltip = tooltip.substr(0,tooltip.length-4);
 			id("battleInvTooltip"+i).innerHTML = tooltip;
+			id("battleInvSpace"+i).classList.add("tooltip");
 		}
 	}
 }
