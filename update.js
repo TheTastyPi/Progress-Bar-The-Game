@@ -347,14 +347,14 @@ function updateBattleInv() {
 		} else {
 			id("battleInvSpace"+i).style.backgroundImage = "url('pics/battle/item" + item.id + "')";
 			id("battleInvSpace"+i).style.backgroundColor = "#222222";
-			let tooltip = "";
+			let tooltipText = "";
 			for (let i in propPriorityList) {
 				if (Object.keys(item).includes(propPriorityList[i])) {
 					tooltip += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
 				}
 			}
-			tooltip = tooltip.substr(0,tooltip.length-4);
-			id("battleInvTooltip"+i).innerHTML = tooltip;
+			tooltipText = tooltipText.substr(0,tooltipText.length-4);
+			id("battleInvTooltip"+i).innerHTML = tooltipText;
 			id("battleInvSpace"+i).classList.add("tooltip");
 		}
 	}
