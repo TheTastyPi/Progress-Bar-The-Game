@@ -352,8 +352,12 @@ function updateBattleInv() {
 			for (let i in propPriorityList) {
 				if (Object.keys(item).includes(propPriorityList[i])) {
 					let propDisp = item[propPriorityList[i]];
-					if (propPriorityList[i] == "type") propDisp = itemGroupList[propDisp[0]] + "/" + itemTypeList[propDisp[0]][propDisp[1]];
-					tooltipText += propDispList[i] + ": " + format(propDisp,2) + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
+					if (propPriorityList[i] == "type") {
+						propDisp = itemGroupList[propDisp[0]] + "/" + itemTypeList[propDisp[0]][propDisp[1]];
+					} else {
+						propDisp = format(propDisp,2);
+					}
+					tooltipText += propDispList[i] + ": " + propDisp + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
 				}
 			}
 			tooltipText = tooltipText.substr(0,tooltipText.length-4);
