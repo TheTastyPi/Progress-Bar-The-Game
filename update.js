@@ -350,7 +350,7 @@ function updateBattleInv() {
 			let tooltipText = "";
 			for (let i in propPriorityList) {
 				if (Object.keys(item).includes(propPriorityList[i])) {
-					tooltip += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
+					tooltipText += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
 				}
 			}
 			tooltipText = tooltipText.substr(0,tooltipText.length-4);
