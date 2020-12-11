@@ -354,6 +354,8 @@ function updateBattleInv() {
 					let propDisp = item[propPriorityList[i]];
 					if (propPriorityList[i] == "type") {
 						propDisp = itemGroupList[propDisp[0]] + "/" + itemTypeList[propDisp[0]][propDisp[1]];
+					} else if (typeof(propDisp) == "number") {
+						propDisp = format(propDisp,2);
 					}
 					tooltipText += propDispList[i] + ": " + propDisp + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
 				}
