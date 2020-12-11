@@ -5,11 +5,11 @@ const effectList = ["overpump","underpump","underfill","overfill","autodrain","a
 const areaList = [];
 const enemyList = [];
 const itemList = [];
-const itemGroupList = ["weapon","armor","healing"];
+const itemGroupList = ["Weapon","Armor","Healing"];
 const itemTypeList = [
-	["bucket","gun","cannon"],
-	["top","body","bottom"],
-	["instant","gradual"]
+	["Bucket","Gun","Cannon"],
+	["Top","Body","Bottom"],
+	["Instant","Gradual"]
 ]
 
 var areaIdCount = 0;
