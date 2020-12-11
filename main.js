@@ -77,7 +77,7 @@ function init() {
 	
 	for (let tooltip of document.getElementsByClassName("tooltip")) {
 		tooltip.addEventListener("mouseenter", function(mouse){
-			if (document.querySelector("#"+tooltip.id+">.tooltipData").innerHTML != "") {
+			if (tooltip.classList.contains("tooltip")) {
 				let tooltipText = document.createElement("div");
 				document.body.appendChild(tooltipText);
 				tooltipText.classList.add("tooltipText",game.currentTheme);
