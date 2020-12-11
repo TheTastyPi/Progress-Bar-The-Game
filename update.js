@@ -338,6 +338,7 @@ function updateBattleStat() {
 function updateBattleInv() {
 	for (let i in game.battle.inventory) {
 		let propPriorityList = ["name","type","modifiersLeft","maxHP","maxSP","str","def","critRate","critMult","HPRegen","SPRegen","HPGain","baseCooldown","cooldown"];
+		let propDispList = ["Name","Type","Modifiers Left","Max HP","Max SP","Str","Def","Crit Rate","Crit Mult","HP Regen","SP Regen","HP Gain","Base Cooldown","Cooldown"];
 		let item = game.battle.inventory[i];
 		if (item == 0) {
 			id("battleInvSpace"+i).style.backgroundImage = "";
@@ -350,7 +351,9 @@ function updateBattleInv() {
 			let tooltipText = "";
 			for (let i in propPriorityList) {
 				if (Object.keys(item).includes(propPriorityList[i])) {
-					tooltipText += propPriorityList[i] + ": " + item[propPriorityList[i]] + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
+					let propDisp = item[propPriorityList[i]];
+					if (propPriorityList[i] == "type") propDisp = itemGroupList[propDisp[0]] + "/" + itemTypeList[propDisp[0]][propDisp[1]];
+					tooltipText += propDispList[i] + ": " + format(propDisp,2) + (propPriorityList[i] == "modifiersLeft" ? "<hr>" : "<br>");
 				}
 			}
 			tooltipText = tooltipText.substr(0,tooltipText.length-4);
