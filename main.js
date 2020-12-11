@@ -70,7 +70,6 @@ function init() {
 		tooltipData.id = "battleInvTooltip"+i;
 		dataContainer.classList.add("tooltipData");
 		id("battleInvSpace"+i).appendChild(dataContainer);
-		id("battleInvSpace"+i).classList.add("tooltip");
 	}
 	
 	allAchievements();
